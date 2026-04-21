@@ -25,6 +25,6 @@ set(CMAKE_AUTORCC ON)
 #查找第三方库
 find_package(OpenCV CONFIG REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Concurrent)
-find_package(RWUL CONFIG REQUIRED COMPONENTS oso hoecm)
+find_package(RWUL CONFIG REQUIRED COMPONENTS oso hoecd)
 
 add_subdirectory ("BagsRealTimeDisplay")

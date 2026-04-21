@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="qt">
+    <qresource prefix="/BagsRealTimeDisplay">
+        <file>icons/close.png</file>
     </qresource>
 </RCC>
