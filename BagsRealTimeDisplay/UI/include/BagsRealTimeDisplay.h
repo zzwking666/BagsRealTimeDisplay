@@ -36,7 +36,10 @@ public slots:
 private slots:
 	void pbtn_exit_clicked();
 	void pbtn_set_clicked();
-
+	void btn_jianshaobaoguang1_clicked();
+	void btn_zengjiabaoguang1_clicked();
+	void btn_jianshaobaoguang2_clicked();
+	void btn_zengjiabaoguang2_clicked();
 private:
 	rw::rqw::ClickableLabel* clickableTitle = nullptr;
 	int minimizeCount{ 3 };

@@ -11,7 +11,7 @@ BagsRealTimeDisplay::BagsRealTimeDisplay(QWidget* parent)
 
 BagsRealTimeDisplay::~BagsRealTimeDisplay()
 {
-	
+
 }
 
 void BagsRealTimeDisplay::initializeComponents()
@@ -36,6 +36,15 @@ void BagsRealTimeDisplay::build_connect()
 		this, &BagsRealTimeDisplay::pbtn_exit_clicked);
 	QObject::connect(ui->pbtn_set, &QPushButton::clicked,
 		this, &BagsRealTimeDisplay::pbtn_set_clicked);
+	QObject::connect(ui->btn_jianshaobaoguang1, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::btn_jianshaobaoguang1_clicked);
+	QObject::connect(ui->btn_zengjiabaoguang1, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::btn_zengjiabaoguang1_clicked);
+	QObject::connect(ui->btn_jianshaobaoguang2, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::btn_jianshaobaoguang2_clicked);
+	QObject::connect(ui->btn_zengjiabaoguang2, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked);
+
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
 		this, &BagsRealTimeDisplay::lb_title_clicked);
@@ -135,6 +144,26 @@ void BagsRealTimeDisplay::pbtn_exit_clicked()
 }
 
 void BagsRealTimeDisplay::pbtn_set_clicked()
+{
+
+}
+
+void BagsRealTimeDisplay::btn_jianshaobaoguang1_clicked()
+{
+
+}
+
+void BagsRealTimeDisplay::btn_zengjiabaoguang1_clicked()
+{
+
+}
+
+void BagsRealTimeDisplay::btn_jianshaobaoguang2_clicked()
+{
+
+}
+
+void BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked()
 {
 
 }
