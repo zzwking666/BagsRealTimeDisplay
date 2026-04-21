@@ -27,6 +27,7 @@ void BagsRealTimeDisplay::build_ui()
 {
 	build_BagsRealTimeDisplayData();
 	build_DlgCloseForm();
+	ini_clickableTitle();
 }
 
 void BagsRealTimeDisplay::build_connect()
@@ -35,10 +36,6 @@ void BagsRealTimeDisplay::build_connect()
 		this, &BagsRealTimeDisplay::pbtn_exit_clicked);
 	QObject::connect(ui->pbtn_set, &QPushButton::clicked,
 		this, &BagsRealTimeDisplay::pbtn_set_clicked);
-	QObject::connect(ui->rbtn_debug, &QRadioButton::clicked,
-		this, &BagsRealTimeDisplay::rbtn_debug_checked);
-	QObject::connect(ui->rbtn_removeFunc, &QRadioButton::clicked,
-		this, &BagsRealTimeDisplay::rbtn_removeFunc_checked);
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
 		this, &BagsRealTimeDisplay::lb_title_clicked);
@@ -56,7 +53,7 @@ void BagsRealTimeDisplay::ini_clickableTitle()
 	auto layoutTitle = ui->groupBox_head->layout();
 	layoutTitle->replaceWidget(ui->label_title, clickableTitle);
 	delete ui->label_title;
-	clickableTitle->setText("钉子检测");
+	clickableTitle->setText("编织袋实时显示");
 	clickableTitle->setStyleSheet("QLabel {font-size: 30px;font-weight: bold;color: rgb(255, 255, 255);padding: 5px 5px;border-bottom: 2px solid #cccccc;}");
 }
 
@@ -138,16 +135,6 @@ void BagsRealTimeDisplay::pbtn_exit_clicked()
 }
 
 void BagsRealTimeDisplay::pbtn_set_clicked()
-{
-
-}
-
-void BagsRealTimeDisplay::rbtn_debug_checked(bool checked)
-{
-
-}
-
-void BagsRealTimeDisplay::rbtn_removeFunc_checked(bool checked)
 {
 
 }

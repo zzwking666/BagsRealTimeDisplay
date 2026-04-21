@@ -36,8 +36,7 @@ public slots:
 private slots:
 	void pbtn_exit_clicked();
 	void pbtn_set_clicked();
-	void rbtn_debug_checked(bool checked);
-	void rbtn_removeFunc_checked(bool checked);
+
 private:
 	rw::rqw::ClickableLabel* clickableTitle = nullptr;
 	int minimizeCount{ 3 };
