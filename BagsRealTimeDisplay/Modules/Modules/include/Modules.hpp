@@ -3,6 +3,7 @@
 #include "IModule.hpp"
 #include "oso/oso_func.hpp"
 #include "RunEnvCheck.hpp"
+#include "CameraModule.hpp"
 
 class Modules
 	:public IModule<bool>
@@ -16,7 +17,7 @@ public:
 		return instance;
 	}
 
-	Modules(const Modules&) = delete;
+	Modules(const Modules&);
 	Modules& operator=(const Modules&) = delete;
 
 private:
@@ -35,6 +36,9 @@ public:
 	template<class TypeCanToAssembly>
 	static void checkFileExistAndFormat(const QString& path, const rw::oso::StorageContext& context);
 	static bool EnsureDirectoryExists(const QString& dirPath);
+
+public:
+	CameraModule cameraModule;
 };
 
 template <class TypeCanToAssembly>

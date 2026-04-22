@@ -12,19 +12,17 @@ CameraModule::~CameraModule()
 
 }
 
-std::vector<BuildError> CameraModule::build()
+bool CameraModule::build()
 {
-	std::vector<BuildError> errorList;
 	if (!build_camera1())
 	{
-		errorList.emplace_back(Camera1Error);
+		return false;
 	}
 	if (!build_camera2())
 	{
-		errorList.emplace_back(Camera2Error);
+		return false;
 	}
-	_buildResults = errorList;
-	return std::vector<BuildError>();
+	return true;
 }
 
 void CameraModule::destroy()

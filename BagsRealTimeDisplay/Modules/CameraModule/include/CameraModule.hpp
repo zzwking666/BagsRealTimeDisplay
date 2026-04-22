@@ -5,21 +5,16 @@
 #include"IModule.hpp"
 #include"hoecd/hoec_d.hpp"
 
-enum BuildError
-{
-	Camera1Error = 1,
-	Camera2Error = 2
-};
 
 class CameraModule
-	: public QObject, public IModule<std::vector<BuildError>>
+	: public QObject, public IModule<bool>
 {
 	Q_OBJECT
 public:
 	CameraModule();
 	~CameraModule() override;
 public:
-	std::vector<BuildError> build() override;
+	bool build() override;
 	void destroy() override;
 public:
 	void start() override;
@@ -39,10 +34,6 @@ public:
 	void seCamera1tGain(size_t gain);
 	void setCamera2ExposureTime(size_t exposureTime);
 	void seCamera2tGain(size_t gain);
-private:
-	std::vector<BuildError> _buildResults;
-public:
-	std::vector<BuildError> getBuildResults() { return _buildResults; };
 
 private:
 	bool isTargetCamera(const QString& cameraIndex, const QString& targetName);

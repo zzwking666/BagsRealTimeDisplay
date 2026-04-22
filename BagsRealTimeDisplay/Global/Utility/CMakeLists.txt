@@ -4,8 +4,8 @@ set(DEMO_TARGET Utility)
 file(GLOB SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 # GLOB扫一层目录下的所有.h和.hpp文件,GLOB_RECURSE扫多层目录下的所有.h和.hpp文件
-file(GLOB INCLUDE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/inf/${DEMO_TARGET}/*.h")
-file(GLOB INCLUDE_HPP_FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/inf/${DEMO_TARGET}/*.hpp")
+file(GLOB INCLUDE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
+file(GLOB INCLUDE_HPP_FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
 list(APPEND INCLUDE_FILES ${INCLUDE_HPP_FILES})
 
 # 添加库生成目标

@@ -49,6 +49,10 @@ target_link_directories(${BRTD_TARGET}
 	PUBLIC ${OpenCV_INCLUDE_DIRS}
 )
 
+target_link_libraries(${BRTD_TARGET}
+	PRIVATE RWUL::rqwu
+)
+
 # 编译好后调用qt中的windeployqt.exe
 add_custom_command(TARGET ${BRTD_TARGET} POST_BUILD
 	COMMAND ${QT_PATH}/bin/windeployqt.exe --no-compiler-runtime --no-opengl-sw $<TARGET_FILE:${BRTD_TARGET}>
