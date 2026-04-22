@@ -18,7 +18,7 @@ target_include_directories(${DEMO_TARGET}
 
 # 链接底层依赖库
 target_link_libraries(${DEMO_TARGET}
-	PUBLIC Qt6::Core Qt6::Widgets Qt6::Concurrent 
+	PUBLIC Qt6::Core Qt6::Widgets Qt6::Concurrent
 )
 
 add_library(Modules::${DEMO_TARGET} ALIAS ${DEMO_TARGET})

@@ -26,15 +26,19 @@ public:
 	void stop() override;
 private:
 	bool build_camera1();
-
+	bool build_camera2();
 	void destroy_camera1();
-
+	void destroy_camera2();
 public:
-	void setCameraTriggerOff();
-	void setHardwareTrigger();
+	void setCamera1TriggerOff();
+	void setCamera1HardwareTrigger();
+	void setCamera2TriggerOff();
+	void setCamera2HardwareTrigger();
 public:
-	void setCameraExposureTime(size_t exposureTime);
-	void setGain(size_t gain);
+	void setCamera1ExposureTime(size_t exposureTime);
+	void seCamera1tGain(size_t gain);
+	void setCamera2ExposureTime(size_t exposureTime);
+	void seCamera2tGain(size_t gain);
 private:
 	std::vector<BuildError> _buildResults;
 public:
@@ -48,9 +52,10 @@ public slots:
 	bool onBuildCamera(int index);
 	void onDestroyCamera(int index);
 	void onStartCamera(int index);
-public:
+private:
 	std::unique_ptr<rw::hoec::DVPCameraPassive> camera1{ nullptr };
 	std::unique_ptr<rw::hoec::DVPCameraPassive> camera2{ nullptr };
-
+public:
 	std::atomic<bool> isCamera1SoftTrigger{ false };
+	std::atomic<bool> isCamera2SoftTrigger{ false };
 };

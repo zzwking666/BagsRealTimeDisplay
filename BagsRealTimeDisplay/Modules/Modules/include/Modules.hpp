@@ -35,18 +35,14 @@ public:
 	template<class TypeCanToAssembly>
 	static void checkFileExistAndFormat(const QString& path, const rw::oso::StorageContext& context);
 	static bool EnsureDirectoryExists(const QString& dirPath);
-
-
-public:
-
 };
 
 template <class TypeCanToAssembly>
 void Modules::checkFileExistAndFormat(const QString& path, const rw::oso::StorageContext& context)
 {
-	if (rw::rqw::RunEnvCheck::isFileExist(path))
+	if (RunEnvCheck::isFileExist(path))
 	{
-		if (!rw::rqw::RunEnvCheck::isFileFormatCorrectWithSafe<TypeCanToAssembly>(path, context))
+		if (!RunEnvCheck::isFileFormatCorrectWithSafe<TypeCanToAssembly>(path, context))
 		{
 			auto assembly = context.load(path.toStdString());
 			bool isMerge{ false };
