@@ -28,6 +28,11 @@ target_include_directories(${BRTD_TARGET}
 )
 
 # 链接本项目的层级库
+target_link_libraries(${BRTD_TARGET}
+	PUBLIC Modules::CameraModule
+	PUBLIC Modules::Modules
+	PUBLIC Modules::IModule
+)
 
 #--------------------链接第三方库--------------------
 

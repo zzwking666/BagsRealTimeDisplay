@@ -1,4 +1,4 @@
-set(DEMO_TARGET CameraModule)
+set(DEMO_TARGET Modules)
 
 # GLOB扫一层目录下的所有.cpp文件,GLOB_RECURSE扫多层目录下的所有.cpp文件
 file(GLOB SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
@@ -9,7 +9,7 @@ file(GLOB INCLUDE_HPP_FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/inf/${DEMO_TARG
 list(APPEND INCLUDE_FILES ${INCLUDE_HPP_FILES})
 
 # 添加库生成目标
-add_library(${DEMO_TARGET} ${SRC_FILES} ${INCLUDE_FILES})
+add_library(${DEMO_TARGET} ${SRC_FILES} ${INCLUDE_FILES})	
 
 # 添加头文件搜索路径
 target_include_directories(${DEMO_TARGET} 
@@ -18,9 +18,8 @@ target_include_directories(${DEMO_TARGET}
 
 # 链接底层依赖库
 target_link_libraries(${DEMO_TARGET}
-	PUBLIC RWUL::oso
-	PUBLIC RWUL::hoecd
-	PUBLIC Modules::IModule
+	PUBLIC Modules::CameraModule
+	PUBLIC Tools::RunEnvCheck
 )
 
 add_library(Modules::${DEMO_TARGET} ALIAS ${DEMO_TARGET})
