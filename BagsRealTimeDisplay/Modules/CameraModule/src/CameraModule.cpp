@@ -2,6 +2,8 @@
 #include"Utility.hpp"
 #include <QRegularExpression>
 
+#include "Modules.hpp"
+
 CameraModule::CameraModule()
 {
 
@@ -71,7 +73,7 @@ bool CameraModule::build_camera1()
 			camera1->startMonitor();
 			setCamera1TriggerOff();
 
-			/*auto cfg = Modules::getInstance().configManagerModule.runningInfo;
+			/*auto cfg = Modules::getInstance().configModule.;
 
 			camera1->setExposureTime(static_cast<size_t>(cfg.cameraSet.exposureTime));
 			camera1->setGain(static_cast<size_t>(cfg.cameraSet.gain));*/

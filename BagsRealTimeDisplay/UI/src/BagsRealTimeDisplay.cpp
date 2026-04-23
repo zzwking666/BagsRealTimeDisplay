@@ -1,5 +1,6 @@
 #include "BagsRealTimeDisplay.h"
 #include "DlgProductSet.h"
+
 #include <QFile>
 
 #include "Modules.hpp"
@@ -18,6 +19,7 @@ BagsRealTimeDisplay::~BagsRealTimeDisplay()
 {
 	Modules::getInstance().stop();
 	Modules::getInstance().destroy();
+	delete _dlgCloseForm;
 	delete ui;
 }
 
@@ -60,13 +62,13 @@ void BagsRealTimeDisplay::build_connect()
 
 void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 {
-	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
-
+	auto& BagsRealTimeDisplayConfig = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
+	auto& setConfig = Modules::getInstance().configModule.setConfig;
 	// 更新UI
-	ui->lb_FrontTotal->setText(QString::number(config.zhengmianzongliang));
-	ui->lb_BackTotal->setText(QString::number(config.beimianzongliang));
-	ui->btn_baoguang1->setText(QString::number(config.camera1Exposure));
-	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
+	ui->lb_FrontTotal->setText(QString::number(BagsRealTimeDisplayConfig.zhengmianzongliang));
+	ui->lb_BackTotal->setText(QString::number(BagsRealTimeDisplayConfig.beimianzongliang));
+	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
+	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 }
 
 void BagsRealTimeDisplay::build_setConfig()
@@ -166,38 +168,38 @@ void BagsRealTimeDisplay::pbtn_set_clicked()
 
 void BagsRealTimeDisplay::btn_jianshaobaoguang1_clicked()
 {
-	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
-	config.camera1Exposure -= 1;
-	ui->btn_baoguang1->setText(QString::number(config.camera1Exposure));
+	auto& setConfig = Modules::getInstance().configModule.setConfig;
+	setConfig.baoguang1 -= 1;
+	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
 	auto& cameraModule = Modules::getInstance().cameraModule;
-	cameraModule.setCamera1ExposureTime(config.camera1Exposure);
+	cameraModule.setCamera1ExposureTime(setConfig.baoguang1);
 }
 
 void BagsRealTimeDisplay::btn_zengjiabaoguang1_clicked()
 {
-	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
-	config.camera1Exposure += 1;
-	ui->btn_baoguang1->setText(QString::number(config.camera1Exposure));
+	auto& setConfig = Modules::getInstance().configModule.setConfig;
+	setConfig.baoguang1 += 1;
+	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
 	auto& cameraModule = Modules::getInstance().cameraModule;
-	cameraModule.setCamera1ExposureTime(config.camera1Exposure);
+	cameraModule.setCamera1ExposureTime(setConfig.baoguang1);
 }
 
 void BagsRealTimeDisplay::btn_jianshaobaoguang2_clicked()
 {
-	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
-	config.camera2Exposure -= 1;
-	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
+	auto& setConfig = Modules::getInstance().configModule.setConfig;
+	setConfig.baoguang2 -= 1;
+	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 	auto& cameraModule = Modules::getInstance().cameraModule;
-	cameraModule.setCamera2ExposureTime(config.camera2Exposure);
+	cameraModule.setCamera2ExposureTime(setConfig.baoguang2);
 }
 
 void BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked()
 {
-	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
-	config.camera2Exposure += 1;
-	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
+	auto& setConfig = Modules::getInstance().configModule.setConfig;
+	setConfig.baoguang2 += 1;
+	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 	auto& cameraModule = Modules::getInstance().cameraModule;
-	cameraModule.setCamera2ExposureTime(config.camera2Exposure);
+	cameraModule.setCamera2ExposureTime(setConfig.baoguang2);
 }
 
 void BagsRealTimeDisplay::loadCompanyTXT()

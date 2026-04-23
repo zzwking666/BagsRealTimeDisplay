@@ -21,6 +21,7 @@ target_link_libraries(${DEMO_TARGET}
 	PUBLIC RWUL::oso
 	PUBLIC RWUL::hoecd
 	PUBLIC Modules::IModule
+	PUBLIC Modules::Modules
 	PUBLIC Global::Utility
 )
 

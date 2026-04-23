@@ -4,8 +4,6 @@ namespace cdm {
 	class BagsRealTimeDisplayInfo
 	{
 	public:
-		camera1Exposure : int : default = 0;
-		camera2Exposure : int : default = 0;
 		zhengmianzongliang : int : default = 0;
 		beimianzongliang : int : default = 0;
 	};

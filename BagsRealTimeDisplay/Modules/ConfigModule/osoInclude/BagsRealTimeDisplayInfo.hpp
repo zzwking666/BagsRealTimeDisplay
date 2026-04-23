@@ -19,8 +19,6 @@ namespace cdm {
         bool operator!=(const BagsRealTimeDisplayInfo& obj) const;
 
     public:
-        int camera1Exposure{ 0 };
-        int camera2Exposure{ 0 };
         int zhengmianzongliang{ 0 };
         int beimianzongliang{ 0 };
     };
@@ -32,16 +30,6 @@ namespace cdm {
         {
             throw std::runtime_error("Assembly is not $class$BagsRealTimeDisplayInfo$");
         }
-        auto camera1ExposureItem = rw::oso::ObjectStoreCoreToItem(assembly.getItem("$variable$camera1Exposure$"));
-        if (!camera1ExposureItem) {
-            throw std::runtime_error("$variable$camera1Exposure is not found");
-        }
-        camera1Exposure = camera1ExposureItem->getValueAsInt();
-        auto camera2ExposureItem = rw::oso::ObjectStoreCoreToItem(assembly.getItem("$variable$camera2Exposure$"));
-        if (!camera2ExposureItem) {
-            throw std::runtime_error("$variable$camera2Exposure is not found");
-        }
-        camera2Exposure = camera2ExposureItem->getValueAsInt();
         auto zhengmianzongliangItem = rw::oso::ObjectStoreCoreToItem(assembly.getItem("$variable$zhengmianzongliang$"));
         if (!zhengmianzongliangItem) {
             throw std::runtime_error("$variable$zhengmianzongliang is not found");
@@ -56,8 +44,6 @@ namespace cdm {
 
     inline BagsRealTimeDisplayInfo::BagsRealTimeDisplayInfo(const BagsRealTimeDisplayInfo& obj)
     {
-        camera1Exposure = obj.camera1Exposure;
-        camera2Exposure = obj.camera2Exposure;
         zhengmianzongliang = obj.zhengmianzongliang;
         beimianzongliang = obj.beimianzongliang;
     }
@@ -65,8 +51,6 @@ namespace cdm {
     inline BagsRealTimeDisplayInfo& BagsRealTimeDisplayInfo::operator=(const BagsRealTimeDisplayInfo& obj)
     {
         if (this != &obj) {
-            camera1Exposure = obj.camera1Exposure;
-            camera2Exposure = obj.camera2Exposure;
             zhengmianzongliang = obj.zhengmianzongliang;
             beimianzongliang = obj.beimianzongliang;
         }
@@ -77,14 +61,6 @@ namespace cdm {
     {
         rw::oso::ObjectStoreAssembly assembly;
         assembly.setName("$class$BagsRealTimeDisplayInfo$");
-        auto camera1ExposureItem = std::make_shared<rw::oso::ObjectStoreItem>();
-        camera1ExposureItem->setName("$variable$camera1Exposure$");
-        camera1ExposureItem->setValueFromInt(camera1Exposure);
-        assembly.addItem(camera1ExposureItem);
-        auto camera2ExposureItem = std::make_shared<rw::oso::ObjectStoreItem>();
-        camera2ExposureItem->setName("$variable$camera2Exposure$");
-        camera2ExposureItem->setValueFromInt(camera2Exposure);
-        assembly.addItem(camera2ExposureItem);
         auto zhengmianzongliangItem = std::make_shared<rw::oso::ObjectStoreItem>();
         zhengmianzongliangItem->setName("$variable$zhengmianzongliang$");
         zhengmianzongliangItem->setValueFromInt(zhengmianzongliang);
@@ -98,7 +74,7 @@ namespace cdm {
 
     inline bool BagsRealTimeDisplayInfo::operator==(const BagsRealTimeDisplayInfo& obj) const
     {
-        return camera1Exposure == obj.camera1Exposure && camera2Exposure == obj.camera2Exposure && zhengmianzongliang == obj.zhengmianzongliang && beimianzongliang == obj.beimianzongliang;
+        return zhengmianzongliang == obj.zhengmianzongliang && beimianzongliang == obj.beimianzongliang;
     }
 
     inline bool BagsRealTimeDisplayInfo::operator!=(const BagsRealTimeDisplayInfo& obj) const

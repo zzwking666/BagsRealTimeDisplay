@@ -4,6 +4,7 @@
 #include<QObject>
 #include "oso/oso_StorageContext.hpp"
 #include "BagsRealTimeDisplayInfo.hpp"
+#include "SetConfig.hpp"
 
 class ConfigModule
 	: public QObject, public IModule<bool>
@@ -18,4 +19,5 @@ public:
 	std::unique_ptr<rw::oso::StorageContext> storeContext{ nullptr };
 public:
 	cdm::BagsRealTimeDisplayInfo bagsRealTimeDisplayInfo{};
+	cdm::SetConfig setConfig{};
 };
