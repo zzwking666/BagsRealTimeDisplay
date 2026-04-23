@@ -5,6 +5,7 @@
 
 #include "rqw_LabelClickable.h"
 #include "DlgCloseForm.h"
+#include "DlgProductSet.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class BagsRealTimeDisplayClass; };
@@ -23,6 +24,7 @@ public:
 	void build_ui();
 	void build_connect();
 	void build_BagsRealTimeDisplayData();
+	void build_setConfig();
 	void ini_clickableTitle();
 	void build_DlgCloseForm();
 public slots:
@@ -44,6 +46,7 @@ private:
 	rw::rqw::ClickableLabel* clickableTitle = nullptr;
 	int minimizeCount{ 3 };
 	DlgCloseForm* _dlgCloseForm = nullptr;
+	DlgProductSet* _dlgProductSet = nullptr;
 private:
     Ui::BagsRealTimeDisplayClass* ui;
 };

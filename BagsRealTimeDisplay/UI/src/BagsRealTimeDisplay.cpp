@@ -1,5 +1,5 @@
 #include "BagsRealTimeDisplay.h"
-
+#include "DlgProductSet.h"
 #include <QFile>
 
 #include "Modules.hpp"
@@ -35,6 +35,7 @@ void BagsRealTimeDisplay::build_ui()
 	build_BagsRealTimeDisplayData();
 	build_DlgCloseForm();
 	ini_clickableTitle();
+	build_setConfig();
 }
 
 void BagsRealTimeDisplay::build_connect()
@@ -66,6 +67,11 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 	ui->lb_BackTotal->setText(QString::number(config.beimianzongliang));
 	ui->btn_baoguang1->setText(QString::number(config.camera1Exposure));
 	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
+}
+
+void BagsRealTimeDisplay::build_setConfig()
+{
+	_dlgProductSet = new DlgProductSet(this);
 }
 
 void BagsRealTimeDisplay::ini_clickableTitle()
@@ -153,7 +159,9 @@ void BagsRealTimeDisplay::pbtn_exit_clicked()
 
 void BagsRealTimeDisplay::pbtn_set_clicked()
 {
-
+	_dlgProductSet->setFixedSize(this->width(), this->height());
+	_dlgProductSet->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
+	_dlgProductSet->exec();
 }
 
 void BagsRealTimeDisplay::btn_jianshaobaoguang1_clicked()
