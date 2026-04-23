@@ -18,6 +18,7 @@ add_library(${DEMO_TARGET} ${SRC_FILES} ${INCLUDE_FILES})
 # 添加头文件搜索路径
 target_include_directories(${DEMO_TARGET} 
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/osoInclude
 )
 
 # 链接底层依赖库
