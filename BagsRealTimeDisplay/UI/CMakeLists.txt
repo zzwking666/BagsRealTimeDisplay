@@ -32,6 +32,7 @@ target_link_libraries(${BRTD_TARGET}
 	PUBLIC Modules::CameraModule
 	PUBLIC Modules::Modules
 	PUBLIC Modules::IModule
+	PUBLIC BusinessLayer::ImageStitch
 )
 
 #--------------------链接第三方库--------------------

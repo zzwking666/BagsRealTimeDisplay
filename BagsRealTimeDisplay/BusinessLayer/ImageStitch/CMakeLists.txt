@@ -19,6 +19,9 @@ target_include_directories(${DEMO_TARGET}
 # 链接底层依赖库
 target_link_libraries(${DEMO_TARGET}
 	PUBLIC Qt6::Core
+	PUBLIC RWUL::rqwcd
+	PUBLIC Modules::Modules
+	PUBLIC RWUL::imgqt
 )
 
 add_library(BusinessLayer::${DEMO_TARGET} ALIAS ${DEMO_TARGET})
