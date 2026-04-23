@@ -990,7 +990,7 @@ QPushButton:pressed {
 }</string>
                 </property>
                 <property name="text">
-                 <string>value</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -1922,7 +1922,7 @@ QPushButton:pressed {
 }</string>
                 </property>
                 <property name="text">
-                 <string>value</string>
+                 <string>0</string>
                 </property>
                </widget>
               </item>
@@ -2854,7 +2854,7 @@ QLabel.icon {
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
-             <widget class="QCheckBox" name="ckb_jiingxiang">
+             <widget class="QCheckBox" name="ckb_jingxiang">
               <property name="styleSheet">
                <string notr="true">QCheckBox {
     spacing: 8px;
