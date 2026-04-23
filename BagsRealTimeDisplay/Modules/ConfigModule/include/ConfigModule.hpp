@@ -5,7 +5,7 @@
 #include "oso/oso_StorageContext.hpp"
 #include "BagsRealTimeDisplayInfo.hpp"
 
-class ConfigManagerModule
+class ConfigModule
 	: public QObject, public IModule<bool>
 {
 	Q_OBJECT

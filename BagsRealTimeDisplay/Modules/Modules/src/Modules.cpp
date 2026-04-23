@@ -18,6 +18,14 @@ Modules::~Modules()
 
 bool Modules::build()
 {
+	auto isConfigBuildSuccess = configModule.build();
+
+	if (!isConfigBuildSuccess)
+	{
+		qWarning("Config build failed");
+		return false;
+	}
+
 	auto isCameraBuildSuccess = cameraModule.build();
 
 	if (!isCameraBuildSuccess)
@@ -25,22 +33,26 @@ bool Modules::build()
 		qWarning("Camera build failed");
 		return false;
 	}
+
 	return true;
 }
 
 void Modules::destroy()
 {
 	cameraModule.destroy();
+	configModule.destroy();
 }
 
 void Modules::start()
 {
+	configModule.start();
 	cameraModule.start();
 }
 
 void Modules::stop()
 {
 	cameraModule.stop();
+	configModule.stop();
 }
 
 void Modules::connect()

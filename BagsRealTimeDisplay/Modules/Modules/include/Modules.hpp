@@ -4,6 +4,7 @@
 #include "oso/oso_func.hpp"
 #include "RunEnvCheck.hpp"
 #include "CameraModule.hpp"
+#include "ConfigModule.hpp"
 
 class Modules
 	:public IModule<bool>
@@ -39,6 +40,7 @@ public:
 
 public:
 	CameraModule cameraModule;
+	ConfigModule configModule;
 };
 
 template <class TypeCanToAssembly>

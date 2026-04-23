@@ -1,7 +1,7 @@
 #include"ConfigModule.hpp"
 #include "utility.hpp"
 
-bool ConfigManagerModule::build()
+bool ConfigModule::build()
 {
 	storeContext = std::make_unique<rw::oso::StorageContext>(rw::oso::StorageType::Xml);
 
@@ -20,18 +20,18 @@ bool ConfigManagerModule::build()
 	return true;
 }
 
-void ConfigManagerModule::destroy()
+void ConfigModule::destroy()
 {
 	storeContext->saveSafe(bagsRealTimeDisplayInfo, globalPath.bagsRealTimeDisplayConfigPath.toStdString());
 	storeContext.reset();
 }
 
-void ConfigManagerModule::start()
+void ConfigModule::start()
 {
 
 }
 
-void ConfigManagerModule::stop()
+void ConfigModule::stop()
 {
 
 }
