@@ -73,10 +73,10 @@ bool CameraModule::build_camera1()
 			camera1->startMonitor();
 			setCamera1TriggerOff();
 
-			/*auto cfg = Modules::getInstance().configModule.;
+			auto cfg = Modules::getInstance().configModule.setConfig;
 
-			camera1->setExposureTime(static_cast<size_t>(cfg.cameraSet.exposureTime));
-			camera1->setGain(static_cast<size_t>(cfg.cameraSet.gain));*/
+			camera1->setExposureTime(static_cast<size_t>(cfg.baoguang1));
+			camera1->setGain(static_cast<size_t>(cfg.zengyi1));
 
 			return true;
 		}
@@ -103,10 +103,12 @@ bool CameraModule::build_camera2()
 			camera2->registerCallBackFunc();
 			camera2->startMonitor();
 			setCamera2TriggerOff();
-			/*auto cfg = Modules::getInstance().configManagerModule.runningInfo;
 
-			camera2->setExposureTime(static_cast<size_t>(cfg.cameraSet.exposureTime));
-			camera2->setGain(static_cast<size_t>(cfg.cameraSet.gain));*/
+			auto cfg = Modules::getInstance().configModule.setConfig;
+
+			camera2->setExposureTime(static_cast<size_t>(cfg.baoguang2));
+			camera2->setGain(static_cast<size_t>(cfg.zengyi2));
+
 			return true;
 		}
 		catch (const std::exception&)
