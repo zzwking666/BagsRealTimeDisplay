@@ -1,5 +1,9 @@
 #include "BagsRealTimeDisplay.h"
+
+#include <QFile>
+
 #include "Modules.hpp"
+#include "utility.hpp"
 
 BagsRealTimeDisplay::BagsRealTimeDisplay(QWidget* parent)
 	: QMainWindow(parent)
@@ -22,6 +26,8 @@ void BagsRealTimeDisplay::initializeComponents()
 	build_ui();
 
 	build_connect();
+
+	loadCompanyTXT();
 }
 
 void BagsRealTimeDisplay::build_ui()
@@ -184,4 +190,29 @@ void BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked()
 	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
 	auto& cameraModule = Modules::getInstance().cameraModule;
 	cameraModule.setCamera2ExposureTime(config.camera2Exposure);
+}
+
+void BagsRealTimeDisplay::loadCompanyTXT()
+{
+	const QString companyRootPath = globalPath.companyTxtPath;
+	QFile file(companyRootPath);
+	if (!file.exists())
+	{
+		qWarning("company.txt不存在：%s", qUtf8Printable(companyRootPath));
+		return;
+	}
+
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning("company.txt不存在：%s", qUtf8Printable(companyRootPath));
+		return;
+	}
+
+	QTextStream in(&file);
+	in.setEncoding(QStringConverter::Utf8);
+
+	const QString content = in.readAll().trimmed();
+	ui->label_companyInfo->setText(content);
+
+	file.close();
 }

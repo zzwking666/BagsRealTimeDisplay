@@ -39,6 +39,8 @@ private slots:
 	void btn_jianshaobaoguang2_clicked();
 	void btn_zengjiabaoguang2_clicked();
 private:
+	void loadCompanyTXT();
+private:
 	rw::rqw::ClickableLabel* clickableTitle = nullptr;
 	int minimizeCount{ 3 };
 	DlgCloseForm* _dlgCloseForm = nullptr;
