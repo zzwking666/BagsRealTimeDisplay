@@ -1,4 +1,5 @@
 #include "BagsRealTimeDisplay.h"
+#include "Modules.hpp"
 
 BagsRealTimeDisplay::BagsRealTimeDisplay(QWidget* parent)
 	: QMainWindow(parent)
@@ -11,14 +12,14 @@ BagsRealTimeDisplay::BagsRealTimeDisplay(QWidget* parent)
 
 BagsRealTimeDisplay::~BagsRealTimeDisplay()
 {
-
+	Modules::getInstance().stop();
+	Modules::getInstance().destroy();
+	delete ui;
 }
 
 void BagsRealTimeDisplay::initializeComponents()
 {
 	build_ui();
-
-	build_camera();
 
 	build_connect();
 }
@@ -52,7 +53,13 @@ void BagsRealTimeDisplay::build_connect()
 
 void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 {
+	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
 
+	// 更新UI
+	ui->lb_FrontTotal->setText(QString::number(config.zhengmianzongliang));
+	ui->lb_BackTotal->setText(QString::number(config.beimianzongliang));
+	ui->btn_baoguang1->setText(QString::number(config.camera1Exposure));
+	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
 }
 
 void BagsRealTimeDisplay::ini_clickableTitle()
@@ -69,11 +76,6 @@ void BagsRealTimeDisplay::ini_clickableTitle()
 void BagsRealTimeDisplay::build_DlgCloseForm()
 {
 	_dlgCloseForm = new DlgCloseForm(this);
-}
-
-void BagsRealTimeDisplay::build_camera()
-{
-
 }
 
 void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
@@ -150,20 +152,36 @@ void BagsRealTimeDisplay::pbtn_set_clicked()
 
 void BagsRealTimeDisplay::btn_jianshaobaoguang1_clicked()
 {
-
+	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
+	config.camera1Exposure -= 1;
+	ui->btn_baoguang1->setText(QString::number(config.camera1Exposure));
+	auto& cameraModule = Modules::getInstance().cameraModule;
+	cameraModule.setCamera1ExposureTime(config.camera1Exposure);
 }
 
 void BagsRealTimeDisplay::btn_zengjiabaoguang1_clicked()
 {
-
+	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
+	config.camera1Exposure += 1;
+	ui->btn_baoguang1->setText(QString::number(config.camera1Exposure));
+	auto& cameraModule = Modules::getInstance().cameraModule;
+	cameraModule.setCamera1ExposureTime(config.camera1Exposure);
 }
 
 void BagsRealTimeDisplay::btn_jianshaobaoguang2_clicked()
 {
-
+	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
+	config.camera2Exposure -= 1;
+	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
+	auto& cameraModule = Modules::getInstance().cameraModule;
+	cameraModule.setCamera2ExposureTime(config.camera2Exposure);
 }
 
 void BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked()
 {
-
+	auto& config = Modules::getInstance().configModule.bagsRealTimeDisplayInfo;
+	config.camera2Exposure += 1;
+	ui->btn_baoguang2->setText(QString::number(config.camera2Exposure));
+	auto& cameraModule = Modules::getInstance().cameraModule;
+	cameraModule.setCamera2ExposureTime(config.camera2Exposure);
 }

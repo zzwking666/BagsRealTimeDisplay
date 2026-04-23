@@ -25,8 +25,6 @@ public:
 	void build_BagsRealTimeDisplayData();
 	void ini_clickableTitle();
 	void build_DlgCloseForm();
-public:
-	void build_camera();
 public slots:
 	void updateCameraLabelState(int cameraIndex, bool state);
 

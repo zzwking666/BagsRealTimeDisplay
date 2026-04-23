@@ -23,7 +23,6 @@ bool Modules::build()
 	if (!isConfigBuildSuccess)
 	{
 		qWarning("Config build failed");
-		return false;
 	}
 
 	auto isCameraBuildSuccess = cameraModule.build();
@@ -31,7 +30,6 @@ bool Modules::build()
 	if (!isCameraBuildSuccess)
 	{
 		qWarning("Camera build failed");
-		return false;
 	}
 
 	return true;

@@ -1,4 +1,7 @@
 #include"ConfigModule.hpp"
+
+#include <oso/oso_StorageContext.hpp>
+
 #include "utility.hpp"
 
 bool ConfigModule::build()
@@ -14,7 +17,6 @@ bool ConfigModule::build()
 	else
 	{
 		qWarning("主窗体参数加载失败!");
-		return false;
 	}
 
 	return true;
