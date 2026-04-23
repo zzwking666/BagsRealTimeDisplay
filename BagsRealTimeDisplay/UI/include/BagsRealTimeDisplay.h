@@ -32,7 +32,7 @@ public slots:
 
     void onCameraDisplay(size_t index, QPixmap image);
 
-	void lb_title_clicked();
+	void setConfigWindowClosed();
 private slots:
 	void pbtn_exit_clicked();
 	void pbtn_set_clicked();
@@ -40,6 +40,8 @@ private slots:
 	void btn_zengjiabaoguang1_clicked();
 	void btn_jianshaobaoguang2_clicked();
 	void btn_zengjiabaoguang2_clicked();
+
+	void lb_title_clicked();
 private:
 	void loadCompanyTXT();
 private:

@@ -74,6 +74,10 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 void BagsRealTimeDisplay::build_setConfig()
 {
 	_dlgProductSet = new DlgProductSet(this);
+
+	// 连接槽函数
+	QObject::connect(_dlgProductSet, &DlgProductSet::paramsChanged,
+		this, &BagsRealTimeDisplay::setConfigWindowClosed);
 }
 
 void BagsRealTimeDisplay::ini_clickableTitle()
@@ -131,6 +135,13 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, QPixmap image)
 	{
 		ui->label_imgDisplay_2->setPixmap(image.scaled(ui->label_imgDisplay_2->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 	}
+}
+
+void BagsRealTimeDisplay::setConfigWindowClosed()
+{
+	auto& setConfig = Modules::getInstance().configModule.setConfig;
+	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
+	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 }
 
 void BagsRealTimeDisplay::lb_title_clicked()

@@ -20,6 +20,9 @@ public:
 	void read_config();
 	void build_connect();
 
+protected:
+	void showEvent(QShowEvent* event) override;
+
 signals:
 	void paramsChanged();
 

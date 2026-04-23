@@ -95,6 +95,15 @@ void DlgProductSet::build_connect()
 		this, &DlgProductSet::ckb_jingxiang_toggled);
 }
 
+void DlgProductSet::showEvent(QShowEvent* event)
+{
+	QDialog::showEvent(event);
+
+	auto& setConfig = Modules::getInstance().configModule.setConfig;
+	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
+	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
+}
+
 void DlgProductSet::btn_close_clicked()
 {
 	emit paramsChanged();
