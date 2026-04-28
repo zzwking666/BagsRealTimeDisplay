@@ -31,6 +31,4 @@ void AppRuntime::shutdown()
 {
 	_modules.stop();
     _modules.destroy();
-
-    _bagsRealTimeDisplay.reset();
 }

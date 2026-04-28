@@ -19,6 +19,7 @@ BagsRealTimeDisplay::BagsRealTimeDisplay(ConfigModule& configModule, CameraModul
 BagsRealTimeDisplay::~BagsRealTimeDisplay()
 {
 	delete _dlgCloseForm;
+	delete _dlgProductSet;
 	delete ui;
 }
 
@@ -35,6 +36,7 @@ void BagsRealTimeDisplay::build_ui()
 {
 	build_BagsRealTimeDisplayData();
 	build_DlgCloseForm();
+	build_DlgProductSet();
 	ini_clickableTitle();
 }
 
@@ -83,6 +85,11 @@ void BagsRealTimeDisplay::ini_clickableTitle()
 void BagsRealTimeDisplay::build_DlgCloseForm()
 {
 	_dlgCloseForm = new DlgCloseForm(this);
+}
+
+void BagsRealTimeDisplay::build_DlgProductSet()
+{
+	_dlgProductSet = new DlgProductSet(_configModule, this);
 }
 
 void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
@@ -161,6 +168,9 @@ void BagsRealTimeDisplay::pbtn_exit_clicked()
 
 void BagsRealTimeDisplay::pbtn_set_clicked()
 {
+	_dlgProductSet->setFixedSize(this->width(), this->height());
+	_dlgProductSet->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
+	_dlgProductSet->exec();
 }
 
 void BagsRealTimeDisplay::btn_jianshaobaoguang1_clicked()
