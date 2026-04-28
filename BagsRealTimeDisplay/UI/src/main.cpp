@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     }
 
     Modules::getInstance().build();
-	BagsRealTimeDisplay w;
+    BagsRealTimeDisplay w;
     Modules::getInstance().connect();
     Modules::getInstance().start();
 
