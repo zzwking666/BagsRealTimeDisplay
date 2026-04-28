@@ -1,31 +1,27 @@
 #include <QFile>
 
-#include "BagsRealTimeDisplay.h"
-#include "Modules.hpp"
 #include <QtWidgets/QApplication>
 #include "rqwu/rqwu_core.h"
-
+#include "AppRuntime.hpp"
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     Q_INIT_RESOURCE(BagsRealTimeDisplay);
     rw::rqwu::ini();
 
-    // 检测运行环境
-    if (!Modules::check())
+	AppRuntime appRuntime;
+    if (!appRuntime.initialize())
     {
         return 1;
     }
+    appRuntime.show();
 
-    Modules::getInstance().build();
-    BagsRealTimeDisplay w(Modules::getInstance().configModule, Modules::getInstance().cameraModule);
-    Modules::getInstance().connect();
-    Modules::getInstance().start();
-
-#ifdef NDEBUG
-    w.showFullScreen();
-#else
-    w.show();
-#endif
+    QObject::connect(&app, &QCoreApplication::aboutToQuit,
+        [&appRuntime]()
+        {
+	        appRuntime.shutdown();
+        }
+    );
+  
     return app.exec();
 }
