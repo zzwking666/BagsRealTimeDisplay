@@ -1,3 +1,5 @@
+add_subdirectory(UIModule)
+
 set(BRTD_TARGET BagsRealTimeDisplay)
 
 #设置cpp文件路径
