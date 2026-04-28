@@ -21,6 +21,7 @@ target_link_libraries(${DEMO_TARGET}
 	PUBLIC Modules::CameraModule
 	PUBLIC Modules::ConfigModule
 	PUBLIC Tools::RunEnvCheck
+	PUBLIC BusinessLayer::ImageStitch
 )
 
 add_library(Modules::${DEMO_TARGET} ALIAS ${DEMO_TARGET})

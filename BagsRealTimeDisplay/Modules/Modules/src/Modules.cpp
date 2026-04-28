@@ -9,12 +9,10 @@ Modules::Modules(const Modules&)
 }
 
 Modules::Modules()
-{
-}
+{}
 
 Modules::~Modules()
-{
-}
+{}
 
 bool Modules::build()
 {
@@ -55,7 +53,9 @@ void Modules::stop()
 
 void Modules::connect()
 {
-
+	// 相机出图信号连接到图像拼接模块
+	QObject::connect(&cameraModule, &CameraModule::onCameraCapture,
+		&imageStitchModule, &ImageStitch::onFrameCaptured);
 }
 
 bool Modules::check()

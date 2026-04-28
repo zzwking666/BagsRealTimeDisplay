@@ -3,7 +3,7 @@
 #include <QObject>
 
 #include"IModule.hpp"
-#include"hoecd/hoec_d.hpp"
+#include"rqwcd/rqwcd/rqwc_d.hpp"
 
 
 class CameraModule
@@ -43,9 +43,14 @@ public slots:
 	bool onBuildCamera(int index);
 	void onDestroyCamera(int index);
 	void onStartCamera(int index);
+private slots:
+	void onCamera1Capture(const rw::hoec::MatInfo& matInfo);
+	void onCamera2Capture(const rw::hoec::MatInfo& matInfo);
+signals:
+	void onCameraCapture(const rw::hoec::MatInfo& matInfo, size_t index);
 private:
-	std::unique_ptr<rw::hoec::DVPCameraPassive> camera1{ nullptr };
-	std::unique_ptr<rw::hoec::DVPCameraPassive> camera2{ nullptr };
+	std::unique_ptr<rw::rqwc::DVPCameraPassive> camera1{ nullptr };
+	std::unique_ptr<rw::rqwc::DVPCameraPassive> camera2{ nullptr };
 public:
 	std::atomic<bool> isCamera1SoftTrigger{ false };
 	std::atomic<bool> isCamera2SoftTrigger{ false };

@@ -66,7 +66,7 @@ bool CameraModule::build_camera1()
 	{
 		try
 		{
-			camera1 = std::make_unique<rw::hoec::DVPCameraPassive>();
+			camera1 = std::make_unique<rw::rqwc::DVPCameraPassive>();
 			camera1->setIP(cameraMetaData1.ip);
 			camera1->connectCamera();
 			camera1->registerCallBackFunc();
@@ -77,6 +77,9 @@ bool CameraModule::build_camera1()
 
 			camera1->setExposureTime(static_cast<size_t>(cfg.baoguang1));
 			camera1->setGain(static_cast<size_t>(cfg.zengyi1));
+
+			QObject::connect(camera1.get(), &rw::rqwc::DVPCameraPassive::callBackFuncPost,
+				this, &CameraModule::onCamera1Capture);
 
 			return true;
 		}
@@ -97,7 +100,7 @@ bool CameraModule::build_camera2()
 	{
 		try
 		{
-			camera2 = std::make_unique<rw::hoec::DVPCameraPassive>();
+			camera2 = std::make_unique<rw::rqwc::DVPCameraPassive>();
 			camera2->setIP(cameraMetaData2.ip);
 			camera2->connectCamera();
 			camera2->registerCallBackFunc();
@@ -108,6 +111,9 @@ bool CameraModule::build_camera2()
 
 			camera2->setExposureTime(static_cast<size_t>(cfg.baoguang2));
 			camera2->setGain(static_cast<size_t>(cfg.zengyi2));
+
+			QObject::connect(camera2.get(), &rw::rqwc::DVPCameraPassive::callBackFuncPost,
+				this, &CameraModule::onCamera2Capture);
 
 			return true;
 		}
@@ -273,4 +279,14 @@ void CameraModule::onStartCamera(int index)
 	default:
 		break;
 	}
+}
+
+void CameraModule::onCamera1Capture(const rw::hoec::MatInfo& matInfo)
+{
+	emit onCameraCapture(matInfo, 1);
+}
+
+void CameraModule::onCamera2Capture(const rw::hoec::MatInfo& matInfo)
+{
+	emit onCameraCapture(matInfo, 2);
 }

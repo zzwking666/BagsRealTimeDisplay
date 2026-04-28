@@ -5,6 +5,7 @@
 #include "RunEnvCheck.hpp"
 #include "CameraModule.hpp"
 #include "ConfigModule.hpp"
+#include "ImageStitch.hpp"
 
 class Modules
 	:public IModule<bool>
@@ -41,6 +42,7 @@ public:
 public:
 	CameraModule cameraModule;
 	ConfigModule configModule;
+	ImageStitch imageStitchModule;
 };
 
 template <class TypeCanToAssembly>
