@@ -5,7 +5,8 @@
 
 #include "rqw_LabelClickable.h"
 #include "DlgCloseForm.h"
-#include "DlgProductSet.h"
+#include "ConfigModule.hpp"
+#include "CameraModule.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class BagsRealTimeDisplayClass; };
@@ -16,7 +17,7 @@ class BagsRealTimeDisplay : public QMainWindow
     Q_OBJECT
 
 public:
-    BagsRealTimeDisplay(QWidget* parent = nullptr);
+    BagsRealTimeDisplay(ConfigModule& configModule,CameraModule& cameraModule,QWidget* parent = nullptr);
     ~BagsRealTimeDisplay();
 public:
 	void initializeComponents();
@@ -24,8 +25,7 @@ public:
 	void build_ui();
 	void build_connect();
 	void build_BagsRealTimeDisplayData();
-	void build_setConfig();
-	void ini_clickableTitle();
+    void ini_clickableTitle();
 	void build_DlgCloseForm();
 public slots:
 	void updateCameraLabelState(int cameraIndex, bool state);
@@ -48,8 +48,10 @@ private:
 	rw::rqw::ClickableLabel* clickableTitle = nullptr;
 	int minimizeCount{ 3 };
 	DlgCloseForm* _dlgCloseForm = nullptr;
-	DlgProductSet* _dlgProductSet = nullptr;
+
 private:
     Ui::BagsRealTimeDisplayClass* ui;
+    ConfigModule& _configModule;
+	CameraModule& _cameraModule;
 };
 

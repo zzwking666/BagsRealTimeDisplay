@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDialog>
+#include "ConfigModule.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -12,7 +13,7 @@ class DlgProductSet : public QDialog
 	Q_OBJECT
 
 public:
-	DlgProductSet(QWidget* parent = nullptr);
+	DlgProductSet(ConfigModule& configModule,QWidget* parent = nullptr);
 	~DlgProductSet();
 
 public:
@@ -51,5 +52,7 @@ private slots:
 	void ckb_jingxiang_toggled(bool checked);
 public:
 	Ui::DlgProductSetClass* ui;
+private:
+	ConfigModule& _configModule;
 };
 
