@@ -27,5 +27,5 @@ private:
 	int newFrameNum{ 0 };
 
 signals:
-	void imageReady(size_t index, QPixmap image);
+	void imageReady(size_t index, const QPixmap& image);
 };
