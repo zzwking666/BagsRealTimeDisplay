@@ -121,7 +121,7 @@ void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
 	}
 }
 
-void BagsRealTimeDisplay::onCameraDisplay(size_t index, QPixmap image)
+void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
 {
 	if (1 == index)
 	{

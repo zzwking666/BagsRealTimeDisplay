@@ -13,6 +13,8 @@ public:
 	void shutdown();
 
 public:
+	void build_connect();
+public:
 	Modules& _modules{ Modules::getInstance() };
 	std::unique_ptr<BagsRealTimeDisplay> _bagsRealTimeDisplay{ nullptr };
 };

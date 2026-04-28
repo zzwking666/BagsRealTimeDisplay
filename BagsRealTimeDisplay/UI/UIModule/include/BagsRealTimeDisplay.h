@@ -32,7 +32,7 @@ public:
 public slots:
 	void updateCameraLabelState(int cameraIndex, bool state);
 
-    void onCameraDisplay(size_t index, QPixmap image);
+    void onCameraDisplay(size_t index, const QPixmap& image);
 
 	void setConfigWindowClosed();
 private slots:

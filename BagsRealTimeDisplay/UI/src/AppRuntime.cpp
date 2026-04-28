@@ -32,3 +32,10 @@ void AppRuntime::shutdown()
 	_modules.stop();
     _modules.destroy();
 }
+
+void AppRuntime::build_connect()
+{
+	// 连接相机模块的图像捕获信号到UI显示槽函数
+    QObject::connect(&Modules::getInstance().imageStitchModule, &ImageStitch::imageReady,
+        _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onCameraDisplay);
+}
