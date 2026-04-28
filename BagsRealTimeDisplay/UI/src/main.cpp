@@ -1,3 +1,5 @@
+#include <QFile>
+
 #include "BagsRealTimeDisplay.h"
 #include "Modules.hpp"
 #include <QtWidgets/QApplication>
@@ -6,7 +8,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
+    Q_INIT_RESOURCE(BagsRealTimeDisplay);
     rw::rqwu::ini();
 
     // 检测运行环境

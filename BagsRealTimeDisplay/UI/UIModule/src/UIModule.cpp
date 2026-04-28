@@ -7,7 +7,7 @@ bool UIModule::build()
 
 void UIModule::destroy()
 {
-
+	_bagsRealTimeDisplay.close();
 }
 
 void UIModule::start()

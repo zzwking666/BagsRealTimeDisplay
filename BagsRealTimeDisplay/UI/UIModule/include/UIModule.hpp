@@ -1,6 +1,7 @@
 #pragma once
 #include "IModule.hpp"
 #include<QObject>
+#include "BagsRealTimeDisplay.h"
 
 class UIModule
 	:public QObject, public IModule<bool>
@@ -12,5 +13,5 @@ public:
 	void start() override;
 	void stop() override;
 public:
-	
+	BagsRealTimeDisplay _bagsRealTimeDisplay;
 };
