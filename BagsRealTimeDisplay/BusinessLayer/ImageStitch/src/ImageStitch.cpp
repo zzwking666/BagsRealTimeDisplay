@@ -11,7 +11,7 @@
 
 
 ImageStitch::ImageStitch(ConfigModule& configModule, QObject* parent)
-	: QThread(parent),configModule(configModule)
+	: QThread(parent), configModule(configModule)
 {
 
 }
@@ -28,17 +28,18 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 		return;
 	}
 
-	if (1 == index)
-	{
-		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
-		emit imageReady(index, qimg);
-	}
-	else if (2 == index)
+
+	if (2 == index)
 	{
 		if (configModule.setConfig.isjingxiang)
 		{
 			rotateXImage(matInfo.mat);
 		}
+		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
+		emit imageReady(index, qimg);
+	}
+	else
+	{
 		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
 		emit imageReady(index, qimg);
 	}
