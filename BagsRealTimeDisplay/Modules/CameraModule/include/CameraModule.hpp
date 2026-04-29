@@ -34,7 +34,11 @@ public:
 	void seCamera1tGain(size_t gain);
 	void setCamera2ExposureTime(size_t exposureTime);
 	void seCamera2tGain(size_t gain);
-
+public:
+	void setCamera1Multiplier(size_t multiplier);
+	void setCamera1PostDivider(size_t postDivider);
+	void setCamera2Multiplier(size_t multiplier);
+	void setCamera2PostDivider(size_t postDivider);
 private:
 	bool isTargetCamera(const QString& cameraIndex, const QString& targetName);
 	rw::hoec::CameraInfo cameraMetaDataCheck(const QString& cameraIndex,

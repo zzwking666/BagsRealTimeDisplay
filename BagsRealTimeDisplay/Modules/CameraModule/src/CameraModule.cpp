@@ -205,6 +205,38 @@ void CameraModule::seCamera2tGain(size_t gain)
 	}
 }
 
+void CameraModule::setCamera1Multiplier(size_t multiplier)
+{
+	if (camera1)
+	{
+		camera1->setMultiplier(multiplier);
+	}
+}
+
+void CameraModule::setCamera1PostDivider(size_t postDivider)
+{
+	if (camera1)
+	{
+		camera1->setPostDivider(postDivider);
+	}
+}
+
+void CameraModule::setCamera2Multiplier(size_t multiplier)
+{
+	if (camera2)
+	{
+		camera2->setMultiplier(multiplier);
+	}
+}
+
+void CameraModule::setCamera2PostDivider(size_t postDivider)
+{
+	if (camera2)
+	{
+		camera2->setPostDivider(postDivider);
+	}
+}
+
 bool CameraModule::isTargetCamera(const QString& cameraIndex, const QString& targetName)
 {
 	QRegularExpression regex(R"((\d+)\.(\d+)\.(\d+)\.(\d+))");
