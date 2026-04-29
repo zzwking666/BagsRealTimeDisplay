@@ -23,6 +23,27 @@ ImageStitch::~ImageStitch()
 
 void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 {
+	if (matInfo.mat.empty())
+	{
+		return;
+	}
+
+	if (1 == index)
+	{
+		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
+		emit imageReady(index, qimg);
+	}
+	else if (2 == index)
+	{
+		if (configModule.setConfig.isjingxiang)
+		{
+			rotateXImage(matInfo.mat);
+		}
+		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
+		emit imageReady(index, qimg);
+	}
+
+	// ---------------------拼接图像的逻辑----------------------
 	/*if (matInfos.size() > matInfosSize)
 	{
 		matInfos.pop_front();
@@ -37,7 +58,10 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 
 	//auto stitchedMat = stitchImages(stitchNum);
 
-	auto testImg1 = cv::imread("C:/Users/zfkj4090/Downloads/test_ocr.png");
+	//  ----------------------拼接图像的逻辑----------------------
+
+	// ----------------------4090测试用---------------------------------
+	/*auto testImg1 = cv::imread("C:/Users/zfkj4090/Downloads/test_ocr.png");
 	auto testImg2 = cv::imread("C:/Users/zfkj4090/Downloads/222.jpg");
 	static bool emitFirst = true;
 	if (testImg1.empty() || testImg2.empty())
@@ -60,7 +84,9 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 		emit imageReady(2, qimg);
 	}
 
-	emitFirst = !emitFirst;
+	emitFirst = !emitFirst;*/
+
+	// ----------------------4090测试用---------------------------------
 }
 
 cv::Mat ImageStitch::stitchImages(int stitchCount)
