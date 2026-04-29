@@ -54,6 +54,8 @@ void BagsRealTimeDisplay::build_connect()
 		this, &BagsRealTimeDisplay::btn_jianshaobaoguang2_clicked);
 	QObject::connect(ui->btn_zengjiabaoguang2, &QPushButton::clicked,
 		this, &BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked);
+	QObject::connect(ui->cbb_qiehuanxianshi, &QComboBox::currentIndexChanged,
+				this, &BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged);
 
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
@@ -64,11 +66,15 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 {
 	auto& BagsRealTimeDisplayConfig = _configModule.bagsRealTimeDisplayInfo;
 	auto& setConfig = _configModule.setConfig;
+
+	ui->cbb_qiehuanxianshi->addItems({"正面", "背面", "双面"});
+
 	// 更新UI
 	ui->lb_FrontTotal->setText(QString::number(BagsRealTimeDisplayConfig.zhengmianzongliang));
 	ui->lb_BackTotal->setText(QString::number(BagsRealTimeDisplayConfig.beimianzongliang));
 	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
 	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
+	ui->cbb_qiehuanxianshi->setCurrentIndex(BagsRealTimeDisplayConfig.qiehuanxianshi);
 }
 
 void BagsRealTimeDisplay::ini_clickableTitle()
@@ -207,6 +213,11 @@ void BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked()
 	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 	auto& cameraModule = _cameraModule;
 	cameraModule.setCamera2ExposureTime(setConfig.baoguang2);
+}
+
+void BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged(int index)
+{
+	_configModule.bagsRealTimeDisplayInfo.qiehuanxianshi = index;
 }
 
 void BagsRealTimeDisplay::loadCompanyTXT()

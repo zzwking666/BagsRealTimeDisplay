@@ -43,6 +43,8 @@ private slots:
 	void btn_jianshaobaoguang2_clicked();
 	void btn_zengjiabaoguang2_clicked();
 
+	void cbb_qiehuanxianshi_currentIndexChanged(int index);
+
 	void lb_title_clicked();
 private:
 	void loadCompanyTXT();
