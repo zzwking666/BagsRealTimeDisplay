@@ -4,11 +4,13 @@
 #include"QDir"
 
 Modules::Modules(const Modules&)
+	: imageStitchModule(configModule)
 {
 
 }
 
 Modules::Modules()
+	: imageStitchModule(configModule)
 {}
 
 Modules::~Modules()

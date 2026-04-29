@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <vector>
 #include <cmath>
-
+#include <QDebug>
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include "imgqt/imgqt.hpp"
@@ -10,7 +10,8 @@
 #include "Modules.hpp"
 
 
-ImageStitch::ImageStitch(QObject* parent)
+ImageStitch::ImageStitch(ConfigModule& configModule, QObject* parent)
+	: QThread(parent),configModule(configModule)
 {
 
 }
@@ -51,6 +52,10 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 	}
 	else
 	{
+		if (configModule.setConfig.isjingxiang)
+		{
+			rotateXImage(testImg2);
+		}
 		const QImage qimg = rw::img::cvMatToQImage(testImg2);
 		emit imageReady(2, qimg);
 	}
@@ -152,4 +157,26 @@ cv::Mat ImageStitch::stitchImages(int stitchCount)
 
 	lastStitchFrameNum = latestFrame;
 	return stitched;
+}
+
+void ImageStitch::rotateXImage(cv::Mat& image)
+{
+	if (image.empty())
+	{
+		return;
+	}
+
+	// 以竖直中轴 x = (w - 1) / 2 做轴对称：x' = -x + 2*x0
+	const double x0 = (static_cast<double>(image.cols) - 1.0) * 0.5;
+	const cv::Mat M = (cv::Mat_<double>(2, 3) << -1.0, 0.0, 2.0 * x0,
+		0.0, 1.0, 0.0);
+
+	cv::Mat dst;
+	cv::warpAffine(
+		image, dst, M, image.size(),
+		cv::INTER_LINEAR,
+		cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0)
+	);
+
+	image = std::move(dst);
 }

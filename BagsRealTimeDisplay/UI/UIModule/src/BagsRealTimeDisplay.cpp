@@ -291,7 +291,6 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 		{
 			if (index == 1) showByCamera(1, QPixmap::fromImage(image));
 			else            showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
-
 			++lastCameraCaptureCount;
 			const int switchCount = _configModule.setConfig.qiehuanzhangshu;
 			if (lastCameraCaptureCount >= switchCount)

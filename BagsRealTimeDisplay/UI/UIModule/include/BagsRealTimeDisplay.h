@@ -55,11 +55,12 @@ private slots:
 	void lb_title_clicked();
 private:
 	void loadCompanyTXT();
+public:
+	DlgProductSet* _dlgProductSet = nullptr;
 private:
 	rw::rqw::ClickableLabel* clickableTitle = nullptr;
 	int minimizeCount{ 3 };
 	DlgCloseForm* _dlgCloseForm = nullptr;
-	DlgProductSet* _dlgProductSet = nullptr;
 	int lastCameraCaptureCount{ 0 };
 	int lastCameraCaptureIndex{ 1 };
 
