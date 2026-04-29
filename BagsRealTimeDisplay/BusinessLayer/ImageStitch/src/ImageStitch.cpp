@@ -22,22 +22,22 @@ ImageStitch::~ImageStitch()
 
 void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 {
-	if (matInfos.size() > matInfosSize)
+	/*if (matInfos.size() > matInfosSize)
 	{
 		matInfos.pop_front();
 	}
-	matInfos.push_back(matInfo);
+	matInfos.push_back(matInfo);*/
 
 	// 更新最新的图像的帧号
 	newFrameNum = static_cast<int>(matInfo.frameInfo.frameNum);
 
-	auto& setConfig = Modules::getInstance().configModule.setConfig;
-	auto stitchNum = setConfig.qiehuanzhangshu;
+	//auto& setConfig = Modules::getInstance().configModule.setConfig;
+	//auto stitchNum = setConfig.qiehuanzhangshu;
 
-	auto stitchedMat = stitchImages(stitchNum);
-	if (!stitchedMat.empty())
+	//auto stitchedMat = stitchImages(stitchNum);
+	if (!matInfo.mat.empty())
 	{
-		QImage stitchedQimage = rw::img::cvMatToQImage(stitchedMat);
+		QImage stitchedQimage = rw::img::cvMatToQImage(matInfo.mat);
 		emit imageReady(index, QPixmap::fromImage(stitchedQimage));
 	}
 }
