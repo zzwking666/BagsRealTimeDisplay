@@ -8,6 +8,8 @@
 #include "ConfigModule.hpp"
 #include "CameraModule.hpp"
 #include "DlgProductSet.h"
+#include "PanZoomLabel.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class BagsRealTimeDisplayClass; };
@@ -29,6 +31,7 @@ public:
     void ini_clickableTitle();
 	void build_DlgCloseForm();
 	void build_DlgProductSet();
+	void build_PanZoomLabel();
 public slots:
 	void updateCameraLabelState(int cameraIndex, bool state);
 
@@ -55,6 +58,11 @@ private:
 	DlgProductSet* _dlgProductSet = nullptr;
 	int lastCameraCaptureCount{ 0 };
 	int lastCameraCaptureIndex{ 1 };
+
+	PanZoomLabel* _panZoomLabel = nullptr;
+	PanZoomLabel::ViewState _frontViewState{};
+	PanZoomLabel::ViewState _backViewState{};
+	int _currentViewCamera{ 0 };	// 1:正面相机, 2:背面相机
 private:
     Ui::BagsRealTimeDisplayClass* ui;
     ConfigModule& _configModule;

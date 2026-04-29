@@ -36,6 +36,7 @@ void BagsRealTimeDisplay::build_ui()
 	build_DlgCloseForm();
 	build_DlgProductSet();
 	ini_clickableTitle();
+	build_PanZoomLabel();
 }
 
 void BagsRealTimeDisplay::build_connect()
@@ -53,7 +54,7 @@ void BagsRealTimeDisplay::build_connect()
 	QObject::connect(ui->btn_zengjiabaoguang2, &QPushButton::clicked,
 		this, &BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked);
 	QObject::connect(ui->cbb_qiehuanxianshi, &QComboBox::currentIndexChanged,
-				this, &BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged);
+		this, &BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged);
 
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
@@ -65,7 +66,7 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 	auto& BagsRealTimeDisplayConfig = _configModule.bagsRealTimeDisplayInfo;
 	auto& setConfig = _configModule.setConfig;
 
-	ui->cbb_qiehuanxianshi->addItems({"正面", "背面", "双面"});
+	ui->cbb_qiehuanxianshi->addItems({ "正面", "背面", "双面" });
 
 	// 更新UI
 	ui->lb_FrontTotal->setText(QString::number(BagsRealTimeDisplayConfig.zhengmianzongliang));
@@ -94,6 +95,59 @@ void BagsRealTimeDisplay::build_DlgCloseForm()
 void BagsRealTimeDisplay::build_DlgProductSet()
 {
 	_dlgProductSet = new DlgProductSet(_configModule, _cameraModule, this);
+}
+
+void BagsRealTimeDisplay::build_PanZoomLabel()
+{
+	if (_panZoomLabel) return;
+	if (!ui || !ui->label_imgDisplay_1) return;
+
+	QLabel* oldLabel = ui->label_imgDisplay_1;
+
+	// 用原label同一个父对象，避免层级变化
+	_panZoomLabel = new PanZoomLabel(oldLabel->parentWidget());
+
+	// 迁移常用属性
+	_panZoomLabel->setObjectName(oldLabel->objectName());
+	_panZoomLabel->setGeometry(oldLabel->geometry());
+	_panZoomLabel->setSizePolicy(oldLabel->sizePolicy());
+	_panZoomLabel->setMinimumSize(oldLabel->minimumSize());
+	_panZoomLabel->setMaximumSize(oldLabel->maximumSize());
+	_panZoomLabel->setBaseSize(oldLabel->baseSize());
+	_panZoomLabel->setContentsMargins(oldLabel->contentsMargins());
+
+	_panZoomLabel->setStyleSheet(oldLabel->styleSheet());
+	_panZoomLabel->setFont(oldLabel->font());
+	_panZoomLabel->setPalette(oldLabel->palette());
+	_panZoomLabel->setAutoFillBackground(oldLabel->autoFillBackground());
+	_panZoomLabel->setCursor(oldLabel->cursor());
+	_panZoomLabel->setEnabled(oldLabel->isEnabled());
+	_panZoomLabel->setVisible(oldLabel->isVisible());
+
+	// QLabel相关视觉属性
+	_panZoomLabel->setAlignment(oldLabel->alignment());
+	_panZoomLabel->setFrameShape(oldLabel->frameShape());
+	_panZoomLabel->setFrameShadow(oldLabel->frameShadow());
+	_panZoomLabel->setLineWidth(oldLabel->lineWidth());
+	_panZoomLabel->setMidLineWidth(oldLabel->midLineWidth());
+	_panZoomLabel->setIndent(oldLabel->indent());
+	_panZoomLabel->setMargin(oldLabel->margin());
+
+	// 用布局替换（首选）
+	if (oldLabel->parentWidget() && oldLabel->parentWidget()->layout())
+	{
+		oldLabel->parentWidget()->layout()->replaceWidget(oldLabel, _panZoomLabel);
+	}
+	else
+	{
+		// 没有布局时，至少保持位置尺寸一致
+		_panZoomLabel->move(oldLabel->pos());
+		_panZoomLabel->resize(oldLabel->size());
+	}
+
+	_panZoomLabel->show();
+	oldLabel->hide();
+	oldLabel->deleteLater();
 }
 
 void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
@@ -127,61 +181,60 @@ void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
 {
+	if (!_panZoomLabel || image.isNull()) return;
+
 	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
 	const double youyijuli = _configModule.setConfig.youyijuli;
 	const double suofangbili = _configModule.setConfig.suofang;
 
-	auto showImage = [&](double offsetX, double scalePercent)
+	auto makeBackCanvas = [&](const QPixmap& src)->QPixmap
 		{
-			auto* label = ui->label_imgDisplay_1;
-			const QSize dstSize = label->size();
-			if (dstSize.isEmpty() || image.isNull()) return;
+			const QSize dstSize = _panZoomLabel->size();
+			if (dstSize.isEmpty()) return src;
 
-			// 100=原图，<100缩小，>100放大
-			const double scale = std::max(0.01, scalePercent / 100.0);
-
-			const int targetW = std::max(1, qRound(image.width() * scale));
-			const int targetH = std::max(1, qRound(image.height() * scale));
-			const QPixmap scaled = image.scaled(
-				targetW, targetH,
-				Qt::IgnoreAspectRatio,
-				Qt::SmoothTransformation);
+			const double scale = std::max(0.01, suofangbili / 100.0);
+			const int targetW = std::max(1, qRound(src.width() * scale));
+			const int targetH = std::max(1, qRound(src.height() * scale));
+			const QPixmap scaled = src.scaled(targetW, targetH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
 			QPixmap canvas(dstSize);
 			canvas.fill(Qt::black);
 
 			const int baseX = (dstSize.width() - scaled.width()) / 2;
 			const int baseY = (dstSize.height() - scaled.height()) / 2;
-			const int drawX = baseX + qRound(offsetX);
+			const int drawX = baseX + qRound(youyijuli);
 
 			QPainter painter(&canvas);
 			painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 			painter.drawPixmap(drawX, baseY, scaled);
-
-			label->setPixmap(canvas);
+			return canvas;
 		};
 
-	// 0: 正面(相机1) -> 不缩放
-	if (mode == 0)
-	{
-		if (index == 1) showImage(0.0, 100.0);
-		return;
-	}
+	auto showByCamera = [&](int camera, const QPixmap& pix)
+		{
+			// 先保存上一相机视图
+			if (_currentViewCamera == 1) _frontViewState = _panZoomLabel->viewState();
+			if (_currentViewCamera == 2) _backViewState = _panZoomLabel->viewState();
 
-	// 1: 背面(相机2) -> 应用偏移+缩放
-	if (mode == 1)
-	{
-		if (index == 2) showImage(youyijuli, suofangbili);
-		return;
-	}
+			// 显示新图（不复位）
+			_panZoomLabel->setPixmap(pix, false);
 
-	// 2: 双面切换
+			// 恢复当前相机各自视图
+			if (camera == 1 && _frontViewState.valid) _panZoomLabel->applyViewState(_frontViewState);
+			if (camera == 2 && _backViewState.valid)  _panZoomLabel->applyViewState(_backViewState);
+
+			_currentViewCamera = camera;
+		};
+
+	if (mode == 0) { if (index == 1) showByCamera(1, image); return; }
+	if (mode == 1) { if (index == 2) showByCamera(2, makeBackCanvas(image)); return; }
+
 	if (mode == 2)
 	{
 		if (index == static_cast<size_t>(lastCameraCaptureIndex))
 		{
-			const bool isBack = (index == 2);
-			showImage(isBack ? youyijuli : 0.0, isBack ? suofangbili : 100.0);
+			if (index == 1) showByCamera(1, image);
+			else            showByCamera(2, makeBackCanvas(image));
 
 			++lastCameraCaptureCount;
 			const int switchCount = _configModule.setConfig.qiehuanzhangshu;

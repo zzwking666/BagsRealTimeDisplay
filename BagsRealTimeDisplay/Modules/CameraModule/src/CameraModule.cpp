@@ -50,10 +50,12 @@ void CameraModule::stop()
 	if (camera1)
 	{
 		camera1->stopMonitor();
+		camera1->disconnectCamera();
 	}
 	if (camera2)
 	{
 		camera2->stopMonitor();
+		camera2->disconnectCamera();
 	}
 }
 
@@ -127,12 +129,18 @@ bool CameraModule::build_camera2()
 
 void CameraModule::destroy_camera1()
 {
-	camera1.reset();
+	if (camera1)
+	{
+		camera1.reset();
+	}
 }
 
 void CameraModule::destroy_camera2()
 {
-	camera2.reset();
+	if(camera2)
+	{
+		camera2.reset();
+	}
 }
 
 void CameraModule::setCamera1TriggerOff()

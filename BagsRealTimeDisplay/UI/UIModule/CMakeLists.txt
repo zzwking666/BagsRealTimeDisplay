@@ -27,8 +27,9 @@ target_include_directories(${DEMO_TARGET}
 
 # 链接底层依赖库
 target_link_libraries(${DEMO_TARGET}
-	PUBLIC Modules::ConfigModule
-	PUBLIC Modules::CameraModule
+	PRIVATE Modules::ConfigModule
+	PRIVATE Modules::CameraModule
+	PRIVATE Tools::PanZoomLabel
 )
 
 #链接QT库

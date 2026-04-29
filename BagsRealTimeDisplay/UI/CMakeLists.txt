@@ -19,6 +19,7 @@ target_link_libraries(${BRTD_TARGET}
 	PRIVATE Qt6::Core Qt6::Widgets
 	PRIVATE RWUL::rqwu
 	PRIVATE Modules::Modules
+	PRIVATE Tools::PanZoomLabel
 )
 
 target_include_directories(${BRTD_TARGET}

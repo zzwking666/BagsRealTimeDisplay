@@ -36,16 +36,26 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 
 	//auto stitchedMat = stitchImages(stitchNum);
 
-	auto testImg = cv::imread("C:/Users/zfkj4090/Downloads/test_ocr.png");
-	if (!testImg.empty())
+	auto testImg1 = cv::imread("C:/Users/zfkj4090/Downloads/test_ocr.png");
+	auto testImg2 = cv::imread("C:/Users/zfkj4090/Downloads/222.jpg");
+	static bool emitFirst = true;
+	if (testImg1.empty() || testImg2.empty())
 	{
-		matInfo.mat = testImg;
+		return;
 	}
-	if (!matInfo.mat.empty())
+
+	if (emitFirst)
 	{
-		QImage stitchedQimage = rw::img::cvMatToQImage(matInfo.mat);
-		emit imageReady(index, QPixmap::fromImage(stitchedQimage));
+		const QImage qimg = rw::img::cvMatToQImage(testImg1);
+		emit imageReady(1, QPixmap::fromImage(qimg));
 	}
+	else
+	{
+		const QImage qimg = rw::img::cvMatToQImage(testImg2);
+		emit imageReady(2, QPixmap::fromImage(qimg));
+	}
+
+	emitFirst = !emitFirst;
 }
 
 cv::Mat ImageStitch::stitchImages(int stitchCount)
