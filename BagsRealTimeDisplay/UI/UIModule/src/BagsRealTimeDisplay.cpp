@@ -129,56 +129,61 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
 {
 	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
 	const double youyijuli = _configModule.setConfig.youyijuli;
+	const double suofangbili = _configModule.setConfig.suofang;
 
-	auto showImage = [&](double offsetX)
+	auto showImage = [&](double offsetX, double scalePercent)
 		{
 			auto* label = ui->label_imgDisplay_1;
 			const QSize dstSize = label->size();
 			if (dstSize.isEmpty() || image.isNull()) return;
 
-			// 先按比例缩放
-			const QPixmap scaled = image.scaled(dstSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			// 100=原图，<100缩小，>100放大
+			const double scale = std::max(0.01, scalePercent / 100.0);
 
-			// 画到与label同尺寸的画布上，再做X方向偏移
+			const int targetW = std::max(1, qRound(image.width() * scale));
+			const int targetH = std::max(1, qRound(image.height() * scale));
+			const QPixmap scaled = image.scaled(
+				targetW, targetH,
+				Qt::IgnoreAspectRatio,
+				Qt::SmoothTransformation);
+
 			QPixmap canvas(dstSize);
-			canvas.fill(Qt::black); // 可按你UI风格改成其它背景色
+			canvas.fill(Qt::black);
 
 			const int baseX = (dstSize.width() - scaled.width()) / 2;
 			const int baseY = (dstSize.height() - scaled.height()) / 2;
-			const int drawX = baseX + qRound(offsetX); // offsetX>0右移，<0左移
+			const int drawX = baseX + qRound(offsetX);
 
 			QPainter painter(&canvas);
 			painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 			painter.drawPixmap(drawX, baseY, scaled);
-			painter.end();
 
 			label->setPixmap(canvas);
 		};
 
-	// 0: 正面(相机1)
+	// 0: 正面(相机1) -> 不缩放
 	if (mode == 0)
 	{
-		if (index == 1) showImage(0);
+		if (index == 1) showImage(0.0, 100.0);
 		return;
 	}
 
-	// 1: 背面(相机2)
+	// 1: 背面(相机2) -> 应用偏移+缩放
 	if (mode == 1)
 	{
-		if (index == 2) showImage(youyijuli);
+		if (index == 2) showImage(youyijuli, suofangbili);
 		return;
 	}
 
-	// 2(或兼容3): 双面切换
+	// 2: 双面切换
 	if (mode == 2)
 	{
 		if (index == static_cast<size_t>(lastCameraCaptureIndex))
 		{
-			const double offsetX = (index == 2) ? youyijuli : 0.0;
-			showImage(offsetX);
-			
-			++lastCameraCaptureCount;
+			const bool isBack = (index == 2);
+			showImage(isBack ? youyijuli : 0.0, isBack ? suofangbili : 100.0);
 
+			++lastCameraCaptureCount;
 			const int switchCount = _configModule.setConfig.qiehuanzhangshu;
 			if (lastCameraCaptureCount >= switchCount)
 			{
