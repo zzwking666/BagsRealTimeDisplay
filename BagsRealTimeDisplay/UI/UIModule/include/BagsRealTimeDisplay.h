@@ -2,7 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_BagsRealTimeDisplay.h"
-
+#include <QTimer>
 #include "rqw_LabelClickable.h"
 #include "DlgCloseForm.h"
 #include "ConfigModule.hpp"
@@ -32,10 +32,14 @@ public:
 	void build_DlgCloseForm();
 	void build_DlgProductSet();
 	void build_PanZoomLabel();
+protected:
+	bool eventFilter(QObject* watched, QEvent* event) override;
+private:
+	void touchManualViewOperation();
 public slots:
 	void updateCameraLabelState(int cameraIndex, bool state);
 
-    void onCameraDisplay(size_t index, const QPixmap& image);
+    void onCameraDisplay(size_t index, const QImage& image);
 
 	void setConfigWindowClosed();
 private slots:
@@ -63,6 +67,9 @@ private:
 	PanZoomLabel::ViewState _frontViewState{};
 	PanZoomLabel::ViewState _backViewState{};
 	int _currentViewCamera{ 0 };	// 1:正面相机, 2:背面相机
+	bool _freezeImageUpdate{ false };
+	int _freezeAfterManualMs{ 3000 };
+	QTimer* _manualFreezeTimer{ nullptr };
 private:
     Ui::BagsRealTimeDisplayClass* ui;
     ConfigModule& _configModule;

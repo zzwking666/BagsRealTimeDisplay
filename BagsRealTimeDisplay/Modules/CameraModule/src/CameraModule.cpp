@@ -72,7 +72,7 @@ bool CameraModule::build_camera1()
 			camera1->setIP(cameraMetaData1.ip);
 			camera1->connectCamera();
 			camera1->registerCallBackFunc();
-			camera1->startMonitor();
+			//camera1->startMonitor();
 			setCamera1TriggerOff();
 
 			auto cfg = Modules::getInstance().configModule.setConfig;
@@ -106,7 +106,7 @@ bool CameraModule::build_camera2()
 			camera2->setIP(cameraMetaData2.ip);
 			camera2->connectCamera();
 			camera2->registerCallBackFunc();
-			camera2->startMonitor();
+			//camera2->startMonitor();
 			setCamera2TriggerOff();
 
 			auto cfg = Modules::getInstance().configModule.setConfig;

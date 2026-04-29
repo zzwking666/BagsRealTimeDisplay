@@ -148,6 +148,61 @@ void BagsRealTimeDisplay::build_PanZoomLabel()
 	_panZoomLabel->show();
 	oldLabel->hide();
 	oldLabel->deleteLater();
+
+	_panZoomLabel->installEventFilter(this);
+
+	// 冻结计时器
+	if (!_manualFreezeTimer)
+	{
+		_manualFreezeTimer = new QTimer(this);
+		_manualFreezeTimer->setSingleShot(true);
+		connect(_manualFreezeTimer, &QTimer::timeout, this, [this]()
+			{
+				_freezeImageUpdate = false;
+			});
+	}
+}
+
+bool BagsRealTimeDisplay::eventFilter(QObject* watched, QEvent* event)
+{
+	if (watched == _panZoomLabel && event)
+	{
+		switch (event->type())
+		{
+		case QEvent::Wheel:
+			touchManualViewOperation();
+			break;
+
+		case QEvent::MouseButtonPress:
+		{
+			auto* me = static_cast<QMouseEvent*>(event);
+			if (me->button() == Qt::LeftButton) touchManualViewOperation();
+			break;
+		}
+
+		case QEvent::MouseMove:
+		{
+			auto* me = static_cast<QMouseEvent*>(event);
+			if (me->buttons() & Qt::LeftButton) touchManualViewOperation();
+			break;
+		}
+
+		default:
+			break;
+		}
+	}
+
+	return QMainWindow::eventFilter(watched, event);
+}
+
+void BagsRealTimeDisplay::touchManualViewOperation()
+{
+	_freezeImageUpdate = true;
+	if (_manualFreezeTimer)
+	{
+		int stopTime = static_cast<int>(_configModule.setConfig.xuantingshijian * 1000);
+		_manualFreezeTimer->start(stopTime);
+	}
 }
 
 void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
@@ -179,8 +234,9 @@ void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
 	}
 }
 
-void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
+void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 {
+	if (_freezeImageUpdate) return;
 	if (!_panZoomLabel || image.isNull()) return;
 
 	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
@@ -226,15 +282,15 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
 			_currentViewCamera = camera;
 		};
 
-	if (mode == 0) { if (index == 1) showByCamera(1, image); return; }
-	if (mode == 1) { if (index == 2) showByCamera(2, makeBackCanvas(image)); return; }
+	if (mode == 0) { if (index == 1) showByCamera(1, QPixmap::fromImage(image)); return; }
+	if (mode == 1) { if (index == 2) showByCamera(2, makeBackCanvas(QPixmap::fromImage(image))); return; }
 
 	if (mode == 2)
 	{
 		if (index == static_cast<size_t>(lastCameraCaptureIndex))
 		{
-			if (index == 1) showByCamera(1, image);
-			else            showByCamera(2, makeBackCanvas(image));
+			if (index == 1) showByCamera(1, QPixmap::fromImage(image));
+			else            showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
 
 			++lastCameraCaptureCount;
 			const int switchCount = _configModule.setConfig.qiehuanzhangshu;

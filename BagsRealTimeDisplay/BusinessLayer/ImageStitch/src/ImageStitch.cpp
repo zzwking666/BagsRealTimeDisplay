@@ -47,12 +47,12 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 	if (emitFirst)
 	{
 		const QImage qimg = rw::img::cvMatToQImage(testImg1);
-		emit imageReady(1, QPixmap::fromImage(qimg));
+		emit imageReady(1, qimg);
 	}
 	else
 	{
 		const QImage qimg = rw::img::cvMatToQImage(testImg2);
-		emit imageReady(2, QPixmap::fromImage(qimg));
+		emit imageReady(2, qimg);
 	}
 
 	emitFirst = !emitFirst;
