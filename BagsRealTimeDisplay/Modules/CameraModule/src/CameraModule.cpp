@@ -18,11 +18,11 @@ bool CameraModule::build()
 {
 	if (!build_camera1())
 	{
-		return false;
+		qWarning("Camera 1 build failed");	
 	}
 	if (!build_camera2())
 	{
-		return false;
+		qWarning("Camera 2 build failed");
 	}
 	return true;
 }
