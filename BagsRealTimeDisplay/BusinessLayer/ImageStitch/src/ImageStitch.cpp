@@ -29,12 +29,18 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 	matInfos.push_back(matInfo);*/
 
 	// 更新最新的图像的帧号
-	newFrameNum = static_cast<int>(matInfo.frameInfo.frameNum);
+	//newFrameNum = static_cast<int>(matInfo.frameInfo.frameNum);
 
 	//auto& setConfig = Modules::getInstance().configModule.setConfig;
 	//auto stitchNum = setConfig.qiehuanzhangshu;
 
 	//auto stitchedMat = stitchImages(stitchNum);
+
+	auto testImg = cv::imread("C:/Users/zfkj4090/Downloads/test_ocr.png");
+	if (!testImg.empty())
+	{
+		matInfo.mat = testImg;
+	}
 	if (!matInfo.mat.empty())
 	{
 		QImage stitchedQimage = rw::img::cvMatToQImage(matInfo.mat);

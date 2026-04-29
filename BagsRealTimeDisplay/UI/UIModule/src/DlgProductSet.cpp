@@ -393,11 +393,6 @@ void DlgProductSet::btn_youyijuli_clicked()
 	if (isAccept == QDialog::Accepted)
 	{
 		auto value = numKeyBord.getValue();
-		if (value.toDouble() < 0)
-		{
-			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
-			return;
-		}
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_youyijuli->setText(value);
 		setConfig.youyijuli = value.toDouble();

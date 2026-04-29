@@ -2,7 +2,7 @@
 #include "DlgProductSet.h"
 
 #include <QFile>
-
+#include <QPainter>
 #include "utility.hpp"
 
 BagsRealTimeDisplay::BagsRealTimeDisplay(ConfigModule& configModule, CameraModule& cameraModule, QWidget* parent)
@@ -128,24 +128,44 @@ void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
 {
 	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
+	const double youyijuli = _configModule.setConfig.youyijuli;
 
-	auto showImage = [&]()
+	auto showImage = [&](double offsetX)
 		{
-			ui->label_imgDisplay_1->setPixmap(
-				image.scaled(ui->label_imgDisplay_1->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			auto* label = ui->label_imgDisplay_1;
+			const QSize dstSize = label->size();
+			if (dstSize.isEmpty() || image.isNull()) return;
+
+			// 先按比例缩放
+			const QPixmap scaled = image.scaled(dstSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+			// 画到与label同尺寸的画布上，再做X方向偏移
+			QPixmap canvas(dstSize);
+			canvas.fill(Qt::black); // 可按你UI风格改成其它背景色
+
+			const int baseX = (dstSize.width() - scaled.width()) / 2;
+			const int baseY = (dstSize.height() - scaled.height()) / 2;
+			const int drawX = baseX + qRound(offsetX); // offsetX>0右移，<0左移
+
+			QPainter painter(&canvas);
+			painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+			painter.drawPixmap(drawX, baseY, scaled);
+			painter.end();
+
+			label->setPixmap(canvas);
 		};
 
 	// 0: 正面(相机1)
 	if (mode == 0)
 	{
-		if (index == 1) showImage();
+		if (index == 1) showImage(0);
 		return;
 	}
 
 	// 1: 背面(相机2)
 	if (mode == 1)
 	{
-		if (index == 2) showImage();
+		if (index == 2) showImage(youyijuli);
 		return;
 	}
 
@@ -154,7 +174,9 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
 	{
 		if (index == static_cast<size_t>(lastCameraCaptureIndex))
 		{
-			showImage();
+			const double offsetX = (index == 2) ? youyijuli : 0.0;
+			showImage(offsetX);
+			
 			++lastCameraCaptureCount;
 
 			const int switchCount = _configModule.setConfig.qiehuanzhangshu;
