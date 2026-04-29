@@ -18,8 +18,6 @@ BagsRealTimeDisplay::BagsRealTimeDisplay(ConfigModule& configModule, CameraModul
 
 BagsRealTimeDisplay::~BagsRealTimeDisplay()
 {
-	delete _dlgCloseForm;
-	delete _dlgProductSet;
 	delete ui;
 }
 
@@ -129,13 +127,43 @@ void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QPixmap& image)
 {
-	if (1 == index)
+	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
+
+	auto showImage = [&]()
+		{
+			ui->label_imgDisplay_1->setPixmap(
+				image.scaled(ui->label_imgDisplay_1->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		};
+
+	// 0: 正面(相机1)
+	if (mode == 0)
 	{
-		ui->label_imgDisplay_1->setPixmap(image.scaled(ui->label_imgDisplay_1->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		if (index == 1) showImage();
+		return;
 	}
-	else if (2 == index)
+
+	// 1: 背面(相机2)
+	if (mode == 1)
 	{
-		ui->label_imgDisplay_2->setPixmap(image.scaled(ui->label_imgDisplay_2->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		if (index == 2) showImage();
+		return;
+	}
+
+	// 2(或兼容3): 双面切换
+	if (mode == 2)
+	{
+		if (index == static_cast<size_t>(lastCameraCaptureIndex))
+		{
+			showImage();
+			++lastCameraCaptureCount;
+
+			const int switchCount = _configModule.setConfig.qiehuanzhangshu;
+			if (lastCameraCaptureCount >= switchCount)
+			{
+				lastCameraCaptureIndex = (lastCameraCaptureIndex == 1) ? 2 : 1;
+				lastCameraCaptureCount = 0;
+			}
+		}
 	}
 }
 
@@ -218,6 +246,8 @@ void BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked()
 void BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged(int index)
 {
 	_configModule.bagsRealTimeDisplayInfo.qiehuanxianshi = index;
+	lastCameraCaptureCount = 0; // 切换显示模式时重置计数器
+	lastCameraCaptureIndex = 1; // 重置为默认相机索引
 }
 
 void BagsRealTimeDisplay::loadCompanyTXT()

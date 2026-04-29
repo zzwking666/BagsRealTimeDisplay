@@ -53,6 +53,8 @@ private:
 	int minimizeCount{ 3 };
 	DlgCloseForm* _dlgCloseForm = nullptr;
 	DlgProductSet* _dlgProductSet = nullptr;
+	int lastCameraCaptureCount{ 0 };
+	int lastCameraCaptureIndex{ 1 };
 private:
     Ui::BagsRealTimeDisplayClass* ui;
     ConfigModule& _configModule;
