@@ -31,9 +31,9 @@ public:
 	void setCamera2HardwareTrigger();
 public:
 	void setCamera1ExposureTime(size_t exposureTime);
-	void seCamera1tGain(size_t gain);
+	void setCamera1Gain(size_t gain);
 	void setCamera2ExposureTime(size_t exposureTime);
-	void seCamera2tGain(size_t gain);
+	void setCamera2Gain(size_t gain);
 public:
 	void setCamera1Multiplier(size_t multiplier);
 	void setCamera1PostDivider(size_t postDivider);

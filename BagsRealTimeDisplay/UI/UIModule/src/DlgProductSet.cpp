@@ -4,10 +4,11 @@
 #include <QMessageBox>
 #include "rqwu/Keyboard/rqwu_NumberKeyboard.h"
 
-DlgProductSet::DlgProductSet(ConfigModule& configModule,QWidget* parent)
+DlgProductSet::DlgProductSet(ConfigModule& configModule, CameraModule& cameraModule, QWidget* parent)
 	: QDialog(parent)
 	, ui(new Ui::DlgProductSetClass())
 	, _configModule(configModule)
+	, _cameraModule(cameraModule)
 {
 	ui->setupUi(this);
 
@@ -164,6 +165,7 @@ void DlgProductSet::btn_chengfaqi1_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_chengfaqi1->setText(value);
 		setConfig.chengfaqi1 = value.toDouble();
+		_cameraModule.setCamera1Multiplier(setConfig.chengfaqi1);
 	}
 }
 
@@ -183,6 +185,7 @@ void DlgProductSet::btn_houfenpin1_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_houfenpin1->setText(value);
 		setConfig.houfenpin1 = value.toDouble();
+		_cameraModule.setCamera1PostDivider(setConfig.houfenpin1);
 	}
 }
 
@@ -202,6 +205,7 @@ void DlgProductSet::btn_zengyi1_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_zengyi1->setText(value);
 		setConfig.zengyi1 = value.toDouble();
+		_cameraModule.setCamera1Gain(setConfig.zengyi1);
 	}
 }
 
@@ -221,6 +225,7 @@ void DlgProductSet::btn_baoguang1_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_baoguang1->setText(value);
 		setConfig.baoguang1 = value.toDouble();
+		_cameraModule.setCamera1ExposureTime(setConfig.baoguang1);
 	}
 }
 
@@ -278,6 +283,7 @@ void DlgProductSet::btn_chengfaqi2_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_chengfaqi2->setText(value);
 		setConfig.chengfaqi2 = value.toDouble();
+		_cameraModule.setCamera2Multiplier(setConfig.chengfaqi2);
 	}
 }
 
@@ -297,6 +303,7 @@ void DlgProductSet::btn_houfenpin2_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_houfenpin2->setText(value);
 		setConfig.houfenpin2 = value.toDouble();
+		_cameraModule.setCamera2PostDivider(setConfig.houfenpin2);
 	}
 }
 
@@ -316,6 +323,7 @@ void DlgProductSet::btn_zengyi2_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_zengyi2->setText(value);
 		setConfig.zengyi2 = value.toDouble();
+		_cameraModule.setCamera2Gain(setConfig.zengyi2);
 	}
 }
 
@@ -335,6 +343,7 @@ void DlgProductSet::btn_baoguang2_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_baoguang2->setText(value);
 		setConfig.baoguang2 = value.toDouble();
+		_cameraModule.setCamera2ExposureTime(setConfig.baoguang2);
 	}
 }
 

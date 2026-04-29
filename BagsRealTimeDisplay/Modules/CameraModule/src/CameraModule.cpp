@@ -181,7 +181,7 @@ void CameraModule::setCamera1ExposureTime(size_t exposureTime)
 	}
 }
 
-void CameraModule::seCamera1tGain(size_t gain)
+void CameraModule::setCamera1Gain(size_t gain)
 {
 	if (camera1)
 	{
@@ -197,7 +197,7 @@ void CameraModule::setCamera2ExposureTime(size_t exposureTime)
 	}
 }
 
-void CameraModule::seCamera2tGain(size_t gain)
+void CameraModule::setCamera2Gain(size_t gain)
 {
 	if (camera2)
 	{

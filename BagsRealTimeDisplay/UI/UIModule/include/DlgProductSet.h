@@ -2,6 +2,7 @@
 
 #include <QDialog>
 #include "ConfigModule.hpp"
+#include "CameraModule.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -13,7 +14,7 @@ class DlgProductSet : public QDialog
 	Q_OBJECT
 
 public:
-	DlgProductSet(ConfigModule& configModule,QWidget* parent = nullptr);
+	DlgProductSet(ConfigModule& configModule, CameraModule& cameraModule, QWidget* parent = nullptr);
 	~DlgProductSet();
 
 public:
@@ -54,5 +55,6 @@ public:
 	Ui::DlgProductSetClass* ui;
 private:
 	ConfigModule& _configModule;
+	CameraModule& _cameraModule;
 };
 

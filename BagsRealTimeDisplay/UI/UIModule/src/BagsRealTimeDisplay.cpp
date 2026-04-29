@@ -89,7 +89,7 @@ void BagsRealTimeDisplay::build_DlgCloseForm()
 
 void BagsRealTimeDisplay::build_DlgProductSet()
 {
-	_dlgProductSet = new DlgProductSet(_configModule, this);
+	_dlgProductSet = new DlgProductSet(_configModule, _cameraModule, this);
 }
 
 void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
