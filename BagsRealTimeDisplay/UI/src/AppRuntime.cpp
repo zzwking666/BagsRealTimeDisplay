@@ -38,4 +38,8 @@ void AppRuntime::build_connect()
 	// 连接相机模块的图像捕获信号到UI显示槽函数
     QObject::connect(&Modules::getInstance().imageStitchModule, &ImageStitch::imageReady,
         _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onCameraDisplay);
+
+    // 连接异步线程刷新主窗体UI
+    QObject::connect(Modules::getInstance().asynchronousThreadModule.refreshUIThread.get(), &RefreshUIThread::emit_RefreshUI,
+		_bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onUpdateStatisticalInfoUI);
 }

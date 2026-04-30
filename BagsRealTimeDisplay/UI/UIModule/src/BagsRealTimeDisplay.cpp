@@ -3,6 +3,8 @@
 
 #include <QFile>
 #include <QPainter>
+
+#include "Modules.hpp"
 #include "utility.hpp"
 
 BagsRealTimeDisplay::BagsRealTimeDisplay(ConfigModule& configModule, CameraModule& cameraModule, QWidget* parent)
@@ -232,6 +234,14 @@ void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
 	default:
 		break;
 	}
+}
+
+void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
+{
+	auto& _statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
+
+	ui->lb_FrontTotal->setText(QString::number(_statisticalInfo.zhengmianzongliang));
+	ui->lb_BackTotal->setText(QString::number(_statisticalInfo.beimianzongliang));
 }
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)

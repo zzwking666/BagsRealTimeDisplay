@@ -6,6 +6,7 @@
 #include "CameraModule.hpp"
 #include "ConfigModule.hpp"
 #include "ImageStitch.hpp"
+#include "AsynchronousThreadModule.hpp"
 
 class Modules
 	:public IModule<bool>
@@ -43,6 +44,7 @@ public:
 	CameraModule cameraModule;
 	ConfigModule configModule;
 	ImageStitch imageStitchModule;
+	AsynchronousThreadModule asynchronousThreadModule;
 };
 
 template <class TypeCanToAssembly>

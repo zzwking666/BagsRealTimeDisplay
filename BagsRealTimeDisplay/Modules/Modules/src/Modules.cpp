@@ -32,11 +32,19 @@ bool Modules::build()
 		qWarning("Camera build failed");
 	}
 
+	auto isAsynchronousThreadBuildSuccess = asynchronousThreadModule.build();
+
+	if (!isAsynchronousThreadBuildSuccess)
+	{
+		qWarning("AsynchronousThread build failed");
+	}
+
 	return true;
 }
 
 void Modules::destroy()
 {
+	asynchronousThreadModule.destroy();
 	cameraModule.destroy();
 	configModule.destroy();
 }
@@ -45,10 +53,12 @@ void Modules::start()
 {
 	configModule.start();
 	cameraModule.start();
+	asynchronousThreadModule.start();
 }
 
 void Modules::stop()
 {
+	asynchronousThreadModule.stop();
 	cameraModule.stop();
 	configModule.stop();
 }
