@@ -18,6 +18,9 @@ public:
 	{
 		std::atomic_uint64_t zhengmianzongliang{ 0 };
 		std::atomic_uint64_t beimianzongliang{ 0 };
+
+		std::atomic_uint64_t cam1FrameLost{ 0 };
+		std::atomic_uint64_t cam2FrameLost{ 0 };
 	} statisticalInfo;
 public:
 	std::unique_ptr<RefreshUIThread> refreshUIThread{ nullptr };

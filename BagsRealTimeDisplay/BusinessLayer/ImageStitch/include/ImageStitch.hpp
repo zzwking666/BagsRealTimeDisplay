@@ -28,6 +28,10 @@ private:
 	int lastStitchFrameNum{ 0 };
 	int newFrameNum{ 0 };
 
+	// 计算丢帧用的变量
+	int lastCam1FrameNum{ 0 };
+	int lastCam2FrameNum{ 0 };
+
 	ConfigModule& configModule;
 signals:
 	void imageReady(size_t index, const QImage& image);
