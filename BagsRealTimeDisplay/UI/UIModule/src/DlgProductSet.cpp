@@ -31,15 +31,11 @@ void DlgProductSet::read_config()
 {
 	auto& setConfig = _configModule.setConfig;
 
-	ui->btn_xiangjimaichong1->setText(QString::number(setConfig.xiangjimaichong1));
-	ui->btn_daichangxishu1->setText(QString::number(setConfig.daichangxishu1));
 	ui->btn_chengfaqi1->setText(QString::number(setConfig.chengfaqi1));
 	ui->btn_houfenpin1->setText(QString::number(setConfig.houfenpin1));
 	ui->btn_zengyi1->setText(QString::number(setConfig.zengyi1));
 	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
 
-	ui->btn_xiangjimaichong2->setText(QString::number(setConfig.xiangjimaichong2));
-	ui->btn_daichangxishu2->setText(QString::number(setConfig.daichangxishu2));
 	ui->btn_chengfaqi2->setText(QString::number(setConfig.chengfaqi2));
 	ui->btn_houfenpin2->setText(QString::number(setConfig.houfenpin2));
 	ui->btn_zengyi2->setText(QString::number(setConfig.zengyi2));
@@ -60,10 +56,6 @@ void DlgProductSet::build_connect()
 {
 	QObject::connect(ui->btn_close, &QPushButton::clicked,
 		this, &DlgProductSet::btn_close_clicked);
-	QObject::connect(ui->btn_xiangjimaichong1, &QPushButton::clicked,
-		this, &DlgProductSet::btn_xiangjimaichong1_clicked);
-	QObject::connect(ui->btn_daichangxishu1, &QPushButton::clicked,
-		this, &DlgProductSet::btn_daichangxishu1_clicked);
 	QObject::connect(ui->btn_chengfaqi1, &QPushButton::clicked,
 		this, &DlgProductSet::btn_chengfaqi1_clicked);
 	QObject::connect(ui->btn_houfenpin1, &QPushButton::clicked,
@@ -72,10 +64,6 @@ void DlgProductSet::build_connect()
 		this, &DlgProductSet::btn_zengyi1_clicked);
 	QObject::connect(ui->btn_baoguang1, &QPushButton::clicked,
 		this, &DlgProductSet::btn_baoguang1_clicked);
-	QObject::connect(ui->btn_xiangjimaichong2, &QPushButton::clicked,
-		this, &DlgProductSet::btn_xiangjimaichong2_clicked);
-	QObject::connect(ui->btn_daichangxishu2, &QPushButton::clicked,
-		this, &DlgProductSet::btn_daichangxishu2_clicked);
 	QObject::connect(ui->btn_chengfaqi2, &QPushButton::clicked,
 		this, &DlgProductSet::btn_chengfaqi2_clicked);
 	QObject::connect(ui->btn_houfenpin2, &QPushButton::clicked,
@@ -109,44 +97,6 @@ void DlgProductSet::btn_close_clicked()
 {
 	emit paramsChanged();
 	this->close();
-}
-
-void DlgProductSet::btn_xiangjimaichong1_clicked()
-{
-	rw::rqwu::NumberKeyboard numKeyBord;
-	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
-	auto isAccept = numKeyBord.exec();
-	if (isAccept == QDialog::Accepted)
-	{
-		auto value = numKeyBord.getValue();
-		if (value.toDouble() < 0)
-		{
-			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
-			return;
-		}
-		auto& setConfig = _configModule.setConfig;
-		ui->btn_xiangjimaichong1->setText(value);
-		setConfig.xiangjimaichong1 = value.toDouble();
-	}
-}
-
-void DlgProductSet::btn_daichangxishu1_clicked()
-{
-	rw::rqwu::NumberKeyboard numKeyBord;
-	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
-	auto isAccept = numKeyBord.exec();
-	if (isAccept == QDialog::Accepted)
-	{
-		auto value = numKeyBord.getValue();
-		if (value.toDouble() < 0)
-		{
-			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
-			return;
-		}
-		auto& setConfig = _configModule.setConfig;
-		ui->btn_daichangxishu1->setText(value);
-		setConfig.daichangxishu1 = value.toDouble();
-	}
 }
 
 void DlgProductSet::btn_chengfaqi1_clicked()
@@ -226,44 +176,6 @@ void DlgProductSet::btn_baoguang1_clicked()
 		ui->btn_baoguang1->setText(value);
 		setConfig.baoguang1 = value.toDouble();
 		_cameraModule.setCamera1ExposureTime(setConfig.baoguang1);
-	}
-}
-
-void DlgProductSet::btn_xiangjimaichong2_clicked()
-{
-	rw::rqwu::NumberKeyboard numKeyBord;
-	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
-	auto isAccept = numKeyBord.exec();
-	if (isAccept == QDialog::Accepted)
-	{
-		auto value = numKeyBord.getValue();
-		if (value.toDouble() < 0)
-		{
-			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
-			return;
-		}
-		auto& setConfig = _configModule.setConfig;
-		ui->btn_xiangjimaichong2->setText(value);
-		setConfig.xiangjimaichong2 = value.toDouble();
-	}
-}
-
-void DlgProductSet::btn_daichangxishu2_clicked()
-{
-	rw::rqwu::NumberKeyboard numKeyBord;
-	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
-	auto isAccept = numKeyBord.exec();
-	if (isAccept == QDialog::Accepted)
-	{
-		auto value = numKeyBord.getValue();
-		if (value.toDouble() < 0)
-		{
-			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
-			return;
-		}
-		auto& setConfig = _configModule.setConfig;
-		ui->btn_daichangxishu2->setText(value);
-		setConfig.daichangxishu2 = value.toDouble();
 	}
 }
 

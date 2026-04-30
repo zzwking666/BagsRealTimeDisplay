@@ -32,15 +32,11 @@ signals:
 private slots:
 	void btn_close_clicked();
 
-	void btn_xiangjimaichong1_clicked();
-	void btn_daichangxishu1_clicked();
 	void btn_chengfaqi1_clicked();
 	void btn_houfenpin1_clicked();
 	void btn_zengyi1_clicked();
 	void btn_baoguang1_clicked();
 
-	void btn_xiangjimaichong2_clicked();
-	void btn_daichangxishu2_clicked();
 	void btn_chengfaqi2_clicked();
 	void btn_houfenpin2_clicked();
 	void btn_zengyi2_clicked();
