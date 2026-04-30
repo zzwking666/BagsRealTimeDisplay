@@ -28,6 +28,7 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 		return;
 	}
 
+	auto& statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
 
 	if (2 == index)
 	{
@@ -37,11 +38,13 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 		}
 		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
 		emit imageReady(index, qimg);
+		++statisticalInfo.beimianzongliang;
 	}
 	else
 	{
 		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
 		emit imageReady(index, qimg);
+		++statisticalInfo.zhengmianzongliang;
 	}
 
 	// ---------------------拼接图像的逻辑----------------------

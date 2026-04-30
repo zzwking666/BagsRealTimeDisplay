@@ -292,15 +292,35 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 			_currentViewCamera = camera;
 		};
 
-	if (mode == 0) { if (index == 1) showByCamera(1, QPixmap::fromImage(image)); return; }
-	if (mode == 1) { if (index == 2) showByCamera(2, makeBackCanvas(QPixmap::fromImage(image))); return; }
+	if (mode == 0)
+	{
+		if (index == 1)
+		{
+			showByCamera(1, QPixmap::fromImage(image));
+			return;
+		}
+	}
+	if (mode == 1)
+	{
+		if (index == 2)
+		{
+			showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
+			return;
+		}
+	}
 
 	if (mode == 2)
 	{
 		if (index == static_cast<size_t>(lastCameraCaptureIndex))
 		{
-			if (index == 1) showByCamera(1, QPixmap::fromImage(image));
-			else            showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
+			if (index == 1)
+			{
+				showByCamera(1, QPixmap::fromImage(image));
+			}
+			else
+			{
+				showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
+			}
 			++lastCameraCaptureCount;
 			const int switchCount = _configModule.setConfig.qiehuanzhangshu;
 			if (lastCameraCaptureCount >= switchCount)
