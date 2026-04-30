@@ -2,7 +2,7 @@
 
 bool AsynchronousThreadModule::build()
 {
-	refreshUIThread = std::make_unique<RefreshUIThread>();
+	refreshUIThread = std::make_unique<RefreshUIThread>(this);
 
 	return true;
 }

@@ -3,6 +3,7 @@
 
 #include <QMessageBox>
 #include "rqwu/Keyboard/rqwu_NumberKeyboard.h"
+#include "Modules.hpp"
 
 DlgProductSet::DlgProductSet(ConfigModule& configModule, CameraModule& cameraModule, QWidget* parent)
 	: QDialog(parent)
@@ -91,6 +92,13 @@ void DlgProductSet::showEvent(QShowEvent* event)
 	auto& setConfig = _configModule.setConfig;
 	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
 	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
+}
+
+void DlgProductSet::onUpdateFrameLost()
+{
+	auto& statisticInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
+	ui->btn_diuzhen1->setText(QString::number(statisticInfo.cam1FrameLost));
+	ui->btn_diuzhen2->setText(QString::number(statisticInfo.cam2FrameLost));
 }
 
 void DlgProductSet::btn_close_clicked()

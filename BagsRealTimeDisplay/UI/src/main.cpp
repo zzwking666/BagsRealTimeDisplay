@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
     {
         return 1;
     }
+
     appRuntime.show();
-    appRuntime.build_connect();
 
     QObject::connect(&app, &QCoreApplication::aboutToQuit,
         [&appRuntime]()
