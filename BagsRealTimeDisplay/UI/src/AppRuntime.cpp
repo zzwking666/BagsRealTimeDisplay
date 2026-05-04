@@ -41,6 +41,10 @@ void AppRuntime::build_connect()
     QObject::connect(&_modules.imageStitchModule, &ImageStitch::imageReady,
         _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onCameraDisplay);
 
+	// 连接相机模块的状态变化信号到UI显示槽函数
+    QObject::connect(&_modules.cameraModule, &CameraModule::onCameraStateChanged,
+        _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::updateCameraLabelState);
+
     // 连接异步线程刷新窗体UI
     QObject::connect(_modules.asynchronousThreadModule.refreshUIThread.get(), &RefreshUIThread::emit_RefreshUI,
 		_bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onUpdateStatisticalInfoUI);

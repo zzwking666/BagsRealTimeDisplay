@@ -18,7 +18,7 @@ bool CameraModule::build()
 {
 	if (!build_camera1())
 	{
-		qWarning("Camera 1 build failed");	
+		qWarning("Camera 1 build failed");
 	}
 	if (!build_camera2())
 	{
@@ -38,10 +38,12 @@ void CameraModule::start()
 	if (camera1)
 	{
 		camera1->startMonitor();
+		onCameraStateChanged(1, true);
 	}
 	if (camera2)
 	{
 		camera2->startMonitor();
+		onCameraStateChanged(2, true);
 	}
 }
 
@@ -83,13 +85,16 @@ bool CameraModule::build_camera1()
 			QObject::connect(camera1.get(), &rw::rqwc::DVPCameraPassive::callBackFuncPost,
 				this, &CameraModule::onCamera1Capture);
 
+			onCameraStateChanged(1, true);
 			return true;
 		}
 		catch (const std::exception&)
 		{
+			onCameraStateChanged(1, false);
 			return false;
 		}
 	}
+	onCameraStateChanged(1, false);
 	return false;
 }
 
@@ -117,13 +122,16 @@ bool CameraModule::build_camera2()
 			QObject::connect(camera2.get(), &rw::rqwc::DVPCameraPassive::callBackFuncPost,
 				this, &CameraModule::onCamera2Capture);
 
+			onCameraStateChanged(2, true);
 			return true;
 		}
 		catch (const std::exception&)
 		{
+			onCameraStateChanged(2, false);
 			return false;
 		}
 	}
+	onCameraStateChanged(2, false);
 	return false;
 }
 
@@ -132,14 +140,16 @@ void CameraModule::destroy_camera1()
 	if (camera1)
 	{
 		camera1.reset();
+		onCameraStateChanged(1, false);
 	}
 }
 
 void CameraModule::destroy_camera2()
 {
-	if(camera2)
+	if (camera2)
 	{
 		camera2.reset();
+		onCameraStateChanged(2, false);
 	}
 }
 

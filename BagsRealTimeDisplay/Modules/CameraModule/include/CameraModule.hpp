@@ -52,6 +52,8 @@ private slots:
 	void onCamera2Capture(const rw::hoec::MatInfo& matInfo);
 signals:
 	void onCameraCapture(const rw::hoec::MatInfo& matInfo, size_t index);
+
+	void onCameraStateChanged(int index, bool state);
 private:
 	std::unique_ptr<rw::rqwc::DVPCameraPassive> camera1{ nullptr };
 	std::unique_ptr<rw::rqwc::DVPCameraPassive> camera2{ nullptr };
