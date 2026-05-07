@@ -55,7 +55,6 @@ private slots:
 	void cbb_qiehuanxianshi_currentIndexChanged(int index);
 
 	void lb_title_clicked();
-private:
 public:
 	DlgProductSet* _dlgProductSet = nullptr;
 private:

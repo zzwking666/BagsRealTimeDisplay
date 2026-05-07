@@ -54,6 +54,8 @@ void BagsRealTimeDisplay::build_connect()
 		this, &BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked);
 	QObject::connect(ui->cbb_qiehuanxianshi, &QComboBox::currentIndexChanged,
 		this, &BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged);
+	QObject::connect(ui->pbtn_resetProduct, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::pbtn_resetProduct_clicked);
 
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,

@@ -28,6 +28,10 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 		return;
 	}
 
+	auto testImg2 = cv::imread("C:/Users/zfkj4090/Desktop/baisedai/train/images/8.jpg");
+
+	matInfo.mat = testImg2;
+
 	auto& statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
 
 	if (2 == index)
