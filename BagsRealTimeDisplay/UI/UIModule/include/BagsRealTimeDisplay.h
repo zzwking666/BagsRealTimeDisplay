@@ -28,8 +28,7 @@ public:
 	void build_ui();
 	void build_connect();
 	void build_BagsRealTimeDisplayData();
-    void ini_clickableTitle();
-	void build_DlgCloseForm();
+    void build_DlgCloseForm();
 	void build_DlgProductSet();
 	void build_PanZoomLabel();
 protected:
@@ -51,12 +50,12 @@ private slots:
 	void btn_zengjiabaoguang1_clicked();
 	void btn_jianshaobaoguang2_clicked();
 	void btn_zengjiabaoguang2_clicked();
+	void pbtn_resetProduct_clicked();
 
 	void cbb_qiehuanxianshi_currentIndexChanged(int index);
 
 	void lb_title_clicked();
 private:
-	void loadCompanyTXT();
 public:
 	DlgProductSet* _dlgProductSet = nullptr;
 private:

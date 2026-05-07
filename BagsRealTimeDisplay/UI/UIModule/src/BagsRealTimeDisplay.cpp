@@ -28,8 +28,6 @@ void BagsRealTimeDisplay::initializeComponents()
 	build_ui();
 
 	build_connect();
-
-	loadCompanyTXT();
 }
 
 void BagsRealTimeDisplay::build_ui()
@@ -37,7 +35,6 @@ void BagsRealTimeDisplay::build_ui()
 	build_BagsRealTimeDisplayData();
 	build_DlgCloseForm();
 	build_DlgProductSet();
-	ini_clickableTitle();
 	build_PanZoomLabel();
 }
 
@@ -76,17 +73,6 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
 	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 	ui->cbb_qiehuanxianshi->setCurrentIndex(BagsRealTimeDisplayConfig.qiehuanxianshi);
-}
-
-void BagsRealTimeDisplay::ini_clickableTitle()
-{
-	// 初始化标题label
-	clickableTitle = new rw::rqw::ClickableLabel(this);
-	auto layoutTitle = ui->groupBox_head->layout();
-	layoutTitle->replaceWidget(ui->label_title, clickableTitle);
-	delete ui->label_title;
-	clickableTitle->setText("编织袋实时显示");
-	clickableTitle->setStyleSheet("QLabel {font-size: 30px;font-weight: bold;color: rgb(255, 255, 255);padding: 5px 5px;border-bottom: 2px solid #cccccc;}");
 }
 
 void BagsRealTimeDisplay::build_DlgCloseForm()
@@ -408,34 +394,17 @@ void BagsRealTimeDisplay::btn_zengjiabaoguang2_clicked()
 	cameraModule.setCamera2ExposureTime(setConfig.baoguang2);
 }
 
+void BagsRealTimeDisplay::pbtn_resetProduct_clicked()
+{
+	auto& _statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
+
+	_statisticalInfo.zhengmianzongliang = 0;
+	_statisticalInfo.beimianzongliang = 0;
+}
+
 void BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged(int index)
 {
 	_configModule.bagsRealTimeDisplayInfo.qiehuanxianshi = index;
 	lastCameraCaptureCount = 0; // 切换显示模式时重置计数器
 	lastCameraCaptureIndex = 1; // 重置为默认相机索引
-}
-
-void BagsRealTimeDisplay::loadCompanyTXT()
-{
-	const QString companyRootPath = globalPath.companyTxtPath;
-	QFile file(companyRootPath);
-	if (!file.exists())
-	{
-		qWarning("company.txt不存在：%s", qUtf8Printable(companyRootPath));
-		return;
-	}
-
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		qWarning("company.txt不存在：%s", qUtf8Printable(companyRootPath));
-		return;
-	}
-
-	QTextStream in(&file);
-	in.setEncoding(QStringConverter::Utf8);
-
-	const QString content = in.readAll().trimmed();
-	ui->label_companyInfo->setText(content);
-
-	file.close();
 }
