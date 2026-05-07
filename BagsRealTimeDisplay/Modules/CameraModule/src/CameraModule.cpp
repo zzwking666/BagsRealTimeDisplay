@@ -40,10 +40,19 @@ void CameraModule::start()
 		camera1->startMonitor();
 		onCameraStateChanged(1, true);
 	}
+	else
+	{
+		onCameraStateChanged(1, false);
+	}
+
 	if (camera2)
 	{
 		camera2->startMonitor();
 		onCameraStateChanged(2, true);
+	}
+	else
+	{
+		onCameraStateChanged(2, false);
 	}
 }
 

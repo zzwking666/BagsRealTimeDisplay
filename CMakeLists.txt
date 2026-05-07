@@ -6,7 +6,7 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif()
 
 #设置QT路径 
-set(QT_PATH "C:/Development/Qt/6.7.3/msvc2019_64")
+set(QT_PATH "C:/Development/tools/Qt/6.7.3/msvc2019_64")
 set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH};${QT_PATH}")
 
 #设置RWUL路径
