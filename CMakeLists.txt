@@ -6,7 +6,7 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif()
 
 #设置QT路径 
-set(QT_PATH "C:/Development/tools/Qt/6.7.3/msvc2019_64")
+set(QT_PATH "C:/Development/Qt/6.7.3/msvc2019_64")
 set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH};${QT_PATH}")
 
 #设置RWUL路径
@@ -25,6 +25,6 @@ set(CMAKE_AUTORCC ON)
 #查找第三方库
 find_package(OpenCV CONFIG REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Concurrent)
-find_package(RWUL CONFIG REQUIRED COMPONENTS oso hoecd rqwu imgcore imgqt core)
+find_package(RWUL CONFIG REQUIRED COMPONENTS core oso hoecd rqwu imgcore imgqt )
 
 add_subdirectory ("BagsRealTimeDisplay")
