@@ -28,15 +28,15 @@
            <item>
             <widget class="QLabel" name="label_imgDisplay_1">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="maximumSize">
               <size>
-               <width>999</width>
-               <height>999</height>
+               <width>9999</width>
+               <height>9999</height>
               </size>
              </property>
              <property name="text">
