@@ -5,9 +5,15 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
 endif()
 
-#设置QT路径 
-set(QT_PATH "C:/Development/tools/Qt/6.7.3/msvc2019_64")
-set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH};${QT_PATH}")
+# 设置QT路径（优先读取环境变量 QT_ROOT）
+if(DEFINED ENV{QT_ROOT})
+    set(QT_PATH "$ENV{QT_ROOT}/6.7.3/msvc2022_64")
+	message(STATUS "${QT_PATH}")
+else()
+    set(QT_PATH "C:/Development/Qt/6.7.3/msvc2019_64")
+endif()
+
+list(APPEND CMAKE_PREFIX_PATH "${QT_PATH}")
 
 #设置RWUL路径
 list(APPEND CMAKE_PREFIX_PATH "D:/Development/RWUL")
