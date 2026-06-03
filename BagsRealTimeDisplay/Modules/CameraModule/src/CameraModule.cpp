@@ -264,6 +264,22 @@ void CameraModule::setCamera2PostDivider(size_t postDivider)
 	}
 }
 
+void CameraModule::setCamera1LineHeight(unsigned int lineHeight)
+{
+	if (camera1)
+	{
+		camera1->setLineHeight(lineHeight);
+	}
+}
+
+void CameraModule::setCamera2LineHeight(unsigned int lineHeight)
+{
+	if (camera2)
+	{
+		camera2->setLineHeight(lineHeight);
+	}
+}
+
 bool CameraModule::isTargetCamera(const QString& cameraIndex, const QString& targetName)
 {
 	QRegularExpression regex(R"((\d+)\.(\d+)\.(\d+)\.(\d+))");

@@ -7,5 +7,6 @@ namespace cdm {
 		zhengmianzongliang : int : default = 0;
 		beimianzongliang : int : default = 0;
 		qiehuanxianshi : int : default = 0;
+		shezhidaizichangdu : int : default = 0;
 	};
 }

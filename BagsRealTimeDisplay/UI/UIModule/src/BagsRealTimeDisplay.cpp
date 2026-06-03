@@ -2,7 +2,9 @@
 #include "DlgProductSet.h"
 
 #include <QFile>
+#include <QMessageBox>
 #include <QPainter>
+#include <rqwu/Keyboard/rqwu_NumberKeyboard.h>
 
 #include "Modules.hpp"
 #include "utility.hpp"
@@ -56,6 +58,8 @@ void BagsRealTimeDisplay::build_connect()
 		this, &BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged);
 	QObject::connect(ui->pbtn_resetProduct, &QPushButton::clicked,
 		this, &BagsRealTimeDisplay::pbtn_resetProduct_clicked);
+	QObject::connect(ui->pbtn_setBagLength, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::pbtn_setBagLength_clicked);
 
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
@@ -75,6 +79,7 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
 	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 	ui->cbb_qiehuanxianshi->setCurrentIndex(BagsRealTimeDisplayConfig.qiehuanxianshi);
+	ui->pbtn_setBagLength->setText(QString::number(BagsRealTimeDisplayConfig.shezhidaizichangdu));
 }
 
 void BagsRealTimeDisplay::build_DlgCloseForm()
@@ -402,6 +407,35 @@ void BagsRealTimeDisplay::pbtn_resetProduct_clicked()
 
 	_statisticalInfo.zhengmianzongliang = 0;
 	_statisticalInfo.beimianzongliang = 0;
+}
+
+void BagsRealTimeDisplay::pbtn_setBagLength_clicked()
+{
+	rw::rqwu::NumberKeyboard numKeyBord;
+	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
+	auto isAccept = numKeyBord.exec();
+	if (isAccept == QDialog::Accepted)
+	{
+		auto value = numKeyBord.getValue();
+		if (value.toDouble() < 0)
+		{
+			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
+			return;
+		}
+		ui->pbtn_setBagLength->setText(QString::number(value.toDouble()));
+		auto& bagsRealTimeDisplayInfo = _configModule.bagsRealTimeDisplayInfo;
+		bagsRealTimeDisplayInfo.shezhidaizichangdu = value.toDouble();
+
+		unsigned int lineHeight1 = static_cast<unsigned int>(
+			value.toDouble() / _configModule.setConfig.xiangsudangliang1
+			);
+		unsigned int lineHeight2 = static_cast<unsigned int>(
+			value.toDouble() / _configModule.setConfig.xiangsudangliang2
+			);
+
+		_cameraModule.setCamera1LineHeight(lineHeight1);
+		_cameraModule.setCamera2LineHeight(lineHeight2);
+	}
 }
 
 void BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged(int index)

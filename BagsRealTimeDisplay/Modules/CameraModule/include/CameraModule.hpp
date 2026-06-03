@@ -39,6 +39,9 @@ public:
 	void setCamera1PostDivider(size_t postDivider);
 	void setCamera2Multiplier(size_t multiplier);
 	void setCamera2PostDivider(size_t postDivider);
+public:
+	void setCamera1LineHeight(unsigned int lineHeight);
+	void setCamera2LineHeight(unsigned int lineHeight);
 private:
 	bool isTargetCamera(const QString& cameraIndex, const QString& targetName);
 	rw::hoec::CameraInfo cameraMetaDataCheck(const QString& cameraIndex,
