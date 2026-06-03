@@ -36,11 +36,13 @@ void DlgProductSet::read_config()
 	ui->btn_houfenpin1->setText(QString::number(setConfig.houfenpin1));
 	ui->btn_zengyi1->setText(QString::number(setConfig.zengyi1));
 	ui->btn_baoguang1->setText(QString::number(setConfig.baoguang1));
+	ui->btn_xiangsudangliang1->setText(QString::number(setConfig.xiangsudangliang1));
 
 	ui->btn_chengfaqi2->setText(QString::number(setConfig.chengfaqi2));
 	ui->btn_houfenpin2->setText(QString::number(setConfig.houfenpin2));
 	ui->btn_zengyi2->setText(QString::number(setConfig.zengyi2));
 	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
+	ui->btn_xiangsudangliang2->setText(QString::number(setConfig.xiangsudangliang2));
 
 	ui->btn_xuantingshijian->setText(QString::number(setConfig.xuantingshijian));
 	ui->btn_qiehuanzhangshu->setText(QString::number(setConfig.qiehuanzhangshu));
@@ -65,6 +67,8 @@ void DlgProductSet::build_connect()
 		this, &DlgProductSet::btn_zengyi1_clicked);
 	QObject::connect(ui->btn_baoguang1, &QPushButton::clicked,
 		this, &DlgProductSet::btn_baoguang1_clicked);
+	QObject::connect(ui->btn_xiangsudangliang1, &QPushButton::clicked,
+		this, &DlgProductSet::btn_xiangsudangliang1_clicked);
 	QObject::connect(ui->btn_chengfaqi2, &QPushButton::clicked,
 		this, &DlgProductSet::btn_chengfaqi2_clicked);
 	QObject::connect(ui->btn_houfenpin2, &QPushButton::clicked,
@@ -73,6 +77,8 @@ void DlgProductSet::build_connect()
 		this, &DlgProductSet::btn_zengyi2_clicked);
 	QObject::connect(ui->btn_baoguang2, &QPushButton::clicked,
 		this, &DlgProductSet::btn_baoguang2_clicked);
+	QObject::connect(ui->btn_xiangsudangliang2, &QPushButton::clicked,
+		this, &DlgProductSet::btn_xiangsudangliang2_clicked);
 	QObject::connect(ui->btn_xuantingshijian, &QPushButton::clicked,
 		this, &DlgProductSet::btn_xuantingshijian_clicked);
 	QObject::connect(ui->btn_qiehuanzhangshu, &QPushButton::clicked,
@@ -187,6 +193,25 @@ void DlgProductSet::btn_baoguang1_clicked()
 	}
 }
 
+void DlgProductSet::btn_xiangsudangliang1_clicked()
+{
+	rw::rqwu::NumberKeyboard numKeyBord;
+	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
+	auto isAccept = numKeyBord.exec();
+	if (isAccept == QDialog::Accepted)
+	{
+		auto value = numKeyBord.getValue();
+		if (value.toDouble() < 0)
+		{
+			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
+			return;
+		}
+		auto& setConfig = _configModule.setConfig;
+		ui->btn_xiangsudangliang1->setText(value);
+		setConfig.xiangsudangliang1 = value.toDouble();
+	}
+}
+
 void DlgProductSet::btn_chengfaqi2_clicked()
 {
 	rw::rqwu::NumberKeyboard numKeyBord;
@@ -264,6 +289,25 @@ void DlgProductSet::btn_baoguang2_clicked()
 		ui->btn_baoguang2->setText(value);
 		setConfig.baoguang2 = value.toDouble();
 		_cameraModule.setCamera2ExposureTime(setConfig.baoguang2);
+	}
+}
+
+void DlgProductSet::btn_xiangsudangliang2_clicked()
+{
+	rw::rqwu::NumberKeyboard numKeyBord;
+	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
+	auto isAccept = numKeyBord.exec();
+	if (isAccept == QDialog::Accepted)
+	{
+		auto value = numKeyBord.getValue();
+		if (value.toDouble() < 0)
+		{
+			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
+			return;
+		}
+		auto& setConfig = _configModule.setConfig;
+		ui->btn_xiangsudangliang2->setText(value);
+		setConfig.xiangsudangliang2 = value.toDouble();
 	}
 }
 

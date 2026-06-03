@@ -38,11 +38,13 @@ private slots:
 	void btn_houfenpin1_clicked();
 	void btn_zengyi1_clicked();
 	void btn_baoguang1_clicked();
+	void btn_xiangsudangliang1_clicked();
 
 	void btn_chengfaqi2_clicked();
 	void btn_houfenpin2_clicked();
 	void btn_zengyi2_clicked();
 	void btn_baoguang2_clicked();
+	void btn_xiangsudangliang2_clicked();
 
 	void btn_xuantingshijian_clicked();
 	void btn_qiehuanzhangshu_clicked();

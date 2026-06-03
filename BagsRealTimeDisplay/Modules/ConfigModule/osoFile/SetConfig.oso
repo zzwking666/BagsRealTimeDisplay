@@ -8,11 +8,13 @@ namespace cdm {
 		houfenpin1 : int : default = 0;
 		zengyi1 : int : default = 0;
 		baoguang1 : int : default = 0;
+		xiangsudangliang1 : double : default = 0;
 
 		chengfaqi2 : int : default = 0;
 		houfenpin2 : int : default = 0;
 		zengyi2 : int : default = 0;
 		baoguang2 : int : default = 0;
+		xiangsudangliang2 : double : default = 0;
 
 		xuantingshijian : double : default = 0;
 		qiehuanzhangshu : int : default = 0;
