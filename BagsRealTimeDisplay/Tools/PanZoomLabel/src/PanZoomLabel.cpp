@@ -20,6 +20,11 @@ PanZoomLabel::PanZoomLabel(QWidget* parent)
 	setMinimumSize(1, 1);
 	setBackgroundRole(QPalette::Base);
 	setAutoFillBackground(true);
+
+	QPalette pal = palette();
+	pal.setColor(QPalette::Base, Qt::black);
+	pal.setColor(QPalette::Window, Qt::black);
+	setPalette(pal);
 }
 
 void PanZoomLabel::setOverlayPaths(const QVector<QPainterPath>& pathsImage)

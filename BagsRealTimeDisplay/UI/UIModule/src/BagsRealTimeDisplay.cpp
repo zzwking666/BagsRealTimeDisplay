@@ -244,31 +244,6 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 	auto& _statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
 
 	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
-	const double youyijuli = _configModule.setConfig.youyijuli;
-	const double suofangbili = _configModule.setConfig.suofang;
-
-	auto makeBackCanvas = [&](const QPixmap& src)->QPixmap
-		{
-			const QSize dstSize = _panZoomLabel->size();
-			if (dstSize.isEmpty()) return src;
-
-			const double scale = std::max(0.01, suofangbili / 100.0);
-			const int targetW = std::max(1, qRound(src.width() * scale));
-			const int targetH = std::max(1, qRound(src.height() * scale));
-			const QPixmap scaled = src.scaled(targetW, targetH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-
-			QPixmap canvas(dstSize);
-			canvas.fill(Qt::black);
-
-			const int baseX = (dstSize.width() - scaled.width()) / 2;
-			const int baseY = (dstSize.height() - scaled.height()) / 2;
-			const int drawX = baseX + qRound(youyijuli);
-
-			QPainter painter(&canvas);
-			painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-			painter.drawPixmap(drawX, baseY, scaled);
-			return canvas;
-		};
 
 	auto showByCamera = [&](int camera, const QPixmap& pix)
 		{
@@ -276,8 +251,16 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 			if (_currentViewCamera == 1) _frontViewState = _panZoomLabel->viewState();
 			if (_currentViewCamera == 2) _backViewState = _panZoomLabel->viewState();
 
-			// 显示新图（不复位）
-			_panZoomLabel->setPixmap(pix, false);
+			// 首次显示该相机图像时自动铺满，后续保持用户视图
+			const bool isFirstShow = (camera == 1 && !_frontViewState.valid) || (camera == 2 && !_backViewState.valid);
+			if (isFirstShow)
+			{
+				_panZoomLabel->setPixmap(pix);
+			}
+			else
+			{
+				_panZoomLabel->setPixmap(pix, false);
+			}
 
 			// 恢复当前相机各自视图
 			if (camera == 1 && _frontViewState.valid) _panZoomLabel->applyViewState(_frontViewState);
@@ -299,7 +282,7 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 	{
 		if (index == 2)
 		{
-			showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
+			showByCamera(2, QPixmap::fromImage(image));
 			++_statisticalInfo.beimianzongliang;
 			return;
 		}
@@ -316,7 +299,7 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 			}
 			else
 			{
-				showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
+				showByCamera(2, QPixmap::fromImage(image));
 				++_statisticalInfo.beimianzongliang;
 			}
 			++lastCameraCaptureCount;
