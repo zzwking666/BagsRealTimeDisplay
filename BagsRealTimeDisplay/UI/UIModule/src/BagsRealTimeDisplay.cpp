@@ -113,8 +113,6 @@ void BagsRealTimeDisplay::build_PanZoomLabel()
 
 	_panZoomLabel->setStyleSheet(oldLabel->styleSheet());
 	_panZoomLabel->setFont(oldLabel->font());
-	_panZoomLabel->setPalette(oldLabel->palette());
-	_panZoomLabel->setAutoFillBackground(oldLabel->autoFillBackground());
 	_panZoomLabel->setCursor(oldLabel->cursor());
 	_panZoomLabel->setEnabled(oldLabel->isEnabled());
 	_panZoomLabel->setVisible(oldLabel->isVisible());
