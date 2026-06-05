@@ -67,6 +67,10 @@ private:
 	int lastCameraCaptureCount{ 0 };
 	int lastCameraCaptureIndex{ 1 };
 
+	// 每相机帧计数器：每两帧只显示一帧，降低显示刷新率
+	unsigned int _frontFrameCounter{ 0 };
+	unsigned int _backFrameCounter{ 0 };
+
 	// 自定义可操作label
 	PanZoomLabel* _panZoomLabel = nullptr;
 	PanZoomLabel::ViewState _frontViewState{};
