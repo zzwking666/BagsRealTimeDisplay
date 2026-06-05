@@ -46,6 +46,7 @@ void DlgProductSet::read_config()
 
 	ui->btn_xuantingshijian->setText(QString::number(setConfig.xuantingshijian));
 	ui->btn_qiehuanzhangshu->setText(QString::number(setConfig.qiehuanzhangshu));
+	ui->btn_chutuzhangshu->setText(QString::number(setConfig.chutuzhangshu));
 	ui->btn_youyijuli->setText(QString::number(setConfig.youyijuli));
 	ui->btn_suofang->setText(QString::number(setConfig.suofang));
 	ui->ckb_jingxiang->setChecked(setConfig.isjingxiang);
@@ -83,6 +84,8 @@ void DlgProductSet::build_connect()
 		this, &DlgProductSet::btn_xuantingshijian_clicked);
 	QObject::connect(ui->btn_qiehuanzhangshu, &QPushButton::clicked,
 		this, &DlgProductSet::btn_qiehuanzhangshu_clicked);
+	QObject::connect(ui->btn_chutuzhangshu, &QPushButton::clicked,
+		this, &DlgProductSet::btn_chutuzhangshu_clicked);
 	QObject::connect(ui->btn_youyijuli, &QPushButton::clicked,
 		this, &DlgProductSet::btn_youyijuli_clicked);
 	QObject::connect(ui->btn_suofang, &QPushButton::clicked,
@@ -346,6 +349,25 @@ void DlgProductSet::btn_qiehuanzhangshu_clicked()
 		auto& setConfig = _configModule.setConfig;
 		ui->btn_qiehuanzhangshu->setText(value);
 		setConfig.qiehuanzhangshu = value.toDouble();
+	}
+}
+
+void DlgProductSet::btn_chutuzhangshu_clicked()
+{
+	rw::rqwu::NumberKeyboard numKeyBord;
+	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
+	auto isAccept = numKeyBord.exec();
+	if (isAccept == QDialog::Accepted)
+	{
+		auto value = numKeyBord.getValue();
+		if (value.toDouble() < 0)
+		{
+			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
+			return;
+		}
+		auto& setConfig = _configModule.setConfig;
+		ui->btn_chutuzhangshu->setText(value);
+		setConfig.chutuzhangshu = value.toDouble();
 	}
 }
 

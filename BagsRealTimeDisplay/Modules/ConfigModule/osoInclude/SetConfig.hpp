@@ -34,6 +34,7 @@ namespace cdm {
         bool isjingxiang{ false };
         double youyijuli{ 0 };
         double suofang{ 0 };
+        int chutuzhangshu{ 0 };
     };
 
     inline SetConfig::SetConfig(const rw::oso::ObjectStoreAssembly& assembly)
@@ -118,6 +119,11 @@ namespace cdm {
             throw std::runtime_error("$variable$suofang is not found");
         }
         suofang = suofangItem->getValueAsDouble();
+        auto chutuzhangshuItem = rw::oso::ObjectStoreCoreToItem(assembly.getItem("$variable$chutuzhangshu$"));
+        if (!chutuzhangshuItem) {
+            throw std::runtime_error("$variable$chutuzhangshu is not found");
+        }
+        chutuzhangshu = chutuzhangshuItem->getValueAsInt();
     }
 
     inline SetConfig::SetConfig(const SetConfig& obj)
@@ -137,6 +143,7 @@ namespace cdm {
         isjingxiang = obj.isjingxiang;
         youyijuli = obj.youyijuli;
         suofang = obj.suofang;
+        chutuzhangshu = obj.chutuzhangshu;
     }
 
     inline SetConfig& SetConfig::operator=(const SetConfig& obj)
@@ -157,6 +164,7 @@ namespace cdm {
             isjingxiang = obj.isjingxiang;
             youyijuli = obj.youyijuli;
             suofang = obj.suofang;
+            chutuzhangshu = obj.chutuzhangshu;
         }
         return *this;
     }
@@ -225,12 +233,16 @@ namespace cdm {
         suofangItem->setName("$variable$suofang$");
         suofangItem->setValueFromDouble(suofang);
         assembly.addItem(suofangItem);
+        auto chutuzhangshuItem = std::make_shared<rw::oso::ObjectStoreItem>();
+        chutuzhangshuItem->setName("$variable$chutuzhangshu$");
+        chutuzhangshuItem->setValueFromInt(chutuzhangshu);
+        assembly.addItem(chutuzhangshuItem);
         return assembly;
     }
 
     inline bool SetConfig::operator==(const SetConfig& obj) const
     {
-        return chengfaqi1 == obj.chengfaqi1 && houfenpin1 == obj.houfenpin1 && zengyi1 == obj.zengyi1 && baoguang1 == obj.baoguang1 && xiangsudangliang1 == obj.xiangsudangliang1 && chengfaqi2 == obj.chengfaqi2 && houfenpin2 == obj.houfenpin2 && zengyi2 == obj.zengyi2 && baoguang2 == obj.baoguang2 && xiangsudangliang2 == obj.xiangsudangliang2 && xuantingshijian == obj.xuantingshijian && qiehuanzhangshu == obj.qiehuanzhangshu && isjingxiang == obj.isjingxiang && youyijuli == obj.youyijuli && suofang == obj.suofang;
+        return chengfaqi1 == obj.chengfaqi1 && houfenpin1 == obj.houfenpin1 && zengyi1 == obj.zengyi1 && baoguang1 == obj.baoguang1 && xiangsudangliang1 == obj.xiangsudangliang1 && chengfaqi2 == obj.chengfaqi2 && houfenpin2 == obj.houfenpin2 && zengyi2 == obj.zengyi2 && baoguang2 == obj.baoguang2 && xiangsudangliang2 == obj.xiangsudangliang2 && xuantingshijian == obj.xuantingshijian && qiehuanzhangshu == obj.qiehuanzhangshu && isjingxiang == obj.isjingxiang && youyijuli == obj.youyijuli && suofang == obj.suofang && chutuzhangshu == obj.chutuzhangshu;
     }
 
     inline bool SetConfig::operator!=(const SetConfig& obj) const

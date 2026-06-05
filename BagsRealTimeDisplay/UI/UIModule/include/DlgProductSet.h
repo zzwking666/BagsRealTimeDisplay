@@ -48,6 +48,7 @@ private slots:
 
 	void btn_xuantingshijian_clicked();
 	void btn_qiehuanzhangshu_clicked();
+	void btn_chutuzhangshu_clicked();
 	void btn_youyijuli_clicked();
 	void btn_suofang_clicked();
 	void ckb_jingxiang_toggled(bool checked);

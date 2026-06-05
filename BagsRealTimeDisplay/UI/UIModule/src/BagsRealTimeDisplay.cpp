@@ -243,16 +243,20 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 
 	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
 
-	// 每相机每两帧只显示一帧，降低显示刷新率便于人眼观察
-	if (index == 1)
+	// 根据出图张数控制显示刷新率：每 N 帧只显示一帧
+	const int chuTuZhangShu = _configModule.setConfig.chutuzhangshu;
+	if (chuTuZhangShu > 1)
 	{
-		++_frontFrameCounter;
-		if (_frontFrameCounter % 2 == 0) return;
-	}
-	else if (index == 2)
-	{
-		++_backFrameCounter;
-		if (_backFrameCounter % 2 == 0) return;
+		if (index == 1)
+		{
+			++_frontFrameCounter;
+			if (_frontFrameCounter % chuTuZhangShu != 0) return;
+		}
+		else if (index == 2)
+		{
+			++_backFrameCounter;
+			if (_backFrameCounter % chuTuZhangShu != 0) return;
+		}
 	}
 
 	auto showByCamera = [&](int camera, const QPixmap& pix)
