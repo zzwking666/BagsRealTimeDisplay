@@ -38,7 +38,6 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 		}
 		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
 		emit imageReady(index, qimg);
-		++statisticalInfo.beimianzongliang;
 		const int frameNum = static_cast<int>(matInfo.frameInfo.frameNum);
 		if(frameNum - lastCam2FrameNum > 1)
 		{
@@ -50,7 +49,6 @@ void ImageStitch::onFrameCaptured(rw::rqwc::MatInfo matInfo, size_t index)
 	{
 		QImage qimg = rw::img::cvMatToQImage(matInfo.mat);
 		emit imageReady(index, qimg);
-		++statisticalInfo.zhengmianzongliang;
 		const int frameNum = static_cast<int>(matInfo.frameInfo.frameNum);
 		if (frameNum - lastCam1FrameNum > 1)
 		{

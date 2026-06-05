@@ -241,6 +241,7 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 {
 	if (_freezeImageUpdate) return;
 	if (!_panZoomLabel || image.isNull()) return;
+	auto& _statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
 
 	const int mode = _configModule.bagsRealTimeDisplayInfo.qiehuanxianshi;
 	const double youyijuli = _configModule.setConfig.youyijuli;
@@ -290,6 +291,7 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 		if (index == 1)
 		{
 			showByCamera(1, QPixmap::fromImage(image));
+			++_statisticalInfo.zhengmianzongliang;
 			return;
 		}
 	}
@@ -298,6 +300,7 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 		if (index == 2)
 		{
 			showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
+			++_statisticalInfo.beimianzongliang;
 			return;
 		}
 	}
@@ -309,10 +312,12 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 			if (index == 1)
 			{
 				showByCamera(1, QPixmap::fromImage(image));
+				++_statisticalInfo.zhengmianzongliang;
 			}
 			else
 			{
 				showByCamera(2, makeBackCanvas(QPixmap::fromImage(image)));
+				++_statisticalInfo.beimianzongliang;
 			}
 			++lastCameraCaptureCount;
 			const int switchCount = _configModule.setConfig.qiehuanzhangshu;
