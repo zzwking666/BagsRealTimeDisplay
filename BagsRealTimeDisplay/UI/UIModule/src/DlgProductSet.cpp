@@ -2,7 +2,7 @@
 #include "ui_DlgProductSet.h"
 
 #include <QMessageBox>
-#include "rqwu/Keyboard/rqwu_NumberKeyboard.h"
+#include "rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h"
 #include "Modules.hpp"
 
 DlgProductSet::DlgProductSet(ConfigModule& configModule, CameraModule& cameraModule, QWidget* parent)

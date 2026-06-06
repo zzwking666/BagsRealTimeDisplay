@@ -1,22 +1,7 @@
 cmake_minimum_required (VERSION 3.10)
 
-# 如果没有定义 CMAKE_TOOLCHAIN_FILE，则设置为 vcpkg 的工具链文件路径,一般情况下再CMakeUserPresets.json中会设置CMAKE_TOOLCHAIN_FILE环境变量指向vcpkg.cmake文件，这里做一个检查，如果没有定义则设置默认路径
-if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
-endif()
-
-# 设置QT路径（优先读取环境变量 QT_ROOT）
-if(DEFINED ENV{QT_ROOT})
-    set(QT_PATH "$ENV{QT_ROOT}/6.7.3/msvc2022_64")
-	message(STATUS "${QT_PATH}")
-else()
-    set(QT_PATH "C:/Development/Qt/6.7.3/msvc2019_64")
-endif()
-
-list(APPEND CMAKE_PREFIX_PATH "${QT_PATH}")
-
-#设置RWUL路径
-list(APPEND CMAKE_PREFIX_PATH "D:/Development/RWUL")
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CMakeCacheIni.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/func.cmake)
 
 project ("BagsRealTimeDisplay" LANGUAGES CXX)
 
@@ -31,6 +16,6 @@ set(CMAKE_AUTORCC ON)
 #查找第三方库
 find_package(OpenCV CONFIG REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Concurrent)
-find_package(RWUL CONFIG REQUIRED COMPONENTS core oso hoecd rqwu imgcore imgqt )
+find_package(RWUL CONFIG REQUIRED COMPONENTS core oso hoecd rqwu imgcore imgqt rqwcd)
 
 add_subdirectory ("BagsRealTimeDisplay")

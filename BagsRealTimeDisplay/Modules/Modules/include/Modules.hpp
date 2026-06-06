@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IModule.hpp"
-#include "oso/oso_func.hpp"
+#include "rwul/oso/oso_func.hpp"
 #include "RunEnvCheck.hpp"
 #include "CameraModule.hpp"
 #include "ConfigModule.hpp"

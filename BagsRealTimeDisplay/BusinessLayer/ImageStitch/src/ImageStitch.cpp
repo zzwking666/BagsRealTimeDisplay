@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
-#include "imgqt/imgqt.hpp"
+#include "rwul/imgqt/imgqt.hpp"
 
 #include "Modules.hpp"
 

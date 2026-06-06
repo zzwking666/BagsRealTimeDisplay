@@ -3,8 +3,7 @@
 #include <QObject>
 
 #include"IModule.hpp"
-#include"rqwcd/rqwcd/rqwc_d.hpp"
-
+#include"rwul/rqwcd/rqwc_d.hpp"
 
 class CameraModule
 	: public QObject, public IModule<bool>

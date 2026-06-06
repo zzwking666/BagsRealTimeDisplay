@@ -4,8 +4,8 @@
 #include<QObject>
 #include <QDebug>
 #include <QFile>
-#include "oso/oso_StorageContext.hpp"
-#include "oso/oso_func.hpp"
+#include "rwul/oso/oso_StorageContext.hpp"
+#include "rwul/oso/oso_func.hpp"
 #include "BagsRealTimeDisplayInfo.hpp"
 #include "SetConfig.hpp"
 

@@ -1,7 +1,7 @@
 #include <QFile>
 
 #include <QtWidgets/QApplication>
-#include "rqwu/rqwu_core.h"
+#include "rwul/rqwu/rqwu_core.h"
 #include "AppRuntime.hpp"
 int main(int argc, char *argv[])
 {

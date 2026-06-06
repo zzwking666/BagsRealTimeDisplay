@@ -27,9 +27,4 @@ target_include_directories(${BRTD_TARGET}
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-
-# 编译好后调用qt中的windeployqt.exe
-add_custom_command(TARGET ${BRTD_TARGET} POST_BUILD
-	COMMAND ${QT_PATH}/bin/windeployqt.exe --no-compiler-runtime --no-opengl-sw $<TARGET_FILE:${BRTD_TARGET}>
-	COMMENT "Running windeployqt to package Qt dependencies for ${BRTD_TARGET}"
-)
+add_windeployqt(${BRTD_TARGET})

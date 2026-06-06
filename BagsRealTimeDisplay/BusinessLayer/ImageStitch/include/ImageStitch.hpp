@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QThread>
 
-#include "rqwcd/rqwc_d.hpp"
+#include "rwul/rqwcd/rqwc_d.hpp"
 #include "ConfigModule.hpp"
 
 class ImageStitch : public QThread
