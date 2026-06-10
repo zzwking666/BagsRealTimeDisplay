@@ -22,7 +22,7 @@ namespace cdm {
         int zhengmianzongliang{ 0 };
         int beimianzongliang{ 0 };
         int qiehuanxianshi{ 0 };
-        int shezhidaizichangdu{ 0 };
+        int shezhichishu{ 0 };
     };
 
     inline BagsRealTimeDisplayInfo::BagsRealTimeDisplayInfo(const rw::oso::ObjectStoreAssembly& assembly)
@@ -47,11 +47,11 @@ namespace cdm {
             throw std::runtime_error("$variable$qiehuanxianshi is not found");
         }
         qiehuanxianshi = qiehuanxianshiItem->getValueAsInt();
-        auto shezhidaizichangduItem = rw::oso::ObjectStoreCoreToItem(assembly.getItem("$variable$shezhidaizichangdu$"));
-        if (!shezhidaizichangduItem) {
-            throw std::runtime_error("$variable$shezhidaizichangdu is not found");
+        auto shezhichishuItem = rw::oso::ObjectStoreCoreToItem(assembly.getItem("$variable$shezhichishu$"));
+        if (!shezhichishuItem) {
+            throw std::runtime_error("$variable$shezhichishu is not found");
         }
-        shezhidaizichangdu = shezhidaizichangduItem->getValueAsInt();
+        shezhichishu = shezhichishuItem->getValueAsInt();
     }
 
     inline BagsRealTimeDisplayInfo::BagsRealTimeDisplayInfo(const BagsRealTimeDisplayInfo& obj)
@@ -59,7 +59,7 @@ namespace cdm {
         zhengmianzongliang = obj.zhengmianzongliang;
         beimianzongliang = obj.beimianzongliang;
         qiehuanxianshi = obj.qiehuanxianshi;
-        shezhidaizichangdu = obj.shezhidaizichangdu;
+        shezhichishu = obj.shezhichishu;
     }
 
     inline BagsRealTimeDisplayInfo& BagsRealTimeDisplayInfo::operator=(const BagsRealTimeDisplayInfo& obj)
@@ -68,7 +68,7 @@ namespace cdm {
             zhengmianzongliang = obj.zhengmianzongliang;
             beimianzongliang = obj.beimianzongliang;
             qiehuanxianshi = obj.qiehuanxianshi;
-            shezhidaizichangdu = obj.shezhidaizichangdu;
+            shezhichishu = obj.shezhichishu;
         }
         return *this;
     }
@@ -89,16 +89,16 @@ namespace cdm {
         qiehuanxianshiItem->setName("$variable$qiehuanxianshi$");
         qiehuanxianshiItem->setValueFromInt(qiehuanxianshi);
         assembly.addItem(qiehuanxianshiItem);
-        auto shezhidaizichangduItem = std::make_shared<rw::oso::ObjectStoreItem>();
-        shezhidaizichangduItem->setName("$variable$shezhidaizichangdu$");
-        shezhidaizichangduItem->setValueFromInt(shezhidaizichangdu);
-        assembly.addItem(shezhidaizichangduItem);
+        auto shezhichishuItem = std::make_shared<rw::oso::ObjectStoreItem>();
+        shezhichishuItem->setName("$variable$shezhichishu$");
+        shezhichishuItem->setValueFromInt(shezhichishu);
+        assembly.addItem(shezhichishuItem);
         return assembly;
     }
 
     inline bool BagsRealTimeDisplayInfo::operator==(const BagsRealTimeDisplayInfo& obj) const
     {
-        return zhengmianzongliang == obj.zhengmianzongliang && beimianzongliang == obj.beimianzongliang && qiehuanxianshi == obj.qiehuanxianshi && shezhidaizichangdu == obj.shezhidaizichangdu;
+        return zhengmianzongliang == obj.zhengmianzongliang && beimianzongliang == obj.beimianzongliang && qiehuanxianshi == obj.qiehuanxianshi && shezhichishu == obj.shezhichishu;
     }
 
     inline bool BagsRealTimeDisplayInfo::operator!=(const BagsRealTimeDisplayInfo& obj) const

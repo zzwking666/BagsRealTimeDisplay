@@ -51,7 +51,7 @@ private slots:
 	void btn_jianshaobaoguang2_clicked();
 	void btn_zengjiabaoguang2_clicked();
 	void pbtn_resetProduct_clicked();
-	void pbtn_setBagLength_clicked();
+	void pbtn_setchishu_clicked();
 
 	void cbb_qiehuanxianshi_currentIndexChanged(int index);
 

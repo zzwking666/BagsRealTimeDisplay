@@ -553,7 +553,7 @@ QComboBox QAbstractItemView {
     }</string>
                  </property>
                  <property name="text">
-                  <string>设置袋子长度</string>
+                  <string>设置齿数</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -561,7 +561,7 @@ QComboBox QAbstractItemView {
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pbtn_setBagLength">
+                <widget class="QPushButton" name="pbtn_setchishu">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                    <horstretch>0</horstretch>
