@@ -21,6 +21,7 @@ target_link_libraries(${DEMO_TARGET}
 	PUBLIC RWUL::hoepZMotion
 	PUBLIC Modules::IModule
 	PUBLIC Qt6::Core
+	PRIVATE Global::Utility
 )
 
 add_library(Modules::${DEMO_TARGET} ALIAS ${DEMO_TARGET})

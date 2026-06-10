@@ -2,6 +2,9 @@
 #include "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp"
 #include <QDebug>
 
+#include "Utility.hpp"
+
+
 ZMotionModule::ZMotionModule()
 {
 }
@@ -12,8 +15,7 @@ ZMotionModule::~ZMotionModule()
 
 bool ZMotionModule::build()
 {
-	// TODO: 从 ConfigModule 读取 IP 地址配置
-	_ipAddress = "192.168.1.250";
+	_ipAddress = utility.zMotionIp.toStdString();
 
 	zMotion = std::make_unique<rw::hoep::ZMotionDevice>();
 
