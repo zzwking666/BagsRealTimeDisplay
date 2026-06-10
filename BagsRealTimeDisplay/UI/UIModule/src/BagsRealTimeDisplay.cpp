@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp>
 #include <rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h>
+#include "rwul/rqwu/rqwu_MessageBox.h"
 
 #include "Modules.hpp"
 #include "utility.hpp"
@@ -236,13 +237,9 @@ void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
 	ui->lb_BackTotal->setText(QString::number(_statisticalInfo.beimianzongliang));
 }
 
-void BagsRealTimeDisplay::onZMotionStatusUpdated()
+void BagsRealTimeDisplay::onZMotionDisconnect()
 {
-	auto& zMotion = Modules::getInstance().zMotionModule.zMotion;
-	if (zMotion->isConnected())
-	{
-		// TODO: 将 Zmotion 状态更新到对应的 UI 控件
-	}
+	rw::rqwu::MessageBox::warning(this,"警告！","运动控制器断开连接！");
 }
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)

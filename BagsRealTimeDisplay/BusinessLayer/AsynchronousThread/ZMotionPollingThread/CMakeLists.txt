@@ -20,6 +20,7 @@ target_include_directories(${DEMO_TARGET}
 target_link_libraries(${DEMO_TARGET}
 	PUBLIC RWUL::hoepZMotion
 	PUBLIC Qt6::Core
+	PRIVATE Modules::Modules
 )
 
 add_library(BusinessLayer::${DEMO_TARGET} ALIAS ${DEMO_TARGET})

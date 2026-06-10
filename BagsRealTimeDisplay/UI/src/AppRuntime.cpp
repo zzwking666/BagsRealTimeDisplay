@@ -50,4 +50,7 @@ void AppRuntime::build_connect()
 		_bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onUpdateStatisticalInfoUI);
     QObject::connect(_modules.asynchronousThreadModule.refreshUIThread.get(), &RefreshUIThread::emit_RefreshUI,
         _bagsRealTimeDisplay.get()->_dlgProductSet, &DlgProductSet::onUpdateFrameLost);
+
+    QObject::connect(_modules.asynchronousThreadModule.zMotionPollingThread.get(), &ZMotionPollingThread::zMotionDisconnect,
+        _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onZMotionDisconnect);
 }

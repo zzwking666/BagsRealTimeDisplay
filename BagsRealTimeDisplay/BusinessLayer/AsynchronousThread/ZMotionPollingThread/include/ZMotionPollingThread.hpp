@@ -15,7 +15,7 @@ public:
 protected:
 	void run() override;
 signals:
-	
+	void zMotionDisconnect();
 private:
 	std::atomic<bool> _running{false};
 };

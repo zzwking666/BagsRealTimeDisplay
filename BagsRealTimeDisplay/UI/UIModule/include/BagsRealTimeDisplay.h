@@ -44,7 +44,7 @@ public slots:
 
 	void setConfigWindowClosed();
 
-	void onZMotionStatusUpdated();
+	void onZMotionDisconnect();
 private slots:
 	void pbtn_exit_clicked();
 	void pbtn_set_clicked();
