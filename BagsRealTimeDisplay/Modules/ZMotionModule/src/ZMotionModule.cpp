@@ -15,13 +15,13 @@ bool ZMotionModule::build()
 	// TODO: 从 ConfigModule 读取 IP 地址配置
 	_ipAddress = "192.168.1.250";
 
-	device = std::make_unique<rw::hoep::ZMotionDevice>();
+	zMotion = std::make_unique<rw::hoep::ZMotionDevice>();
 
 	rw::hoep::ZMotionEthernetCfg cfg;
 	cfg.ipAddress = _ipAddress;
 	cfg.timeoutMs = 100;
 
-	if (!device->connect(cfg))
+	if (!zMotion->connect(cfg))
 	{
 		qWarning() << "ZMotion 连接失败:" << _ipAddress.c_str();
 	}
@@ -31,7 +31,7 @@ bool ZMotionModule::build()
 	}
 
 	// 创建轮询线程（无论连接成功与否都创建，线程内部会处理设备未连接的情况）
-	pollingThread = std::make_unique<ZMotionPollingThread>(device.get(), &zMotionStatus);
+	pollingThread = std::make_unique<ZMotionPollingThread>();
 
 	return true;
 }
@@ -43,10 +43,10 @@ void ZMotionModule::destroy()
 		pollingThread.reset();
 	}
 
-	if (device)
+	if (zMotion)
 	{
-		device->disconnect();
-		device.reset();
+		zMotion->disconnect();
+		zMotion.reset();
 	}
 }
 
@@ -68,7 +68,7 @@ void ZMotionModule::stop()
 
 void ZMotionModule::setGearRatio(double ratio)
 {
-	if (device && device->isConnected())
+	if (zMotion && zMotion->isConnected())
 	{
 		// 通过 ModBus 或其他方式设置电子齿轮比
 		qDebug() << "ZMotion setGearRatio:" << ratio;
@@ -77,10 +77,10 @@ void ZMotionModule::setGearRatio(double ratio)
 
 void ZMotionModule::setPulseEquivalent(double equivalent)
 {
-	if (device && device->isConnected())
+	if (zMotion && zMotion->isConnected())
 	{
 		// 设置轴脉冲当量
-		device->setAxisUnits(0, static_cast<float>(equivalent));
+		zMotion->setAxisUnits(0, static_cast<float>(equivalent));
 		qDebug() << "ZMotion setPulseEquivalent:" << equivalent;
 	}
 }

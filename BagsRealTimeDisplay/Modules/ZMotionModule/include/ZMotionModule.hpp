@@ -21,14 +21,11 @@ public:
 	void stop() override;
 
 public:
-	// Zmotion 实时状态
-	ZMotionStatus zMotionStatus;
-
 	// 轮询线程
 	std::unique_ptr<ZMotionPollingThread> pollingThread{nullptr};
 
 	// Zmotion 设备实例（销毁顺序在 pollingThread 之后，由析构函数保证）
-	std::unique_ptr<rw::hoep::ZMotionDevice> device{nullptr};
+	std::unique_ptr<rw::hoep::ZMotionDevice> zMotion{nullptr};
 
 public:
 	// 参数写入接口

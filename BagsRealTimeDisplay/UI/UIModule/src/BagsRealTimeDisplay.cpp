@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QPainter>
+#include <rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp>
 #include <rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h>
 
 #include "Modules.hpp"
@@ -237,12 +238,11 @@ void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
 
 void BagsRealTimeDisplay::onZMotionStatusUpdated()
 {
-	auto& zMotionStatus = Modules::getInstance().zMotionModule.zMotionStatus;
-
-	// TODO: 将 Zmotion 状态更新到对应的 UI 控件
-	qDebug() << "ZMotion status - Position:" << zMotionStatus.currentPosition.load()
-	         << "AxisStatus:" << zMotionStatus.axisStatus.load()
-	         << "Connected:" << zMotionStatus.isConnected.load();
+	auto& zMotion = Modules::getInstance().zMotionModule.zMotion;
+	if (zMotion->isConnected())
+	{
+		// TODO: 将 Zmotion 状态更新到对应的 UI 控件
+	}
 }
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
