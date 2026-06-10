@@ -19,8 +19,6 @@ namespace cdm {
 		xuantingshijian : double : default = 0;
 		qiehuanzhangshu : int : default = 0;
 		isjingxiang : bool : default = false;
-		youyijuli : double : default = 0;
-		suofang : double : default = 0;
 		chutuzhangshu : int : default = 0;
 	};
 }
