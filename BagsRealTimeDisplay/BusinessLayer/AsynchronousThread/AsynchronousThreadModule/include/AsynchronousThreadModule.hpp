@@ -3,6 +3,7 @@
 #include "IModule.hpp"
 #include <QObject>
 #include "RefreshUIThread.hpp"
+#include "ZMotionPollingThread.hpp"
 
 class AsynchronousThreadModule
 	: public QObject, public IModule<bool>
@@ -24,4 +25,5 @@ public:
 	} statisticalInfo;
 public:
 	std::unique_ptr<RefreshUIThread> refreshUIThread{ nullptr };
+	std::unique_ptr<ZMotionPollingThread> zMotionPollingThread{ nullptr };
 };

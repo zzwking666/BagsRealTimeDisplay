@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include "IModule.hpp"
-#include "ZMotionPollingThread.hpp"
 
 namespace rw { namespace hoep { class ZMotionDevice; } }
 
@@ -21,10 +20,7 @@ public:
 	void stop() override;
 
 public:
-	// 轮询线程
-	std::unique_ptr<ZMotionPollingThread> pollingThread{nullptr};
-
-	// Zmotion 设备实例（销毁顺序在 pollingThread 之后，由析构函数保证）
+	// Zmotion 设备实例
 	std::unique_ptr<rw::hoep::ZMotionDevice> zMotion{nullptr};
 
 public:

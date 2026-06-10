@@ -30,19 +30,11 @@ bool ZMotionModule::build()
 		qDebug() << "ZMotion 连接成功:" << _ipAddress.c_str();
 	}
 
-	// 创建轮询线程（无论连接成功与否都创建，线程内部会处理设备未连接的情况）
-	pollingThread = std::make_unique<ZMotionPollingThread>();
-
 	return true;
 }
 
 void ZMotionModule::destroy()
 {
-	if (pollingThread)
-	{
-		pollingThread.reset();
-	}
-
 	if (zMotion)
 	{
 		zMotion->disconnect();
@@ -52,18 +44,10 @@ void ZMotionModule::destroy()
 
 void ZMotionModule::start()
 {
-	if (pollingThread)
-	{
-		pollingThread->startThread();
-	}
 }
 
 void ZMotionModule::stop()
 {
-	if (pollingThread)
-	{
-		pollingThread->stopThread();
-	}
 }
 
 void ZMotionModule::setGearRatio(double ratio)

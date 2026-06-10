@@ -20,6 +20,7 @@ target_include_directories(${DEMO_TARGET}
 target_link_libraries(${DEMO_TARGET}
 	PUBLIC Qt6::Core
 	PUBLIC BusinessLayer::RefreshUIThread
+	PUBLIC BusinessLayer::ZMotionPollingThread
 	PUBLIC Modules::IModule
 )
 

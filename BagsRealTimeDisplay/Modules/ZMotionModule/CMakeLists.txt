@@ -19,7 +19,6 @@ target_include_directories(${DEMO_TARGET}
 # 链接底层依赖库
 target_link_libraries(${DEMO_TARGET}
 	PUBLIC RWUL::hoepZMotion
-	PUBLIC BusinessLayer::ZMotionPollingThread
 	PUBLIC Modules::IModule
 	PUBLIC Qt6::Core
 )
