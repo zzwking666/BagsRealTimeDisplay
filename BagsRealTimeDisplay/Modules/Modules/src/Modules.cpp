@@ -39,11 +39,19 @@ bool Modules::build()
 		qWarning("AsynchronousThread build failed");
 	}
 
+	auto isZMotionBuildSuccess = zMotionModule.build();
+
+	if (!isZMotionBuildSuccess)
+	{
+		qWarning("ZMotion build failed");
+	}
+
 	return true;
 }
 
 void Modules::destroy()
 {
+	zMotionModule.destroy();
 	asynchronousThreadModule.destroy();
 	cameraModule.destroy();
 	configModule.destroy();
@@ -54,10 +62,12 @@ void Modules::start()
 	configModule.start();
 	cameraModule.start();
 	asynchronousThreadModule.start();
+	zMotionModule.start();
 }
 
 void Modules::stop()
 {
+	zMotionModule.stop();
 	asynchronousThreadModule.stop();
 	cameraModule.stop();
 	configModule.stop();

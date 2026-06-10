@@ -1,4 +1,5 @@
 add_subdirectory(CameraModule)
+add_subdirectory(ZMotionModule)
 add_subdirectory(Modules)
 add_subdirectory(IModule)
 add_subdirectory(ConfigModule)

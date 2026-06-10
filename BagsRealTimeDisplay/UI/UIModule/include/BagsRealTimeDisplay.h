@@ -43,6 +43,8 @@ public slots:
     void onCameraDisplay(size_t index, const QImage& image);
 
 	void setConfigWindowClosed();
+
+	void onZMotionStatusUpdated();
 private slots:
 	void pbtn_exit_clicked();
 	void pbtn_set_clicked();

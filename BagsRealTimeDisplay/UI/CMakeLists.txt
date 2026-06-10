@@ -28,3 +28,5 @@ target_include_directories(${BRTD_TARGET}
 )
 
 add_windeployqt(${BRTD_TARGET})
+
+rw_deploy(${BRTD_TARGET})

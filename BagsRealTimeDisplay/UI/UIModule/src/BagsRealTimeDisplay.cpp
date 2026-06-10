@@ -235,6 +235,16 @@ void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
 	ui->lb_BackTotal->setText(QString::number(_statisticalInfo.beimianzongliang));
 }
 
+void BagsRealTimeDisplay::onZMotionStatusUpdated()
+{
+	auto& zMotionStatus = Modules::getInstance().zMotionModule.zMotionStatus;
+
+	// TODO: 将 Zmotion 状态更新到对应的 UI 控件
+	qDebug() << "ZMotion status - Position:" << zMotionStatus.currentPosition.load()
+	         << "AxisStatus:" << zMotionStatus.axisStatus.load()
+	         << "Connected:" << zMotionStatus.isConnected.load();
+}
+
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 {
 	if (_freezeImageUpdate) return;
@@ -427,7 +437,8 @@ void BagsRealTimeDisplay::pbtn_setchishu_clicked()
 		ui->pbtn_setchishu->setText(QString::number(value.toDouble()));
 		auto& bagsRealTimeDisplayInfo = _configModule.bagsRealTimeDisplayInfo;
 		bagsRealTimeDisplayInfo.shezhichishu = value.toDouble();
-		//  TODO: 补充zmotion后续写入参数
+		//  TODO: 通过 ZMotionModule 下发齿数参数到 Zmotion 控制器
+		//  Modules::getInstance().zMotionModule.setGearRatio(value.toDouble());
 	}
 }
 

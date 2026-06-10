@@ -1,4 +1,4 @@
-set(DEMO_TARGET Modules)
+set(DEMO_TARGET ZMotionModule)
 
 # GLOB扫一层目录下的所有.cpp文件,GLOB_RECURSE扫多层目录下的所有.cpp文件
 file(GLOB SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
@@ -9,21 +9,19 @@ file(GLOB INCLUDE_HPP_FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
 list(APPEND INCLUDE_FILES ${INCLUDE_HPP_FILES})
 
 # 添加库生成目标
-add_library(${DEMO_TARGET} ${SRC_FILES} ${INCLUDE_FILES})	
+add_library(${DEMO_TARGET} ${SRC_FILES} ${INCLUDE_FILES})
 
 # 添加头文件搜索路径
-target_include_directories(${DEMO_TARGET} 
+target_include_directories(${DEMO_TARGET}
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 # 链接底层依赖库
 target_link_libraries(${DEMO_TARGET}
-	PUBLIC Modules::CameraModule
-	PUBLIC Modules::ZMotionModule
-	PUBLIC Modules::ConfigModule
-	PUBLIC Tools::RunEnvCheck
-	PUBLIC BusinessLayer::ImageStitch
-	PUBLIC BusinessLayer::AsynchronousThreadModule
+	PUBLIC RWUL::hoepZMotion
+	PUBLIC BusinessLayer::ZMotionPollingThread
+	PUBLIC Modules::IModule
+	PUBLIC Qt6::Core
 )
 
 add_library(Modules::${DEMO_TARGET} ALIAS ${DEMO_TARGET})

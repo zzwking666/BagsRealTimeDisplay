@@ -4,6 +4,7 @@
 #include "rwul/oso/oso_func.hpp"
 #include "RunEnvCheck.hpp"
 #include "CameraModule.hpp"
+#include "ZMotionModule.hpp"
 #include "ConfigModule.hpp"
 #include "ImageStitch.hpp"
 #include "AsynchronousThreadModule.hpp"
@@ -42,6 +43,7 @@ public:
 
 public:
 	CameraModule cameraModule;
+	ZMotionModule zMotionModule;
 	ConfigModule configModule;
 	ImageStitch imageStitchModule;
 	AsynchronousThreadModule asynchronousThreadModule;
