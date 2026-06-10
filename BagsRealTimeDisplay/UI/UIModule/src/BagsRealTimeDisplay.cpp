@@ -435,7 +435,7 @@ void BagsRealTimeDisplay::pbtn_setchishu_clicked()
 		auto& bagsRealTimeDisplayInfo = _configModule.bagsRealTimeDisplayInfo;
 		bagsRealTimeDisplayInfo.shezhichishu = value.toDouble();
 		//  TODO: 通过 ZMotionModule 下发齿数参数到 Zmotion 控制器
-		//  Modules::getInstance().zMotionModule.setGearRatio(value.toDouble());
+		auto& zMotion = Modules::getInstance().zMotionModule.zMotion;
 	}
 }
 

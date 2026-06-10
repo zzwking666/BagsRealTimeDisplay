@@ -71,7 +71,7 @@ QGroupBox::title {
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
+            <layout class="QHBoxLayout" name="horizontalLayout" stretch="4,1">
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_7">
                <item>

@@ -24,10 +24,7 @@ public:
 	std::unique_ptr<rw::hoep::ZMotionDevice> zMotion{nullptr};
 
 public:
-	// 参数写入接口
-	void setGearRatio(double ratio);
-	void setPulseEquivalent(double equivalent);
-
+	bool reBuildzMotion();
 private:
 	std::string _ipAddress;
 };

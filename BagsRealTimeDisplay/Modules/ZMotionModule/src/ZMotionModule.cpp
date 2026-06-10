@@ -52,21 +52,8 @@ void ZMotionModule::stop()
 {
 }
 
-void ZMotionModule::setGearRatio(double ratio)
+bool ZMotionModule::reBuildzMotion()
 {
-	if (zMotion && zMotion->isConnected())
-	{
-		// 通过 ModBus 或其他方式设置电子齿轮比
-		qDebug() << "ZMotion setGearRatio:" << ratio;
-	}
-}
-
-void ZMotionModule::setPulseEquivalent(double equivalent)
-{
-	if (zMotion && zMotion->isConnected())
-	{
-		// 设置轴脉冲当量
-		zMotion->setAxisUnits(0, static_cast<float>(equivalent));
-		qDebug() << "ZMotion setPulseEquivalent:" << equivalent;
-	}
+	destroy();
+	return build();
 }

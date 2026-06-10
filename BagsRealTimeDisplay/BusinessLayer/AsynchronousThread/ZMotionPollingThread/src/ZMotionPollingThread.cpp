@@ -32,16 +32,17 @@ void ZMotionPollingThread::run()
 	while (_running)
 	{
 		QThread::sleep(5);
-		auto& zMotion = Modules::getInstance().zMotionModule.zMotion;
+		auto& zMotionModule = Modules::getInstance().zMotionModule;
 
-		if (!zMotion)
+		if (!zMotionModule.zMotion)
 		{
 			return;
 		}
 
-		if (!zMotion->isConnected())
+		if (!zMotionModule.zMotion->isConnected())
 		{
 			emit zMotionDisconnect();
+			auto result = zMotionModule.reBuildzMotion();
 		}
 	}
 }
