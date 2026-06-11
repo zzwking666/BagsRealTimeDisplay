@@ -84,8 +84,8 @@ private:
 	int _freezeAfterManualMs{ 3000 };
 	QTimer* _manualFreezeTimer{ nullptr };
 
-	// ZMotion断开弹窗防重入
-	bool _zMotionWarningActive{ false };
+	// ZMotion断开弹窗，最多连续弹3次
+	int _zMotionWarningCount{ 0 };
 private:
     Ui::BagsRealTimeDisplayClass* ui;
     ConfigModule& _configModule;

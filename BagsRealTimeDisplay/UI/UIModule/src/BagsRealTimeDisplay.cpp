@@ -242,10 +242,9 @@ void BagsRealTimeDisplay::onZMotionDisconnect()
 #ifdef BUILD_WITHOUT_HARDWARE
 	return;
 #else
-	if (_zMotionWarningActive) return;
-	_zMotionWarningActive = true;
+	if (_zMotionWarningCount >= 3) return;
+	++_zMotionWarningCount;
 	rw::rqwu::MessageBox::warning(this, "警告！", "运动控制器断开连接！");
-	_zMotionWarningActive = false;
 #endif
 }
 
