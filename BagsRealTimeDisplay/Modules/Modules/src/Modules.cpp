@@ -61,14 +61,14 @@ void Modules::start()
 {
 	configModule.start();
 	cameraModule.start();
-	asynchronousThreadModule.start();
 	zMotionModule.start();
+	asynchronousThreadModule.start();
 }
 
 void Modules::stop()
 {
-	zMotionModule.stop();
 	asynchronousThreadModule.stop();
+	zMotionModule.stop();
 	cameraModule.stop();
 	configModule.stop();
 }
