@@ -13,6 +13,11 @@ list(APPEND INCLUDE_FILES ${INCLUDE_HPP_FILES})
 # 添加可执行文件生成目标
 add_executable(${BRTD_TARGET} ${SRC_FILES} ${INCLUDE_FILES})
 
+# 设置可执行文件的输出目录
+set_target_properties(${BRTD_TARGET} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${BRTD_OUTPUT_DIR}"
+)
+
 # 链接本项目的层级库
 target_link_libraries(${BRTD_TARGET}
     PRIVATE UI::UIModule

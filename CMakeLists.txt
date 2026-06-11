@@ -13,6 +13,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+set(BRTD_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/output/${CMAKE_BUILD_TYPE}")
+
 #查找第三方库
 find_package(OpenCV CONFIG REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Concurrent)
