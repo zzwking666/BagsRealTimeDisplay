@@ -441,8 +441,8 @@ void BagsRealTimeDisplay::pbtn_setchishu_clicked()
 		ui->pbtn_setchishu->setText(QString::number(value.toDouble()));
 		auto& bagsRealTimeDisplayInfo = _configModule.bagsRealTimeDisplayInfo;
 		bagsRealTimeDisplayInfo.shezhichishu = value.toDouble();
-		//  TODO: 通过 ZMotionModule 下发齿数参数到 Zmotion 控制器
-		auto& zMotion = Modules::getInstance().zMotionModule.zMotion;
+		auto& zMotionScheduler = Modules::getInstance().zMotionModule.zMotionScheduler;
+		zMotionScheduler->setModbusFloatAsync(2,1, value.toDouble());
 	}
 }
 
