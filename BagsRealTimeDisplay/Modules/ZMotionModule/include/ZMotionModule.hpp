@@ -21,10 +21,8 @@ public:
 
 public:
 	// Zmotion 设备实例
-	std::unique_ptr<rw::hoep::ZMotionDevice> zMotion{nullptr};
+	std::shared_ptr<rw::hoep::ZMotionDevice> zMotion{nullptr};
 
 public:
 	bool reBuildzMotion();
-private:
-	std::string _ipAddress;
 };

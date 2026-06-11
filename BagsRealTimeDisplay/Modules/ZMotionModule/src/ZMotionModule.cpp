@@ -15,21 +15,19 @@ ZMotionModule::~ZMotionModule()
 
 bool ZMotionModule::build()
 {
-	_ipAddress = utility.zMotionIp.toStdString();
-
-	zMotion = std::make_unique<rw::hoep::ZMotionDevice>();
-
 	rw::hoep::ZMotionEthernetCfg cfg;
-	cfg.ipAddress = _ipAddress;
+	cfg.ipAddress = utility.zMotionIp.toStdString();
 	cfg.timeoutMs = 100;
 
-	if (!zMotion->connect(cfg))
+	zMotion = std::make_shared<rw::hoep::ZMotionDevice>(cfg);
+
+	if (!zMotion->connect())
 	{
-		qWarning() << "ZMotion 连接失败:" << _ipAddress.c_str();
+		qWarning() << "ZMotion 连接失败:" << utility.zMotionIp.toStdString().c_str();
 	}
 	else
 	{
-		qDebug() << "ZMotion 连接成功:" << _ipAddress.c_str();
+		qDebug() << "ZMotion 连接成功:" << utility.zMotionIp.toStdString().c_str();
 	}
 
 	return true;
@@ -54,6 +52,5 @@ void ZMotionModule::stop()
 
 bool ZMotionModule::reBuildzMotion()
 {
-	destroy();
-	return build();
+	return zMotion->reconnect();
 }
