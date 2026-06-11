@@ -35,6 +35,27 @@ void CameraModule::destroy()
 
 void CameraModule::start()
 {
+#ifdef BUILD_WITHOUT_HARDWARE
+	if (noHardwareTimer1)
+	{
+		noHardwareTimer1->start();
+		onCameraStateChanged(1, true);
+	}
+	else
+	{
+		onCameraStateChanged(1, false);
+	}
+
+	if (noHardwareTimer2)
+	{
+		noHardwareTimer2->start();
+		onCameraStateChanged(2, true);
+	}
+	else
+	{
+		onCameraStateChanged(2, false);
+	}
+#else
 	if (camera1)
 	{
 		camera1->startMonitor();
@@ -54,10 +75,21 @@ void CameraModule::start()
 	{
 		onCameraStateChanged(2, false);
 	}
+#endif
 }
 
 void CameraModule::stop()
 {
+#ifdef BUILD_WITHOUT_HARDWARE
+	if (noHardwareTimer1)
+	{
+		noHardwareTimer1->stop();
+	}
+	if (noHardwareTimer2)
+	{
+		noHardwareTimer2->stop();
+	}
+#else
 	if (camera1)
 	{
 		camera1->stopMonitor();
@@ -68,10 +100,19 @@ void CameraModule::stop()
 		camera2->stopMonitor();
 		camera2->disconnectCamera();
 	}
+#endif
 }
 
 bool CameraModule::build_camera1()
 {
+#ifdef BUILD_WITHOUT_HARDWARE
+	noHardwareTimer1 = new QTimer(this);
+	noHardwareTimer1->setInterval(500);
+	QObject::connect(noHardwareTimer1, &QTimer::timeout,
+		this, &CameraModule::onNoHardwareCapture1);
+	onCameraStateChanged(1, true);
+	return true;
+#else
 	auto cameraList = rw::hoec::UtilityFunc<rw::hoec::CameraProvider::DVP>::getCameraInfoList();
 	auto cameraMetaData1 = cameraMetaDataCheck(utility.cameraIp1, cameraList);
 
@@ -105,10 +146,19 @@ bool CameraModule::build_camera1()
 	}
 	onCameraStateChanged(1, false);
 	return false;
+#endif
 }
 
 bool CameraModule::build_camera2()
 {
+#ifdef BUILD_WITHOUT_HARDWARE
+	noHardwareTimer2 = new QTimer(this);
+	noHardwareTimer2->setInterval(500);
+	QObject::connect(noHardwareTimer2, &QTimer::timeout,
+		this, &CameraModule::onNoHardwareCapture2);
+	onCameraStateChanged(2, true);
+	return true;
+#else
 	auto cameraList = rw::hoec::UtilityFunc<rw::hoec::CameraProvider::DVP>::getCameraInfoList();
 	auto cameraMetaData2 = cameraMetaDataCheck(utility.cameraIp2, cameraList);
 
@@ -142,24 +192,45 @@ bool CameraModule::build_camera2()
 	}
 	onCameraStateChanged(2, false);
 	return false;
+#endif
 }
 
 void CameraModule::destroy_camera1()
 {
+#ifdef BUILD_WITHOUT_HARDWARE
+	if (noHardwareTimer1)
+	{
+		noHardwareTimer1->stop();
+		delete noHardwareTimer1;
+		noHardwareTimer1 = nullptr;
+	}
+	onCameraStateChanged(1, false);
+#else
 	if (camera1)
 	{
 		camera1.reset();
 		onCameraStateChanged(1, false);
 	}
+#endif
 }
 
 void CameraModule::destroy_camera2()
 {
+#ifdef BUILD_WITHOUT_HARDWARE
+	if (noHardwareTimer2)
+	{
+		noHardwareTimer2->stop();
+		delete noHardwareTimer2;
+		noHardwareTimer2 = nullptr;
+	}
+	onCameraStateChanged(2, false);
+#else
 	if (camera2)
 	{
 		camera2.reset();
 		onCameraStateChanged(2, false);
 	}
+#endif
 }
 
 void CameraModule::setCamera1TriggerOff()
@@ -365,3 +436,43 @@ void CameraModule::onCamera2Capture(const rw::hoec::MatInfo& matInfo)
 {
 	emit onCameraCapture(matInfo, 2);
 }
+
+#ifdef BUILD_WITHOUT_HARDWARE
+void CameraModule::onNoHardwareCapture1()
+{
+	const QString imagePath = globalPath.testImgRootPath + "OK20251225160441565_heat.jpg";
+	cv::Mat img = cv::imread(imagePath.toStdString());
+	if (img.empty())
+	{
+		qWarning("NoHardware: camera1Img not found or empty");
+		return;
+	}
+
+	rw::hoec::MatInfo matInfo;
+	matInfo.mat = img;
+	matInfo.frameInfo.frameNum = ++noHardwareFrameNum1;
+	matInfo.frameInfo.width = img.cols;
+	matInfo.frameInfo.height = img.rows;
+
+	emit onCameraCapture(matInfo, 1);
+}
+
+void CameraModule::onNoHardwareCapture2()
+{
+	const QString imagePath = globalPath.testImgRootPath + "OK20260602142550102.jpg";
+	cv::Mat img = cv::imread(imagePath.toStdString());
+	if (img.empty())
+	{
+		qWarning("NoHardware: camera2Img not found or empty");
+		return;
+	}
+
+	rw::hoec::MatInfo matInfo;
+	matInfo.mat = img;
+	matInfo.frameInfo.frameNum = ++noHardwareFrameNum2;
+	matInfo.frameInfo.width = img.cols;
+	matInfo.frameInfo.height = img.rows;
+
+	emit onCameraCapture(matInfo, 2);
+}
+#endif

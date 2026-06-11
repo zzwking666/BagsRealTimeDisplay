@@ -18,4 +18,8 @@ find_package(OpenCV CONFIG REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui Concurrent)
 find_package(RWUL CONFIG REQUIRED COMPONENTS core oso hoecd rqwu imgcore imgqt rqwcd hoepZMotion)
 
+if(BUILD_WITHOUT_HARDWARE)
+	add_compile_definitions(BUILD_WITHOUT_HARDWARE)
+endif()
+
 add_subdirectory ("BagsRealTimeDisplay")

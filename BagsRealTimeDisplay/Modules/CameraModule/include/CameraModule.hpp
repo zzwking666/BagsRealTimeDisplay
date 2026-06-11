@@ -5,6 +5,10 @@
 #include"IModule.hpp"
 #include"rwul/rqwcd/rqwc_d.hpp"
 
+#ifdef BUILD_WITHOUT_HARDWARE
+#include <QTimer>
+#endif
+
 class CameraModule
 	: public QObject, public IModule<bool>
 {
@@ -52,6 +56,10 @@ public slots:
 private slots:
 	void onCamera1Capture(const rw::hoec::MatInfo& matInfo);
 	void onCamera2Capture(const rw::hoec::MatInfo& matInfo);
+#ifdef BUILD_WITHOUT_HARDWARE
+	void onNoHardwareCapture1();
+	void onNoHardwareCapture2();
+#endif
 signals:
 	void onCameraCapture(const rw::hoec::MatInfo& matInfo, size_t index);
 
@@ -59,6 +67,12 @@ signals:
 private:
 	std::unique_ptr<rw::rqwc::DVPCameraPassive> camera1{ nullptr };
 	std::unique_ptr<rw::rqwc::DVPCameraPassive> camera2{ nullptr };
+#ifdef BUILD_WITHOUT_HARDWARE
+	QTimer* noHardwareTimer1{ nullptr };
+	QTimer* noHardwareTimer2{ nullptr };
+	int noHardwareFrameNum1{ 0 };
+	int noHardwareFrameNum2{ 0 };
+#endif
 public:
 	std::atomic<bool> isCamera1SoftTrigger{ false };
 	std::atomic<bool> isCamera2SoftTrigger{ false };
