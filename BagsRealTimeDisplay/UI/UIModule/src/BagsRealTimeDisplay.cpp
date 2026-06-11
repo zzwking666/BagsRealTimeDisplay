@@ -239,7 +239,14 @@ void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
 
 void BagsRealTimeDisplay::onZMotionDisconnect()
 {
-	rw::rqwu::MessageBox::warning(this,"警告！","运动控制器断开连接！");
+#ifdef BUILD_WITHOUT_HARDWARE
+	return;
+#else
+	if (_zMotionWarningActive) return;
+	_zMotionWarningActive = true;
+	rw::rqwu::MessageBox::warning(this, "警告！", "运动控制器断开连接！");
+	_zMotionWarningActive = false;
+#endif
 }
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)

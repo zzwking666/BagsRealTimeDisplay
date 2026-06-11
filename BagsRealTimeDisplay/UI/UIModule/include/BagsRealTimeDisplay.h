@@ -83,6 +83,9 @@ private:
 	bool _freezeImageUpdate{ false };
 	int _freezeAfterManualMs{ 3000 };
 	QTimer* _manualFreezeTimer{ nullptr };
+
+	// ZMotion断开弹窗防重入
+	bool _zMotionWarningActive{ false };
 private:
     Ui::BagsRealTimeDisplayClass* ui;
     ConfigModule& _configModule;
