@@ -30,11 +30,17 @@ bool ZMotionModule::build()
 		qDebug() << "ZMotion 连接成功:" << utility.zMotionIp.toStdString().c_str();
 	}
 
+	zMotionScheduler = std::make_shared<rw::hoep::ZMotionDeviceScheduler>(zMotion);
+
 	return true;
 }
 
 void ZMotionModule::destroy()
 {
+	if (zMotionScheduler)
+	{
+		zMotionScheduler.reset();
+	}
 	if (zMotion)
 	{
 		zMotion->disconnect();

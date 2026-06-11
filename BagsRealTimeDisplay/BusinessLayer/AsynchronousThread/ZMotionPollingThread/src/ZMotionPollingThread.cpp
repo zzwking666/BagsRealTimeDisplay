@@ -36,13 +36,13 @@ void ZMotionPollingThread::run()
 
 		if (!zMotionModule.zMotion)
 		{
-			return;
+			continue;
 		}
 
-		if (!zMotionModule.zMotion->isConnected())
+		if (!zMotionModule.zMotion->isControllerReady())
 		{
 			emit zMotionDisconnect();
-			auto result = zMotionModule.reBuildzMotion();
+			zMotionModule.zMotion->reconnect();
 		}
 	}
 }

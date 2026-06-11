@@ -3,8 +3,8 @@
 #include <memory>
 #include <string>
 #include "IModule.hpp"
-
-namespace rw { namespace hoep { class ZMotionDevice; } }
+#include "rwul/hoepZMotion/hoepZMotion_ZMotionDeviceScheduler.hpp"
+#include "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp"
 
 class ZMotionModule
 	: public QObject, public IModule<bool>
@@ -22,7 +22,7 @@ public:
 public:
 	// Zmotion 设备实例
 	std::shared_ptr<rw::hoep::ZMotionDevice> zMotion{nullptr};
-
+	std::shared_ptr<rw::hoep::ZMotionDeviceScheduler> zMotionScheduler{ nullptr };
 public:
 	bool reBuildzMotion();
 };
