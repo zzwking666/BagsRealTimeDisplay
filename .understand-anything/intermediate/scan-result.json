@@ -1,0 +1,511 @@
+{
+  "scriptCompleted": true,
+  "files": [
+    {
+      "path": ".claude/memory/feedback_chinese_language.md",
+      "language": "markdown",
+      "sizeLines": 12,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/memory/feedback_emoji_prefix.md",
+      "language": "markdown",
+      "sizeLines": 12,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/memory/MEMORY.md",
+      "language": "markdown",
+      "sizeLines": 5,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".claude/memory/project_codegraph_auto_update.md",
+      "language": "markdown",
+      "sizeLines": 15,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".codegraph/daemon.pid",
+      "language": "pid",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".gitattributes",
+      "language": "unknown",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "sizeLines": 2,
+      "fileCategory": "config"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 29,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "language": "cpp",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "language": "cpp",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 2,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 26,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "language": "cpp",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "language": "cpp",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 28,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "language": "cpp",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "language": "cpp",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 1,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 29,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "language": "cpp",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "language": "cpp",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 4,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 0,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 27,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "language": "cpp",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "language": "cpp",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 30,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "language": "cpp",
+      "sizeLines": 78,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "language": "cpp",
+      "sizeLines": 478,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 5,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 33,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+      "language": "cpp",
+      "sizeLines": 83,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "language": "oso",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "language": "oso",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+      "language": "cpp",
+      "sizeLines": 110,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "language": "cpp",
+      "sizeLines": 230,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "language": "cpp",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 26,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+      "language": "cpp",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/IModule/src/IModule.cpp",
+      "language": "cpp",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 31,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "language": "cpp",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "language": "cpp",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 29,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp",
+      "language": "cpp",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+      "language": "cpp",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Tools/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 1,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Tools/PanZoomLabel/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 26,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "language": "c",
+      "sizeLines": 110,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "language": "cpp",
+      "sizeLines": 630,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 27,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp",
+      "language": "cpp",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+      "language": "cpp",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 36,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/include/AppRuntime.hpp",
+      "language": "cpp",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "language": "cpp",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/src/main.cpp",
+      "language": "cpp",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 54,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+      "language": "c",
+      "sizeLines": 94,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h",
+      "language": "c",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+      "language": "c",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h",
+      "language": "c",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc",
+      "language": "qrc",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "language": "cpp",
+      "sizeLines": 453,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "language": "cpp",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "language": "cpp",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp",
+      "language": "cpp",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui",
+      "language": "ui",
+      "sizeLines": 877,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui",
+      "language": "ui",
+      "sizeLines": 295,
+      "fileCategory": "code"
+    },
+    {
+      "path": "BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui",
+      "language": "ui",
+      "sizeLines": 2477,
+      "fileCategory": "code"
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "sizeLines": 116,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "cmake/CMakeCacheIni.cmake",
+      "language": "cmake",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "cmake/func.cmake",
+      "language": "cmake",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "language": "txt",
+      "sizeLines": 26,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "CMakePresets.json",
+      "language": "json",
+      "sizeLines": 55,
+      "fileCategory": "config"
+    },
+    {
+      "path": "Folder.DotSettings",
+      "language": "dotsettings",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "Folder.DotSettings.user",
+      "language": "user",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "vcpkg-configuration.json",
+      "language": "json",
+      "sizeLines": 14,
+      "fileCategory": "config"
+    },
+    {
+      "path": "vcpkg.json",
+      "language": "json",
+      "sizeLines": 88,
+      "fileCategory": "config"
+    }
+  ],
+  "totalFiles": 80,
+  "filteredByIgnore": 0,
+  "estimatedComplexity": "moderate",
+  "stats": {
+    "filesScanned": 80,
+    "byCategory": {
+      "docs": 26,
+      "code": 50,
+      "config": 4
+    },
+    "byLanguage": {
+      "markdown": 5,
+      "pid": 1,
+      "unknown": 2,
+      "json": 4,
+      "txt": 21,
+      "cpp": 32,
+      "oso": 2,
+      "c": 5,
+      "qrc": 1,
+      "ui": 3,
+      "cmake": 2,
+      "dotsettings": 1,
+      "user": 1
+    }
+  }
+}

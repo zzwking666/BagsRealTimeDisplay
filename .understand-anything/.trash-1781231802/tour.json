@@ -1,0 +1,100 @@
+[
+  {
+    "order": 1,
+    "title": "项目概述与文档",
+    "description": "从 CLAUDE.md 开始了解项目全貌：Windows 桌面应用 (C++17/Qt6.7.3)，驱动两台 DVP 线扫相机实时显示袋子画面，包含图像拼接和产量统计功能。",
+    "nodeIds": [
+      "document:CLAUDE.md",
+      "document:CMakeLists.txt",
+      "config:CMakePresets.json"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "应用入口与生命周期",
+    "description": "main.cpp 创建 AppRuntime 并调用 initialize() 启动完整生命周期：单实例检查 → 模块构建 → 主窗口创建 → 信号连接 → 模块启动。shutdown() 在退出时逆序销毁。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/UI/src/main.cpp",
+      "file:BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "file:BagsRealTimeDisplay/UI/include/AppRuntime.hpp"
+    ]
+  },
+  {
+    "order": 3,
+    "title": "模块系统与生命周期接口",
+    "description": "IModule 定义 build/destroy/start/stop 契约。Modules 单例持有所有模块实例，按序分发生命周期调用：Config→Camera→AsynchronousThread→ZMotion。connect() 建立跨层信号桥接。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+      "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "file:BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp"
+    ]
+  },
+  {
+    "order": 4,
+    "title": "配置持久化系统",
+    "description": "ConfigModule 使用 RWUL oso 框架实现 XML 配置持久化。SetConfig（230行）定义 15 个配置字段（曝光/增益/乘法器/后分频等，命名采用中文拼音），通过 $variable$字段名$ 格式字符串键与 ObjectStoreAssembly 互转。build() 加载配置，destroy() 保存。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "相机硬件驱动",
+    "description": "CameraModule（478行）管理两台 DVP 线扫相机完整生命周期，支持 BUILD_WITHOUT_HARDWARE 宏的双模式（真硬件/模拟）。提供曝光、增益、乘法器、后分频、行高等参数的独立设置接口。采集回调通过 onCameraCapture 信号发出帧数据。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "file:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "图像拼接与帧处理",
+    "description": "ImageStitch（QThread, 222行）是图像处理核心。onFrameCaptured() 接收相机帧，根据相机编号分流（背面可选 rotateXImage 镜像翻转），转 QImage 后发射 imageReady 信号。stitchImages() 纵向拼接多帧（cv::vconcat），并检测帧号差值统计丢帧。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp"
+    ]
+  },
+  {
+    "order": 7,
+    "title": "异步线程与统计",
+    "description": "AsynchronousThreadModule 聚合 RefreshUIThread（1秒间隔发射 RefreshUI 信号驱动 UI 刷新）和 ZMotionPollingThread（5秒间隔检测控制器连接状态）。StatisticalInfo 使用 std::atomic 提供无锁跨线程产量/丢帧统计。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "主窗口与 UI 交互",
+    "description": "BagsRealTimeDisplay（453行）是主窗口类，管理图像显示、状态标签、参数调节按钮等。onCameraDisplay() 将拼接后的图像分发到 PanZoomLabel 显示。信号槽实现了完整的跨层数据流：CameraModule→ImageStitch→主窗口；RefreshUIThread→统计刷新。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "file:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+      "file:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui"
+    ]
+  },
+  {
+    "order": 9,
+    "title": "产品设置对话框",
+    "description": "DlgProductSet（372行）提供相机参数配置界面：曝光、增益、乘法器、后分频、像素当量、切换张数等。从 ConfigModule 读取当前配置，修改后实时下发到 CameraModule。同时显示实时丢帧统计。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "file:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+      "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui"
+    ]
+  },
+  {
+    "order": 10,
+    "title": "可复用控件与工具",
+    "description": "PanZoomLabel（630行）是自定义图像显示控件，支持平移/缩放/ROI 编辑（三阶段状态机）。RunEnvCheck 提供单实例锁（QSharedMemory）和进程检测工具。",
+    "nodeIds": [
+      "file:BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "file:BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "file:BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp"
+    ]
+  }
+]

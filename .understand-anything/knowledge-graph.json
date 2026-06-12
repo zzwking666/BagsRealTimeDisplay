@@ -1,0 +1,3645 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "BagsRealTimeDisplay",
+    "languages": [
+      "cpp",
+      "c",
+      "cmake",
+      "json",
+      "markdown",
+      "qrc",
+      "ui",
+      "oso"
+    ],
+    "frameworks": [
+      "Qt 6.7.3",
+      "OpenCV",
+      "CMake",
+      "vcpkg",
+      "RWUL"
+    ],
+    "description": "Windows 桌面应用（C++17 + Qt 6.7.3 Widgets），驱动两台 DVP/度申线扫相机，实时显示袋子画面。正面、背面相机图像拼接显示，同时统计产量信息（计数、丢帧），相机/产品参数持久化到 XML 配置文件。",
+    "analyzedAt": "2026-06-12T10:34:24.059824+08:00",
+    "gitCommitHash": "83f320e17f8f453e9c741e1a18bee47d0a2e84cc"
+  },
+  "nodes": [
+    {
+      "id": "document:.claude/memory/MEMORY.md",
+      "type": "document",
+      "name": "MEMORY.md",
+      "filePath": ".claude/memory/MEMORY.md",
+      "summary": "Claude Code 记忆索引文件，作为项目记忆系统的目录索引，列出并链接了3个具体的记忆规则文件：Codegraph自动更新、Emoji前缀偏好、中文交流。",
+      "tags": [
+        "索引",
+        "记忆",
+        "Claude配置",
+        "目录"
+      ],
+      "complexity": "simple",
+      "languageNotes": "纯中文，简洁的Markdown列表索引，不含YAML frontmatter"
+    },
+    {
+      "id": "document:.claude/memory/feedback_chinese_language.md",
+      "type": "document",
+      "name": "feedback_chinese_language.md",
+      "filePath": ".claude/memory/feedback_chinese_language.md",
+      "summary": "用户反馈规则：永远使用中文与用户交流，包括代码注释也一律写中文。这是用户明确偏好的语言约定，要求所有回复、解释、说明均用中文。",
+      "tags": [
+        "反馈",
+        "中文",
+        "语言偏好",
+        "用户规则"
+      ],
+      "complexity": "simple",
+      "languageNotes": "带YAML frontmatter（name/description/metadata），正文为中文说明；包含Why和How to apply两段"
+    },
+    {
+      "id": "document:.claude/memory/feedback_emoji_prefix.md",
+      "type": "document",
+      "name": "feedback_emoji_prefix.md",
+      "filePath": ".claude/memory/feedback_emoji_prefix.md",
+      "summary": "用户反馈规则：每次回复的开头必须带一个emoji。这是用户明确要求的格式风格约定，无论什么场景、什么类型的回复都要遵守。",
+      "tags": [
+        "反馈",
+        "Emoji",
+        "格式偏好",
+        "用户规则"
+      ],
+      "complexity": "simple",
+      "languageNotes": "带YAML frontmatter（name/description/metadata），正文为中文说明；包含Why和How to apply两段"
+    },
+    {
+      "id": "document:.claude/memory/project_codegraph_auto_update.md",
+      "type": "document",
+      "name": "project_codegraph_auto_update.md",
+      "filePath": ".claude/memory/project_codegraph_auto_update.md",
+      "summary": "项目级自动化规则：每次开启新会话时先执行 git status 检查代码变更，如有变更则自动执行 codegraph init -i 重新索引知识图谱，确保符号和调用关系与最新源码保持同步。",
+      "tags": [
+        "Codegraph",
+        "自动化",
+        "Git",
+        "索引",
+        "项目规则"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "带YAML frontmatter（name/description/metadata），正文包含技术细节（codegraph.db数据库过期原理）和具体操作步骤；包含Why和How to apply两段"
+    },
+    {
+      "id": "document:CLAUDE.md",
+      "type": "document",
+      "name": "CLAUDE.md",
+      "filePath": "CLAUDE.md",
+      "summary": "项目指导文件，面向 Claude Code 的代码库文档。描述项目概述（C++17 + Qt 6.7.3 桌面应用，驱动两台线扫相机）、构建工具链（CMake + vcpkg + MSVC）、分层架构（UI/Modules/BusinessLayer/Global/Tools）、模块生命周期（IModule 契约）、跨层信号/槽数据流、配置持久化（oso XML 框架）、以及编码约定（中文拼音命名、Tab 缩进、提交中文信息）。是理解项目整体设计的核心入口文档。",
+      "tags": [
+        "文档",
+        "项目指导",
+        "架构说明",
+        "构建指南",
+        "编码约定"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:CMakeLists.txt",
+      "type": "document",
+      "name": "CMakeLists.txt",
+      "filePath": "CMakeLists.txt",
+      "summary": "根 CMake 构建文件，定义项目名称 BagsRealTimeDisplay，设置 C++17 标准与 Qt 自动 MOC/RCC。通过 find_package 解析三大外部依赖：OpenCV（vcpkg 提供）、Qt6（Core/Widgets/Gui/Concurrent）、RWUL（公司内部自研库，含 core/oso/hoecd/rqwu/imgcore/imgqt/rqwcd/hoepZMotion 组件）。支持 BUILD_WITHOUT_HARDWARE 条件编译标志。通过 add_subdirectory 引入主源码目录 BagsRealTimeDisplay/。",
+      "tags": [
+        "构建",
+        "CMake",
+        "依赖管理",
+        "C++17",
+        "Qt6"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:CMakePresets.json",
+      "type": "config",
+      "name": "CMakePresets.json",
+      "filePath": "CMakePresets.json",
+      "summary": "CMake 预设配置文件（version 4），定义 Windows Ninja 构建预设。包含隐藏基础预设 windows-ninja-base（指定 vcpkg 工具链文件路径 $env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake、条件限制 Windows 平台），以及继承自它的 Debug/Release 配置预设。buildPresets 对应 windows-ninja-debug-build 和 windows-ninja-release-build，均设置 8 并行编译任务。testPresets 为空。",
+      "tags": [
+        "配置",
+        "CMake",
+        "Ninja",
+        "vcpkg",
+        "构建预设"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:vcpkg-configuration.json",
+      "type": "config",
+      "name": "vcpkg-configuration.json",
+      "filePath": "vcpkg-configuration.json",
+      "summary": "vcpkg 注册表配置文件，定义默认注册表为 Microsoft 官方 vcpkg Git 仓库（指定基线 commit b24977af），以及 artifacts 注册表指向 vcpkg-ce-catalog。此文件启用 vcpkg manifest 模式，使 vcpkg.json 中声明的依赖可被自动解析安装。",
+      "tags": [
+        "配置",
+        "vcpkg",
+        "包管理",
+        "注册表"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:vcpkg.json",
+      "type": "config",
+      "name": "vcpkg.json",
+      "filePath": "vcpkg.json",
+      "summary": "vcpkg 依赖清单（manifest），声明项目名 bagsrealtimedisplay v1.0.0。列出 10 个依赖项：opencv4（图像处理）、pugixml（XML 解析）、jsoncpp（JSON 解析）、sqlite3（数据库）、gtest（单元测试）、spdlog（日志）、openssl（加密）、libmodbus（Modbus 通信协议）、libzip（ZIP 压缩）、icu（国际化）。每项均有最低版本约束，并通过 overrides 锁定精确版本。",
+      "tags": [
+        "配置",
+        "vcpkg",
+        "依赖清单",
+        "包管理"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.codegraph/daemon.pid",
+      "type": "config",
+      "name": "daemon.pid",
+      "filePath": ".codegraph/daemon.pid",
+      "summary": "Codegraph 守护进程的运行时 PID 文件，记录进程 ID、版本号、命名管道路径及启动时间戳",
+      "tags": [
+        "codegraph",
+        "守护进程",
+        "pid"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.gitattributes",
+      "type": "config",
+      "name": ".gitattributes",
+      "filePath": ".gitattributes",
+      "summary": "Git 属性配置文件，设置行尾自动标准化（text=auto），并为 VS 项目文件、图片、文档格式提供合并驱动和 diff 行为注释模板",
+      "tags": [
+        "git",
+        "gitattributes",
+        "行尾标准化"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "config",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "understand-anything 分析工具的忽略规则文件，语法同 .gitignore，用于排除构建产物、测试文件等，内置默认排除 node_modules、.git、dist 等目录",
+      "tags": [
+        "understand",
+        "忽略规则",
+        "配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "summary": "understand-anything 工具的主配置文件，设置输出语言为中文（zh）",
+      "tags": [
+        "understand",
+        "配置",
+        "语言"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "type": "document",
+      "name": "AsynchronousThread/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "summary": "异步线程模块的父级 CMake 构建脚本，使用 add_subdirectory 引入 RefreshUIThread、ZMotionPollingThread 和 AsynchronousThreadModule 三个子模块",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "异步线程"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "type": "document",
+      "name": "AsynchronousThreadModule/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "summary": "AsynchronousThreadModule 库的 CMake 构建脚本，通过 GLOB 收集 src/*.cpp 和 include/*.hpp，链接 Qt6::Core、RefreshUIThread、ZMotionPollingThread、IModule，并创建 BusinessLayer::AsynchronousThreadModule 别名",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "AsynchronousThreadModule"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "type": "file",
+      "name": "AsynchronousThreadModule.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "summary": "AsynchronousThreadModule 类声明头文件，继承 QObject 和 IModule<bool>，管理 UI 刷新线程和 ZMotion 轮询线程的生命周期，内嵌 StatisticalInfo 结构体用于统计正面/背面产量总数及各相机丢帧数（std::atomic）",
+      "tags": [
+        "异步线程",
+        "IModule",
+        "统计信息",
+        "QObject",
+        "生命周期"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "type": "file",
+      "name": "AsynchronousThreadModule.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "summary": "AsynchronousThreadModule 类实现文件，实现 IModule 接口的 build/destroy/start/stop 四个生命周期方法：build() 创建 RefreshUIThread 和 ZMotionPollingThread 实例；destroy() 依次销毁；start/stop() 分别启停两个子线程",
+      "tags": [
+        "异步线程",
+        "IModule",
+        "生命周期",
+        "线程管理"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "type": "document",
+      "name": "RefreshUIThread/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "summary": "RefreshUIThread 库的 CMake 构建脚本，GLOB 收集源文件和头文件，链接 Qt6::Core，创建 BusinessLayer::RefreshUIThread 别名",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "RefreshUIThread"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "type": "file",
+      "name": "RefreshUIThread.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "summary": "RefreshUIThread 类声明头文件，继承 QThread，通过 startThread/stopThread 控制运行状态（std::atomic<bool> running），在 run() 中定时发送 emit_RefreshUI() 信号驱动 UI 刷新",
+      "tags": [
+        "QThread",
+        "UI刷新",
+        "信号",
+        "原子变量"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "type": "file",
+      "name": "RefreshUIThread.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "summary": "RefreshUIThread 类实现文件，run() 循环以 1 秒间隔调用 QThread::msleep(1000) 并发射 emit_RefreshUI() 信号；startThread() 设置原子标志并启动线程；stopThread() 清除运行标志；析构函数安全等待线程结束",
+      "tags": [
+        "QThread",
+        "UI刷新",
+        "定时信号",
+        "线程安全"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "type": "document",
+      "name": "ZMotionPollingThread/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "summary": "ZMotionPollingThread 库的 CMake 构建脚本，链接 RWUL::hoepZMotion（ZMotion 硬件驱动库）、Qt6::Core（PUBLIC）和 Modules::Modules（PRIVATE），创建 BusinessLayer::ZMotionPollingThread 别名",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "ZMotion",
+        "hoepZMotion"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "type": "file",
+      "name": "ZMotionPollingThread.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "summary": "ZMotionPollingThread 类声明头文件，继承 QThread，通过 startThread/stopThread 控制运行状态（std::atomic<bool> _running），在 run() 中定期检测 ZMotion 控制器连接状态，失连时发射 zMotionDisconnect() 信号",
+      "tags": [
+        "QThread",
+        "ZMotion",
+        "轮询",
+        "连接检测"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "type": "file",
+      "name": "ZMotionPollingThread.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "summary": "ZMotionPollingThread 类实现文件，run() 循环以 5 秒间隔（QThread::sleep(5)）通过 Modules 单例访问 zMotionModule：检查控制器就绪状态，若未就绪则发射 zMotionDisconnect() 信号并调用 reconnect() 尝试重连",
+      "tags": [
+        "QThread",
+        "ZMotion",
+        "轮询",
+        "重连",
+        "Modules单例"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "type": "document",
+      "name": "BusinessLayer/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "summary": "业务层父级 CMake 构建脚本，使用 add_subdirectory 引入 ImageStitch 和 AsynchronousThread 两个子模块",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "业务层"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "type": "document",
+      "name": "ImageStitch/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "summary": "ImageStitch 库的 CMake 构建脚本，链接 Qt6::Core、RWUL::rqwcd（相机数据定义）、Modules::Modules（单例访问）、RWUL::imgqt（cvMatToQImage 转换），创建 BusinessLayer::ImageStitch 别名",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "ImageStitch",
+        "相机",
+        "图像"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "type": "file",
+      "name": "ImageStitch.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "summary": "ImageStitch 类声明头文件，继承 QThread，通过 onFrameCaptured 槽接收相机帧（rw::rqwc::MatInfo），维护帧缓冲区（QVector<MatInfo>）和帧号追踪变量，提供 stitchImages 拼接和 rotateXImage 镜像变换功能，发射 imageReady 信号传递 QImage 到 UI",
+      "tags": [
+        "QThread",
+        "图像拼接",
+        "相机帧",
+        "帧缓存",
+        "信号"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "type": "file",
+      "name": "ImageStitch.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "ImageStitch 类核心实现文件（222 行），onFrameCaptured() 处理相机帧流：正面相机（index!=2）和背面相机（index==2）分别处理，背面可选镜像变换（rotateXImage），通过 rw::img::cvMatToQImage 转换为 QImage 后发射 imageReady 信号，同时基于帧号差值检测并统计丢帧（cam1FrameLost/cam2FrameLost）；stitchImages() 从帧缓存中选取最近 N 帧按帧号排序、归一化尺寸与类型后使用 cv::vconcat 纵向拼接；rotateXImage() 使用 cv::warpAffine 绕竖直中轴做镜像翻转",
+      "tags": [
+        "图像拼接",
+        "相机帧处理",
+        "丢帧检测",
+        "镜像变换",
+        "OpenCV",
+        "纵向拼接"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "type": "document",
+      "name": "BagsRealTimeDisplay/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/CMakeLists.txt",
+      "summary": "BagsRealTimeDisplay 应用根 CMake 构建脚本，使用 add_subdirectory 按依赖顺序引入 Modules、Global、Tools、BusinessLayer、UI 五个顶层模块",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "顶层模块"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "type": "document",
+      "name": "Global/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "summary": "Global 层父级 CMake 构建脚本，使用 add_subdirectory 引入 Utility 子模块",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "全局层"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "type": "document",
+      "name": "Global/Utility/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "summary": "Utility 库的 CMake 构建脚本，链接 RWUL::oso（序列化框架）和 Qt6::Core，创建 Global::Utility 别名，提供全局路径和配置常量",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "全局工具",
+        "oso"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "type": "file",
+      "name": "Utility.hpp",
+      "filePath": "BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "summary": "全局工具头文件，定义两个内联匿名结构体：utility（相机 IP 地址、ZMotion IP 地址等运行时配置常量）和 globalPath（以 D:\\zfkjData\\BagsRealTimeDisplay\\ 为根的项目数据路径单例，包含 config、model、company txt 和 testImg 子目录路径）",
+      "tags": [
+        "全局配置",
+        "路径管理",
+        "IP配置",
+        "单例"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "type": "file",
+      "name": "Utility.cpp",
+      "filePath": "BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "summary": "Utility.cpp 源文件，仅包含 utility.hpp 头文件（所有内容已通过内联结构体在头文件中定义，无需额外实现）",
+      "tags": [
+        "全局工具",
+        "头文件包含"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "type": "document",
+      "name": "CameraModule/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "summary": "CameraModule 库的 CMake 构建脚本，链接 RWUL::oso、RWUL::rqwcd（DVP 相机被动采集 SDK）、Modules::IModule、Modules::Modules、Global::Utility，创建 Modules::CameraModule 别名",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "CameraModule",
+        "相机SDK"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "type": "file",
+      "name": "CameraModule.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "summary": "CameraModule 类声明，继承 QObject 和 IModule<bool>。声明相机操作的信号、槽和公有接口，声明 DVPCameraPassive 智能指针成员及无硬件模拟所需的 QTimer。",
+      "tags": [
+        "相机",
+        "头文件",
+        "类声明"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "type": "class",
+      "name": "AsynchronousThreadModule",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "summary": "异步线程聚合模块类，继承 QObject 和 IModule<bool>，组合管理 RefreshUIThread（UI 刷新线程）和 ZMotionPollingThread（ZMotion 轮询线程）的生命周期，持有 StatisticalInfo 结构体提供线程安全的产量和丢帧统计数据",
+      "tags": [
+        "异步线程",
+        "IModule",
+        "线程聚合",
+        "统计信息"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:StatisticalInfo",
+      "type": "class",
+      "name": "AsynchronousThreadModule::StatisticalInfo",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "summary": "产量与丢帧统计数据结构，使用 std::atomic_uint64_t 类型存储正面总量（zhengmianzongliang）、背面总量（beimianzongliang）、相机1丢帧数（cam1FrameLost）、相机2丢帧数（cam2FrameLost），支持无锁的跨线程安全读写",
+      "tags": [
+        "统计信息",
+        "原子变量",
+        "产量",
+        "丢帧",
+        "线程安全"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "class",
+      "name": "RefreshUIThread",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "summary": "UI 刷新线程类，继承 QThread，以 1 秒定时间隔在 run() 循环中发射 emit_RefreshUI() 信号，驱动主界面周期性更新统计数据及相机状态显示",
+      "tags": [
+        "QThread",
+        "UI刷新",
+        "定时信号",
+        "统计更新"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "class",
+      "name": "ZMotionPollingThread",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "summary": "ZMotion 控制器轮询线程类，继承 QThread，以 5 秒间隔检测 ZMotion 控制器连接状态，失连时发射 zMotionDisconnect() 信号通知 UI 并自动调用 reconnect() 恢复连接",
+      "tags": [
+        "QThread",
+        "ZMotion",
+        "连接检测",
+        "重连",
+        "轮询"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "type": "class",
+      "name": "ImageStitch",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "summary": "图像拼接处理线程类，继承 QThread，接收相机帧流（onFrameCaptured 槽），维护帧缓冲区进行丢帧检测与统计，支持背面相机镜像翻转（rotateXImage）和多帧纵向拼接（stitchImages，使用 OpenCV cv::vconcat），通过 imageReady 信号将处理后的 QImage 发送到 UI 层显示",
+      "tags": [
+        "图像拼接",
+        "QThread",
+        "丢帧检测",
+        "镜像变换",
+        "OpenCV",
+        "帧缓冲"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "type": "class",
+      "name": "CameraModule",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "summary": "相机硬件模块类，继承 QObject 和 IModule<bool>，封装两台 DVP/度申线扫相机（DVPCameraPassive）的完整控制：构建连接、启停采集、触发模式切换（软触发/硬触发）、曝光/增益/乘法器/后分频/行高等参数设置，通过 onCameraCapture 信号发射采集到的帧数据",
+      "tags": [
+        "相机模块",
+        "IModule",
+        "DVP相机",
+        "触发控制",
+        "相机参数"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+      "type": "function",
+      "name": "ImageStitch::onFrameCaptured",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "相机帧回调槽函数，根据 index 区分正面/背面相机（2=背面），将 cv::Mat 转换为 QImage 后发射 imageReady 信号，对背面相机可选执行镜像变换（rotateXImage），通过比较帧号差值检测并累加丢帧计数到 StatisticalInfo 中的 cam1FrameLost/cam2FrameLost",
+      "tags": [
+        "帧回调",
+        "丢帧检测",
+        "镜像变换",
+        "Mat转QImage",
+        "信号发射"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:stitchImages",
+      "type": "function",
+      "name": "ImageStitch::stitchImages",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "多帧纵向拼接函数，从帧缓存 matInfos 中选取最近 stitchCount 帧，按帧号升序排列，检查帧连续性避免重复拼接，将所有帧统一为相同尺寸和类型后使用 OpenCV cv::vconcat 进行纵向（竖直）拼接，返回拼接结果 cv::Mat",
+      "tags": [
+        "图像拼接",
+        "纵向拼接",
+        "vconcat",
+        "帧排序",
+        "尺寸归一化"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:rotateXImage",
+      "type": "function",
+      "name": "ImageStitch::rotateXImage",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "图像镜像翻转函数，以图像竖直中轴 x=(w-1)/2 为对称轴，使用 OpenCV cv::warpAffine 配合仿射变换矩阵 [-1,0,2*x0; 0,1,0] 实现左右镜像，用于背面相机图像的翻转处理",
+      "tags": [
+        "镜像变换",
+        "warpAffine",
+        "仿射变换",
+        "背面图像"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp:build",
+      "type": "function",
+      "name": "AsynchronousThreadModule::build",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "summary": "IModule 构建方法，创建 RefreshUIThread 和 ZMotionPollingThread 两个 unique_ptr 子线程实例",
+      "tags": [
+        "IModule",
+        "构建",
+        "线程创建"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp:run",
+      "type": "function",
+      "name": "RefreshUIThread::run",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "summary": "QThread 运行循环，以 1 秒间隔（msleep(1000)）重复发射 emit_RefreshUI() 信号，驱动 UI 层定时刷新统计信息和状态",
+      "tags": [
+        "QThread",
+        "运行循环",
+        "定时信号",
+        "UI刷新"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp:run",
+      "type": "function",
+      "name": "ZMotionPollingThread::run",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "summary": "QThread 运行循环，以 5 秒间隔（sleep(5)）通过 Modules 单例访问 zMotionModule 检测控制器就绪状态，失连时发射 zMotionDisconnect() 信号并触发 reconnect() 重连",
+      "tags": [
+        "QThread",
+        "运行循环",
+        "ZMotion",
+        "连接检测",
+        "重连"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "type": "file",
+      "name": "CameraModule.cpp",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "summary": "相机模块核心实现，管理两台 DVP/度申线扫相机的完整生命周期。实现 IModule 接口的 build/destroy/start/stop，通过 RWUL 库 (rqwc::DVPCameraPassive) 驱动相机。支持硬件触发/软触发切换、曝光/增益/乘法器/后分频/行高参数设置，通过 BUILD_WITHOUT_HARDWARE 宏支持无硬件模拟模式（QTimer 读取本地测试图片）。采集回调通过 Qt 信号 onCameraCapture 发出帧数据与相机编号。",
+      "tags": [
+        "相机",
+        "硬件驱动",
+        "生命周期",
+        "DVP",
+        "线扫相机",
+        "Qt信号"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "type": "file",
+      "name": "Modules/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "summary": "Modules 目录聚合 CMake，通过 add_subdirectory 引入 CameraModule、ZMotionModule、Modules、IModule、ConfigModule 五个子模块。",
+      "tags": [
+        "构建配置",
+        "CMake"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "type": "file",
+      "name": "ConfigModule/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "summary": "ConfigModule 的 CMake 构建配置。使用 file(GLOB) 扫描 src/ 和 include/ 下的源文件与头文件，oso_wrap_oso 将 osoFile/ 下的 .oso 定义生成到 osoInclude/ 的头文件。链接 RWUL::oso、Modules::IModule、Global::Utility，注册别名 Modules::ConfigModule。",
+      "tags": [
+        "构建配置",
+        "CMake",
+        "oso"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+      "type": "file",
+      "name": "ConfigModule.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+      "summary": "ConfigModule 类声明，继承 QObject 和 IModule<bool>。持有 rw::oso::StorageContext 的 XML 持久化上下文，以及 BagsRealTimeDisplayInfo 和 SetConfig 两个配置数据对象。提供模板方法 loadConfigSafe 实现安全的配置文件加载与字段合并回退逻辑。",
+      "tags": [
+        "配置",
+        "持久化",
+        "oso",
+        "XML",
+        "头文件"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "type": "file",
+      "name": "BagsRealTimeDisplayInfo.oso",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "summary": "BagsRealTimeDisplayInfo 的 oso schema 定义，声明 4 个字段：zhengmianzongliang（正面总量）、beimianzongliang（背面总量）、qiehuanxianshi（切换显示）、shezhichishu（设置齿数），均为 int 类型默认 0。由 oso_wrap_oso 生成对应的 C++ 头文件。",
+      "tags": [
+        "配置",
+        "oso",
+        "schema"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "type": "file",
+      "name": "SetConfig.oso",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "summary": "SetConfig 的 oso schema 定义，声明 15 个字段：chengfaqi1/2（乘法器）、houfenpin1/2（后分频）、zengyi1/2（增益）、baoguang1/2（曝光）、xiangsudangliang1/2（像素当量）、xuantingshijian（悬停时间）、qiehuanzhangshu（切换张数）、isjingxiang（镜像）、chutuzhangshu（出图张数）。由 oso_wrap_oso 生成 C++ 头文件。",
+      "tags": [
+        "配置",
+        "oso",
+        "schema",
+        "相机参数"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+      "type": "file",
+      "name": "BagsRealTimeDisplayInfo.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+      "summary": "BagsRealTimeDisplayInfo OSO 数据类，由 .oso schema 生成。位于 cdm 命名空间，提供与 rw::oso::ObjectStoreAssembly 的双向转换（构造/赋值/转换运算符），使用 $variable$zhengmianzongliang$ 等格式字符串键。支持拷贝构造、赋值和相等比较。",
+      "tags": [
+        "配置",
+        "oso",
+        "序列化",
+        "数据类"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "type": "file",
+      "name": "SetConfig.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "summary": "SetConfig OSO 数据类，15 个相机/产品参数字段（乘法器、后分频、增益、曝光、像素当量各两台相机，悬停时间、切换张数、镜像、出图张数）。提供与 ObjectStoreAssembly 的双向序列化、拷贝构造、赋值和相等比较。由 .oso schema 自动生成。",
+      "tags": [
+        "配置",
+        "oso",
+        "序列化",
+        "数据类",
+        "相机参数"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "type": "file",
+      "name": "ConfigModule.cpp",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "summary": "ConfigModule 实现。build() 创建 XML StorageContext 并通过 loadConfigSafe 加载主窗体参数和设置参数；destroy() 将两个配置对象保存回磁盘后释放上下文。start()/stop() 为空（配置模块无运行时操作）。",
+      "tags": [
+        "配置",
+        "持久化",
+        "XML",
+        "生命周期"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt",
+      "type": "file",
+      "name": "IModule/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt",
+      "summary": "IModule 接口库的 CMake 构建配置。纯头文件模板库，链接 Qt6::Core、Qt6::Widgets、Qt6::Concurrent，注册别名 Modules::IModule。",
+      "tags": [
+        "构建配置",
+        "CMake",
+        "接口"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+      "type": "file",
+      "name": "IModule.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+      "summary": "IModule 模板接口，定义所有模块必须实现的契约。泛型参数 TBuildError（默认 bool）为 build() 返回值类型。四个纯虚函数：build() 资源创建、destroy() 资源释放、start() 运行时启动、stop() 运行时停止。是项目中所有模块的基础抽象。",
+      "tags": [
+        "接口",
+        "模板",
+        "生命周期",
+        "设计模式"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/IModule/src/IModule.cpp",
+      "type": "file",
+      "name": "IModule.cpp",
+      "filePath": "BagsRealTimeDisplay/Modules/IModule/src/IModule.cpp",
+      "summary": "空实现文件，IModule 是模板类，所有实现在头文件中。",
+      "tags": [
+        "空文件"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "type": "file",
+      "name": "Modules/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "summary": "Modules 单例聚合器的 CMake 构建配置。链接所有子模块和工具库：CameraModule、ZMotionModule、ConfigModule、RunEnvCheck、ImageStitch、AsynchronousThreadModule，注册别名 Modules::Modules。",
+      "tags": [
+        "构建配置",
+        "CMake",
+        "聚合"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "type": "file",
+      "name": "Modules.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "summary": "Modules 单例类声明，实现 IModule<bool>。持有所有模块实例作为公有成员（cameraModule、zMotionModule、configModule、imageStitchModule、asynchronousThreadModule）。提供 connect() 跨层信号连接方法，check() 启动前环境检查，checkFileExistAndFormat() 配置文件的格式校验与合并模板方法。",
+      "tags": [
+        "单例",
+        "聚合",
+        "生命周期",
+        "设计模式",
+        "头文件"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "type": "file",
+      "name": "Modules.cpp",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "summary": "Modules 单例实现。build() 按 Config -> Camera -> AsynchronousThread -> ZMotion 顺序构建所有模块；destroy() 按反向顺序销毁（保证配置最后保存）；connect() 将 CameraModule::onCameraCapture 信号连接到 ImageStitch::onFrameCaptured；check() 实现单实例锁（QSharedMemory）、厂商相机软件进程检测（MVS.exe/BasedCam3.exe）、配置目录存在性校验。",
+      "tags": [
+        "单例",
+        "生命周期",
+        "信号连接",
+        "进程检查",
+        "安全"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt",
+      "type": "file",
+      "name": "ZMotionModule/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt",
+      "summary": "ZMotionModule 的 CMake 构建配置。链接 RWUL::hoepZMotion（正运动控制器库）、Modules::IModule、Qt6::Core，PRIVATE 依赖 Global::Utility，注册别名 Modules::ZMotionModule。",
+      "tags": [
+        "构建配置",
+        "CMake",
+        "运动控制"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp",
+      "type": "file",
+      "name": "ZMotionModule.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp",
+      "summary": "ZMotionModule 类声明，继承 QObject 和 IModule<bool>。持有 ZMotionDevice（正运动控制器设备）和 ZMotionDeviceScheduler（异步调度器）的 shared_ptr，提供 reBuildzMotion() 重连方法。",
+      "tags": [
+        "运动控制",
+        "ZMotion",
+        "头文件",
+        "异步"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+      "type": "file",
+      "name": "ZMotionModule.cpp",
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+      "summary": "ZMotionModule 实现。build() 通过以太网配置（IP+超时）连接正运动控制器并创建异步调度器；destroy() 先释放调度器再断开设备连接；start()/stop() 为空。",
+      "tags": [
+        "运动控制",
+        "ZMotion",
+        "以太网",
+        "生命周期"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Tools/CMakeLists.txt",
+      "type": "file",
+      "name": "Tools/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Tools/CMakeLists.txt",
+      "summary": "Tools 目录聚合 CMake，通过 add_subdirectory 引入 RunEnvCheck 和 PanZoomLabel 两个工具库。",
+      "tags": [
+        "构建配置",
+        "CMake"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Tools/PanZoomLabel/CMakeLists.txt",
+      "type": "file",
+      "name": "PanZoomLabel/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/CMakeLists.txt",
+      "summary": "PanZoomLabel 的 CMake 构建配置。链接 Qt6::Core、Qt6::Widgets、Qt6::Concurrent，注册别名 Tools::PanZoomLabel。",
+      "tags": [
+        "构建配置",
+        "CMake",
+        "UI控件"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "type": "file",
+      "name": "PanZoomLabel.h",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "summary": "PanZoomLabel 类声明，继承 QLabel。支持图像平移/缩放（滚轮+拖拽）和多 ROI 绘制编辑（左键绘制、右键确认）。包含 ViewState 结构体（缩放/偏移/有效性快照）、RoiEditState 枚举（空闲/第一点/编辑中）、RoiHandle 枚举（四角+移动）。支持轮廓叠加路径、创建/屏蔽 ROI 分组。信号 roiRectsConfirmedChanged 在 ROI 确认时发出。",
+      "tags": [
+        "UI控件",
+        "QLabel",
+        "图像",
+        "ROI",
+        "缩放",
+        "平移",
+        "头文件"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "type": "file",
+      "name": "PanZoomLabel.cpp",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "summary": "PanZoomLabel 完整实现（630行）。核心功能：(1) 图像显示与自适应缩放 fitToView/resetView；(2) 鼠标滚轮缩放以光标为中心；(3) 左键拖拽平移图像；(4) ROI 模式三阶段编辑——Idle→FirstPointSet（左键设第一点）→Editing（可拖拽四角/整体移动）→右键确认加入列表；(5) 支持多 ROI 叠加显示、轮廓路径叠加、屏蔽区域绘制；(6) 坐标系转换 widgetToImage/imageToWidget 保证缩放偏移下操作精确。",
+      "tags": [
+        "UI控件",
+        "QLabel",
+        "图像",
+        "ROI",
+        "缩放",
+        "平移",
+        "事件处理",
+        "坐标转换"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt",
+      "type": "file",
+      "name": "RunEnvCheck/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt",
+      "summary": "RunEnvCheck 的 CMake 构建配置。链接 Qt6::Core、Qt6::Widgets、Qt6::Concurrent 和 RWUL::oso，注册别名 Tools::RunEnvCheck。",
+      "tags": [
+        "构建配置",
+        "CMake",
+        "工具"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp",
+      "type": "file",
+      "name": "RunEnvCheck.hpp",
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp",
+      "summary": "RunEnvCheck 静态工具类声明。提供单实例检查 isSingleInstance()、进程运行检查 isProcessRunning()、文件存在检查 isFileExist()，以及两个 OSO 配置文件格式校验模板方法（安全版/普通版），基于 rw::oso::StorageContext 的 loadSafeToType/loadToType。",
+      "tags": [
+        "工具",
+        "进程检查",
+        "单实例",
+        "OSO",
+        "头文件"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+      "type": "file",
+      "name": "RunEnvCheck.cpp",
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+      "summary": "RunEnvCheck 实现。isSingleInstance() 使用 QSharedMemory 互斥锁；isProcessRunning() 调用 Windows tasklist 命令检测进程；isFileExist() 通过 QFile::exists() 判断。",
+      "tags": [
+        "工具",
+        "Win32",
+        "QSharedMemory",
+        "进程"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:CameraModule",
+      "type": "class",
+      "name": "CameraModule",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "summary": "相机管理模块，继承 QObject 和 IModule<bool>。管理两台 DVP/度申线扫相机（正面/背面）的完整生命周期，封装 RWUL 库的 DVPCameraPassive 驱动。支持硬件触发与软触发切换、曝光/增益/乘法器/后分频/行高等参数设置，通过 Qt 信号 onCameraCapture 向外发送采集帧。同时支持 BUILD_WITHOUT_HARDWARE 无硬件模拟模式。",
+      "tags": [
+        "相机",
+        "硬件驱动",
+        "生命周期",
+        "Qt信号",
+        "DVP"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:PanZoomLabel",
+      "type": "class",
+      "name": "PanZoomLabel",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "summary": "自定义 QLabel 控件，支持图像的平移、滚轮缩放和多 ROI 交互编辑。ROI 编辑采用三阶段状态机（Idle→FirstPointSet→Editing），支持四角拖拽和整体移动，右键确认后通过 roiRectsConfirmedChanged 信号发出。提供轮廓路径叠加、创建/屏蔽 ROI 分组、视图状态快照（ViewState）等功能。",
+      "tags": [
+        "UI控件",
+        "QLabel",
+        "ROI",
+        "缩放",
+        "平移",
+        "状态机"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:cdm::SetConfig",
+      "type": "class",
+      "name": "cdm::SetConfig",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "summary": "相机/产品参数配置数据类（OSO 序列化）。15 个字段覆盖两台相机的乘法器、后分频、增益、曝光时间、像素当量，以及悬停时间、切换张数、镜像、出图张数等产品参数。提供与 rw::oso::ObjectStoreAssembly 的双向转换（持久化到 XML），支持拷贝、赋值和相等比较。",
+      "tags": [
+        "OSO",
+        "序列化",
+        "配置",
+        "数据类",
+        "相机参数"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:cdm::BagsRealTimeDisplayInfo",
+      "type": "class",
+      "name": "cdm::BagsRealTimeDisplayInfo",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+      "summary": "主窗体显示参数配置数据类（OSO 序列化）。4 个字段：正面总量、背面总量、切换显示、设置齿数。提供与 ObjectStoreAssembly 的双向转换，支持拷贝、赋值和相等比较。",
+      "tags": [
+        "OSO",
+        "序列化",
+        "配置",
+        "数据类",
+        "UI参数"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:IModule",
+      "type": "class",
+      "name": "IModule",
+      "filePath": "BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+      "summary": "模块接口模板基类，定义所有模块的生命周期契约。泛型参数 TBuildError（默认 bool）为 build() 返回值类型。四个纯虚函数：build() 创建资源、destroy() 释放资源、start() 启动运行时、stop() 停止运行时。CameraModule、ConfigModule、ZMotionModule、Modules 均实现此接口。",
+      "tags": [
+        "接口",
+        "模板",
+        "生命周期",
+        "设计模式",
+        "抽象"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:Modules",
+      "type": "class",
+      "name": "Modules",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "summary": "全局模块聚合单例，实现 IModule<bool>。持有所有功能模块实例（cameraModule、zMotionModule、configModule、imageStitchModule、asynchronousThreadModule）作为公有成员，将生命周期调用分发给各子模块。提供 connect() 建立跨层信号连接、check() 启动前环境校验（单实例、进程冲突、目录存在）、checkFileExistAndFormat() OSO 配置文件格式版本迁移。",
+      "tags": [
+        "单例",
+        "聚合",
+        "生命周期",
+        "门面模式",
+        "信号连接"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:ConfigModule",
+      "type": "class",
+      "name": "ConfigModule",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+      "summary": "配置持久化模块，继承 QObject 和 IModule<bool>。持有 rw::oso::StorageContext（XML 后端）以及 BagsRealTimeDisplayInfo 和 SetConfig 两个配置对象。build() 时从磁盘加载 XML 配置文件，destroy() 时保存。loadConfigSafe 模板方法支持文件缺失/格式版本不匹配时的默认值合并回退。",
+      "tags": [
+        "配置",
+        "持久化",
+        "OSO",
+        "XML",
+        "数据完整性"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:ZMotionModule",
+      "type": "class",
+      "name": "ZMotionModule",
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp",
+      "summary": "正运动（ZMotion）控制器模块，继承 QObject 和 IModule<bool>。管理 ZMotionDevice（以太网连接的运动控制器）和 ZMotionDeviceScheduler（异步指令调度器），通过 build() 建立连接、destroy() 断开释放。",
+      "tags": [
+        "运动控制",
+        "ZMotion",
+        "以太网",
+        "异步"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:RunEnvCheck",
+      "type": "class",
+      "name": "RunEnvCheck",
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp",
+      "summary": "运行环境检查静态工具类。提供进程单实例互斥（QSharedMemory）、Windows 进程检测（tasklist 命令）、文件存在性检查、OSO 配置文件格式校验（安全加载版/普通版），供 Modules::check() 和 Modules::checkFileExistAndFormat() 调用。",
+      "tags": [
+        "工具",
+        "Win32",
+        "进程检查",
+        "单实例",
+        "文件校验"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:PanZoomLabel::ViewState",
+      "type": "class",
+      "name": "PanZoomLabel::ViewState",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "summary": "视图状态快照结构体，记录当前缩放比例 scale、偏移量 offset 和有效性标志 valid。用于保存和恢复 PanZoomLabel 的视口状态。",
+      "tags": [
+        "结构体",
+        "视图状态",
+        "快照"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:CameraModule::build",
+      "type": "function",
+      "name": "CameraModule::build",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "summary": "IModule 生命周期入口，依次调用 build_camera1() 和 build_camera2() 初始化两台相机。任一台失败仅打 warning 不阻断流程，始终返回 true。",
+      "tags": [
+        "生命周期",
+        "相机初始化"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:CameraModule::build_camera1",
+      "type": "function",
+      "name": "CameraModule::build_camera1",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "summary": "构建正面相机（相机1）。通过 rw::hoec::UtilityFunc 枚举 DVP 相机列表，用 cameraMetaDataCheck 匹配配置 IP，创建 DVPCameraPassive 实例并设置 IP/连接/注册回调。从 ConfigModule 获取 SetConfig 设置曝光和增益，连接 callBackFuncPost 信号到 onCamera1Capture 槽。无硬件模式下创建 500ms QTimer 定时读取测试图片。",
+      "tags": [
+        "相机驱动",
+        "DVP",
+        "IP匹配",
+        "初始化"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:CameraModule::onCamera1Capture",
+      "type": "function",
+      "name": "CameraModule::onCamera1Capture",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "summary": "相机1 采集回调槽函数，接收 rw::hoec::MatInfo 帧数据，通过 emit onCameraCapture(matInfo, 1) 发出信号，参数 1 标识相机编号。",
+      "tags": [
+        "相机回调",
+        "Qt信号",
+        "帧数据"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:CameraModule::cameraMetaDataCheck",
+      "type": "function",
+      "name": "CameraModule::cameraMetaDataCheck",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "summary": "在相机列表中通过 IP 地址第三段匹配目标相机。遍历 cameraInfo 列表，用 isTargetCamera 正则匹配 IP 格式 X.X.&lt;cameraIndex&gt;.X，返回匹配的 CameraInfo 或 error（ip=0）。",
+      "tags": [
+        "IP匹配",
+        "正则表达式",
+        "相机发现"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Modules::build",
+      "type": "function",
+      "name": "Modules::build",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "summary": "按顺序构建所有子模块：ConfigModule -> CameraModule -> AsynchronousThreadModule -> ZMotionModule。任一失败仅打 warning，确保配置先加载再供相机使用。始终返回 true。",
+      "tags": [
+        "生命周期",
+        "聚合",
+        "初始化顺序"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Modules::connect",
+      "type": "function",
+      "name": "Modules::connect",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "summary": "建立跨层 Qt 信号连接。将 CameraModule::onCameraCapture 信号连接到 ImageStitch::onFrameCaptured，实现相机帧数据到图像拼接模块的数据流转。",
+      "tags": [
+        "信号连接",
+        "跨层通信",
+        "Qt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:Modules::check",
+      "type": "function",
+      "name": "Modules::check",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "summary": "启动前环境检查：(1) 单实例锁（QSharedMemory BagsRealTimeDisplay.exe）；(2) 厂商相机软件进程检测（MVS.exe 海康威视、BasedCam3.exe 度申平台），如运行则弹窗拒绝启动；(3) 确保项目目录、配置目录、模型目录、公司目录存在。任一失败返回 false。",
+      "tags": [
+        "安全检查",
+        "单实例",
+        "进程检测",
+        "目录"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:Modules::checkFileExistAndFormat",
+      "type": "function",
+      "name": "Modules::checkFileExistAndFormat",
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "summary": "模板方法，校验并迁移 OSO 配置文件格式。若文件不存在则用默认值创建；若存在但格式版本不匹配，通过 AssemblyMergeTool::Merge 合并新增字段后保存；若格式正确则保留原文件。",
+      "tags": [
+        "配置迁移",
+        "OSO",
+        "模板",
+        "数据完整性"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:ConfigModule::loadConfigSafe",
+      "type": "function",
+      "name": "ConfigModule::loadConfigSafe<T>",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+      "summary": "模板方法，安全加载 OSO 配置文件。先 loadSafe 加载，成功后用 ConfigType 构造对象；若字段不匹配（runtime_error），用 AssemblyMergeTool 合并默认值与旧数据后保存并重试；合并后仍失败则使用默认值。确保配置文件版本升级时的向前兼容。",
+      "tags": [
+        "配置加载",
+        "OSO",
+        "模板",
+        "容错",
+        "版本迁移"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:PanZoomLabel::paintEvent",
+      "type": "function",
+      "name": "PanZoomLabel::paintEvent",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "summary": "核心绘制函数，渲染当前图像（应用平移/缩放变换后 drawPixmap），叠加显示已确认 ROI（红色实线+半透明填充）、当前编辑中的 ROI 预览框（绿色虚线绘制阶段/红色实线编辑阶段+四角拖拽手柄）、轮廓路径（青色 Cosmetic 线不随缩放变粗）、屏蔽区域（白色半透明填充）。",
+      "tags": [
+        "绘制",
+        "QtPainter",
+        "ROI",
+        "图像",
+        "叠加层"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:PanZoomLabel::wheelEvent",
+      "type": "function",
+      "name": "PanZoomLabel::wheelEvent",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "summary": "滚轮缩放事件处理。以鼠标光标位置为锚点进行缩放（step=1.15），通过 widgetToImage 计算锚点在图像坐标中的位置，缩放后调整偏移使该点保持在光标下。缩放范围受 _minScale 和 _maxScale 钳制。",
+      "tags": [
+        "缩放",
+        "滚轮事件",
+        "坐标变换"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:PanZoomLabel::setRoiMode",
+      "type": "function",
+      "name": "PanZoomLabel::setRoiMode",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "summary": "切换 ROI 编辑模式。进入时重置拖拽状态、光标、编辑状态（Idle）、预览框和工作 ROI 矩形；退出时清空所有临时编辑状态。",
+      "tags": [
+        "ROI",
+        "模式切换",
+        "状态重置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:PanZoomLabel::fitToView",
+      "type": "function",
+      "name": "PanZoomLabel::fitToView",
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "summary": "自适应视图，将图像缩放至恰好填满控件（取宽高中较小的比例），居中显示。设置 _scale = _minScale 并计算居中偏移。",
+      "tags": [
+        "自适应",
+        "缩放",
+        "布局"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:RunEnvCheck::isSingleInstance",
+      "type": "function",
+      "name": "RunEnvCheck::isSingleInstance",
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+      "summary": "单实例互斥检查，使用 QSharedMemory 以程序名创建 1 字节共享内存，若已存在（create 失败）说明已有实例在运行。",
+      "tags": [
+        "单实例",
+        "QSharedMemory",
+        "进程互斥"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:RunEnvCheck::isProcessRunning",
+      "type": "function",
+      "name": "RunEnvCheck::isProcessRunning",
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+      "summary": "Windows 进程运行检测，通过 QProcess 执行 tasklist /FI IMAGENAME eq 进程名 命令，检查标准输出中是否包含目标进程名。",
+      "tags": [
+        "进程检测",
+        "Win32",
+        "tasklist",
+        "QProcess"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cdm::SetConfig::operator ObjectStoreAssembly",
+      "type": "function",
+      "name": "cdm::SetConfig::operator rw::oso::ObjectStoreAssembly",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "summary": "将 SetConfig 的 15 个字段序列化为 OSO ObjectStoreAssembly（XML 持久化格式）。为每个字段创建 ObjectStoreItem 并用 $variable$<字段名>$ 命名，按类型调用 setValueFromInt/setValueFromDouble/setValueFromBool。",
+      "tags": [
+        "OSO",
+        "序列化",
+        "XML",
+        "持久化"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:ZMotionModule::build",
+      "type": "function",
+      "name": "ZMotionModule::build",
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+      "summary": "构建正运动控制器连接。用 utility.zMotionIp 和 100ms 超时创建 ZMotionEthernetCfg，建立 ZMotionDevice 以太网连接，并创建 ZMotionDeviceScheduler 异步调度器。连接失败仅打 warning 不阻断流程。",
+      "tags": [
+        "运动控制",
+        "以太网",
+        "ZMotion",
+        "初始化"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "type": "config",
+      "name": "SetConfig.oso",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "summary": "SetConfig OSO schema——定义相机参数和产品参数的持久化结构。包含 15 个字段分别对应两台相机的乘法器、后分频、增益、曝光时间、像素当量，以及产品级的悬停时间、切换张数、镜像开关、出图张数。",
+      "tags": [
+        "OSO schema",
+        "配置定义",
+        "相机参数"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "type": "config",
+      "name": "BagsRealTimeDisplayInfo.oso",
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "summary": "BagsRealTimeDisplayInfo OSO schema——定义主窗体显示参数的持久化结构。包含 4 个 int 字段：正面总量、背面总量、切换显示、设置齿数。",
+      "tags": [
+        "OSO schema",
+        "配置定义",
+        "UI参数"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "type": "document",
+      "name": "CameraModule 接口文档",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "summary": "CameraModule 的公有接口声明文档，展示相机控制 API、Qt 信号/槽定义、无硬件模拟成员。",
+      "tags": [
+        "接口",
+        "API"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/CMakeLists.txt",
+      "type": "file",
+      "name": "CMakeLists.txt (UI可执行文件)",
+      "filePath": "BagsRealTimeDisplay/UI/CMakeLists.txt",
+      "summary": "UI 可执行文件(BagsRealTimeDisplay.exe)的构建配置，GLOB扫描 UI/src/ 和 UI/include/，链接 UIModule、Modules、RWUL::rqwu、Qt6::Core/Widgets、Tools::PanZoomLabel，并通过 add_windeployqt 和 rw_deploy 进行部署打包",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "UI",
+        "可执行文件",
+        "windeployqt"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/include/AppRuntime.hpp",
+      "type": "file",
+      "name": "AppRuntime.hpp",
+      "filePath": "BagsRealTimeDisplay/UI/include/AppRuntime.hpp",
+      "summary": "应用生命周期控制器头文件，持有 Modules 单例引用和主窗口 unique_ptr，声明 initialize/show/shutdown/build_connect 四个关键方法",
+      "tags": [
+        "生命周期",
+        "头文件",
+        "AppRuntime"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "type": "file",
+      "name": "AppRuntime.cpp",
+      "filePath": "BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "summary": "应用生命周期控制器实现，initialize() 串联 Modules::check/build/connect/start 启动流程，shutdown() 执行 stop/destroy 释放资源，build_connect() 建立所有跨层信号槽连接（ImageStitch→onCameraDisplay、CameraModule→updateCameraLabelState、RefreshUIThread→onUpdateStatisticalInfoUI/onUpdateFrameLost、DlgProductSet::paramsChanged→setConfigWindowClosed、ZMotionPollingThread→onZMotionDisconnect）",
+      "tags": [
+        "生命周期",
+        "启动流程",
+        "信号槽",
+        "核心逻辑"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/src/main.cpp",
+      "type": "file",
+      "name": "main.cpp",
+      "filePath": "BagsRealTimeDisplay/UI/src/main.cpp",
+      "summary": "程序入口点，创建 QApplication，初始化 Qt 资源(rw::rqwu::ini)，创建 AppRuntime 并调用 initialize()/show()，连接 aboutToQuit 信号到 shutdown()，进入事件循环",
+      "tags": [
+        "入口点",
+        "main",
+        "启动"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt",
+      "type": "file",
+      "name": "CMakeLists.txt (UIModule库)",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt",
+      "summary": "UIModule 静态库构建配置，GLOB 扫描 src/include/ui/qrc 目录，通过 qt_wrap_ui 编译 .ui 文件为 ui_*.h，链接 ConfigModule、CameraModule、PanZoomLabel、Qt6::Core/Widgets/Concurrent、OpenCV、RWUL::rqwu，导出别名 UI::UIModule",
+      "tags": [
+        "CMake",
+        "构建配置",
+        "UIModule",
+        "静态库",
+        "UI编译"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+      "type": "file",
+      "name": "BagsRealTimeDisplay.h",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+      "summary": "主窗口类头文件，继承 QMainWindow，持有 ConfigModule& CameraModule& 引用，包含大量槽函数声明（相机显示、统计刷新、曝光调节、齿数设置、显示切换），管理 PanZoomLabel、双面视图状态、帧计数器、手动冻结计时器和 ZMotion 断开计数",
+      "tags": [
+        "主窗口",
+        "头文件",
+        "Qt",
+        "UIModule"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h",
+      "type": "file",
+      "name": "DlgCloseForm.h",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h",
+      "summary": "关机/重启对话框头文件，继承 QDialog，提供关闭/重启/是(关机)/否(退出)四个按钮槽，包含 setLabelShowMessage 设置提示文本接口",
+      "tags": [
+        "对话框",
+        "头文件",
+        "关闭",
+        "重启"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+      "type": "file",
+      "name": "DlgProductSet.h",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+      "summary": "产品参数设置对话框头文件，继承 QDialog，持有 ConfigModule& CameraModule& 引用，提供两套相机参数（乘法器/后分频/增益/曝光/像素当量/丢帧）和全局参数（悬停时间/切换张数/出图张数/镜像）的编辑槽，声明 paramsChanged 信号和 emit_changeLanguage 信号",
+      "tags": [
+        "对话框",
+        "头文件",
+        "产品设置",
+        "相机参数"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h",
+      "type": "file",
+      "name": "rqw_LabelClickable.h",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h",
+      "summary": "可点击 Label 头文件，继承 QLabel，位于 rw::rqw 命名空间，重写 mousePressEvent 在左键点击时发射 clicked() 信号，用于主窗口标题区域点击最小化功能",
+      "tags": [
+        "头文件",
+        "自定义控件",
+        "ClickableLabel",
+        "Qt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc",
+      "type": "file",
+      "name": "BagsRealTimeDisplay.qrc",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc",
+      "summary": "Qt 资源文件，注册 /BagsRealTimeDisplay 前缀，包含 icons/close.png 图标资源，供主窗口和设置的关闭按钮使用",
+      "tags": [
+        "资源文件",
+        "qrc",
+        "图标"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "type": "file",
+      "name": "BagsRealTimeDisplay.cpp",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "主窗口实现（453行），核心组件：initializeComponents() 串联 build_ui() 和 build_connect()；build_PanZoomLabel() 将 QLabel 替换为 PanZoomLabel 并迁移所有属性；onCameraDisplay() 根据 qiehuanxianshi(0=正面/1=背面/2=双面) 模式分发图像，支持出图张数降频和视图状态保持；eventFilter() 处理鼠标/滚轮操作触发显示冻结；曝光调节槽直接操作 CameraModule 实时下发参数；pbtn_setchishu_clicked() 打开 NumberKeyboard 输入齿数并通过 ZMotionScheduler 异步下发 Modbus 指令",
+      "tags": [
+        "主窗口",
+        "实现",
+        "图像显示",
+        "曝光控制",
+        "事件过滤",
+        "PanZoomLabel"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "type": "file",
+      "name": "DlgCloseForm.cpp",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "summary": "关机/重启对话框实现（118行），btn_restart_clicked() 调用 ExitWindowsEx(EWX_REBOOT) 重启系统（Win32 API 提权后执行），btn_yes_clicked() 调用 ExitWindowsEx(EWX_SHUTDOWN | EWX_POWEROFF) 关机，btn_no_clicked() 仅退出程序，均含 Linux 回退逻辑；编译通过 WIN32_LEAN_AND_MEAN 修复 Windows.h 类型冲突",
+      "tags": [
+        "对话框",
+        "实现",
+        "关机",
+        "重启",
+        "Win32 API"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "type": "file",
+      "name": "DlgProductSet.cpp",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "summary": "产品参数设置对话框实现（372行），read_config() 从 ConfigModule::setConfig 加载各参数到 UI；每个参数点击槽弹出 NumberKeyboard 输入数字，校验 >=0 后更新 SetConfig 并调用 CameraModule 实时下发（如 setCamera1ExposureTime/setCamera1Gain/setCamera1Multiplier/setCamera1PostDivider），像素当量和悬停时间仅更新配置不下发；ckb_jingxiang_toggled 直接切换镜像标志；btn_close_clicked 发射 paramsChanged() 信号通知主窗口刷新；onUpdateFrameLost() 从 StatisticalInfo 获取丢帧数显示",
+      "tags": [
+        "对话框",
+        "实现",
+        "产品设置",
+        "相机参数",
+        "NumberKeyboard",
+        "参数下发"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp",
+      "type": "file",
+      "name": "rqw_LabelClickable.cpp",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp",
+      "summary": "可点击 Label 实现（14行），mousePressEvent 重写检查左键按下后发射 clicked() 信号，同时调用基类 QLabel::mousePressEvent 保持默认行为",
+      "tags": [
+        "实现",
+        "自定义控件",
+        "ClickableLabel",
+        "Qt"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui",
+      "type": "file",
+      "name": "BagsRealTimeDisplay.ui",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui",
+      "summary": "主窗口 UI 布局（877行），class=BagsRealTimeDisplayClass，1280x1024 尺寸，布局结构：顶部图像显示区(label_imgDisplay_1) + 底部控制区；控制区包含正面/背面总量统计(lb_FrontTotal/lb_BackTotal)、产量清零按钮(pbtn_resetProduct)、相机1/2曝光+/-快捷调节(btn_jianshaobaoguang1/btn_zengjiabaoguang1 等六按钮)、切换显示下拉框(cbb_qiehuanxianshi)、设置齿数按钮(pbtn_setchishu)、右侧面板有退出按钮(pbtn_exit)/设置按钮(pbtn_set)/相机状态标签(label_camera1State/label_camera2State)，引用 icons/close.png 资源",
+      "tags": [
+        "UI布局",
+        "主窗口",
+        "Qt Designer",
+        "控件"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui",
+      "type": "file",
+      "name": "DlgCloseForm.ui",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui",
+      "summary": "关机对话框 UI 布局（295行），class=DlgCloseFormClass，600x400 尺寸，显示'是否关机? Do You Want To Close Computer?'提示文本，提供 是(btn_yes)/否(btn_no)/重启(btn_restart)/关闭(btn_close) 四个按钮，浅黄色背景(252,255,233)",
+      "tags": [
+        "UI布局",
+        "对话框",
+        "关机",
+        "Qt Designer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui",
+      "type": "file",
+      "name": "DlgProductSet.ui",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui",
+      "summary": "产品参数设置对话框 UI 布局（2477行，最大 UI 文件），class=DlgProductSetClass，1280x1024，左侧'正面相机参数'分组：乘法器(btn_chengfaqi1)、后分频(btn_houfenpin1)、增益(btn_zengyi1)、曝光(btn_baoguang1)、丢帧(btn_diuzhen1)、像素当量(btn_xiangsudangliang1)；右侧'反面相机参数'分组对称布局；底部全局参数：悬停时间(btn_xuantingshijian)、切换张数(btn_qiehuanzhangshu)、出图张数(btn_chutuzhangshu)、镜像复选框(ckb_jingxiang)；右上角关闭按钮(btn_close)引用 close.png；统一样式系统含标题/副标题/强调/数据/状态标签样式定义",
+      "tags": [
+        "UI布局",
+        "对话框",
+        "产品设置",
+        "相机参数",
+        "Qt Designer",
+        "大文件"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:cmake/CMakeCacheIni.cmake",
+      "type": "file",
+      "name": "CMakeCacheIni.cmake",
+      "filePath": "cmake/CMakeCacheIni.cmake",
+      "summary": "CMake 缓存初始化脚本，定义 QT_DIR 和 RWUL_DIR 缓存变量（默认 D:），检查路径存在性并追加到 CMAKE_PREFIX_PATH",
+      "tags": [
+        "CMake",
+        "缓存",
+        "配置",
+        "Qt",
+        "RWUL"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:cmake/func.cmake",
+      "type": "file",
+      "name": "func.cmake",
+      "filePath": "cmake/func.cmake",
+      "summary": "CMake 辅助函数定义，提供 add_windeployqt(target) 函数，在目标 POST_BUILD 时调用 windeployqt.exe 部署 Qt 依赖",
+      "tags": [
+        "CMake",
+        "函数",
+        "windeployqt",
+        "部署"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Folder.DotSettings",
+      "type": "file",
+      "name": "Folder.DotSettings",
+      "filePath": "Folder.DotSettings",
+      "summary": "ReSharper 团队共享设置，配置 C++ 命名规则（缩写 RT/IO），自定义词典添加拼音命名常用词（pbtn/bbox/cbox/yolov/dets/classid 等）",
+      "tags": [
+        "IDE设置",
+        "ReSharper",
+        "命名规则",
+        "词典"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:Folder.DotSettings.user",
+      "type": "file",
+      "name": "Folder.DotSettings.user",
+      "filePath": "Folder.DotSettings.user",
+      "summary": "ReSharper 用户个人设置，配置代码检查启用级别为 SOLUTION，保存单元测试会话状态",
+      "tags": [
+        "IDE设置",
+        "ReSharper",
+        "用户配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/UI/include/AppRuntime.hpp:AppRuntime",
+      "type": "class",
+      "name": "AppRuntime",
+      "filePath": "BagsRealTimeDisplay/UI/include/AppRuntime.hpp",
+      "summary": "应用生命周期控制器(QObject)，持有 Modules 单例引用和 BagsRealTimeDisplay 主窗口 unique_ptr；核心流程 initialize() → show() → (aboutToQuit) → shutdown()，build_connect() 负责建立所有跨模块信号槽连接",
+      "tags": [
+        "生命周期",
+        "QObject",
+        "启动",
+        "关闭",
+        "信号槽"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h:BagsRealTimeDisplay",
+      "type": "class",
+      "name": "BagsRealTimeDisplay",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+      "summary": "主窗口类(QMainWindow)，持有 ConfigModule& 和 CameraModule& 引用，管理 PanZoomLabel 图像显示控件、双面视图状态切换、手动操作冻结定时器、ZMotion 断开弹窗计数；提供相机图像显示/统计刷新/曝光调节/齿数设置/显示模式切换等槽函数",
+      "tags": [
+        "主窗口",
+        "QMainWindow",
+        "图像显示",
+        "曝光控制",
+        "相机管理",
+        "UI"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h:DlgCloseForm",
+      "type": "class",
+      "name": "DlgCloseForm",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h",
+      "summary": "关机/重启对话框(QDialog)，提供关闭/重启/是(关机)/否(仅退出)四个操作，通过 Win32 API ExitWindowsEx 实现系统级关机重启，含 Linux fallback；提供 setLabelShowMessage 设置提示文本",
+      "tags": [
+        "对话框",
+        "QDialog",
+        "关机",
+        "重启",
+        "Win32"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h:DlgProductSet",
+      "type": "class",
+      "name": "DlgProductSet",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+      "summary": "产品参数设置对话框(QDialog)，持有 ConfigModule& 和 CameraModule& 引用，管理两套相机参数（乘法器/后分频/增益/曝光/像素当量）+ 全局参数（悬停时间/切换张数/出图张数/镜像），通过 NumberKeyboard 输入并实时下发参数到 CameraModule；声明 paramsChanged 信号通知主窗口参数变更",
+      "tags": [
+        "对话框",
+        "QDialog",
+        "产品设置",
+        "相机参数",
+        "参数下发",
+        "信号"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h:rw::rqw::ClickableLabel",
+      "type": "class",
+      "name": "ClickableLabel",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h",
+      "summary": "可点击的 QLabel 自定义控件(rw::rqw 命名空间)，重写 mousePressEvent 在左键点击时发射 clicked() 信号，用于主窗口标题区域点击最小化功能",
+      "tags": [
+        "自定义控件",
+        "QLabel",
+        "点击信号",
+        "rw::rqw"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/src/main.cpp:main",
+      "type": "function",
+      "name": "main()",
+      "filePath": "BagsRealTimeDisplay/UI/src/main.cpp",
+      "summary": "程序入口函数，创建 QApplication，初始化 Qt 资源(rw::rqwu::ini)，创建 AppRuntime 实例，调用 initialize() → show()，连接 aboutToQuit → shutdown()，进入 app.exec() 事件循环",
+      "tags": [
+        "入口点",
+        "main",
+        "启动"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::initialize",
+      "type": "function",
+      "name": "AppRuntime::initialize()",
+      "filePath": "BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "summary": "应用初始化入口，顺序执行：Modules::check() 前置检查(单实例/相机软件)→ _modules.build() 构建模块→ 构造主窗口 BagsRealTimeDisplay(注入 ConfigModule& CameraModule&) → _modules.connect() 模块间连接 → build_connect() 跨层连接 → _modules.start() 启动模块，任一步失败返回 false",
+      "tags": [
+        "初始化",
+        "生命周期",
+        "启动流程",
+        "核心逻辑"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::show",
+      "type": "function",
+      "name": "AppRuntime::show()",
+      "filePath": "BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "summary": "显示主窗口，NDEBUG(Release)模式调用 showFullScreen() 全屏，Debug 模式调用 show() 窗口模式",
+      "tags": [
+        "显示",
+        "全屏",
+        "窗口"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::shutdown",
+      "type": "function",
+      "name": "AppRuntime::shutdown()",
+      "filePath": "BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "summary": "应用关闭流程，先 _modules.stop() 停止模块运行，再 _modules.destroy() 销毁资源(ConfigModule::destroy 中保存配置到磁盘)，顺序敏感",
+      "tags": [
+        "关闭",
+        "生命周期",
+        "资源释放"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "type": "function",
+      "name": "AppRuntime::build_connect()",
+      "filePath": "BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "summary": "建立所有跨层信号槽连接——核心数据流接线：ImageStitch::imageReady → BagsRealTimeDisplay::onCameraDisplay(图像显示)、CameraModule::onCameraStateChanged → updateCameraLabelState(相机状态)、RefreshUIThread::emit_RefreshUI → onUpdateStatisticalInfoUI + DlgProductSet::onUpdateFrameLost(统计刷新)、DlgProductSet::paramsChanged → setConfigWindowClosed(参数变更通知)、ZMotionPollingThread::zMotionDisconnect → onZMotionDisconnect(控制器断开)",
+      "tags": [
+        "信号槽",
+        "数据流",
+        "跨层连接",
+        "核心逻辑"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::initializeComponents",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::initializeComponents()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "主窗口组件初始化入口，调用 build_ui() 构建 UI 控件，再调用 build_connect() 建立内部信号槽连接",
+      "tags": [
+        "初始化",
+        "组件"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::build_PanZoomLabel",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::build_PanZoomLabel()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "将 UI 中的 QLabel(label_imgDisplay_1) 替换为 PanZoomLabel 自定义控件，迁移所有几何/样式/字号/光标/对齐/边框属性，通过布局 replaceWidget 替换，隐藏旧 label 并 deleteLater，安装 eventFilter 监听鼠标滚轮和拖拽操作，创建手动冻结定时器",
+      "tags": [
+        "PanZoomLabel",
+        "控件替换",
+        "事件过滤",
+        "UI初始化"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onCameraDisplay",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::onCameraDisplay(size_t, const QImage&)",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "核心图像显示槽，接收 ImageStitch::imageReady 信号；先检查 freezeImageUpdate/panZoomLabel/图像有效性；根据 chutuzhangshu 出图张数降频显示；按 qiehuanxianshi 模式分发：0=仅正面(camera1)、1=仅背面(camera2)、2=双面轮切(按 qiehuanzhangshu 切换张数交替显示)；每次切换保存/恢复各相机 PanZoomLabel 视图状态(ViewState)；首帧自动铺满，后续保持用户缩放位置；同时递增 zhengmianzongliang/beimianzongliang 产量计数",
+      "tags": [
+        "图像显示",
+        "核心槽",
+        "相机切换",
+        "视图状态",
+        "产量统计",
+        "出图降频"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onUpdateStatisticalInfoUI",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::onUpdateStatisticalInfoUI()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "统计信息刷新槽，从 Modules::asynchronousThreadModule.statisticalInfo 读取 atomic 产量计数(zhengmianzongliang/beimianzongliang)，更新 UI 标签 lb_FrontTotal 和 lb_BackTotal",
+      "tags": [
+        "统计刷新",
+        "UI更新",
+        "产量",
+        "atomic"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::updateCameraLabelState",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::updateCameraLabelState(int, bool)",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "相机状态更新槽，根据 cameraIndex(1/2) 和 state 设置 label_camera1State/label_camera2State 的文本('连接成功'绿色/'连接失败'红色)和样式",
+      "tags": [
+        "相机状态",
+        "UI更新",
+        "连接状态"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onZMotionDisconnect",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::onZMotionDisconnect()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "ZMotion 运动控制器断开处理槽，BUILD_WITHOUT_HARDWARE 宏时直接返回；否则最多连续弹警告框 3 次(_zMotionWarningCount 计数)，防止重复骚扰用户",
+      "tags": [
+        "ZMotion",
+        "断开",
+        "警告",
+        "防重入"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::setConfigWindowClosed",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::setConfigWindowClosed()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "配置窗口关闭响应槽，连接 DlgProductSet::paramsChanged 信号；从 setConfig 读取 baoguang1/baoguang2 并刷新主窗口曝光按钮文本，确保主窗口曝光显示与设置对话框同步",
+      "tags": [
+        "配置同步",
+        "UI更新",
+        "曝光"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::eventFilter",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::eventFilter(QObject*, QEvent*)",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "事件过滤器，监听 PanZoomLabel 的鼠标滚轮(Wheel)、鼠标按下(MouseButtonPress 左键)、鼠标移动(MouseMove 左键拖拽)事件，触发 touchManualViewOperation() 冻结图像更新，其余事件透传给 QMainWindow::eventFilter",
+      "tags": [
+        "事件过滤",
+        "鼠标",
+        "滚轮",
+        "冻结"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::touchManualViewOperation",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::touchManualViewOperation()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "手动视图操作时冻结图像更新：设置 _freezeImageUpdate=true，启动 _manualFreezeTimer 单次定时器(时长=setConfig.xuantingshijian*1000ms)，超时后自动解冻(_freezeImageUpdate=false)",
+      "tags": [
+        "冻结",
+        "定时器",
+        "手动操作",
+        "悬停时间"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::lb_title_clicked",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::lb_title_clicked()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "标题点击槽，实现防误触最小化：minimizeCount 倒计数(初始3)，每次点击减1，归零时调用 showMinimized() 最小化窗口并重置计数器为3",
+      "tags": [
+        "最小化",
+        "防误触",
+        "ClickableLabel"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::pbtn_setchishu_clicked",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::pbtn_setchishu_clicked()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "设置齿数按钮槽，弹出 rw::rqwu::NumberKeyboard 数字键盘，校验输入 >=0，更新 UI 按钮文本和 bagsRealTimeDisplayInfo.shezhichishu 配置，通过 ZMotionScheduler->setModbusFloatAsync(2,1,value) 异步下发齿数参数到运动控制器",
+      "tags": [
+        "齿数设置",
+        "NumberKeyboard",
+        "ZMotion",
+        "Modbus",
+        "异步下发"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::pbtn_resetProduct_clicked",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::pbtn_resetProduct_clicked()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "产量清零按钮槽，将 statisticalInfo 的 zhengmianzongliang 和 beimianzongliang 重置为 0",
+      "tags": [
+        "产量清零",
+        "重置",
+        "统计"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged",
+      "type": "function",
+      "name": "BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged(int)",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "summary": "切换显示模式下拉框槽，更新 bagsRealTimeDisplayInfo.qiehuanxianshi(0正面/1背面/2双面)，重置双面切换计数器(lastCameraCaptureCount=0, lastCameraCaptureIndex=1)",
+      "tags": [
+        "显示切换",
+        "下拉框",
+        "相机模式"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp:DlgProductSet::read_config",
+      "type": "function",
+      "name": "DlgProductSet::read_config()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "summary": "从 ConfigModule::setConfig 读取所有参数并填入 UI：相机1/2的乘法器/后分频/增益/曝光/像素当量，悬停时间/切换张数/出图张数，镜像复选框状态",
+      "tags": [
+        "配置读取",
+        "UI初始化",
+        "参数加载"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp:DlgProductSet::onUpdateFrameLost",
+      "type": "function",
+      "name": "DlgProductSet::onUpdateFrameLost()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "summary": "丢帧信息更新槽，从 asynchronousThreadModule.statisticalInfo 读取 cam1FrameLost/cam2FrameLost 并刷新 btn_diuzhen1/btn_diuzhen2 文本",
+      "tags": [
+        "丢帧",
+        "统计刷新",
+        "UI更新"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp:DlgCloseForm::btn_restart_clicked",
+      "type": "function",
+      "name": "DlgCloseForm::btn_restart_clicked()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "summary": "重启系统按钮槽，通过 Win32 API OpenProcessToken/AdjustTokenPrivileges 提升关机权限后调用 ExitWindowsEx(EWX_REBOOT|EWX_FORCEIFHUNG)，失败回退到 QProcess::startDetached('shutdown /r /t 7')；Linux 平台依次尝试 systemctl reboot/reboot/shutdown -r +1",
+      "tags": [
+        "重启",
+        "Win32 API",
+        "ExitWindowsEx",
+        "权限提升"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp:DlgCloseForm::btn_yes_clicked",
+      "type": "function",
+      "name": "DlgCloseForm::btn_yes_clicked()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "summary": "关机按钮槽，Win32 API 提权后调用 ExitWindowsEx(EWX_SHUTDOWN|EWX_POWEROFF|EWX_FORCEIFHUNG)，回退 shutdown /s /t 7；Linux 依次尝试 systemctl poweroff/poweroff/shutdown -h +1",
+      "tags": [
+        "关机",
+        "Win32 API",
+        "ExitWindowsEx",
+        "权限提升"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp:DlgCloseForm::btn_no_clicked",
+      "type": "function",
+      "name": "DlgCloseForm::btn_no_clicked()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "summary": "否按钮槽，仅调用 qApp->quit() 退出应用，不关机不重启",
+      "tags": [
+        "退出",
+        "关闭"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp:rw::rqw::ClickableLabel::mousePressEvent",
+      "type": "function",
+      "name": "ClickableLabel::mousePressEvent()",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp",
+      "summary": "鼠标按下事件重写，检测左键(Qt::LeftButton)按下时发射 clicked() 信号，然后调用基类 QLabel::mousePressEvent 保持默认行为",
+      "tags": [
+        "鼠标事件",
+        "信号发射",
+        "clicked"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui:BagsRealTimeDisplayClass",
+      "type": "document",
+      "name": "BagsRealTimeDisplay.ui 布局文档",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui",
+      "summary": "主窗口 Qt Designer UI 布局定义，class=BagsRealTimeDisplayClass(QMainWindow)，关键控件：label_imgDisplay_1(图像区)、lb_FrontTotal/lb_BackTotal(产量)、pbtn_resetProduct(清零)、btn_baoguang1/2 + btn_jianshaobaoguang1/2 + btn_zengjiabaoguang1/2(曝光±)、cbb_qiehuanxianshi(切面下拉框)、pbtn_setchishu(齿数)、pbtn_set(设置)、label_camera1State/label_camera2State(相机状态)、pbtn_exit(退出)",
+      "tags": [
+        "UI布局",
+        "Qt Designer",
+        "主窗口"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui:DlgProductSetClass",
+      "type": "document",
+      "name": "DlgProductSet.ui 布局文档",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui",
+      "summary": "产品设置 Qt Designer UI 布局定义，class=DlgProductSetClass(QDialog)，双列参数布局：左'正面相机参数'(乘法器/后分频/增益/曝光/丢帧/像素当量)、右'反面相机参数'(对称)、底部全局参数(悬停时间/切换张数/出图张数/镜像)，统一样式系统含 QLabel/QPushButton/QGroupBox/QCheckBox 主题定义",
+      "tags": [
+        "UI布局",
+        "Qt Designer",
+        "产品设置",
+        "参数配置"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui:DlgCloseFormClass",
+      "type": "document",
+      "name": "DlgCloseForm.ui 布局文档",
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui",
+      "summary": "关机对话框 Qt Designer UI 布局定义，class=DlgCloseFormClass(QDialog)，600x400，显示中英双语提示'是否关机? Do You Want To Close Computer?'，提供是(btn_yes)/否(btn_no)/重启(btn_restart)/关闭(btn_close) 四按钮",
+      "tags": [
+        "UI布局",
+        "Qt Designer",
+        "关机对话框"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:cmake/CMakeCacheIni.cmake:cmake-cache-config",
+      "type": "config",
+      "name": "CMake 缓存初始化配置",
+      "filePath": "cmake/CMakeCacheIni.cmake",
+      "summary": "定义 QT_DIR 和 RWUL_DIR 缓存变量(默认D:)，追加到 CMAKE_PREFIX_PATH，用于 CMake 查找 Qt6 和 RWUL 包",
+      "tags": [
+        "CMake",
+        "缓存",
+        "Qt",
+        "RWUL",
+        "路径配置"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:Folder.DotSettings:resharper-team-settings",
+      "type": "config",
+      "name": "ReSharper 团队设置",
+      "filePath": "Folder.DotSettings",
+      "summary": "团队共享 ReSharper 设置，配置 C++ 命名缩写规则(RT/IO)，自定义词典收录拼音命名常用词(pbtn/bbox/cbox/yolov/dets/classid 等)，确保 IDE 不对中文拼音命名报警告",
+      "tags": [
+        "IDE设置",
+        "ReSharper",
+        "命名规则",
+        "词典",
+        "拼音"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:.claude/memory/MEMORY.md",
+      "target": "document:.claude/memory/project_codegraph_auto_update.md",
+      "type": "documents",
+      "weight": 0.8,
+      "label": "索引指向——Codegraph自动更新规则",
+      "direction": "forward"
+    },
+    {
+      "source": "document:.claude/memory/MEMORY.md",
+      "target": "document:.claude/memory/feedback_emoji_prefix.md",
+      "type": "documents",
+      "weight": 0.8,
+      "label": "索引指向——Emoji前缀偏好规则",
+      "direction": "forward"
+    },
+    {
+      "source": "document:.claude/memory/MEMORY.md",
+      "target": "document:.claude/memory/feedback_chinese_language.md",
+      "type": "documents",
+      "weight": 0.8,
+      "label": "索引指向——中文交流规则",
+      "direction": "forward"
+    },
+    {
+      "source": "document:.claude/memory/feedback_chinese_language.md",
+      "target": "document:.claude/memory/feedback_emoji_prefix.md",
+      "type": "related",
+      "weight": 0.6,
+      "label": "同为用户反馈偏好规则，均定义Claude交互行为",
+      "direction": "forward"
+    },
+    {
+      "source": "document:.claude/memory/feedback_chinese_language.md",
+      "target": "document:.claude/memory/project_codegraph_auto_update.md",
+      "type": "related",
+      "weight": 0.3,
+      "label": "同属.claude/memory目录下的记忆配置",
+      "direction": "forward"
+    },
+    {
+      "source": "document:.claude/memory/feedback_emoji_prefix.md",
+      "target": "document:.claude/memory/project_codegraph_auto_update.md",
+      "type": "related",
+      "weight": 0.3,
+      "label": "同属.claude/memory目录下的记忆配置",
+      "direction": "forward"
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "document:CMakeLists.txt",
+      "type": "documents",
+      "weight": 0.9,
+      "label": "文档化构建系统",
+      "direction": "forward"
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:CMakePresets.json",
+      "type": "documents",
+      "weight": 0.8,
+      "label": "文档化构建预设",
+      "direction": "forward"
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:vcpkg.json",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "提及 vcpkg 工具链",
+      "direction": "forward"
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:vcpkg-configuration.json",
+      "type": "documents",
+      "weight": 0.4,
+      "label": "提及 vcpkg 注册表",
+      "direction": "forward"
+    },
+    {
+      "source": "config:CMakePresets.json",
+      "target": "document:CMakeLists.txt",
+      "type": "configures",
+      "weight": 0.9,
+      "label": "预设驱动 CMake 构建配置",
+      "direction": "forward"
+    },
+    {
+      "source": "config:CMakePresets.json",
+      "target": "config:vcpkg-configuration.json",
+      "type": "depends_on",
+      "weight": 0.7,
+      "label": "工具链引用 vcpkg 注册表",
+      "direction": "forward"
+    },
+    {
+      "source": "config:CMakePresets.json",
+      "target": "config:vcpkg.json",
+      "type": "depends_on",
+      "weight": 0.7,
+      "label": "vcpkg 工具链解析 manifest 依赖",
+      "direction": "forward"
+    },
+    {
+      "source": "config:vcpkg.json",
+      "target": "config:vcpkg-configuration.json",
+      "type": "depends_on",
+      "weight": 0.8,
+      "label": "manifest 依赖注册表配置",
+      "direction": "forward"
+    },
+    {
+      "source": "config:vcpkg.json",
+      "target": "document:CMakeLists.txt",
+      "type": "related",
+      "weight": 0.7,
+      "label": "vcpkg 提供 CMake find_package 所需库",
+      "direction": "forward"
+    },
+    {
+      "source": "document:CMakeLists.txt",
+      "target": "config:CMakePresets.json",
+      "type": "configured_by",
+      "weight": 0.8,
+      "label": "CMake 接受预设参数",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "contains",
+      "weight": 0.9,
+      "label": "持有 unique_ptr<RefreshUIThread> 成员，管理其生命周期",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "contains",
+      "weight": 0.9,
+      "label": "持有 unique_ptr<ZMotionPollingThread> 成员，管理其生命周期",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:StatisticalInfo",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "嵌套 StatisticalInfo 结构体作为公开成员，提供线程安全的产量和丢帧统计",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp:build",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "build() 中调用 std::make_unique<RefreshUIThread> 创建实例",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp:build",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "build() 中调用 std::make_unique<ZMotionPollingThread> 创建实例",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "target": "class:ConfigModule",
+      "type": "depends_on",
+      "weight": 0.9,
+      "label": "构造函数接受 ConfigModule& 引用，读取镜像设置（isjingxiang）等配置参数",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:StatisticalInfo",
+      "type": "calls",
+      "weight": 1.0,
+      "label": "通过 Modules 单例访问 statisticalInfo，更新 cam1FrameLost 和 cam2FrameLost 丢帧计数",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+      "target": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:rotateXImage",
+      "type": "calls",
+      "weight": 0.7,
+      "label": "当背面相机（index==2）且配置开启镜像时调用 rotateXImage 翻转图像",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp:run",
+      "target": "class:Modules",
+      "type": "calls",
+      "weight": 0.9,
+      "label": "通过 Modules::getInstance() 单例访问 zMotionModule，检查控制器就绪状态",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "通过 onCameraCapture(MatInfo, index) 信号将采集的帧数据传递给 ImageStitch::onFrameCaptured 槽",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 BusinessLayer::RefreshUIThread",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 BusinessLayer::ZMotionPollingThread",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 RWUL::hoepZMotion（ZMotion 硬件驱动）和 Modules::Modules（PRIVATE）",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 RWUL::rqwcd（相机数据定义）、Modules::Modules、RWUL::imgqt（图像转换）",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 RWUL::oso、RWUL::rqwcd、Modules::IModule、Modules::Modules、Global::Utility",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "target": "file:BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "type": "related",
+      "weight": 1.0,
+      "label": "Utility.cpp 仅包含 Utility.hpp 头文件，所有定义均为内联结构体",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "target": "file:BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "type": "depends_on",
+      "weight": 0.3,
+      "label": "CameraModule CMake 通过 Global::Utility 依赖全局路径配置",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "父级 CMake 通过 add_subdirectory 引入 AsynchronousThreadModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "父级 CMake 通过 add_subdirectory 引入 RefreshUIThread",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "父级 CMake 通过 add_subdirectory 引入 ZMotionPollingThread",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "业务层父级 CMake 通过 add_subdirectory 引入 ImageStitch",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "业务层父级 CMake 通过 add_subdirectory 引入 AsynchronousThread",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.3,
+      "label": "根 CMake 通过 add_subdirectory 引入 BusinessLayer",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.3,
+      "label": "根 CMake 通过 add_subdirectory 引入 Modules（含 CameraModule）",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.3,
+      "label": "根 CMake 通过 add_subdirectory 引入 Global（含 Utility）",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "Global 层父级 CMake 通过 add_subdirectory 引入 Utility",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "target": "class:CameraModule",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "实现类",
+      "direction": "forward"
+    },
+    {
+      "source": "class:CameraModule",
+      "target": "class:IModule",
+      "type": "implements",
+      "weight": 0.9,
+      "label": "实现接口 IModule<bool>",
+      "direction": "forward"
+    },
+    {
+      "source": "class:CameraModule",
+      "target": "class:cdm::SetConfig",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "读取相机参数配置",
+      "direction": "forward"
+    },
+    {
+      "source": "class:CameraModule",
+      "target": "class:Modules",
+      "type": "calls",
+      "weight": 0.7,
+      "label": "获取 ConfigModule 配置",
+      "direction": "forward"
+    },
+    {
+      "source": "function:CameraModule::build",
+      "target": "function:CameraModule::build_camera1",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "调用构建正面相机",
+      "direction": "forward"
+    },
+    {
+      "source": "function:CameraModule::build_camera1",
+      "target": "function:CameraModule::cameraMetaDataCheck",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "IP 匹配查找相机",
+      "direction": "forward"
+    },
+    {
+      "source": "function:CameraModule::build_camera1",
+      "target": "function:CameraModule::onCamera1Capture",
+      "type": "calls",
+      "weight": 0.6,
+      "label": "连接回调信号",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "#include 头文件",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "#include 获取单例",
+      "direction": "forward"
+    },
+    {
+      "source": "class:Modules",
+      "target": "class:IModule",
+      "type": "implements",
+      "weight": 0.9,
+      "label": "实现接口 IModule<bool>",
+      "direction": "forward"
+    },
+    {
+      "source": "class:Modules",
+      "target": "class:CameraModule",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "持有 cameraModule 成员",
+      "direction": "forward"
+    },
+    {
+      "source": "class:Modules",
+      "target": "class:ZMotionModule",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "持有 zMotionModule 成员",
+      "direction": "forward"
+    },
+    {
+      "source": "class:Modules",
+      "target": "class:ConfigModule",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "持有 configModule 成员",
+      "direction": "forward"
+    },
+    {
+      "source": "class:Modules",
+      "target": "class:RunEnvCheck",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "调用运行环境检查",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::build",
+      "target": "class:ConfigModule",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "先构建配置模块",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::build",
+      "target": "class:CameraModule",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "后构建相机模块",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::connect",
+      "target": "class:CameraModule",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "连接相机信号",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::check",
+      "target": "function:RunEnvCheck::isSingleInstance",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "单实例检查",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::check",
+      "target": "function:RunEnvCheck::isProcessRunning",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "厂商软件进程检测",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::checkFileExistAndFormat",
+      "target": "function:RunEnvCheck::isProcessRunning",
+      "type": "calls",
+      "weight": 0.6,
+      "label": "间接依赖 RunEnvCheck 工具",
+      "direction": "forward"
+    },
+    {
+      "source": "class:ConfigModule",
+      "target": "class:IModule",
+      "type": "implements",
+      "weight": 0.9,
+      "label": "实现接口 IModule<bool>",
+      "direction": "forward"
+    },
+    {
+      "source": "class:ConfigModule",
+      "target": "class:cdm::SetConfig",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "持有 SetConfig 数据成员",
+      "direction": "forward"
+    },
+    {
+      "source": "class:ConfigModule",
+      "target": "class:cdm::BagsRealTimeDisplayInfo",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "持有 BagsRealTimeDisplayInfo 数据成员",
+      "direction": "forward"
+    },
+    {
+      "source": "function:ConfigModule::loadConfigSafe",
+      "target": "class:cdm::SetConfig",
+      "type": "configures",
+      "weight": 0.6,
+      "label": "加载/合并 SetConfig",
+      "direction": "forward"
+    },
+    {
+      "source": "function:ConfigModule::loadConfigSafe",
+      "target": "class:cdm::BagsRealTimeDisplayInfo",
+      "type": "configures",
+      "weight": 0.6,
+      "label": "加载/合并 BagsRealTimeDisplayInfo",
+      "direction": "forward"
+    },
+    {
+      "source": "class:cdm::SetConfig",
+      "target": "function:cdm::SetConfig::operator ObjectStoreAssembly",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "序列化转换运算符",
+      "direction": "forward"
+    },
+    {
+      "source": "class:cdm::BagsRealTimeDisplayInfo",
+      "target": "document:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "type": "configures",
+      "weight": 0.4,
+      "label": "UI 显示参数配置",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "#include 头文件",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "间接 Include（通过 ConfigModule.hpp）",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "间接 Include（通过 ConfigModule.hpp）",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "target": "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "type": "configures",
+      "weight": 0.6,
+      "label": "由 .oso schema 生成",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+      "target": "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "type": "configures",
+      "weight": 0.6,
+      "label": "由 .oso schema 生成",
+      "direction": "forward"
+    },
+    {
+      "source": "class:ZMotionModule",
+      "target": "class:IModule",
+      "type": "implements",
+      "weight": 0.9,
+      "label": "实现接口 IModule<bool>",
+      "direction": "forward"
+    },
+    {
+      "source": "function:ZMotionModule::build",
+      "target": "class:ZMotionModule",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "核心构建逻辑",
+      "direction": "forward"
+    },
+    {
+      "source": "class:PanZoomLabel",
+      "target": "class:PanZoomLabel::ViewState",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "内部结构体",
+      "direction": "forward"
+    },
+    {
+      "source": "function:PanZoomLabel::paintEvent",
+      "target": "class:PanZoomLabel",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "核心绘制",
+      "direction": "forward"
+    },
+    {
+      "source": "function:PanZoomLabel::wheelEvent",
+      "target": "function:PanZoomLabel::fitToView",
+      "type": "calls",
+      "weight": 0.5,
+      "label": "缩放受 fit 约束",
+      "direction": "forward"
+    },
+    {
+      "source": "function:PanZoomLabel::setRoiMode",
+      "target": "class:PanZoomLabel",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "切换 ROI 编辑状态",
+      "direction": "forward"
+    },
+    {
+      "source": "class:PanZoomLabel",
+      "target": "file:BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "类声明",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "target": "file:BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "#include 头文件",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "#include 头文件",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "target": "file:BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "间接 Include 环境检查工具",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "#include 头文件",
+      "direction": "forward"
+    },
+    {
+      "source": "class:RunEnvCheck",
+      "target": "function:RunEnvCheck::isSingleInstance",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "静态方法",
+      "direction": "forward"
+    },
+    {
+      "source": "class:RunEnvCheck",
+      "target": "function:RunEnvCheck::isProcessRunning",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "静态方法",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "target": "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "oso_wrap_oso 生成头文件",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "target": "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "oso_wrap_oso 生成头文件",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "CMake 依赖 Modules::IModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "CMake 依赖 Modules::CameraModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "CMake 依赖 Modules::ZMotionModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "CMake 依赖 Modules::ConfigModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "CMake 依赖 Tools::RunEnvCheck",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "CMake 依赖 Modules::IModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "type": "imports",
+      "weight": 0.4,
+      "label": "同依赖 RWUL::oso",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "type": "contains",
+      "weight": 0.5,
+      "label": "聚合子目录 CameraModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+      "type": "contains",
+      "weight": 0.5,
+      "label": "聚合子目录 ZMotionModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "type": "contains",
+      "weight": 0.5,
+      "label": "聚合子目录 Modules",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+      "type": "contains",
+      "weight": 0.5,
+      "label": "聚合子目录 IModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "type": "contains",
+      "weight": 0.5,
+      "label": "聚合子目录 ConfigModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Tools/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+      "type": "contains",
+      "weight": 0.5,
+      "label": "聚合子目录 RunEnvCheck",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Tools/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "type": "contains",
+      "weight": 0.5,
+      "label": "聚合子目录 PanZoomLabel",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::build",
+      "target": "function:CameraModule::build",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "分发生命周期到相机模块",
+      "direction": "forward"
+    },
+    {
+      "source": "function:Modules::build",
+      "target": "class:ZMotionModule",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "构建运动控制模块",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "通过 Modules 间接依赖 SetConfig",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "target": "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "type": "imports",
+      "weight": 0.6,
+      "label": "间接 Include OSO 配置",
+      "direction": "forward"
+    },
+    {
+      "source": "document:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "target": "class:CameraModule",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "描述 API 接口",
+      "direction": "forward"
+    },
+    {
+      "source": "class:CameraModule",
+      "target": "class:ZMotionModule",
+      "type": "calls",
+      "weight": 0.4,
+      "label": "同属 Modules 聚合，间接协作",
+      "direction": "forward"
+    },
+    {
+      "source": "class:Modules",
+      "target": "function:Modules::checkFileExistAndFormat",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "模板静态方法",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/main.cpp:main",
+      "target": "class:BagsRealTimeDisplay/UI/include/AppRuntime.hpp:AppRuntime",
+      "type": "calls",
+      "weight": 0.9,
+      "label": "创建并调用 initialize/show",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::initialize",
+      "target": "class:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h:BagsRealTimeDisplay",
+      "type": "calls",
+      "weight": 0.9,
+      "label": "构造主窗口(注入 ConfigModule& CameraModule&)",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::initialize",
+      "target": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "调用 build_connect 建立信号槽",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onCameraDisplay",
+      "type": "connects",
+      "weight": 1.0,
+      "label": "ImageStitch::imageReady → onCameraDisplay(图像显示)",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::updateCameraLabelState",
+      "type": "connects",
+      "weight": 0.9,
+      "label": "CameraModule::onCameraStateChanged → updateCameraLabelState",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onUpdateStatisticalInfoUI",
+      "type": "connects",
+      "weight": 0.9,
+      "label": "RefreshUIThread::emit_RefreshUI → onUpdateStatisticalInfoUI",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp:DlgProductSet::onUpdateFrameLost",
+      "type": "connects",
+      "weight": 0.9,
+      "label": "RefreshUIThread::emit_RefreshUI → DlgProductSet::onUpdateFrameLost",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::setConfigWindowClosed",
+      "type": "connects",
+      "weight": 0.8,
+      "label": "DlgProductSet::paramsChanged → setConfigWindowClosed(参数同步)",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onZMotionDisconnect",
+      "type": "connects",
+      "weight": 0.8,
+      "label": "ZMotionPollingThread::zMotionDisconnect → onZMotionDisconnect",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h:BagsRealTimeDisplay",
+      "target": "class:BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h:DlgCloseForm",
+      "type": "contains",
+      "weight": 0.8,
+      "label": "持有 _dlgCloseForm 指针",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h:BagsRealTimeDisplay",
+      "target": "class:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h:DlgProductSet",
+      "type": "contains",
+      "weight": 0.9,
+      "label": "持有 _dlgProductSet 指针(公开成员)",
+      "direction": "forward"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h:BagsRealTimeDisplay",
+      "target": "class:BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h:rw::rqw::ClickableLabel",
+      "type": "contains",
+      "weight": 0.7,
+      "label": "持有 clickableTitle 指针",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::initializeComponents",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::build_PanZoomLabel",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "build_ui → build_PanZoomLabel",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::build_PanZoomLabel",
+      "target": "document:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui:BagsRealTimeDisplayClass",
+      "type": "references",
+      "weight": 0.8,
+      "label": "替换 UI 中 label_imgDisplay_1 为 PanZoomLabel",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::lb_title_clicked",
+      "target": "class:BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h:rw::rqw::ClickableLabel",
+      "type": "calls",
+      "weight": 0.6,
+      "label": "响应 ClickableLabel::clicked 信号",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "implement",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "implement",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "implement",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "implement",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/include/AppRuntime.hpp",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "implement",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui",
+      "type": "uses-ui",
+      "weight": 0.8,
+      "label": "引用 ui_BagsRealTimeDisplay.h (qt_wrap_ui 编译产物)",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui",
+      "type": "uses-ui",
+      "weight": 0.8,
+      "label": "引用 ui_DlgProductSet.h (qt_wrap_ui 编译产物)",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui",
+      "type": "uses-ui",
+      "weight": 0.8,
+      "label": "引用 ui_DlgCloseForm.h (qt_wrap_ui 编译产物)",
+      "direction": "forward"
+    },
+    {
+      "source": "document:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui:BagsRealTimeDisplayClass",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc",
+      "type": "references",
+      "weight": 0.6,
+      "label": "引用资源文件中的 close.png 图标",
+      "direction": "forward"
+    },
+    {
+      "source": "document:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui:DlgProductSetClass",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc",
+      "type": "references",
+      "weight": 0.6,
+      "label": "引用资源文件中的 close.png 图标",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt",
+      "type": "build-depends",
+      "weight": 0.9,
+      "label": "add_subdirectory(UIModule) + 链接 UI::UIModule",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt",
+      "target": "file:cmake/func.cmake",
+      "type": "build-depends",
+      "weight": 0.5,
+      "label": "CMakeLists.txt 目录级引用，func.cmake 由顶层 include",
+      "direction": "forward"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/UI/CMakeLists.txt",
+      "target": "file:cmake/func.cmake",
+      "type": "build-uses",
+      "weight": 0.5,
+      "label": "调用 add_windeployqt(${BRTD_TARGET})",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmake/CMakeCacheIni.cmake",
+      "target": "file:cmake/func.cmake",
+      "type": "build-depends",
+      "weight": 0.4,
+      "label": "同属于 cmake/ 目录下的构建辅助脚本",
+      "direction": "forward"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onCameraDisplay",
+      "target": "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged",
+      "type": "depends-on-data",
+      "weight": 0.6,
+      "label": "依赖 qiehuanxianshi 模式值和双面切换计数器",
+      "direction": "forward"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:ui",
+      "name": "UI 层",
+      "description": "用户界面层：主窗口 (BagsRealTimeDisplay)、对话框 (DlgProductSet/DlgCloseForm)、应用生命周期管理 (AppRuntime)、Qt UI 布局文件",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/UI/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/UI/include/AppRuntime.hpp",
+        "file:BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+        "file:BagsRealTimeDisplay/UI/src/main.cpp",
+        "file:BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+        "file:BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h",
+        "file:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+        "file:BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h",
+        "file:BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc",
+        "file:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+        "file:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+        "file:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+        "file:BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp",
+        "file:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui",
+        "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui",
+        "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui",
+        "document:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui:BagsRealTimeDisplayClass",
+        "document:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui:DlgProductSetClass",
+        "document:BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui:DlgCloseFormClass",
+        "class:BagsRealTimeDisplay/UI/include/AppRuntime.hpp:AppRuntime",
+        "class:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h:BagsRealTimeDisplay",
+        "class:BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h:DlgCloseForm",
+        "class:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h:DlgProductSet",
+        "class:BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h:rw::rqw::ClickableLabel",
+        "function:BagsRealTimeDisplay/UI/src/main.cpp:main",
+        "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::initialize",
+        "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::show",
+        "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::shutdown",
+        "function:BagsRealTimeDisplay/UI/src/AppRuntime.cpp:AppRuntime::build_connect",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::initializeComponents",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::build_PanZoomLabel",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onCameraDisplay",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onUpdateStatisticalInfoUI",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::updateCameraLabelState",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::onZMotionDisconnect",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::setConfigWindowClosed",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::eventFilter",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::touchManualViewOperation",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::lb_title_clicked",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::pbtn_setchishu_clicked",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::pbtn_resetProduct_clicked",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp:BagsRealTimeDisplay::cbb_qiehuanxianshi_currentIndexChanged",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp:DlgProductSet::read_config",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp:DlgProductSet::onUpdateFrameLost",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp:DlgCloseForm::btn_restart_clicked",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp:DlgCloseForm::btn_yes_clicked",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp:DlgCloseForm::btn_no_clicked",
+        "function:BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp:rw::rqw::ClickableLabel::mousePressEvent"
+      ]
+    },
+    {
+      "id": "layer:business",
+      "name": "业务逻辑层",
+      "description": "图像拼接 (ImageStitch)、异步线程 (RefreshUIThread/ZMotionPollingThread)、统计信息管理 (AsynchronousThreadModule)",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+        "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+        "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:StatisticalInfo",
+        "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+        "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+        "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+        "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+        "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:stitchImages",
+        "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:rotateXImage",
+        "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp:build",
+        "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp:run",
+        "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp:run"
+      ]
+    },
+    {
+      "id": "layer:modules",
+      "name": "硬件/配置模块层",
+      "description": "相机模块 (CameraModule)、配置持久化 (ConfigModule)、ZMotion 控制器 (ZMotionModule)、模块聚合器 (Modules)、IModule 接口",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+        "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+        "file:BagsRealTimeDisplay/Modules/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+        "file:BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+        "file:BagsRealTimeDisplay/Modules/IModule/src/IModule.cpp",
+        "file:BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+        "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+        "file:BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp",
+        "file:BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+        "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+        "config:BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+        "document:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+        "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+        "class:CameraModule",
+        "class:cdm::SetConfig",
+        "class:cdm::BagsRealTimeDisplayInfo",
+        "class:IModule",
+        "class:Modules",
+        "class:ConfigModule",
+        "class:ZMotionModule",
+        "function:CameraModule::build",
+        "function:CameraModule::build_camera1",
+        "function:CameraModule::onCamera1Capture",
+        "function:CameraModule::cameraMetaDataCheck",
+        "function:Modules::build",
+        "function:Modules::connect",
+        "function:Modules::check",
+        "function:Modules::checkFileExistAndFormat",
+        "function:ConfigModule::loadConfigSafe",
+        "function:cdm::SetConfig::operator ObjectStoreAssembly",
+        "function:ZMotionModule::build"
+      ]
+    },
+    {
+      "id": "layer:tools",
+      "name": "工具层",
+      "description": "可复用控件 (PanZoomLabel)、运行环境检查 (RunEnvCheck)",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/Tools/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Tools/PanZoomLabel/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+        "file:BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+        "file:BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp",
+        "file:BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+        "class:PanZoomLabel",
+        "class:RunEnvCheck",
+        "class:PanZoomLabel::ViewState",
+        "function:PanZoomLabel::paintEvent",
+        "function:PanZoomLabel::wheelEvent",
+        "function:PanZoomLabel::setRoiMode",
+        "function:PanZoomLabel::fitToView",
+        "function:RunEnvCheck::isSingleInstance",
+        "function:RunEnvCheck::isProcessRunning"
+      ]
+    },
+    {
+      "id": "layer:global",
+      "name": "全局工具层",
+      "description": "全局路径配置 (Utility/globalPath)、项目级构建配置",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/Global/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+        "file:BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+        "file:BagsRealTimeDisplay/Global/Utility/src/Utility.cpp"
+      ]
+    },
+    {
+      "id": "layer:project-config",
+      "name": "项目配置",
+      "description": "CMake 构建系统、vcpkg 依赖管理、项目文档 (CLAUDE.md)",
+      "nodeIds": [
+        "document:CLAUDE.md",
+        "document:CMakeLists.txt",
+        "config:CMakePresets.json",
+        "config:vcpkg-configuration.json",
+        "config:vcpkg.json",
+        "file:.codegraph/daemon.pid",
+        "file:.gitattributes",
+        "file:.understand-anything/.understandignore",
+        "file:.understand-anything/config.json",
+        "file:BagsRealTimeDisplay/CMakeLists.txt",
+        "file:cmake/CMakeCacheIni.cmake",
+        "file:cmake/func.cmake",
+        "file:Folder.DotSettings",
+        "file:Folder.DotSettings.user",
+        "config:cmake/CMakeCacheIni.cmake:cmake-cache-config",
+        "config:Folder.DotSettings:resharper-team-settings"
+      ]
+    },
+    {
+      "id": "layer:memory",
+      "name": "Claude 记忆",
+      "description": "Claude Code 持久化记忆文件（用户偏好、项目规则）",
+      "nodeIds": [
+        "document:.claude/memory/MEMORY.md",
+        "document:.claude/memory/feedback_chinese_language.md",
+        "document:.claude/memory/feedback_emoji_prefix.md",
+        "document:.claude/memory/project_codegraph_auto_update.md"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "项目概述与文档",
+      "description": "从 CLAUDE.md 开始了解项目全貌：Windows 桌面应用 (C++17/Qt6.7.3)，驱动两台 DVP 线扫相机实时显示袋子画面，包含图像拼接和产量统计功能。",
+      "nodeIds": [
+        "document:CLAUDE.md",
+        "document:CMakeLists.txt",
+        "config:CMakePresets.json"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "应用入口与生命周期",
+      "description": "main.cpp 创建 AppRuntime 并调用 initialize() 启动完整生命周期：单实例检查 → 模块构建 → 主窗口创建 → 信号连接 → 模块启动。shutdown() 在退出时逆序销毁。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/UI/src/main.cpp",
+        "file:BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+        "file:BagsRealTimeDisplay/UI/include/AppRuntime.hpp"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "模块系统与生命周期接口",
+      "description": "IModule 定义 build/destroy/start/stop 契约。Modules 单例持有所有模块实例，按序分发生命周期调用：Config→Camera→AsynchronousThread→ZMotion。connect() 建立跨层信号桥接。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+        "file:BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+        "file:BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "配置持久化系统",
+      "description": "ConfigModule 使用 RWUL oso 框架实现 XML 配置持久化。SetConfig（230行）定义 15 个配置字段（曝光/增益/乘法器/后分频等，命名采用中文拼音），通过 $variable$字段名$ 格式字符串键与 ObjectStoreAssembly 互转。build() 加载配置，destroy() 保存。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+        "file:BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "相机硬件驱动",
+      "description": "CameraModule（478行）管理两台 DVP 线扫相机完整生命周期，支持 BUILD_WITHOUT_HARDWARE 宏的双模式（真硬件/模拟）。提供曝光、增益、乘法器、后分频、行高等参数的独立设置接口。采集回调通过 onCameraCapture 信号发出帧数据。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+        "file:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "图像拼接与帧处理",
+      "description": "ImageStitch（QThread, 222行）是图像处理核心。onFrameCaptured() 接收相机帧，根据相机编号分流（背面可选 rotateXImage 镜像翻转），转 QImage 后发射 imageReady 信号。stitchImages() 纵向拼接多帧（cv::vconcat），并检测帧号差值统计丢帧。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "异步线程与统计",
+      "description": "AsynchronousThreadModule 聚合 RefreshUIThread（1秒间隔发射 RefreshUI 信号驱动 UI 刷新）和 ZMotionPollingThread（5秒间隔检测控制器连接状态）。StatisticalInfo 使用 std::atomic 提供无锁跨线程产量/丢帧统计。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+        "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "主窗口与 UI 交互",
+      "description": "BagsRealTimeDisplay（453行）是主窗口类，管理图像显示、状态标签、参数调节按钮等。onCameraDisplay() 将拼接后的图像分发到 PanZoomLabel 显示。信号槽实现了完整的跨层数据流：CameraModule→ImageStitch→主窗口；RefreshUIThread→统计刷新。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+        "file:BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+        "file:BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui"
+      ]
+    },
+    {
+      "order": 9,
+      "title": "产品设置对话框",
+      "description": "DlgProductSet（372行）提供相机参数配置界面：曝光、增益、乘法器、后分频、像素当量、切换张数等。从 ConfigModule 读取当前配置，修改后实时下发到 CameraModule。同时显示实时丢帧统计。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+        "file:BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+        "file:BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui"
+      ]
+    },
+    {
+      "order": 10,
+      "title": "可复用控件与工具",
+      "description": "PanZoomLabel（630行）是自定义图像显示控件，支持平移/缩放/ROI 编辑（三阶段状态机）。RunEnvCheck 提供单实例锁（QSharedMemory）和进程检测工具。",
+      "nodeIds": [
+        "file:BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+        "file:BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+        "file:BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp"
+      ]
+    }
+  ]
+}

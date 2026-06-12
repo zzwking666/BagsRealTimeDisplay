@@ -1,0 +1,121 @@
+{
+  "nodes": [
+    {
+      "id": "document:CLAUDE.md",
+      "type": "document",
+      "name": "CLAUDE.md",
+      "filePath": "CLAUDE.md",
+      "summary": "项目指导文件，面向 Claude Code 的代码库文档。描述项目概述（C++17 + Qt 6.7.3 桌面应用，驱动两台线扫相机）、构建工具链（CMake + vcpkg + MSVC）、分层架构（UI/Modules/BusinessLayer/Global/Tools）、模块生命周期（IModule 契约）、跨层信号/槽数据流、配置持久化（oso XML 框架）、以及编码约定（中文拼音命名、Tab 缩进、提交中文信息）。是理解项目整体设计的核心入口文档。",
+      "tags": ["文档", "项目指导", "架构说明", "构建指南", "编码约定"],
+      "complexity": "high"
+    },
+    {
+      "id": "document:CMakeLists.txt",
+      "type": "document",
+      "name": "CMakeLists.txt",
+      "filePath": "CMakeLists.txt",
+      "summary": "根 CMake 构建文件，定义项目名称 BagsRealTimeDisplay，设置 C++17 标准与 Qt 自动 MOC/RCC。通过 find_package 解析三大外部依赖：OpenCV（vcpkg 提供）、Qt6（Core/Widgets/Gui/Concurrent）、RWUL（公司内部自研库，含 core/oso/hoecd/rqwu/imgcore/imgqt/rqwcd/hoepZMotion 组件）。支持 BUILD_WITHOUT_HARDWARE 条件编译标志。通过 add_subdirectory 引入主源码目录 BagsRealTimeDisplay/。",
+      "tags": ["构建", "CMake", "依赖管理", "C++17", "Qt6"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:CMakePresets.json",
+      "type": "config",
+      "name": "CMakePresets.json",
+      "filePath": "CMakePresets.json",
+      "summary": "CMake 预设配置文件（version 4），定义 Windows Ninja 构建预设。包含隐藏基础预设 windows-ninja-base（指定 vcpkg 工具链文件路径 $env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake、条件限制 Windows 平台），以及继承自它的 Debug/Release 配置预设。buildPresets 对应 windows-ninja-debug-build 和 windows-ninja-release-build，均设置 8 并行编译任务。testPresets 为空。",
+      "tags": ["配置", "CMake", "Ninja", "vcpkg", "构建预设"],
+      "complexity": "low"
+    },
+    {
+      "id": "config:vcpkg-configuration.json",
+      "type": "config",
+      "name": "vcpkg-configuration.json",
+      "filePath": "vcpkg-configuration.json",
+      "summary": "vcpkg 注册表配置文件，定义默认注册表为 Microsoft 官方 vcpkg Git 仓库（指定基线 commit b24977af），以及 artifacts 注册表指向 vcpkg-ce-catalog。此文件启用 vcpkg manifest 模式，使 vcpkg.json 中声明的依赖可被自动解析安装。",
+      "tags": ["配置", "vcpkg", "包管理", "注册表"],
+      "complexity": "low"
+    },
+    {
+      "id": "config:vcpkg.json",
+      "type": "config",
+      "name": "vcpkg.json",
+      "filePath": "vcpkg.json",
+      "summary": "vcpkg 依赖清单（manifest），声明项目名 bagsrealtimedisplay v1.0.0。列出 10 个依赖项：opencv4（图像处理）、pugixml（XML 解析）、jsoncpp（JSON 解析）、sqlite3（数据库）、gtest（单元测试）、spdlog（日志）、openssl（加密）、libmodbus（Modbus 通信协议）、libzip（ZIP 压缩）、icu（国际化）。每项均有最低版本约束，并通过 overrides 锁定精确版本。",
+      "tags": ["配置", "vcpkg", "依赖清单", "包管理"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:CLAUDE.md",
+      "target": "document:CMakeLists.txt",
+      "type": "documents",
+      "weight": 0.9,
+      "label": "文档化构建系统"
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:CMakePresets.json",
+      "type": "documents",
+      "weight": 0.8,
+      "label": "文档化构建预设"
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:vcpkg.json",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "提及 vcpkg 工具链"
+    },
+    {
+      "source": "document:CLAUDE.md",
+      "target": "config:vcpkg-configuration.json",
+      "type": "documents",
+      "weight": 0.4,
+      "label": "提及 vcpkg 注册表"
+    },
+    {
+      "source": "config:CMakePresets.json",
+      "target": "document:CMakeLists.txt",
+      "type": "configures",
+      "weight": 0.9,
+      "label": "预设驱动 CMake 构建配置"
+    },
+    {
+      "source": "config:CMakePresets.json",
+      "target": "config:vcpkg-configuration.json",
+      "type": "depends_on",
+      "weight": 0.7,
+      "label": "工具链引用 vcpkg 注册表"
+    },
+    {
+      "source": "config:CMakePresets.json",
+      "target": "config:vcpkg.json",
+      "type": "depends_on",
+      "weight": 0.7,
+      "label": "vcpkg 工具链解析 manifest 依赖"
+    },
+    {
+      "source": "config:vcpkg.json",
+      "target": "config:vcpkg-configuration.json",
+      "type": "depends_on",
+      "weight": 0.8,
+      "label": "manifest 依赖注册表配置"
+    },
+    {
+      "source": "config:vcpkg.json",
+      "target": "document:CMakeLists.txt",
+      "type": "related",
+      "weight": 0.7,
+      "label": "vcpkg 提供 CMake find_package 所需库"
+    },
+    {
+      "source": "document:CMakeLists.txt",
+      "target": "config:CMakePresets.json",
+      "type": "configured_by",
+      "weight": 0.8,
+      "label": "CMake 接受预设参数"
+    }
+  ]
+}

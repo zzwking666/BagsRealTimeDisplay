@@ -1,0 +1,3666 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "83f320e17f8f453e9c741e1a18bee47d0a2e84cc",
+  "generatedAt": "2026-06-12T02:35:55.289Z",
+  "files": {
+    ".claude/memory/feedback_chinese_language.md": {
+      "filePath": ".claude/memory/feedback_chinese_language.md",
+      "contentHash": "173621132ceddc4b4290842bebd3ba4cee5da13961cf9732a28392e1a346a2ac",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    ".claude/memory/feedback_emoji_prefix.md": {
+      "filePath": ".claude/memory/feedback_emoji_prefix.md",
+      "contentHash": "8f6cc1e60e5b57cc352eac5ab63b26f3faab330994d7178688930dc604a67f29",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    ".claude/memory/MEMORY.md": {
+      "filePath": ".claude/memory/MEMORY.md",
+      "contentHash": "298dfb95bb6ef84a09d59f50f85fb9d964dc424ea5085cd70fa2c04ec40fcb49",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    ".claude/memory/project_codegraph_auto_update.md": {
+      "filePath": ".claude/memory/project_codegraph_auto_update.md",
+      "contentHash": "ab3795a92ff3c52ea3b15cca86185d9772228d015f9f4b95c9c2f54d50ac5f53",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    ".codegraph/daemon.pid": {
+      "filePath": ".codegraph/daemon.pid",
+      "contentHash": "21ccf89bbad61abf44a6b1704cf3b5ec88515e5c1276d17ddf9c1f7c6290a62e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": false
+    },
+    ".gitattributes": {
+      "filePath": ".gitattributes",
+      "contentHash": "462475ee5301e77d2a54a64757d95c3f21fc3a79e92e6ec94bdfcc8b36e48964",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/.understandignore": {
+      "filePath": ".understand-anything/.understandignore",
+      "contentHash": "5f7278d03a16b180b022b17b58f8ce241a43d3605cf15f533c339785fa399e3d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 23,
+      "hasStructuralAnalysis": false
+    },
+    ".understand-anything/config.json": {
+      "filePath": ".understand-anything/config.json",
+      "contentHash": "de7ae7b841141718a1bd36930e7642f915b847a713410d80cd433977a0691fe0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "contentHash": "6dc59413cd4e118c6d63bec08f3fd25eabf137fcf61e0200ba4db5da3d6061d9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "contentHash": "57d57c160a0046db88e62d580bb09c80ee1311124729b2d1a8ebb78b6fd8ed47",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AsynchronousThreadModule",
+          "methods": [
+            "destroy",
+            "start",
+            "stop"
+          ],
+          "properties": [
+            "public",
+            "statisticalInfo",
+            "refreshUIThread",
+            "zMotionPollingThread"
+          ],
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "imports": [
+        {
+          "source": "IModule.hpp",
+          "specifiers": [
+            "IModule.hpp"
+          ]
+        },
+        {
+          "source": "QObject",
+          "specifiers": [
+            "QObject"
+          ]
+        },
+        {
+          "source": "RefreshUIThread.hpp",
+          "specifiers": [
+            "RefreshUIThread.hpp"
+          ]
+        },
+        {
+          "source": "ZMotionPollingThread.hpp",
+          "specifiers": [
+            "ZMotionPollingThread.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "AsynchronousThreadModule"
+      ],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "contentHash": "a5a4330f43a7f50ac82d66e22bc6043c274f9b903a0757f768bcecc067997f60",
+      "functions": [
+        {
+          "name": "build",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "destroy",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "start",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "stop",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "AsynchronousThreadModule.hpp",
+          "specifiers": [
+            "AsynchronousThreadModule.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "build",
+        "destroy",
+        "start",
+        "stop"
+      ],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "contentHash": "3b9becb5292b1c54fa2b9c8da3bf8ebd13873f8f5a4aa7c7a5d07a4e103fb2ff",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "contentHash": "9b81e9c83fe8b989489c3bb7367d98437fde3441f064efe800c7f82ffb2be396",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "contentHash": "eed199f458dd877686d4e26ceb1e0e994456da08f023d1cda2ffe8884809048a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "RefreshUIThread",
+          "methods": [
+            "startThread",
+            "stopThread",
+            "run",
+            "emit_RefreshUI"
+          ],
+          "properties": [
+            "public",
+            "running"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "QThread",
+          "specifiers": [
+            "QThread"
+          ]
+        }
+      ],
+      "exports": [
+        "RefreshUIThread"
+      ],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "contentHash": "ff824f88e821ab361ad94339cc4a3ae9215f6cadd785c5bfd940193862db9d40",
+      "functions": [
+        {
+          "name": "RefreshUIThread",
+          "params": [
+            "parent"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "~RefreshUIThread",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "startThread",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "stopThread",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "run",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "RefreshUIThread.hpp",
+          "specifiers": [
+            "RefreshUIThread.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "RefreshUIThread",
+        "~RefreshUIThread",
+        "startThread",
+        "stopThread",
+        "run"
+      ],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "contentHash": "dd1f457c0b0706228675f35059f5ece7d380e84032a07703c36f97500a3505c9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "contentHash": "892d35aa0d6050e1d024f7ab79f9fde78be87e1b8b3350658c248a5f757886d5",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ZMotionPollingThread",
+          "methods": [
+            "startThread",
+            "stopThread",
+            "run",
+            "zMotionDisconnect"
+          ],
+          "properties": [
+            "public",
+            "_running"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "imports": [
+        {
+          "source": "QThread",
+          "specifiers": [
+            "QThread"
+          ]
+        },
+        {
+          "source": "atomic",
+          "specifiers": [
+            "atomic"
+          ]
+        }
+      ],
+      "exports": [
+        "ZMotionPollingThread"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "contentHash": "e4e93903e39dcfe6ba60745c0983144b33ed948c2228b6737f45b3498358e308",
+      "functions": [
+        {
+          "name": "ZMotionPollingThread",
+          "params": [
+            "parent"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "~ZMotionPollingThread",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "startThread",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "stopThread",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "run",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ZMotionPollingThread.hpp",
+          "specifiers": [
+            "ZMotionPollingThread.hpp"
+          ]
+        },
+        {
+          "source": "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp",
+          "specifiers": [
+            "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp"
+          ]
+        },
+        {
+          "source": "Modules.hpp",
+          "specifiers": [
+            "Modules.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "ZMotionPollingThread",
+        "~ZMotionPollingThread",
+        "startThread",
+        "stopThread",
+        "run"
+      ],
+      "totalLines": 49,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "contentHash": "79bc7efbd22df559d9e4ff4627d06be75aa7d7670b4e36f2b497aacba74a70f8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "contentHash": "a9d74add980e54a926621a1ad52dcab46a39b62104b397cedf5ff4f3bd368577",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "contentHash": "2dcb53d8a1a1240616d6dfe436a7c82480534b079f3b3a742d4662b67e4d60f5",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ImageStitch",
+          "methods": [
+            "onFrameCaptured",
+            "stitchImages",
+            "rotateXImage",
+            "imageReady"
+          ],
+          "properties": [
+            "public",
+            "matInfos",
+            "matInfosSize",
+            "lastStitchFrameNum",
+            "newFrameNum",
+            "lastCam1FrameNum",
+            "lastCam2FrameNum",
+            "configModule"
+          ],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "imports": [
+        {
+          "source": "QObject",
+          "specifiers": [
+            "QObject"
+          ]
+        },
+        {
+          "source": "QThread",
+          "specifiers": [
+            "QThread"
+          ]
+        },
+        {
+          "source": "rwul/rqwcd/rqwc_d.hpp",
+          "specifiers": [
+            "rwul/rqwcd/rqwc_d.hpp"
+          ]
+        },
+        {
+          "source": "ConfigModule.hpp",
+          "specifiers": [
+            "ConfigModule.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "onFrameCaptured",
+        "ImageStitch"
+      ],
+      "totalLines": 39,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp": {
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "contentHash": "bf5720832876a3d1a4f949eb360f08acd70daf1a5f785f672a6c492fb2def3d1",
+      "functions": [
+        {
+          "name": "ImageStitch",
+          "params": [
+            "configModule",
+            "parent"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "~ImageStitch",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "onFrameCaptured",
+          "params": [
+            "matInfo",
+            "index"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 81
+        },
+        {
+          "name": "stitchImages",
+          "params": [
+            "stitchCount"
+          ],
+          "returnType": "cv::Mat",
+          "exported": true,
+          "lineCount": 95
+        },
+        {
+          "name": "rotateXImage",
+          "params": [
+            "image"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 21
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ImageStitch.hpp",
+          "specifiers": [
+            "ImageStitch.hpp"
+          ]
+        },
+        {
+          "source": "algorithm",
+          "specifiers": [
+            "algorithm"
+          ]
+        },
+        {
+          "source": "vector",
+          "specifiers": [
+            "vector"
+          ]
+        },
+        {
+          "source": "cmath",
+          "specifiers": [
+            "cmath"
+          ]
+        },
+        {
+          "source": "QDebug",
+          "specifiers": [
+            "QDebug"
+          ]
+        },
+        {
+          "source": "opencv2/core.hpp",
+          "specifiers": [
+            "opencv2/core.hpp"
+          ]
+        },
+        {
+          "source": "opencv2/imgproc.hpp",
+          "specifiers": [
+            "opencv2/imgproc.hpp"
+          ]
+        },
+        {
+          "source": "rwul/imgqt/imgqt.hpp",
+          "specifiers": [
+            "rwul/imgqt/imgqt.hpp"
+          ]
+        },
+        {
+          "source": "Modules.hpp",
+          "specifiers": [
+            "Modules.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "ImageStitch",
+        "~ImageStitch",
+        "onFrameCaptured",
+        "stitchImages",
+        "rotateXImage"
+      ],
+      "totalLines": 223,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/CMakeLists.txt",
+      "contentHash": "d4995d4ece8709a910d537b063a9b57577affae0ca5eaa13082211301b891e79",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Global/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "contentHash": "574e305450d94226256f32e4e7a20256968fe74a2e02a9a7d9e6695058fcfb8a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Global/Utility/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "contentHash": "26090e2c96d0b0ffec5c55a9145f430b890ed537504fe9c6bf42760257c73ca4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Global/Utility/include/Utility.hpp": {
+      "filePath": "BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "contentHash": "3d63bb64a5b9a0c1444bd1a15332bf606351ca1d2151f91a28498d75420a1c24",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "QString",
+          "specifiers": [
+            "QString"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Global/Utility/src/Utility.cpp": {
+      "filePath": "BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "contentHash": "0bad5de9d2a7eb816ff9440a894d19252e6754a8af3e498efb808e90178f182f",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "utility.hpp",
+          "specifiers": [
+            "utility.hpp"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "contentHash": "62833ae297a551527cc9c58dc8f5b3ddcdf033d317befad85b4f4a8aad215e17",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "contentHash": "58e13b8d0db019132229bebc3d370ac34c762aa79691b2540efe5721803ad412",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CameraModule",
+          "methods": [
+            "build",
+            "destroy",
+            "start",
+            "stop",
+            "build_camera1",
+            "build_camera2",
+            "destroy_camera1",
+            "destroy_camera2",
+            "setCamera1TriggerOff",
+            "setCamera1HardwareTrigger",
+            "setCamera2TriggerOff",
+            "setCamera2HardwareTrigger",
+            "setCamera1ExposureTime",
+            "setCamera1Gain",
+            "setCamera2ExposureTime",
+            "setCamera2Gain",
+            "setCamera1Multiplier",
+            "setCamera1PostDivider",
+            "setCamera2Multiplier",
+            "setCamera2PostDivider",
+            "setCamera1LineHeight",
+            "setCamera2LineHeight",
+            "isTargetCamera",
+            "cameraMetaDataCheck",
+            "onBuildCamera",
+            "onDestroyCamera",
+            "onStartCamera",
+            "onCamera1Capture",
+            "onCamera2Capture",
+            "onCameraCapture",
+            "onCameraStateChanged"
+          ],
+          "properties": [
+            "public",
+            "camera1",
+            "camera2",
+            "isCamera1SoftTrigger",
+            "isCamera2SoftTrigger"
+          ],
+          "exported": true,
+          "lineCount": 68
+        }
+      ],
+      "imports": [
+        {
+          "source": "memory",
+          "specifiers": [
+            "memory"
+          ]
+        },
+        {
+          "source": "QObject",
+          "specifiers": [
+            "QObject"
+          ]
+        },
+        {
+          "source": "IModule.hpp",
+          "specifiers": [
+            "IModule.hpp"
+          ]
+        },
+        {
+          "source": "rwul/rqwcd/rqwc_d.hpp",
+          "specifiers": [
+            "rwul/rqwcd/rqwc_d.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "build",
+        "destroy",
+        "start",
+        "stop",
+        "setCamera1TriggerOff",
+        "setCamera1HardwareTrigger",
+        "setCamera2TriggerOff",
+        "setCamera2HardwareTrigger",
+        "setCamera1ExposureTime",
+        "setCamera1Gain",
+        "setCamera2ExposureTime",
+        "setCamera2Gain",
+        "setCamera1Multiplier",
+        "setCamera1PostDivider",
+        "setCamera2Multiplier",
+        "setCamera2PostDivider",
+        "setCamera1LineHeight",
+        "setCamera2LineHeight",
+        "onBuildCamera",
+        "onDestroyCamera",
+        "onStartCamera",
+        "CameraModule"
+      ],
+      "totalLines": 79,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/src/CameraModule.cpp",
+      "contentHash": "8d65dce208e4e86ecbc9549d66dc4cb75b594a240050c49d8d8950b3649a58c4",
+      "functions": [
+        {
+          "name": "CameraModule",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "~CameraModule",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "build",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "destroy",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "start",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 44
+        },
+        {
+          "name": "stop",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "build_camera1",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 45
+        },
+        {
+          "name": "build_camera2",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 45
+        },
+        {
+          "name": "destroy_camera1",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "destroy_camera2",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "setCamera1TriggerOff",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "setCamera1HardwareTrigger",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "setCamera2TriggerOff",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "setCamera2HardwareTrigger",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "setCamera1ExposureTime",
+          "params": [
+            "exposureTime"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera1Gain",
+          "params": [
+            "gain"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera2ExposureTime",
+          "params": [
+            "exposureTime"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera2Gain",
+          "params": [
+            "gain"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera1Multiplier",
+          "params": [
+            "multiplier"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera1PostDivider",
+          "params": [
+            "postDivider"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera2Multiplier",
+          "params": [
+            "multiplier"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera2PostDivider",
+          "params": [
+            "postDivider"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera1LineHeight",
+          "params": [
+            "lineHeight"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setCamera2LineHeight",
+          "params": [
+            "lineHeight"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "isTargetCamera",
+          "params": [
+            "cameraIndex",
+            "targetName"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "cameraMetaDataCheck",
+          "params": [
+            "cameraIndex",
+            "cameraInfo"
+          ],
+          "returnType": "rw::hoec::CameraInfo",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "onBuildCamera",
+          "params": [
+            "index"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "onDestroyCamera",
+          "params": [
+            "index"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "onStartCamera",
+          "params": [
+            "index"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "onCamera1Capture",
+          "params": [
+            "matInfo"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "onCamera2Capture",
+          "params": [
+            "matInfo"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "CameraModule.hpp",
+          "specifiers": [
+            "CameraModule.hpp"
+          ]
+        },
+        {
+          "source": "Utility.hpp",
+          "specifiers": [
+            "Utility.hpp"
+          ]
+        },
+        {
+          "source": "QRegularExpression",
+          "specifiers": [
+            "QRegularExpression"
+          ]
+        },
+        {
+          "source": "Modules.hpp",
+          "specifiers": [
+            "Modules.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "CameraModule",
+        "~CameraModule",
+        "build",
+        "destroy",
+        "start",
+        "stop",
+        "build_camera1",
+        "build_camera2",
+        "destroy_camera1",
+        "destroy_camera2",
+        "setCamera1TriggerOff",
+        "setCamera1HardwareTrigger",
+        "setCamera2TriggerOff",
+        "setCamera2HardwareTrigger",
+        "setCamera1ExposureTime",
+        "setCamera1Gain",
+        "setCamera2ExposureTime",
+        "setCamera2Gain",
+        "setCamera1Multiplier",
+        "setCamera1PostDivider",
+        "setCamera2Multiplier",
+        "setCamera2PostDivider",
+        "setCamera1LineHeight",
+        "setCamera2LineHeight",
+        "isTargetCamera",
+        "cameraMetaDataCheck",
+        "onBuildCamera",
+        "onDestroyCamera",
+        "onStartCamera",
+        "onCamera1Capture",
+        "onCamera2Capture"
+      ],
+      "totalLines": 479,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Modules/CMakeLists.txt",
+      "contentHash": "963270810807300f573938c56cc2cecdb9cd98add6daf69bd94f298a1bd0a7dd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/CMakeLists.txt",
+      "contentHash": "991cd4a28ad23f137063ba601bd1242b32346f6a0781270029d512df219db17b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/include/ConfigModule.hpp",
+      "contentHash": "5e1f493cc539bdd73f56e29da4ecaf8cc2528a4564d8ab6590c32a49fdd1f712",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ConfigModule",
+          "methods": [
+            "destroy",
+            "start",
+            "stop"
+          ],
+          "properties": [
+            "public",
+            "storeContext",
+            "bagsRealTimeDisplayInfo",
+            "setConfig"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "imports": [
+        {
+          "source": "IModule.hpp",
+          "specifiers": [
+            "IModule.hpp"
+          ]
+        },
+        {
+          "source": "QObject",
+          "specifiers": [
+            "QObject"
+          ]
+        },
+        {
+          "source": "QDebug",
+          "specifiers": [
+            "QDebug"
+          ]
+        },
+        {
+          "source": "QFile",
+          "specifiers": [
+            "QFile"
+          ]
+        },
+        {
+          "source": "rwul/oso/oso_StorageContext.hpp",
+          "specifiers": [
+            "rwul/oso/oso_StorageContext.hpp"
+          ]
+        },
+        {
+          "source": "rwul/oso/oso_func.hpp",
+          "specifiers": [
+            "rwul/oso/oso_func.hpp"
+          ]
+        },
+        {
+          "source": "BagsRealTimeDisplayInfo.hpp",
+          "specifiers": [
+            "BagsRealTimeDisplayInfo.hpp"
+          ]
+        },
+        {
+          "source": "SetConfig.hpp",
+          "specifiers": [
+            "SetConfig.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "ConfigModule"
+      ],
+      "totalLines": 84,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso": {
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/BagsRealTimeDisplayInfo.oso",
+      "contentHash": "19c85a1ec3cab67bfd756f4650a5ee57f269c1684a0cd97048a168567cda3d06",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso": {
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoFile/SetConfig.oso",
+      "contentHash": "5d810b408c34fc2a92894d6cc1877b893540a714bedf4b3116f343bb096223bd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/BagsRealTimeDisplayInfo.hpp",
+      "contentHash": "c80d8245ee6766a8db0b7afc4dec14a02a88799aae7566cab67daded0fe4f590",
+      "functions": [
+        {
+          "name": "BagsRealTimeDisplayInfo",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "~BagsRealTimeDisplayInfo",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "BagsRealTimeDisplayInfo",
+          "params": [
+            "assembly"
+          ],
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "BagsRealTimeDisplayInfo",
+          "params": [
+            "obj"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "oso::ObjectStoreAssembly",
+          "params": [],
+          "returnType": "BagsRealTimeDisplayInfo::operator",
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "operator==",
+          "params": [
+            "obj"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "operator!=",
+          "params": [
+            "obj"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "BagsRealTimeDisplayInfo",
+          "methods": [
+            "BagsRealTimeDisplayInfo",
+            "~BagsRealTimeDisplayInfo",
+            "operator==",
+            "operator!="
+          ],
+          "properties": [
+            "zhengmianzongliang",
+            "beimianzongliang",
+            "qiehuanxianshi",
+            "shezhichishu"
+          ],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "rwul/oso/oso_core.h",
+          "specifiers": [
+            "rwul/oso/oso_core.h"
+          ]
+        },
+        {
+          "source": "string",
+          "specifiers": [
+            "string"
+          ]
+        }
+      ],
+      "exports": [
+        "BagsRealTimeDisplayInfo",
+        "~BagsRealTimeDisplayInfo",
+        "operator==",
+        "operator!=",
+        "BagsRealTimeDisplayInfo",
+        "BagsRealTimeDisplayInfo",
+        "BagsRealTimeDisplayInfo",
+        "oso::ObjectStoreAssembly",
+        "operator==",
+        "operator!="
+      ],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/osoInclude/SetConfig.hpp",
+      "contentHash": "758d2cfa04cae7d15ce2cbcfdc449123328cae7383fbd42af821a098b7a5e131",
+      "functions": [
+        {
+          "name": "SetConfig",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "~SetConfig",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "SetConfig",
+          "params": [
+            "assembly"
+          ],
+          "exported": true,
+          "lineCount": 78
+        },
+        {
+          "name": "SetConfig",
+          "params": [
+            "obj"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "oso::ObjectStoreAssembly",
+          "params": [],
+          "returnType": "SetConfig::operator",
+          "exported": true,
+          "lineCount": 62
+        },
+        {
+          "name": "operator==",
+          "params": [
+            "obj"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "operator!=",
+          "params": [
+            "obj"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [
+        {
+          "name": "SetConfig",
+          "methods": [
+            "SetConfig",
+            "~SetConfig",
+            "operator==",
+            "operator!="
+          ],
+          "properties": [
+            "chengfaqi1",
+            "houfenpin1",
+            "zengyi1",
+            "baoguang1",
+            "xiangsudangliang1",
+            "chengfaqi2",
+            "houfenpin2",
+            "zengyi2",
+            "baoguang2",
+            "xiangsudangliang2",
+            "xuantingshijian",
+            "qiehuanzhangshu",
+            "isjingxiang",
+            "chutuzhangshu"
+          ],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "imports": [
+        {
+          "source": "rwul/oso/oso_core.h",
+          "specifiers": [
+            "rwul/oso/oso_core.h"
+          ]
+        },
+        {
+          "source": "string",
+          "specifiers": [
+            "string"
+          ]
+        }
+      ],
+      "exports": [
+        "SetConfig",
+        "~SetConfig",
+        "operator==",
+        "operator!=",
+        "SetConfig",
+        "SetConfig",
+        "SetConfig",
+        "oso::ObjectStoreAssembly",
+        "operator==",
+        "operator!="
+      ],
+      "totalLines": 231,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/ConfigModule/src/ConfigModule.cpp",
+      "contentHash": "5719451ac8c310019e6c60ac976224451c00592a492393a1a4b7a22f8691ff81",
+      "functions": [
+        {
+          "name": "build",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "destroy",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "start",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "stop",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ConfigModule.hpp",
+          "specifiers": [
+            "ConfigModule.hpp"
+          ]
+        },
+        {
+          "source": "rwul/oso/oso_StorageContext.hpp",
+          "specifiers": [
+            "rwul/oso/oso_StorageContext.hpp"
+          ]
+        },
+        {
+          "source": "utility.hpp",
+          "specifiers": [
+            "utility.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "build",
+        "destroy",
+        "start",
+        "stop"
+      ],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Modules/IModule/CMakeLists.txt",
+      "contentHash": "d299c3affeecb95f9ff536f8e2b7f685b33d99389bf48c4f196dd719168e40b8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/IModule/include/IModule.hpp",
+      "contentHash": "c75df719517a9ea35b2e32bb1600f16147af1734c8153f4de03361dff5599ce9",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vector",
+          "specifiers": [
+            "vector"
+          ]
+        },
+        {
+          "source": "qstring.h",
+          "specifiers": [
+            "qstring.h"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/IModule/src/IModule.cpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/IModule/src/IModule.cpp",
+      "contentHash": "63d186586c1190f6c6d29f12e1ec3920d90152a14b3d11be165dc9207e7da258",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "IModule.hpp",
+          "specifiers": [
+            "IModule.hpp"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/CMakeLists.txt",
+      "contentHash": "ae2617a3aa89a684a849a13b5abe85b470eae145983d5c3d1c3c618ba2f73949",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/include/Modules.hpp",
+      "contentHash": "cf504a281e3737de435aba9b7fa6052486dced3f7e1e7f469fb939710965b63e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Modules",
+          "methods": [
+            "build",
+            "destroy",
+            "start",
+            "stop",
+            "connect",
+            "check",
+            "EnsureDirectoryExists"
+          ],
+          "properties": [
+            "cameraModule",
+            "zMotionModule",
+            "configModule",
+            "imageStitchModule",
+            "asynchronousThreadModule"
+          ],
+          "exported": true,
+          "lineCount": 39
+        }
+      ],
+      "imports": [
+        {
+          "source": "IModule.hpp",
+          "specifiers": [
+            "IModule.hpp"
+          ]
+        },
+        {
+          "source": "rwul/oso/oso_func.hpp",
+          "specifiers": [
+            "rwul/oso/oso_func.hpp"
+          ]
+        },
+        {
+          "source": "RunEnvCheck.hpp",
+          "specifiers": [
+            "RunEnvCheck.hpp"
+          ]
+        },
+        {
+          "source": "CameraModule.hpp",
+          "specifiers": [
+            "CameraModule.hpp"
+          ]
+        },
+        {
+          "source": "ZMotionModule.hpp",
+          "specifiers": [
+            "ZMotionModule.hpp"
+          ]
+        },
+        {
+          "source": "ConfigModule.hpp",
+          "specifiers": [
+            "ConfigModule.hpp"
+          ]
+        },
+        {
+          "source": "ImageStitch.hpp",
+          "specifiers": [
+            "ImageStitch.hpp"
+          ]
+        },
+        {
+          "source": "AsynchronousThreadModule.hpp",
+          "specifiers": [
+            "AsynchronousThreadModule.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "build",
+        "destroy",
+        "start",
+        "stop",
+        "connect",
+        "check",
+        "EnsureDirectoryExists",
+        "Modules"
+      ],
+      "totalLines": 78,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/Modules/src/Modules.cpp",
+      "contentHash": "b2da715ceb72c422c9001b9cb41dbf5364009614baa50d889794a557468ed930",
+      "functions": [
+        {
+          "name": "Modules",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "Modules",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "~Modules",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "build",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "destroy",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "start",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "stop",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "connect",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "check",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "EnsureDirectoryExists",
+          "params": [
+            "dirPath"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "Modules.hpp",
+          "specifiers": [
+            "Modules.hpp"
+          ]
+        },
+        {
+          "source": "qmessagebox.h",
+          "specifiers": [
+            "qmessagebox.h"
+          ]
+        },
+        {
+          "source": "Utility.hpp",
+          "specifiers": [
+            "Utility.hpp"
+          ]
+        },
+        {
+          "source": "QDir",
+          "specifiers": [
+            "QDir"
+          ]
+        }
+      ],
+      "exports": [
+        "Modules",
+        "Modules",
+        "~Modules",
+        "build",
+        "destroy",
+        "start",
+        "stop",
+        "connect",
+        "check",
+        "EnsureDirectoryExists"
+      ],
+      "totalLines": 124,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/CMakeLists.txt",
+      "contentHash": "e23944485b67ee09384c74c04b1e17c1d7b0c87064f4234f905a0287fc1168f9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/include/ZMotionModule.hpp",
+      "contentHash": "24eb17c0f608ff0f11711eeb4e1f0fe3c8c77ae496864c195f0ee5fb5c3868a6",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ZMotionModule",
+          "methods": [
+            "build",
+            "destroy",
+            "start",
+            "stop",
+            "reBuildzMotion"
+          ],
+          "properties": [
+            "public",
+            "zMotion",
+            "zMotionScheduler"
+          ],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "QObject",
+          "specifiers": [
+            "QObject"
+          ]
+        },
+        {
+          "source": "memory",
+          "specifiers": [
+            "memory"
+          ]
+        },
+        {
+          "source": "string",
+          "specifiers": [
+            "string"
+          ]
+        },
+        {
+          "source": "IModule.hpp",
+          "specifiers": [
+            "IModule.hpp"
+          ]
+        },
+        {
+          "source": "rwul/hoepZMotion/hoepZMotion_ZMotionDeviceScheduler.hpp",
+          "specifiers": [
+            "rwul/hoepZMotion/hoepZMotion_ZMotionDeviceScheduler.hpp"
+          ]
+        },
+        {
+          "source": "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp",
+          "specifiers": [
+            "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "build",
+        "destroy",
+        "start",
+        "stop",
+        "reBuildzMotion",
+        "ZMotionModule"
+      ],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp": {
+      "filePath": "BagsRealTimeDisplay/Modules/ZMotionModule/src/ZMotionModule.cpp",
+      "contentHash": "29d5bd0bcbabfb9c42da484c2900ed398cad4f0f800d5369cc65097171f36d06",
+      "functions": [
+        {
+          "name": "ZMotionModule",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "~ZMotionModule",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "build",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "destroy",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "start",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "stop",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "reBuildzMotion",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "ZMotionModule.hpp",
+          "specifiers": [
+            "ZMotionModule.hpp"
+          ]
+        },
+        {
+          "source": "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp",
+          "specifiers": [
+            "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp"
+          ]
+        },
+        {
+          "source": "QDebug",
+          "specifiers": [
+            "QDebug"
+          ]
+        },
+        {
+          "source": "Utility.hpp",
+          "specifiers": [
+            "Utility.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "ZMotionModule",
+        "~ZMotionModule",
+        "build",
+        "destroy",
+        "start",
+        "stop",
+        "reBuildzMotion"
+      ],
+      "totalLines": 63,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Tools/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Tools/CMakeLists.txt",
+      "contentHash": "9a1d1fd1e1feb03858e9419c459473ed67f6f8ddb0e3d61654e3f46d24234eba",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Tools/PanZoomLabel/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/CMakeLists.txt",
+      "contentHash": "1403342ead3ab315491a3a8fd8ecf2bce25654afed5accef68e0d941a90dbf62",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h": {
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/include/PanZoomLabel.h",
+      "contentHash": "bb062135d18fe7d225ed01616506ac6f200fb500cc6f6e38d41dd59fa4581664",
+      "functions": [
+        {
+          "name": "roiMode",
+          "params": [],
+          "returnType": "bool",
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "PanZoomLabel",
+          "methods": [
+            "setPixmap",
+            "setPixmap",
+            "resetView",
+            "fitToView",
+            "viewState",
+            "applyViewState",
+            "setRoiMode",
+            "roiMode",
+            "clearAllRois",
+            "cancelActiveRoi",
+            "setCreateRois",
+            "setShieldRois",
+            "setOverlayPaths",
+            "clearOverlayPaths",
+            "roiRectsConfirmedChanged",
+            "paintEvent",
+            "wheelEvent",
+            "mousePressEvent",
+            "mouseMoveEvent",
+            "mouseReleaseEvent",
+            "resizeEvent",
+            "ensureValidOffset",
+            "widgetToImage",
+            "imageToWidget",
+            "imageToWidget",
+            "calcFitMinScale",
+            "hitTestActiveRoiHandle",
+            "normalizeRoi",
+            "clampRoiToImage"
+          ],
+          "properties": [
+            "public",
+            "_src",
+            "_scale",
+            "_minScale",
+            "_maxScale",
+            "_offset",
+            "_dragging",
+            "_lastMousePos",
+            "_roiMode",
+            "_roiState",
+            "_roiImageRects",
+            "_roiFirstPointImage",
+            "_roiPreviewImageRect",
+            "_activeRoiImageRect",
+            "_activeHandle",
+            "_dragStartMouseImage",
+            "_dragStartRoiImage",
+            "_overlayPathsImage",
+            "_roiStrokeColor",
+            "_roiFillColor",
+            "_createRoisImage",
+            "_shieldRoisImage"
+          ],
+          "exported": true,
+          "lineCount": 101
+        }
+      ],
+      "imports": [
+        {
+          "source": "QLabel",
+          "specifiers": [
+            "QLabel"
+          ]
+        },
+        {
+          "source": "QPixmap",
+          "specifiers": [
+            "QPixmap"
+          ]
+        },
+        {
+          "source": "QPoint",
+          "specifiers": [
+            "QPoint"
+          ]
+        },
+        {
+          "source": "QPointF",
+          "specifiers": [
+            "QPointF"
+          ]
+        },
+        {
+          "source": "QRectF",
+          "specifiers": [
+            "QRectF"
+          ]
+        },
+        {
+          "source": "QVector",
+          "specifiers": [
+            "QVector"
+          ]
+        },
+        {
+          "source": "QPainterPath",
+          "specifiers": [
+            "QPainterPath"
+          ]
+        }
+      ],
+      "exports": [
+        "PanZoomLabel"
+      ],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp": {
+      "filePath": "BagsRealTimeDisplay/Tools/PanZoomLabel/src/PanZoomLabel.cpp",
+      "contentHash": "06f0b9188cdece86fa5084a985cb7d7b04c46edc22b6531576a0a5b0bfb3826b",
+      "functions": [
+        {
+          "name": "safeDiv",
+          "params": [
+            "a",
+            "b",
+            "fallback"
+          ],
+          "returnType": "double",
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "PanZoomLabel",
+          "params": [
+            "parent"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "setOverlayPaths",
+          "params": [
+            "pathsImage"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "clearOverlayPaths",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "setRoiMode",
+          "params": [
+            "enabled"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "clearAllRois",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "cancelActiveRoi",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "setPixmap",
+          "params": [
+            "pixmap"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "setPixmap",
+          "params": [
+            "pixmap",
+            "resetView"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "resetView",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "fitToView",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "viewState",
+          "params": [],
+          "returnType": "PanZoomLabel::ViewState",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "applyViewState",
+          "params": [
+            "state"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "paintEvent",
+          "params": [
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 104
+        },
+        {
+          "name": "wheelEvent",
+          "params": [
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "mousePressEvent",
+          "params": [
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 90
+        },
+        {
+          "name": "mouseMoveEvent",
+          "params": [
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 91
+        },
+        {
+          "name": "mouseReleaseEvent",
+          "params": [
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "resizeEvent",
+          "params": [
+            "e"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "widgetToImage",
+          "params": [
+            "pWidget"
+          ],
+          "returnType": "QPointF",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "imageToWidget",
+          "params": [
+            "pImage"
+          ],
+          "returnType": "QPointF",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "imageToWidget",
+          "params": [
+            "rImage"
+          ],
+          "returnType": "QRectF",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "calcFitMinScale",
+          "params": [],
+          "returnType": "double",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "hitTestActiveRoiHandle",
+          "params": [
+            "posWidget"
+          ],
+          "returnType": "PanZoomLabel::RoiHandle",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "normalizeRoi",
+          "params": [
+            "r"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "clampRoiToImage",
+          "params": [
+            "r"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "ensureValidOffset",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "setCreateRois",
+          "params": [
+            "roisImage"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "setShieldRois",
+          "params": [
+            "roisImage"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "PanZoomLabel.h",
+          "specifiers": [
+            "PanZoomLabel.h"
+          ]
+        },
+        {
+          "source": "QPainter",
+          "specifiers": [
+            "QPainter"
+          ]
+        },
+        {
+          "source": "QWheelEvent",
+          "specifiers": [
+            "QWheelEvent"
+          ]
+        },
+        {
+          "source": "QMouseEvent",
+          "specifiers": [
+            "QMouseEvent"
+          ]
+        },
+        {
+          "source": "QResizeEvent",
+          "specifiers": [
+            "QResizeEvent"
+          ]
+        },
+        {
+          "source": "algorithm",
+          "specifiers": [
+            "algorithm"
+          ]
+        }
+      ],
+      "exports": [
+        "PanZoomLabel",
+        "setOverlayPaths",
+        "clearOverlayPaths",
+        "setRoiMode",
+        "clearAllRois",
+        "cancelActiveRoi",
+        "setPixmap",
+        "setPixmap",
+        "resetView",
+        "fitToView",
+        "viewState",
+        "applyViewState",
+        "paintEvent",
+        "wheelEvent",
+        "mousePressEvent",
+        "mouseMoveEvent",
+        "mouseReleaseEvent",
+        "resizeEvent",
+        "widgetToImage",
+        "imageToWidget",
+        "imageToWidget",
+        "calcFitMinScale",
+        "hitTestActiveRoiHandle",
+        "normalizeRoi",
+        "clampRoiToImage",
+        "ensureValidOffset",
+        "setCreateRois",
+        "setShieldRois"
+      ],
+      "totalLines": 631,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/CMakeLists.txt",
+      "contentHash": "e88f4c5f587cc712f82aca7687f21ab7a313765b69476e636aa4b6c267700e45",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp": {
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/include/RunEnvCheck.hpp",
+      "contentHash": "4ecdb838773b62723f3ca30344c0ae316337665f50b9030d8edc1e3e1bc5b93e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "RunEnvCheck",
+          "methods": [
+            "isSingleInstance",
+            "isProcessRunning",
+            "isFileExist"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "imports": [
+        {
+          "source": "QString",
+          "specifiers": [
+            "QString"
+          ]
+        },
+        {
+          "source": "rwul/oso/oso_StorageContext.hpp",
+          "specifiers": [
+            "rwul/oso/oso_StorageContext.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "isSingleInstance",
+        "isProcessRunning",
+        "isFileExist",
+        "RunEnvCheck"
+      ],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp": {
+      "filePath": "BagsRealTimeDisplay/Tools/RunEnvCheck/src/RunEnvCheck.cpp",
+      "contentHash": "586d4ce3263fe3f632df329a94cfd63d367cfdce70abd60e7a9608f1b957f61f",
+      "functions": [
+        {
+          "name": "isSingleInstance",
+          "params": [
+            "instanceName"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "isProcessRunning",
+          "params": [
+            "processName"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "isFileExist",
+          "params": [
+            "filePath"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "RunEnvCheck.hpp",
+          "specifiers": [
+            "RunEnvCheck.hpp"
+          ]
+        },
+        {
+          "source": "QProcess",
+          "specifiers": [
+            "QProcess"
+          ]
+        },
+        {
+          "source": "QSharedMemory",
+          "specifiers": [
+            "QSharedMemory"
+          ]
+        },
+        {
+          "source": "QFile",
+          "specifiers": [
+            "QFile"
+          ]
+        }
+      ],
+      "exports": [
+        "isSingleInstance",
+        "isProcessRunning",
+        "isFileExist"
+      ],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/UI/CMakeLists.txt",
+      "contentHash": "a7d2881b089f68319a2b40818d55a5f9e54c775cd83fd475b84138dad20de775",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/UI/include/AppRuntime.hpp": {
+      "filePath": "BagsRealTimeDisplay/UI/include/AppRuntime.hpp",
+      "contentHash": "a0de0332aa91969ccab35cb60a37c457b38ec88678ee93f07088cc14f5615d99",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AppRuntime",
+          "methods": [
+            "show",
+            "shutdown",
+            "build_connect"
+          ],
+          "properties": [
+            "public",
+            "_modules",
+            "_bagsRealTimeDisplay"
+          ],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "imports": [
+        {
+          "source": "QObject",
+          "specifiers": [
+            "QObject"
+          ]
+        },
+        {
+          "source": "Modules.hpp",
+          "specifiers": [
+            "Modules.hpp"
+          ]
+        },
+        {
+          "source": "BagsRealTimeDisplay.h",
+          "specifiers": [
+            "BagsRealTimeDisplay.h"
+          ]
+        }
+      ],
+      "exports": [
+        "build_connect",
+        "AppRuntime"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/src/AppRuntime.cpp": {
+      "filePath": "BagsRealTimeDisplay/UI/src/AppRuntime.cpp",
+      "contentHash": "293bf5657841107eeae627548547eab18821aa35afbc8684a562bfafa815e8c3",
+      "functions": [
+        {
+          "name": "initialize",
+          "params": [],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "show",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "shutdown",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "build_connect",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "AppRuntime.hpp",
+          "specifiers": [
+            "AppRuntime.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "initialize",
+        "show",
+        "shutdown",
+        "build_connect"
+      ],
+      "totalLines": 60,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/src/main.cpp": {
+      "filePath": "BagsRealTimeDisplay/UI/src/main.cpp",
+      "contentHash": "62e4ea36d50b04b38f8cdebe297140ecbe92f6a3a6170f61ead3f952fadab6d7",
+      "functions": [
+        {
+          "name": "main",
+          "params": [
+            "argc",
+            "argv"
+          ],
+          "returnType": "int",
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "QFile",
+          "specifiers": [
+            "QFile"
+          ]
+        },
+        {
+          "source": "QtWidgets/QApplication",
+          "specifiers": [
+            "QtWidgets/QApplication"
+          ]
+        },
+        {
+          "source": "rwul/rqwu/rqwu_core.h",
+          "specifiers": [
+            "rwul/rqwu/rqwu_core.h"
+          ]
+        },
+        {
+          "source": "AppRuntime.hpp",
+          "specifiers": [
+            "AppRuntime.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "main"
+      ],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/CMakeLists.txt",
+      "contentHash": "bbae7810836c31cb96e83448ec3478cc011203f7f99c5de33d6189ca1f2d2c58",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 55,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/BagsRealTimeDisplay.h",
+      "contentHash": "c03a4e292156c773a7dd744abeddce64080663cd803aa2ba81b1145b730a7ec9",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "QtWidgets/QMainWindow",
+          "specifiers": [
+            "QtWidgets/QMainWindow"
+          ]
+        },
+        {
+          "source": "ui_BagsRealTimeDisplay.h",
+          "specifiers": [
+            "ui_BagsRealTimeDisplay.h"
+          ]
+        },
+        {
+          "source": "QTimer",
+          "specifiers": [
+            "QTimer"
+          ]
+        },
+        {
+          "source": "rqw_LabelClickable.h",
+          "specifiers": [
+            "rqw_LabelClickable.h"
+          ]
+        },
+        {
+          "source": "DlgCloseForm.h",
+          "specifiers": [
+            "DlgCloseForm.h"
+          ]
+        },
+        {
+          "source": "ConfigModule.hpp",
+          "specifiers": [
+            "ConfigModule.hpp"
+          ]
+        },
+        {
+          "source": "CameraModule.hpp",
+          "specifiers": [
+            "CameraModule.hpp"
+          ]
+        },
+        {
+          "source": "DlgProductSet.h",
+          "specifiers": [
+            "DlgProductSet.h"
+          ]
+        },
+        {
+          "source": "PanZoomLabel.h",
+          "specifiers": [
+            "PanZoomLabel.h"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 95,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/DlgCloseForm.h",
+      "contentHash": "d674a506dc4d2adfcf60783b30cd30872ab2d2d3c8980a03d7d81683b7b5f224",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "QDialog",
+          "specifiers": [
+            "QDialog"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/DlgProductSet.h",
+      "contentHash": "db50526e85a0539164d5df41cc3d007e5d7d99fcc7cc7ece9822fbf33a64a356",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "QDialog",
+          "specifiers": [
+            "QDialog"
+          ]
+        },
+        {
+          "source": "ConfigModule.hpp",
+          "specifiers": [
+            "ConfigModule.hpp"
+          ]
+        },
+        {
+          "source": "CameraModule.hpp",
+          "specifiers": [
+            "CameraModule.hpp"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 60,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/include/rqw_LabelClickable.h",
+      "contentHash": "e6a944e56f1be3fa20862e8f9c48c7c984c57aa1dab9d9ada112866ee73daea3",
+      "functions": [
+        {
+          "name": "~ClickableLabel",
+          "params": [],
+          "exported": false,
+          "lineCount": 1
+        }
+      ],
+      "classes": [
+        {
+          "name": "ClickableLabel",
+          "methods": [
+            "~ClickableLabel",
+            "clicked",
+            "mousePressEvent"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "imports": [
+        {
+          "source": "QLabel",
+          "specifiers": [
+            "QLabel"
+          ]
+        },
+        {
+          "source": "QWidget",
+          "specifiers": [
+            "QWidget"
+          ]
+        },
+        {
+          "source": "QMouseEvent",
+          "specifiers": [
+            "QMouseEvent"
+          ]
+        }
+      ],
+      "exports": [
+        "ClickableLabel"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/qrc/BagsRealTimeDisplay.qrc",
+      "contentHash": "c42aed9e10892bd3b0dccd5b7dec1d4490a91d205c64569a306e024d13c6d279",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/BagsRealTimeDisplay.cpp",
+      "contentHash": "bbb626b9f047de94423fae631219d903877bd641f037c1f623848a20b512be1c",
+      "functions": [
+        {
+          "name": "BagsRealTimeDisplay",
+          "params": [
+            "configModule",
+            "cameraModule",
+            "parent"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "~BagsRealTimeDisplay",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "initializeComponents",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "build_ui",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "build_connect",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "build_BagsRealTimeDisplayData",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "build_DlgCloseForm",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "build_DlgProductSet",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "build_PanZoomLabel",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 63
+        },
+        {
+          "name": "eventFilter",
+          "params": [
+            "watched",
+            "event"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "touchManualViewOperation",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "updateCameraLabelState",
+          "params": [
+            "cameraIndex",
+            "state"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 28
+        },
+        {
+          "name": "onUpdateStatisticalInfoUI",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "onZMotionDisconnect",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "onCameraDisplay",
+          "params": [
+            "index",
+            "image"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 91
+        },
+        {
+          "name": "setConfigWindowClosed",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "lb_title_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "pbtn_exit_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "pbtn_set_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "btn_jianshaobaoguang1_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "btn_zengjiabaoguang1_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "btn_jianshaobaoguang2_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "btn_zengjiabaoguang2_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "pbtn_resetProduct_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "pbtn_setchishu_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "cbb_qiehuanxianshi_currentIndexChanged",
+          "params": [
+            "index"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "BagsRealTimeDisplay.h",
+          "specifiers": [
+            "BagsRealTimeDisplay.h"
+          ]
+        },
+        {
+          "source": "DlgProductSet.h",
+          "specifiers": [
+            "DlgProductSet.h"
+          ]
+        },
+        {
+          "source": "QFile",
+          "specifiers": [
+            "QFile"
+          ]
+        },
+        {
+          "source": "QMessageBox",
+          "specifiers": [
+            "QMessageBox"
+          ]
+        },
+        {
+          "source": "QPainter",
+          "specifiers": [
+            "QPainter"
+          ]
+        },
+        {
+          "source": "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp",
+          "specifiers": [
+            "rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp"
+          ]
+        },
+        {
+          "source": "rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h",
+          "specifiers": [
+            "rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h"
+          ]
+        },
+        {
+          "source": "rwul/rqwu/rqwu_MessageBox.h",
+          "specifiers": [
+            "rwul/rqwu/rqwu_MessageBox.h"
+          ]
+        },
+        {
+          "source": "Modules.hpp",
+          "specifiers": [
+            "Modules.hpp"
+          ]
+        },
+        {
+          "source": "utility.hpp",
+          "specifiers": [
+            "utility.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "BagsRealTimeDisplay",
+        "~BagsRealTimeDisplay",
+        "initializeComponents",
+        "build_ui",
+        "build_connect",
+        "build_BagsRealTimeDisplayData",
+        "build_DlgCloseForm",
+        "build_DlgProductSet",
+        "build_PanZoomLabel",
+        "eventFilter",
+        "touchManualViewOperation",
+        "updateCameraLabelState",
+        "onUpdateStatisticalInfoUI",
+        "onZMotionDisconnect",
+        "onCameraDisplay",
+        "setConfigWindowClosed",
+        "lb_title_clicked",
+        "pbtn_exit_clicked",
+        "pbtn_set_clicked",
+        "btn_jianshaobaoguang1_clicked",
+        "btn_zengjiabaoguang1_clicked",
+        "btn_jianshaobaoguang2_clicked",
+        "btn_zengjiabaoguang2_clicked",
+        "pbtn_resetProduct_clicked",
+        "pbtn_setchishu_clicked",
+        "cbb_qiehuanxianshi_currentIndexChanged"
+      ],
+      "totalLines": 454,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgCloseForm.cpp",
+      "contentHash": "97e05d4f87ab2eec68fceba839893a6e786ab24b31e8ae5a09679aad7091d8dc",
+      "functions": [
+        {
+          "name": "DlgCloseForm",
+          "params": [
+            "parent"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "~DlgCloseForm",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "build_connect",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "setLabelShowMessage",
+          "params": [
+            "message"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "btn_close_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "btn_restart_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "btn_yes_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 32
+        },
+        {
+          "name": "btn_no_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "DlgCloseForm.h",
+          "specifiers": [
+            "DlgCloseForm.h"
+          ]
+        },
+        {
+          "source": "QProcess",
+          "specifiers": [
+            "QProcess"
+          ]
+        },
+        {
+          "source": "QApplication",
+          "specifiers": [
+            "QApplication"
+          ]
+        },
+        {
+          "source": "ui_DlgCloseForm.h",
+          "specifiers": [
+            "ui_DlgCloseForm.h"
+          ]
+        }
+      ],
+      "exports": [
+        "DlgCloseForm",
+        "~DlgCloseForm",
+        "build_connect",
+        "setLabelShowMessage",
+        "btn_close_clicked",
+        "btn_restart_clicked",
+        "btn_yes_clicked",
+        "btn_no_clicked"
+      ],
+      "totalLines": 119,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/DlgProductSet.cpp",
+      "contentHash": "1b794be8dd5d2109d5ba4ca09d439132cd4c547bf32a1f55731014843f647e9d",
+      "functions": [
+        {
+          "name": "DlgProductSet",
+          "params": [
+            "configModule",
+            "cameraModule",
+            "parent"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "~DlgProductSet",
+          "params": [],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "build_ui",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "read_config",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "build_connect",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "showEvent",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "onUpdateFrameLost",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "btn_close_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "btn_chengfaqi1_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_houfenpin1_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_zengyi1_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_baoguang1_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_xiangsudangliang1_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "btn_chengfaqi2_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_houfenpin2_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_zengyi2_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_baoguang2_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "btn_xiangsudangliang2_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "btn_xuantingshijian_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "btn_qiehuanzhangshu_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "btn_chutuzhangshu_clicked",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "ckb_jingxiang_toggled",
+          "params": [
+            "checked"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "DlgProductSet.h",
+          "specifiers": [
+            "DlgProductSet.h"
+          ]
+        },
+        {
+          "source": "ui_DlgProductSet.h",
+          "specifiers": [
+            "ui_DlgProductSet.h"
+          ]
+        },
+        {
+          "source": "QMessageBox",
+          "specifiers": [
+            "QMessageBox"
+          ]
+        },
+        {
+          "source": "rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h",
+          "specifiers": [
+            "rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h"
+          ]
+        },
+        {
+          "source": "Modules.hpp",
+          "specifiers": [
+            "Modules.hpp"
+          ]
+        }
+      ],
+      "exports": [
+        "DlgProductSet",
+        "~DlgProductSet",
+        "build_ui",
+        "read_config",
+        "build_connect",
+        "showEvent",
+        "onUpdateFrameLost",
+        "btn_close_clicked",
+        "btn_chengfaqi1_clicked",
+        "btn_houfenpin1_clicked",
+        "btn_zengyi1_clicked",
+        "btn_baoguang1_clicked",
+        "btn_xiangsudangliang1_clicked",
+        "btn_chengfaqi2_clicked",
+        "btn_houfenpin2_clicked",
+        "btn_zengyi2_clicked",
+        "btn_baoguang2_clicked",
+        "btn_xiangsudangliang2_clicked",
+        "btn_xuantingshijian_clicked",
+        "btn_qiehuanzhangshu_clicked",
+        "btn_chutuzhangshu_clicked",
+        "ckb_jingxiang_toggled"
+      ],
+      "totalLines": 373,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/src/rqw_LabelClickable.cpp",
+      "contentHash": "d6a841563ca329d2cc8f0c7487bcab8f4a9575a1f459489ad35249c8fb3e1eb5",
+      "functions": [
+        {
+          "name": "mousePressEvent",
+          "params": [
+            "event"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "rqw_LabelClickable.h",
+          "specifiers": [
+            "rqw_LabelClickable.h"
+          ]
+        }
+      ],
+      "exports": [
+        "mousePressEvent"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/BagsRealTimeDisplay.ui",
+      "contentHash": "c4589f24d6ccc0f4c188c84374a9efba4591a3dfddf0bd08cb3312eb632f27d8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 878,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/DlgCloseForm.ui",
+      "contentHash": "215ca3cfbc257948b8b02ad781102366f328fad0191d8517eb796f61d17bc0e5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 296,
+      "hasStructuralAnalysis": false
+    },
+    "BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui": {
+      "filePath": "BagsRealTimeDisplay/UI/UIModule/ui/DlgProductSet.ui",
+      "contentHash": "0c92155d4c17d7054a81a67362ab2180e185bc6b7f4884ebe64ca033af8990c4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2478,
+      "hasStructuralAnalysis": false
+    },
+    "CLAUDE.md": {
+      "filePath": "CLAUDE.md",
+      "contentHash": "8823477e4ac9e49c24279b41843667b50f3eb70da184d69c92b5d98904e0de63",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 117,
+      "hasStructuralAnalysis": true
+    },
+    "cmake/CMakeCacheIni.cmake": {
+      "filePath": "cmake/CMakeCacheIni.cmake",
+      "contentHash": "8718cd6273c7e7fb043021879204c3f5689353ee00bcbee866b32c1b78533e26",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 15,
+      "hasStructuralAnalysis": false
+    },
+    "cmake/func.cmake": {
+      "filePath": "cmake/func.cmake",
+      "contentHash": "bf46ef7618092727498c8f3329692bc8d426d39e8159e25e887eaa2070bf2660",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": false
+    },
+    "CMakeLists.txt": {
+      "filePath": "CMakeLists.txt",
+      "contentHash": "d9dabff7777d556edf0b02189810bf3bac70ca0d8012161d5da11d45e5746bb4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": false
+    },
+    "CMakePresets.json": {
+      "filePath": "CMakePresets.json",
+      "contentHash": "362648e5c0c379015b8f031e055ff9c0c05ada0d1be0856d777f5672062b23c9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "Folder.DotSettings": {
+      "filePath": "Folder.DotSettings",
+      "contentHash": "dd8269068c1be3099f6e2697c565da26bbee1de91be8c5213ac11e5f54bc9d18",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 15,
+      "hasStructuralAnalysis": false
+    },
+    "Folder.DotSettings.user": {
+      "filePath": "Folder.DotSettings.user",
+      "contentHash": "1937da04de5f938e0d86a28a897b6eb717b5bb192d09d8c74834f23ece83aa97",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": false
+    },
+    "vcpkg-configuration.json": {
+      "filePath": "vcpkg-configuration.json",
+      "contentHash": "47ebb42c4e4a53cff4b8f3c76177fe00ac7402625e8dc4c1341caca070c8dd36",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "vcpkg.json": {
+      "filePath": "vcpkg.json",
+      "contentHash": "43a6c46b6c749e71112d71dac664c25490299973821e9744042ea6377f8d3211",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 89,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

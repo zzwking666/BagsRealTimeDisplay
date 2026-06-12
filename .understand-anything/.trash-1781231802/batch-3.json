@@ -1,0 +1,598 @@
+{
+  "nodes": [
+    {
+      "id": "file:.codegraph/daemon.pid",
+      "type": "config",
+      "name": "daemon.pid",
+      "filePath": ".codegraph/daemon.pid",
+      "summary": "Codegraph 守护进程的运行时 PID 文件，记录进程 ID、版本号、命名管道路径及启动时间戳",
+      "tags": ["codegraph", "守护进程", "pid"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.gitattributes",
+      "type": "config",
+      "name": ".gitattributes",
+      "filePath": ".gitattributes",
+      "summary": "Git 属性配置文件，设置行尾自动标准化（text=auto），并为 VS 项目文件、图片、文档格式提供合并驱动和 diff 行为注释模板",
+      "tags": ["git", "gitattributes", "行尾标准化"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "config",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "understand-anything 分析工具的忽略规则文件，语法同 .gitignore，用于排除构建产物、测试文件等，内置默认排除 node_modules、.git、dist 等目录",
+      "tags": ["understand", "忽略规则", "配置"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "summary": "understand-anything 工具的主配置文件，设置输出语言为中文（zh）",
+      "tags": ["understand", "配置", "语言"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "type": "document",
+      "name": "AsynchronousThread/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "summary": "异步线程模块的父级 CMake 构建脚本，使用 add_subdirectory 引入 RefreshUIThread、ZMotionPollingThread 和 AsynchronousThreadModule 三个子模块",
+      "tags": ["CMake", "构建配置", "异步线程"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "type": "document",
+      "name": "AsynchronousThreadModule/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "summary": "AsynchronousThreadModule 库的 CMake 构建脚本，通过 GLOB 收集 src/*.cpp 和 include/*.hpp，链接 Qt6::Core、RefreshUIThread、ZMotionPollingThread、IModule，并创建 BusinessLayer::AsynchronousThreadModule 别名",
+      "tags": ["CMake", "构建配置", "AsynchronousThreadModule"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "type": "file",
+      "name": "AsynchronousThreadModule.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "summary": "AsynchronousThreadModule 类声明头文件，继承 QObject 和 IModule<bool>，管理 UI 刷新线程和 ZMotion 轮询线程的生命周期，内嵌 StatisticalInfo 结构体用于统计正面/背面产量总数及各相机丢帧数（std::atomic）",
+      "tags": ["异步线程", "IModule", "统计信息", "QObject", "生命周期"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "type": "file",
+      "name": "AsynchronousThreadModule.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "summary": "AsynchronousThreadModule 类实现文件，实现 IModule 接口的 build/destroy/start/stop 四个生命周期方法：build() 创建 RefreshUIThread 和 ZMotionPollingThread 实例；destroy() 依次销毁；start/stop() 分别启停两个子线程",
+      "tags": ["异步线程", "IModule", "生命周期", "线程管理"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "type": "document",
+      "name": "RefreshUIThread/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "summary": "RefreshUIThread 库的 CMake 构建脚本，GLOB 收集源文件和头文件，链接 Qt6::Core，创建 BusinessLayer::RefreshUIThread 别名",
+      "tags": ["CMake", "构建配置", "RefreshUIThread"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "type": "file",
+      "name": "RefreshUIThread.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "summary": "RefreshUIThread 类声明头文件，继承 QThread，通过 startThread/stopThread 控制运行状态（std::atomic<bool> running），在 run() 中定时发送 emit_RefreshUI() 信号驱动 UI 刷新",
+      "tags": ["QThread", "UI刷新", "信号", "原子变量"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "type": "file",
+      "name": "RefreshUIThread.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "summary": "RefreshUIThread 类实现文件，run() 循环以 1 秒间隔调用 QThread::msleep(1000) 并发射 emit_RefreshUI() 信号；startThread() 设置原子标志并启动线程；stopThread() 清除运行标志；析构函数安全等待线程结束",
+      "tags": ["QThread", "UI刷新", "定时信号", "线程安全"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "type": "document",
+      "name": "ZMotionPollingThread/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "summary": "ZMotionPollingThread 库的 CMake 构建脚本，链接 RWUL::hoepZMotion（ZMotion 硬件驱动库）、Qt6::Core（PUBLIC）和 Modules::Modules（PRIVATE），创建 BusinessLayer::ZMotionPollingThread 别名",
+      "tags": ["CMake", "构建配置", "ZMotion", "hoepZMotion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "type": "file",
+      "name": "ZMotionPollingThread.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "summary": "ZMotionPollingThread 类声明头文件，继承 QThread，通过 startThread/stopThread 控制运行状态（std::atomic<bool> _running），在 run() 中定期检测 ZMotion 控制器连接状态，失连时发射 zMotionDisconnect() 信号",
+      "tags": ["QThread", "ZMotion", "轮询", "连接检测"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "type": "file",
+      "name": "ZMotionPollingThread.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "summary": "ZMotionPollingThread 类实现文件，run() 循环以 5 秒间隔（QThread::sleep(5)）通过 Modules 单例访问 zMotionModule：检查控制器就绪状态，若未就绪则发射 zMotionDisconnect() 信号并调用 reconnect() 尝试重连",
+      "tags": ["QThread", "ZMotion", "轮询", "重连", "Modules单例"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "type": "document",
+      "name": "BusinessLayer/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "summary": "业务层父级 CMake 构建脚本，使用 add_subdirectory 引入 ImageStitch 和 AsynchronousThread 两个子模块",
+      "tags": ["CMake", "构建配置", "业务层"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "type": "document",
+      "name": "ImageStitch/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "summary": "ImageStitch 库的 CMake 构建脚本，链接 Qt6::Core、RWUL::rqwcd（相机数据定义）、Modules::Modules（单例访问）、RWUL::imgqt（cvMatToQImage 转换），创建 BusinessLayer::ImageStitch 别名",
+      "tags": ["CMake", "构建配置", "ImageStitch", "相机", "图像"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "type": "file",
+      "name": "ImageStitch.hpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "summary": "ImageStitch 类声明头文件，继承 QThread，通过 onFrameCaptured 槽接收相机帧（rw::rqwc::MatInfo），维护帧缓冲区（QVector<MatInfo>）和帧号追踪变量，提供 stitchImages 拼接和 rotateXImage 镜像变换功能，发射 imageReady 信号传递 QImage 到 UI",
+      "tags": ["QThread", "图像拼接", "相机帧", "帧缓存", "信号"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "type": "file",
+      "name": "ImageStitch.cpp",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "ImageStitch 类核心实现文件（222 行），onFrameCaptured() 处理相机帧流：正面相机（index!=2）和背面相机（index==2）分别处理，背面可选镜像变换（rotateXImage），通过 rw::img::cvMatToQImage 转换为 QImage 后发射 imageReady 信号，同时基于帧号差值检测并统计丢帧（cam1FrameLost/cam2FrameLost）；stitchImages() 从帧缓存中选取最近 N 帧按帧号排序、归一化尺寸与类型后使用 cv::vconcat 纵向拼接；rotateXImage() 使用 cv::warpAffine 绕竖直中轴做镜像翻转",
+      "tags": ["图像拼接", "相机帧处理", "丢帧检测", "镜像变换", "OpenCV", "纵向拼接"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "type": "document",
+      "name": "BagsRealTimeDisplay/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/CMakeLists.txt",
+      "summary": "BagsRealTimeDisplay 应用根 CMake 构建脚本，使用 add_subdirectory 按依赖顺序引入 Modules、Global、Tools、BusinessLayer、UI 五个顶层模块",
+      "tags": ["CMake", "构建配置", "顶层模块"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "type": "document",
+      "name": "Global/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "summary": "Global 层父级 CMake 构建脚本，使用 add_subdirectory 引入 Utility 子模块",
+      "tags": ["CMake", "构建配置", "全局层"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "type": "document",
+      "name": "Global/Utility/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "summary": "Utility 库的 CMake 构建脚本，链接 RWUL::oso（序列化框架）和 Qt6::Core，创建 Global::Utility 别名，提供全局路径和配置常量",
+      "tags": ["CMake", "构建配置", "全局工具", "oso"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "type": "file",
+      "name": "Utility.hpp",
+      "filePath": "BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "summary": "全局工具头文件，定义两个内联匿名结构体：utility（相机 IP 地址、ZMotion IP 地址等运行时配置常量）和 globalPath（以 D:\\zfkjData\\BagsRealTimeDisplay\\ 为根的项目数据路径单例，包含 config、model、company txt 和 testImg 子目录路径）",
+      "tags": ["全局配置", "路径管理", "IP配置", "单例"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "type": "file",
+      "name": "Utility.cpp",
+      "filePath": "BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "summary": "Utility.cpp 源文件，仅包含 utility.hpp 头文件（所有内容已通过内联结构体在头文件中定义，无需额外实现）",
+      "tags": ["全局工具", "头文件包含"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "type": "document",
+      "name": "CameraModule/CMakeLists.txt",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "summary": "CameraModule 库的 CMake 构建脚本，链接 RWUL::oso、RWUL::rqwcd（DVP 相机被动采集 SDK）、Modules::IModule、Modules::Modules、Global::Utility，创建 Modules::CameraModule 别名",
+      "tags": ["CMake", "构建配置", "CameraModule", "相机SDK"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "type": "file",
+      "name": "CameraModule.hpp",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "summary": "CameraModule 类声明头文件，继承 QObject 和 IModule<bool>，封装两台 DVP/度申线扫相机（DVPCameraPassive）的完整控制接口：build/destroy/start/stop 生命周期、触发模式切换（软触发/硬触发）、曝光/增益/乘法器/后分频/行高参数设置、相机元数据校验，通过 onCameraCapture 信号将 MatInfo 帧数据传递给 ImageStitch，支持 BUILD_WITHOUT_HARDWARE 无硬件模拟模式",
+      "tags": ["相机模块", "IModule", "DVP相机", "触发模式", "相机参数", "无硬件模式"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "type": "class",
+      "name": "AsynchronousThreadModule",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "summary": "异步线程聚合模块类，继承 QObject 和 IModule<bool>，组合管理 RefreshUIThread（UI 刷新线程）和 ZMotionPollingThread（ZMotion 轮询线程）的生命周期，持有 StatisticalInfo 结构体提供线程安全的产量和丢帧统计数据",
+      "tags": ["异步线程", "IModule", "线程聚合", "统计信息"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:StatisticalInfo",
+      "type": "class",
+      "name": "AsynchronousThreadModule::StatisticalInfo",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp",
+      "summary": "产量与丢帧统计数据结构，使用 std::atomic_uint64_t 类型存储正面总量（zhengmianzongliang）、背面总量（beimianzongliang）、相机1丢帧数（cam1FrameLost）、相机2丢帧数（cam2FrameLost），支持无锁的跨线程安全读写",
+      "tags": ["统计信息", "原子变量", "产量", "丢帧", "线程安全"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "class",
+      "name": "RefreshUIThread",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp",
+      "summary": "UI 刷新线程类，继承 QThread，以 1 秒定时间隔在 run() 循环中发射 emit_RefreshUI() 信号，驱动主界面周期性更新统计数据及相机状态显示",
+      "tags": ["QThread", "UI刷新", "定时信号", "统计更新"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "class",
+      "name": "ZMotionPollingThread",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp",
+      "summary": "ZMotion 控制器轮询线程类，继承 QThread，以 5 秒间隔检测 ZMotion 控制器连接状态，失连时发射 zMotionDisconnect() 信号通知 UI 并自动调用 reconnect() 恢复连接",
+      "tags": ["QThread", "ZMotion", "连接检测", "重连", "轮询"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "type": "class",
+      "name": "ImageStitch",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp",
+      "summary": "图像拼接处理线程类，继承 QThread，接收相机帧流（onFrameCaptured 槽），维护帧缓冲区进行丢帧检测与统计，支持背面相机镜像翻转（rotateXImage）和多帧纵向拼接（stitchImages，使用 OpenCV cv::vconcat），通过 imageReady 信号将处理后的 QImage 发送到 UI 层显示",
+      "tags": ["图像拼接", "QThread", "丢帧检测", "镜像变换", "OpenCV", "帧缓冲"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "type": "class",
+      "name": "CameraModule",
+      "filePath": "BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp",
+      "summary": "相机硬件模块类，继承 QObject 和 IModule<bool>，封装两台 DVP/度申线扫相机（DVPCameraPassive）的完整控制：构建连接、启停采集、触发模式切换（软触发/硬触发）、曝光/增益/乘法器/后分频/行高等参数设置，通过 onCameraCapture 信号发射采集到的帧数据",
+      "tags": ["相机模块", "IModule", "DVP相机", "触发控制", "相机参数"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+      "type": "function",
+      "name": "ImageStitch::onFrameCaptured",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "相机帧回调槽函数，根据 index 区分正面/背面相机（2=背面），将 cv::Mat 转换为 QImage 后发射 imageReady 信号，对背面相机可选执行镜像变换（rotateXImage），通过比较帧号差值检测并累加丢帧计数到 StatisticalInfo 中的 cam1FrameLost/cam2FrameLost",
+      "tags": ["帧回调", "丢帧检测", "镜像变换", "Mat转QImage", "信号发射"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:stitchImages",
+      "type": "function",
+      "name": "ImageStitch::stitchImages",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "多帧纵向拼接函数，从帧缓存 matInfos 中选取最近 stitchCount 帧，按帧号升序排列，检查帧连续性避免重复拼接，将所有帧统一为相同尺寸和类型后使用 OpenCV cv::vconcat 进行纵向（竖直）拼接，返回拼接结果 cv::Mat",
+      "tags": ["图像拼接", "纵向拼接", "vconcat", "帧排序", "尺寸归一化"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:rotateXImage",
+      "type": "function",
+      "name": "ImageStitch::rotateXImage",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp",
+      "summary": "图像镜像翻转函数，以图像竖直中轴 x=(w-1)/2 为对称轴，使用 OpenCV cv::warpAffine 配合仿射变换矩阵 [-1,0,2*x0; 0,1,0] 实现左右镜像，用于背面相机图像的翻转处理",
+      "tags": ["镜像变换", "warpAffine", "仿射变换", "背面图像"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp:build",
+      "type": "function",
+      "name": "AsynchronousThreadModule::build",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp",
+      "summary": "IModule 构建方法，创建 RefreshUIThread 和 ZMotionPollingThread 两个 unique_ptr 子线程实例",
+      "tags": ["IModule", "构建", "线程创建"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp:run",
+      "type": "function",
+      "name": "RefreshUIThread::run",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/src/RefreshUIThread.cpp",
+      "summary": "QThread 运行循环，以 1 秒间隔（msleep(1000)）重复发射 emit_RefreshUI() 信号，驱动 UI 层定时刷新统计信息和状态",
+      "tags": ["QThread", "运行循环", "定时信号", "UI刷新"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp:run",
+      "type": "function",
+      "name": "ZMotionPollingThread::run",
+      "filePath": "BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp",
+      "summary": "QThread 运行循环，以 5 秒间隔（sleep(5)）通过 Modules 单例访问 zMotionModule 检测控制器就绪状态，失连时发射 zMotionDisconnect() 信号并触发 reconnect() 重连",
+      "tags": ["QThread", "运行循环", "ZMotion", "连接检测", "重连"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "contains",
+      "weight": 0.9,
+      "label": "持有 unique_ptr<RefreshUIThread> 成员，管理其生命周期"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "contains",
+      "weight": 0.9,
+      "label": "持有 unique_ptr<ZMotionPollingThread> 成员，管理其生命周期"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:StatisticalInfo",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "嵌套 StatisticalInfo 结构体作为公开成员，提供线程安全的产量和丢帧统计"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:AsynchronousThreadModule",
+      "target": "IModule",
+      "type": "implements",
+      "weight": 1.0,
+      "label": "实现 IModule<bool> 接口的 build/destroy/start/stop 生命周期"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp:build",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "build() 中调用 std::make_unique<RefreshUIThread> 创建实例"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/src/AsynchronousThreadModule.cpp:build",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "build() 中调用 std::make_unique<ZMotionPollingThread> 创建实例"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "target": "QThread",
+      "type": "inherits",
+      "weight": 0.5,
+      "label": "继承 QThread，利用 Qt 事件循环实现定时 UI 刷新"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "target": "QThread",
+      "type": "inherits",
+      "weight": 0.5,
+      "label": "继承 QThread，利用 Qt 事件循环实现 ZMotion 状态轮询"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "target": "QThread",
+      "type": "inherits",
+      "weight": 0.5,
+      "label": "继承 QThread，作为图像拼接处理线程运行"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "target": "class:ConfigModule",
+      "type": "depends_on",
+      "weight": 0.9,
+      "label": "构造函数接受 ConfigModule& 引用，读取镜像设置（isjingxiang）等配置参数"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/include/AsynchronousThreadModule.hpp:StatisticalInfo",
+      "type": "calls",
+      "weight": 1.0,
+      "label": "通过 Modules 单例访问 statisticalInfo，更新 cam1FrameLost 和 cam2FrameLost 丢帧计数"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+      "target": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:rotateXImage",
+      "type": "calls",
+      "weight": 0.7,
+      "label": "当背面相机（index==2）且配置开启镜像时调用 rotateXImage 翻转图像"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:onFrameCaptured",
+      "target": "rw::img::cvMatToQImage",
+      "type": "calls",
+      "weight": 0.9,
+      "label": "将 cv::Mat 转换为 QImage 后通过 imageReady 信号发射到 UI 层"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:stitchImages",
+      "target": "cv::vconcat",
+      "type": "calls",
+      "weight": 0.9,
+      "label": "使用 OpenCV vconcat 将多帧图像纵向拼接为一张大图"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:stitchImages",
+      "target": "cv::resize",
+      "type": "calls",
+      "weight": 0.7,
+      "label": "将不同宽度的帧统一缩放到相同列数以确保 vconcat 兼容"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/ImageStitch/src/ImageStitch.cpp:rotateXImage",
+      "target": "cv::warpAffine",
+      "type": "calls",
+      "weight": 0.9,
+      "label": "使用 OpenCV warpAffine 配合仿射变换矩阵实现绕竖直中轴的镜像翻转"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp:run",
+      "target": "class:Modules",
+      "type": "calls",
+      "weight": 0.9,
+      "label": "通过 Modules::getInstance() 单例访问 zMotionModule，检查控制器就绪状态"
+    },
+    {
+      "source": "function:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/src/ZMotionPollingThread.cpp:run",
+      "target": "hoepZMotion_ZMotionDevice",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "调用 zMotion->isControllerReady() 检查连接状态，失连时调用 reconnect() 恢复"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "target": "IModule",
+      "type": "implements",
+      "weight": 1.0,
+      "label": "实现 IModule<bool> 接口的 build/destroy/start/stop 生命周期"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "target": "rw::rqwc::DVPCameraPassive",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "持有两台 DVPCameraPassive 相机实例（camera1、camera2），封装相机采集和控制"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "通过 onCameraCapture(MatInfo, index) 信号将采集的帧数据传递给 ImageStitch::onFrameCaptured 槽"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/include/RefreshUIThread.hpp:RefreshUIThread",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 BusinessLayer::RefreshUIThread"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 BusinessLayer::ZMotionPollingThread"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/include/ZMotionPollingThread.hpp:ZMotionPollingThread",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 RWUL::hoepZMotion（ZMotion 硬件驱动）和 Modules::Modules（PRIVATE）"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/BusinessLayer/ImageStitch/include/ImageStitch.hpp:ImageStitch",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 RWUL::rqwcd（相机数据定义）、Modules::Modules、RWUL::imgqt（图像转换）"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "target": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "type": "configures",
+      "weight": 0.5,
+      "label": "CMake 中 target_link_libraries 链接 RWUL::oso、RWUL::rqwcd、Modules::IModule、Modules::Modules、Global::Utility"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "target": "file:BagsRealTimeDisplay/Global/Utility/src/Utility.cpp",
+      "type": "related",
+      "weight": 1.0,
+      "label": "Utility.cpp 仅包含 Utility.hpp 头文件，所有定义均为内联结构体"
+    },
+    {
+      "source": "class:BagsRealTimeDisplay/Modules/CameraModule/include/CameraModule.hpp:CameraModule",
+      "target": "file:BagsRealTimeDisplay/Global/Utility/include/Utility.hpp",
+      "type": "depends_on",
+      "weight": 0.3,
+      "label": "CameraModule CMake 通过 Global::Utility 依赖全局路径配置"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/AsynchronousThreadModule/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "父级 CMake 通过 add_subdirectory 引入 AsynchronousThreadModule"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/RefreshUIThread/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "父级 CMake 通过 add_subdirectory 引入 RefreshUIThread"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/ZMotionPollingThread/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "父级 CMake 通过 add_subdirectory 引入 ZMotionPollingThread"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/ImageStitch/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "业务层父级 CMake 通过 add_subdirectory 引入 ImageStitch"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/AsynchronousThread/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "业务层父级 CMake 通过 add_subdirectory 引入 AsynchronousThread"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/BusinessLayer/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.3,
+      "label": "根 CMake 通过 add_subdirectory 引入 BusinessLayer"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Modules/CameraModule/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.3,
+      "label": "根 CMake 通过 add_subdirectory 引入 Modules（含 CameraModule）"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.3,
+      "label": "根 CMake 通过 add_subdirectory 引入 Global（含 Utility）"
+    },
+    {
+      "source": "file:BagsRealTimeDisplay/Global/CMakeLists.txt",
+      "target": "file:BagsRealTimeDisplay/Global/Utility/CMakeLists.txt",
+      "type": "contains",
+      "weight": 0.4,
+      "label": "Global 层父级 CMake 通过 add_subdirectory 引入 Utility"
+    }
+  ]
+}
