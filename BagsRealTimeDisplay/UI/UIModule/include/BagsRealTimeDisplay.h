@@ -58,6 +58,8 @@ private slots:
 	void cbb_qiehuanxianshi_currentIndexChanged(int index);
 
 	void lb_title_clicked();
+private:
+	void setChishu(float chishu);
 public:
 	DlgProductSet* _dlgProductSet = nullptr;
 private:

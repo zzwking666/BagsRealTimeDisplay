@@ -82,6 +82,8 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 	ui->btn_baoguang2->setText(QString::number(setConfig.baoguang2));
 	ui->cbb_qiehuanxianshi->setCurrentIndex(BagsRealTimeDisplayConfig.qiehuanxianshi);
 	ui->pbtn_setchishu->setText(QString::number(BagsRealTimeDisplayConfig.shezhichishu));
+
+	setChishu(BagsRealTimeDisplayConfig.shezhichishu);
 }
 
 void BagsRealTimeDisplay::build_DlgCloseForm()
@@ -361,6 +363,16 @@ void BagsRealTimeDisplay::lb_title_clicked()
 	}
 }
 
+void BagsRealTimeDisplay::setChishu(float chishu)
+{
+	auto& bagsRealTimeDisplayInfo = _configModule.bagsRealTimeDisplayInfo;
+	auto& zMotionScheduler = Modules::getInstance().zMotionModule.zMotionScheduler;
+	if (zMotionScheduler)
+	{
+		zMotionScheduler->setModbusFloatAsync(2, 1, bagsRealTimeDisplayInfo.shezhichishu);
+	}
+}
+
 void BagsRealTimeDisplay::pbtn_exit_clicked()
 {
 #ifdef NDEBUG
@@ -441,7 +453,10 @@ void BagsRealTimeDisplay::pbtn_setchishu_clicked()
 		auto& bagsRealTimeDisplayInfo = _configModule.bagsRealTimeDisplayInfo;
 		bagsRealTimeDisplayInfo.shezhichishu = value.toDouble();
 		auto& zMotionScheduler = Modules::getInstance().zMotionModule.zMotionScheduler;
-		zMotionScheduler->setModbusFloatAsync(2,1, value.toDouble());
+		if (zMotionScheduler)
+		{
+			zMotionScheduler->setModbusFloatAsync(2, 1, value.toDouble());
+		}
 	}
 }
 
