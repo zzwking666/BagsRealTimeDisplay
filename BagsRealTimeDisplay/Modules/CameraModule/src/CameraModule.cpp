@@ -125,7 +125,7 @@ bool CameraModule::build_camera1()
 			camera1->connectCamera();
 			camera1->registerCallBackFunc();
 			//camera1->startMonitor();
-			setCamera1TriggerOff();
+			setCamera1HardwareTrigger();
 
 			auto cfg = Modules::getInstance().configModule.setConfig;
 
@@ -171,7 +171,7 @@ bool CameraModule::build_camera2()
 			camera2->connectCamera();
 			camera2->registerCallBackFunc();
 			//camera2->startMonitor();
-			setCamera2TriggerOff();
+			setCamera2HardwareTrigger();
 
 			auto cfg = Modules::getInstance().configModule.setConfig;
 
@@ -247,7 +247,7 @@ void CameraModule::setCamera1HardwareTrigger()
 	if (camera1)
 	{
 		camera1->setTriggerModeStatus(rw::hoec::TriggerModeStatus::ON);
-		camera1->setTriggerSource(rw::hoec::TriggerSource::Line0);
+		//camera1->setTriggerSource(rw::hoec::TriggerSource::Line0);
 		isCamera1SoftTrigger = false;
 	}
 }
@@ -266,7 +266,7 @@ void CameraModule::setCamera2HardwareTrigger()
 	if (camera2)
 	{
 		camera2->setTriggerModeStatus(rw::hoec::TriggerModeStatus::ON);
-		camera2->setTriggerSource(rw::hoec::TriggerSource::Line0);
+		//camera2->setTriggerSource(rw::hoec::TriggerSource::Line0);
 		isCamera2SoftTrigger = false;
 	}
 }
