@@ -38,6 +38,16 @@ bool ConfigModule::loadConfigSafe(const QString& path, ConfigType& outConfig, co
 		return false;
 	}
 
+	// 优先使用 loadSafeToType 尝试加载
+	bool isLoad = false;
+	outConfig = storeContext->loadSafeToType<ConfigType>(path.toStdString(), isLoad);
+
+	if (isLoad)
+	{
+		return true;
+	}
+
+	// loadSafeToType 失败，尝试通过合并默认值来修复
 	auto loadData = storeContext->loadSafe(path.toStdString());
 	if (!loadData)
 	{
@@ -46,38 +56,30 @@ bool ConfigModule::loadConfigSafe(const QString& path, ConfigType& outConfig, co
 		return false;
 	}
 
-	try
+	qWarning() << configName << "配置文件字段不匹配，尝试合并默认值...";
+
+	rw::oso::ObjectStoreAssembly oldAssembly = *loadData;
+	rw::oso::ObjectStoreAssembly newAssembly = ConfigType();
+	rw::oso::AssemblyMergeTool::Merge(newAssembly, oldAssembly);
+
+	if (storeContext->saveSafe(newAssembly, path.toStdString()))
 	{
-		outConfig = ConfigType(*loadData);
-		return true;
+		qDebug() << configName << "配置文件更新成功:" << path;
+
+		// 合并后重新尝试构造
+		try
+		{
+			outConfig = ConfigType(newAssembly);
+			return true;
+		}
+		catch (...)
+		{
+			qWarning() << configName << "合并后仍无法解析，使用默认值";
+		}
 	}
-	catch (std::runtime_error&)
+	else
 	{
-		qWarning() << configName << "配置文件字段不匹配，尝试合并默认值...";
-
-		rw::oso::ObjectStoreAssembly oldAssembly = *loadData;
-		rw::oso::ObjectStoreAssembly newAssembly = ConfigType();
-		rw::oso::AssemblyMergeTool::Merge(newAssembly, oldAssembly);
-
-		if (storeContext->saveSafe(newAssembly, path.toStdString()))
-		{
-			qDebug() << configName << "配置文件更新成功:" << path;
-
-			// 合并后重新尝试构造
-			try
-			{
-				outConfig = ConfigType(newAssembly);
-				return true;
-			}
-			catch (...)
-			{
-				qWarning() << configName << "合并后仍无法解析，使用默认值";
-			}
-		}
-		else
-		{
-			qWarning() << configName << "合并后保存失败:" << path;
-		}
-		return false;
+		qWarning() << configName << "合并后保存失败:" << path;
 	}
+	return false;
 }

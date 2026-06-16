@@ -8,8 +8,8 @@ bool ConfigModule::build()
 {
 	storeContext = std::make_unique<rw::oso::StorageContext>(rw::oso::StorageType::Xml);
 
-	loadConfigSafe(globalPath.bagsRealTimeDisplayConfigPath, bagsRealTimeDisplayInfo, QStringLiteral("主窗体参数"));
-	loadConfigSafe(globalPath.setConfigPath, setConfig, QStringLiteral("设置参数"));
+	loadConfigSafe(globalPath.bagsRealTimeDisplayConfigPath, bagsRealTimeDisplayInfo, "BagsRealTimeDisplayInfo");
+	loadConfigSafe(globalPath.setConfigPath, setConfig, "SetConfig");
 
 	return true;
 }
