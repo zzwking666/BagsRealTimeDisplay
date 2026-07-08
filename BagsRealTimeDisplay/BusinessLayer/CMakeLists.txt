@@ -1,2 +1,4 @@
 add_subdirectory(ImageStitch)
 add_subdirectory(AsynchronousThread)
+add_subdirectory(actCry)
+add_subdirectory(LicenseManager)

@@ -25,6 +25,7 @@ target_link_libraries(${BRTD_TARGET}
 	PRIVATE RWUL::rqwu
 	PRIVATE Modules::Modules
 	PRIVATE Tools::PanZoomLabel
+	PRIVATE BusinessLayer::LicenseManager
 )
 
 target_include_directories(${BRTD_TARGET}

@@ -1,11 +1,40 @@
 #include "AppRuntime.hpp"
 
+#include "LicenseManager.hpp"
+#include "DlgLicense.h"
+
+#include <QDebug>
+#include <QDialog>
+#include <QMessageBox>
+
 bool AppRuntime::initialize()
 {
     if (!Modules::check())
     {
         return false;
     }
+
+#pragma region check license
+#ifndef BUILD_WITHOUT_HARDWARE
+	// 未授权时弹出 DlgLicense 引导激活；取消或激活失败则中止启动
+	if (!LicenseManager::verifyAtStartup())
+	{
+		DlgLicense dlg(LicenseManager::getMachineCode());
+		if (dlg.exec() != QDialog::Accepted)
+		{
+			return false;
+		}
+		if (!LicenseManager::applyActivationCode(dlg.activationCode()))
+		{
+			return false;
+		}
+		QMessageBox::information(nullptr, "提示",
+			QString("激活成功，%1").arg(LicenseManager::getAuthorizationExpiry()));
+	}
+#else
+	qDebug() << "[开发模式] 跳过授权校验";
+#endif
+#pragma endregion
 
 	_modules.build();
 
