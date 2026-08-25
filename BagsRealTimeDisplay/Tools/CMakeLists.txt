@@ -1,3 +1,4 @@
 add_subdirectory(RunEnvCheck)
 add_subdirectory(PanZoomLabel)
+add_subdirectory(NumberKeyboard)
 add_subdirectory(LicenseIssuer)

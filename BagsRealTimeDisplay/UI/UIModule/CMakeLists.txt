@@ -30,6 +30,7 @@ target_link_libraries(${DEMO_TARGET}
 	PRIVATE Modules::ConfigModule
 	PRIVATE Modules::CameraModule
 	PRIVATE Tools::PanZoomLabel
+	PRIVATE Tools::NumberKeyboard
 )
 
 #链接QT库

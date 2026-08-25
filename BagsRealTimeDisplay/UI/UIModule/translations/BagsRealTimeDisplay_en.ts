@@ -288,6 +288,21 @@ Shut Down The Computer?</translation>
     </message>
 </context>
 <context>
+    <name>NumberKeyboard</name>
+    <message>
+        <source>删除</source>
+        <translation>Delete</translation>
+    </message>
+    <message>
+        <source>取消</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <source>确定</source>
+        <translation>OK</translation>
+    </message>
+</context>
+<context>
     <name>MessageBoxUtil</name>
     <message>
         <source>确定</source>

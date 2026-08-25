@@ -6,7 +6,7 @@
 #include "MessageBoxUtil.hpp"
 #include <QPainter>
 #include <rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp>
-#include <rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h>
+#include "NumberKeyboard.h"
 #include "rwul/rqwu/rqwu_MessageBox.h"
 
 #include "Modules.hpp"
@@ -473,7 +473,7 @@ void BagsRealTimeDisplay::pbtn_resetProduct_clicked()
 
 void BagsRealTimeDisplay::pbtn_setchishu_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)

@@ -3,7 +3,7 @@
 
 #include <QMessageBox>
 #include "MessageBoxUtil.hpp"
-#include "rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h"
+#include "NumberKeyboard.h"
 #include "Modules.hpp"
 
 DlgProductSet::DlgProductSet(ConfigModule& configModule, CameraModule& cameraModule, QWidget* parent)
@@ -125,7 +125,7 @@ void DlgProductSet::btn_close_clicked()
 
 void DlgProductSet::btn_chengfaqi1_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -145,7 +145,7 @@ void DlgProductSet::btn_chengfaqi1_clicked()
 
 void DlgProductSet::btn_houfenpin1_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -165,7 +165,7 @@ void DlgProductSet::btn_houfenpin1_clicked()
 
 void DlgProductSet::btn_zengyi1_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -185,7 +185,7 @@ void DlgProductSet::btn_zengyi1_clicked()
 
 void DlgProductSet::btn_baoguang1_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -205,7 +205,7 @@ void DlgProductSet::btn_baoguang1_clicked()
 
 void DlgProductSet::btn_xiangsudangliang1_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -224,7 +224,7 @@ void DlgProductSet::btn_xiangsudangliang1_clicked()
 
 void DlgProductSet::btn_chengfaqi2_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -244,7 +244,7 @@ void DlgProductSet::btn_chengfaqi2_clicked()
 
 void DlgProductSet::btn_houfenpin2_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -264,7 +264,7 @@ void DlgProductSet::btn_houfenpin2_clicked()
 
 void DlgProductSet::btn_zengyi2_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -284,7 +284,7 @@ void DlgProductSet::btn_zengyi2_clicked()
 
 void DlgProductSet::btn_baoguang2_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -304,7 +304,7 @@ void DlgProductSet::btn_baoguang2_clicked()
 
 void DlgProductSet::btn_xiangsudangliang2_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -323,7 +323,7 @@ void DlgProductSet::btn_xiangsudangliang2_clicked()
 
 void DlgProductSet::btn_xuantingshijian_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -342,7 +342,7 @@ void DlgProductSet::btn_xuantingshijian_clicked()
 
 void DlgProductSet::btn_qiehuanzhangshu_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
@@ -361,7 +361,7 @@ void DlgProductSet::btn_qiehuanzhangshu_clicked()
 
 void DlgProductSet::btn_chutuzhangshu_clicked()
 {
-	rw::rqwu::NumberKeyboard numKeyBord;
+	NumberKeyboard numKeyBord;
 	numKeyBord.setWindowFlags(Qt::Window | Qt::CustomizeWindowHint);
 	auto isAccept = numKeyBord.exec();
 	if (isAccept == QDialog::Accepted)
