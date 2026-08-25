@@ -17,6 +17,8 @@ private:
 	void build_connect();
 public:
 	void setLabelShowMessage(QString message);
+	/// 语言切换后重刷界面文本
+	void retranslate();
 private slots:
 	void btn_close_clicked();
 	void btn_restart_clicked();

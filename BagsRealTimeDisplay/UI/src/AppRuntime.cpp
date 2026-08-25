@@ -2,6 +2,7 @@
 
 #include "LicenseManager.hpp"
 #include "DlgLicense.h"
+#include "LanguageManager.h"
 
 #include <QDebug>
 #include <QDialog>
@@ -37,6 +38,9 @@ bool AppRuntime::initialize()
 //#pragma endregion
 
 	_modules.build();
+
+	// 按持久化的语言设置安装翻译器，必须在构造主窗口之前（setupUi 时即按当前语言生成文本）
+	LanguageManager::getInstance().applyLanguage(_modules.configModule.setConfig.yuyan);
 
 	_bagsRealTimeDisplay = std::make_unique<BagsRealTimeDisplay>(_modules.configModule, _modules.cameraModule);
 
@@ -82,6 +86,12 @@ void AppRuntime::build_connect()
 
     QObject::connect(_bagsRealTimeDisplay.get()->_dlgProductSet, &DlgProductSet::paramsChanged,
         _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::setConfigWindowClosed);
+
+    // 设置对话框切换语言 → 语言管理器安装/卸载翻译器 → 主窗口级联重刷所有界面文本
+    QObject::connect(_bagsRealTimeDisplay.get()->_dlgProductSet, &DlgProductSet::emit_changeLanguage,
+        &LanguageManager::getInstance(), &LanguageManager::applyLanguage);
+    QObject::connect(&LanguageManager::getInstance(), &LanguageManager::languageChanged,
+        _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::retranslate);
 
     QObject::connect(_modules.asynchronousThreadModule.zMotionPollingThread.get(), &ZMotionPollingThread::zMotionDisconnect,
         _bagsRealTimeDisplay.get(), &BagsRealTimeDisplay::onZMotionDisconnect);

@@ -21,6 +21,8 @@ public:
 	void build_ui();
 	void read_config();
 	void build_connect();
+	/// 语言切换后重刷界面文本（retranslateUi 会把数值按钮重置为占位符，需重新刷数据）
+	void retranslate();
 
 protected:
 	void showEvent(QShowEvent* event) override;
@@ -50,6 +52,8 @@ private slots:
 	void btn_qiehuanzhangshu_clicked();
 	void btn_chutuzhangshu_clicked();
 	void ckb_jingxiang_toggled(bool checked);
+
+	void cbb_yuyan_currentIndexChanged(int index);
 public:
 	Ui::DlgProductSetClass* ui;
 private:

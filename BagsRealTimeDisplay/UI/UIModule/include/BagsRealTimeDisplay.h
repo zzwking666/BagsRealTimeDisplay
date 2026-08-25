@@ -24,6 +24,10 @@ public:
     ~BagsRealTimeDisplay();
 public:
 	void initializeComponents();
+	/// 语言切换后重刷全部界面文本（含动态文本与子对话框）。
+	/// 注意：不能调用 ui->retranslateUi —— label_imgDisplay_1 已被
+	/// PanZoomLabel 替换并 deleteLater，retranslateUi 会访问悬垂指针。
+	void retranslate();
 public:
 	void build_ui();
 	void build_connect();
@@ -88,6 +92,10 @@ private:
 
 	// ZMotion断开弹窗，最多连续弹3次
 	int _zMotionWarningCount{ 0 };
+
+	// 相机连接状态缓存，语言切换后按缓存重刷状态文本
+	bool _camera1Connected{ false };
+	bool _camera2Connected{ false };
 private:
     Ui::BagsRealTimeDisplayClass* ui;
     ConfigModule& _configModule;

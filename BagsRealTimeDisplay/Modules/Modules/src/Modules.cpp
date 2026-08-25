@@ -1,7 +1,9 @@
 #include"Modules.hpp"
 #include"qmessagebox.h"
+#include"MessageBoxUtil.hpp"
 #include"Utility.hpp"
 #include"QDir"
+#include <QCoreApplication>
 
 Modules::Modules(const Modules&)
 	: imageStitchModule(configModule)
@@ -85,7 +87,8 @@ bool Modules::check()
 #pragma region check single instance
 	if (!RunEnvCheck::isSingleInstance("BagsRealTimeDisplay.exe"))
 	{
-		QMessageBox::warning(nullptr, "错误", "已经有程序在运行，请勿多次打开");
+		msgutil::warning(nullptr, QCoreApplication::translate("Modules", "错误"),
+			QCoreApplication::translate("Modules", "已经有程序在运行，请勿多次打开"));
 		return false;
 	}
 #pragma endregion
@@ -93,13 +96,15 @@ bool Modules::check()
 #pragma region check run env
 	if (RunEnvCheck::isProcessRunning("MVS.exe"))
 	{
-		QMessageBox::warning(nullptr, "错误", "检测到海康威视软件正在运行，请先关闭后再启动本程序。");
+		msgutil::warning(nullptr, QCoreApplication::translate("Modules", "错误"),
+			QCoreApplication::translate("Modules", "检测到海康威视软件正在运行，请先关闭后再启动本程序。"));
 		return false;
 	}
 
 	if (RunEnvCheck::isProcessRunning("BasedCam3.exe"))
 	{
-		QMessageBox::warning(nullptr, "错误", "检测到度申相机平台软件正在运行，请先关闭后再启动本程序。");
+		msgutil::warning(nullptr, QCoreApplication::translate("Modules", "错误"),
+			QCoreApplication::translate("Modules", "检测到度申相机平台软件正在运行，请先关闭后再启动本程序。"));
 		return false;
 	}
 #pragma endregion

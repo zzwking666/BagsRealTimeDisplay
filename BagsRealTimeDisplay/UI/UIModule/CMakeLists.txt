@@ -49,6 +49,18 @@ target_link_libraries(${DEMO_TARGET}
 	PRIVATE RWUL::rqwu
 )
 
+# 中英文翻译：lrelease 将 .ts 编译为 .qm，再经 qt_add_resources 内嵌为
+# :/BagsRealTimeDisplay/i18n/*.qm 资源（静态库需在 main.cpp 中 Q_INIT_RESOURCE(translations)）
+find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
+
+qt_add_lrelease(TS_FILES "${CMAKE_CURRENT_SOURCE_DIR}/translations/BagsRealTimeDisplay_en.ts"
+	QM_FILES_OUTPUT_VARIABLE QM_FILES)
+
+qt_add_resources(${DEMO_TARGET} "translations"
+	PREFIX "/BagsRealTimeDisplay/i18n"
+	BASE "${CMAKE_CURRENT_BINARY_DIR}"
+	FILES ${QM_FILES})
+
 add_library(UI::${DEMO_TARGET} ALIAS ${DEMO_TARGET})
 
 

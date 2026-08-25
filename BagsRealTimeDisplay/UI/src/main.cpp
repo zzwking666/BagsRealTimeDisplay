@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     Q_INIT_RESOURCE(BagsRealTimeDisplay);
+    Q_INIT_RESOURCE(translations);
     rw::rqwu::ini();
 
 	AppRuntime appRuntime;

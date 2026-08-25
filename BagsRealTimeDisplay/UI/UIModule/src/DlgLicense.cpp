@@ -4,6 +4,7 @@
 #include <QClipboard>
 #include <QGuiApplication>
 #include <QMessageBox>
+#include "MessageBoxUtil.hpp"
 
 DlgLicense::DlgLicense(const QString& machineCode, QWidget* parent)
 	: QDialog(parent)
@@ -32,14 +33,14 @@ void DlgLicense::btn_copyMachineCode_clicked()
 {
 	QClipboard* clipboard = QGuiApplication::clipboard();
 	clipboard->setText(ui->lineEdit_machineCode->text());
-	QMessageBox::information(this, "提示", "机器码已复制到剪贴板");
+	msgutil::information(this, tr("提示"), tr("机器码已复制到剪贴板"));
 }
 
 void DlgLicense::btn_activate_clicked()
 {
 	if (activationCode().isEmpty())
 	{
-		QMessageBox::warning(this, "提示", "请输入激活码");
+		msgutil::warning(this, tr("提示"), tr("请输入激活码"));
 		return;
 	}
 	accept();

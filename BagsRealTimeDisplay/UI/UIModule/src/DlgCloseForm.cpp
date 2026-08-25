@@ -41,6 +41,11 @@ void DlgCloseForm::setLabelShowMessage(QString message)
     }
 }
 
+void DlgCloseForm::retranslate()
+{
+    ui->retranslateUi(this);
+}
+
 void DlgCloseForm::btn_close_clicked()
 {
 	this->close();

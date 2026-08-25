@@ -3,6 +3,7 @@
 
 #include <QFile>
 #include <QMessageBox>
+#include "MessageBoxUtil.hpp"
 #include <QPainter>
 #include <rwul/hoepZMotion/hoepZMotion_ZMotionDevice.hpp>
 #include <rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h>
@@ -73,7 +74,7 @@ void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
 	auto& BagsRealTimeDisplayConfig = _configModule.bagsRealTimeDisplayInfo;
 	auto& setConfig = _configModule.setConfig;
 
-	ui->cbb_qiehuanxianshi->addItems({ "正面", "背面", "双面" });
+	ui->cbb_qiehuanxianshi->addItems({ tr("正面"), tr("背面"), tr("双面") });
 
 	// 更新UI
 	ui->lb_FrontTotal->setText(QString::number(BagsRealTimeDisplayConfig.zhengmianzongliang));
@@ -202,27 +203,61 @@ void BagsRealTimeDisplay::touchManualViewOperation()
 	}
 }
 
+void BagsRealTimeDisplay::retranslate()
+{
+	// 静态文本（对应 .ui 中的中文，此处手写重设以避免 retranslateUi 访问已删除的 label_imgDisplay_1）
+	ui->label_wasteProducts->setText(tr("正面总量"));
+	ui->label_wasteProducts_2->setText(tr("背面总量"));
+	ui->label_info->setText(tr("统计信息"));
+	ui->pbtn_resetProduct->setText(tr("产量清零"));
+	ui->label_info_2->setText(tr("设置齿数"));
+	ui->pbtn_set->setText(tr("设置"));
+	ui->label_wasteProducts_3->setText(tr("切换显示:"));
+	ui->label_cameraStateTitle->setText(tr("相机状态"));
+
+	// 切换显示下拉框：重填翻译文本并保持当前选项
+	const int currentIndex = ui->cbb_qiehuanxianshi->currentIndex();
+	ui->cbb_qiehuanxianshi->blockSignals(true);
+	ui->cbb_qiehuanxianshi->clear();
+	ui->cbb_qiehuanxianshi->addItems({ tr("正面"), tr("背面"), tr("双面") });
+	ui->cbb_qiehuanxianshi->setCurrentIndex(currentIndex < 0 ? 0 : currentIndex);
+	ui->cbb_qiehuanxianshi->blockSignals(false);
+
+	// 动态文本刷新
+	onUpdateStatisticalInfoUI();
+	setConfigWindowClosed();
+	ui->pbtn_setchishu->setText(QString::number(_configModule.bagsRealTimeDisplayInfo.shezhichishu));
+	updateCameraLabelState(1, _camera1Connected);
+	updateCameraLabelState(2, _camera2Connected);
+
+	// 子对话框同步刷新
+	if (_dlgProductSet) _dlgProductSet->retranslate();
+	if (_dlgCloseForm) _dlgCloseForm->retranslate();
+}
+
 void BagsRealTimeDisplay::updateCameraLabelState(int cameraIndex, bool state)
 {
 	switch (cameraIndex)
 	{
 	case 1:
+		_camera1Connected = state;
 		if (state) {
-			ui->label_camera1State->setText("连接成功");
+			ui->label_camera1State->setText(tr("连接成功"));
 			ui->label_camera1State->setStyleSheet(QString("QLabel{color:rgb(0, 230, 0);font-size: 18px;font - weight: bold;padding: 5px 5px;} "));
 		}
 		else {
-			ui->label_camera1State->setText("连接失败");
+			ui->label_camera1State->setText(tr("连接失败"));
 			ui->label_camera1State->setStyleSheet(QString("QLabel{color:rgb(230, 0, 0);font-size: 18px;font - weight: bold;padding: 5px 5px;} "));
 		}
 		break;
 	case 2:
+		_camera2Connected = state;
 		if (state) {
-			ui->label_camera2State->setText("连接成功");
+			ui->label_camera2State->setText(tr("连接成功"));
 			ui->label_camera2State->setStyleSheet(QString("QLabel{color:rgb(0, 230, 0);font-size: 18px;font - weight: bold;padding: 5px 5px;} "));
 		}
 		else {
-			ui->label_camera2State->setText("连接失败");
+			ui->label_camera2State->setText(tr("连接失败"));
 			ui->label_camera2State->setStyleSheet(QString("QLabel{color:rgb(230, 0, 0);font-size: 18px;font - weight: bold;padding: 5px 5px;} "));
 		}
 		break;
@@ -246,7 +281,7 @@ void BagsRealTimeDisplay::onZMotionDisconnect()
 #else
 	if (_zMotionWarningCount >= 3) return;
 	++_zMotionWarningCount;
-	rw::rqwu::MessageBox::warning(this, "警告！", "运动控制器断开连接！");
+	msgutil::warning(this, tr("警告！"), tr("运动控制器断开连接！"));
 #endif
 }
 
@@ -446,7 +481,7 @@ void BagsRealTimeDisplay::pbtn_setchishu_clicked()
 		auto value = numKeyBord.getValue();
 		if (value.toDouble() < 0)
 		{
-			QMessageBox::warning(this, "提示", "请输入大于等于0的数值");
+			msgutil::warning(this, tr("提示"), tr("请输入大于等于0的数值"));
 			return;
 		}
 		ui->pbtn_setchishu->setText(QString::number(value.toDouble()));

@@ -20,5 +20,7 @@ namespace cdm {
 		qiehuanzhangshu : int : default = 0;
 		isjingxiang : bool : default = false;
 		chutuzhangshu : int : default = 0;
+
+		yuyan : int : default = 0;
 	};
 }

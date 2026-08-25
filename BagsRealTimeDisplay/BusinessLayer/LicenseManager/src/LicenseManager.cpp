@@ -1,5 +1,6 @@
 #include "LicenseManager.hpp"
 
+#include <QCoreApplication>
 #include <QCryptographicHash>
 #include <QDebug>
 #include <QMessageBox>
@@ -129,9 +130,20 @@ bool LicenseManager::isAuthorized()
 	return ok && info.hwid == machineCode.toStdString();
 }
 
+namespace
+{
+	// 标准按钮（Ok）文字取自 Windows 系统语言、不经 QTranslator，改用显式文本按钮以便随语言切换
+	void showWarningOk(const QString& title, const QString& text)
+	{
+		QMessageBox box(QMessageBox::Warning, title, text, QMessageBox::NoButton, nullptr);
+		box.addButton(QCoreApplication::translate("LicenseManager", "确定"), QMessageBox::AcceptRole);
+		box.exec();
+	}
+}
+
 QString LicenseManager::getAuthorizationExpiry()
 {
-	return QStringLiteral("永久授权");
+	return QCoreApplication::translate("LicenseManager", "永久授权");
 }
 
 bool LicenseManager::applyActivationCode(const QString& activationCode)
@@ -144,21 +156,23 @@ bool LicenseManager::applyActivationCode(const QString& activationCode)
 		activationCode.toStdString(), kActivationKey, parseOk);
 	if (!parseOk)
 	{
-		QMessageBox::warning(nullptr, "错误", "激活码无效或格式错误");
+		showWarningOk(QCoreApplication::translate("LicenseManager", "错误"),
+			QCoreApplication::translate("LicenseManager", "激活码无效或格式错误"));
 		return false;
 	}
 
 	const QString machineCode = getMachineCode();
 	if (info.hwid != machineCode.toStdString())
 	{
-		QMessageBox::warning(nullptr, "错误",
-			"激活码与当前机器不匹配。请确认机器码后重新申请激活码。");
+		showWarningOk(QCoreApplication::translate("LicenseManager", "错误"),
+			QCoreApplication::translate("LicenseManager", "激活码与当前机器不匹配。请确认机器码后重新申请激活码。"));
 		return false;
 	}
 
 	if (!rw::actCry::ActivationInfo::save(info, getRegistryCfg()))
 	{
-		QMessageBox::warning(nullptr, "错误", "保存授权信息失败，请检查权限或联系管理员");
+		showWarningOk(QCoreApplication::translate("LicenseManager", "错误"),
+			QCoreApplication::translate("LicenseManager", "保存授权信息失败，请检查权限或联系管理员"));
 		return false;
 	}
 
