@@ -43,6 +43,8 @@ protected:
 private:
 	void touchManualViewOperation();
 	void updateCropPreview(const QPixmap& source);
+	void applyBagLengthToCamera(size_t cameraIndex, double bagLength);
+	void restoreBagLengthAfterCapture(size_t cameraIndex);
 public slots:
 	void updateCameraLabelState(int cameraIndex, bool state);
 
@@ -62,6 +64,7 @@ private slots:
 	void btn_zengjiabaoguang2_clicked();
 	void pbtn_resetProduct_clicked();
 	void pbtn_setBagLength_clicked();
+	void pbtn_nextBagLengthAdd50_clicked();
 
 	void cbb_qiehuanxianshi_currentIndexChanged(int index);
 
@@ -94,6 +97,10 @@ private:
 	bool _freezeImageUpdate{ false };
 	int _freezeAfterManualMs{ 3000 };
 	QTimer* _manualFreezeTimer{ nullptr };
+
+	// 下一次出图临时增加袋子长度，各相机出图后分别恢复
+	bool _nextBagLengthPendingCamera1{ false };
+	bool _nextBagLengthPendingCamera2{ false };
 
 #ifndef NDEBUG
 	QPushButton* _pbtnJiaozaituxiang{ nullptr };

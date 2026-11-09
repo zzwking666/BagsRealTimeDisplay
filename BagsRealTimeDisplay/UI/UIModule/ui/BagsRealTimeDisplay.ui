@@ -561,27 +561,29 @@ QComboBox QAbstractItemView {
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pbtn_setBagLength">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>150</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QPushButton {
+                <layout class="QHBoxLayout" name="horizontalLayout_bagLength">
+                 <item>
+                  <widget class="QPushButton" name="pbtn_setBagLength">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton {
     padding: 6px 14px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px; 
+    font-size: 20px;
 }
 
 QPushButton:hover {
@@ -593,11 +595,55 @@ QPushButton:pressed {
     border-color: #777;
     background-color: #EEE;
 }</string>
-                 </property>
-                 <property name="text">
-                  <string>0000</string>
-                 </property>
-                </widget>
+                   </property>
+                   <property name="text">
+                    <string>0000</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pbtn_nextBagLengthAdd50">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>仅下一次出图使用当前袋子长度 +50，之后自动恢复</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton {
+    padding: 6px 14px;
+    border: 2px solid #CCC;
+    border-radius: 4px;
+    background-color: white;
+    color: #444;
+    font-size: 20px;
+}
+
+QPushButton:hover {
+    border-color: #999;
+    background-color: #F5F5F5;
+}
+
+QPushButton:pressed {
+    border-color: #777;
+    background-color: #EEE;
+}</string>
+                   </property>
+                   <property name="text">
+                    <string>调整图像位置</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </item>

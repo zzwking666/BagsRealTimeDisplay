@@ -70,6 +70,8 @@ void BagsRealTimeDisplay::build_connect()
 		this, &BagsRealTimeDisplay::pbtn_resetProduct_clicked);
 	QObject::connect(ui->pbtn_setBagLength, &QPushButton::clicked,
 		this, &BagsRealTimeDisplay::pbtn_setBagLength_clicked);
+	QObject::connect(ui->pbtn_nextBagLengthAdd50, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::pbtn_nextBagLengthAdd50_clicked);
 
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
@@ -295,6 +297,7 @@ void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 {
+	restoreBagLengthAfterCapture(index);
 #ifndef NDEBUG
 	if (_debugLocalImageMode) return;
 #endif
@@ -595,16 +598,57 @@ void BagsRealTimeDisplay::pbtn_setBagLength_clicked()
 		ui->pbtn_setBagLength->setText(QString::number(value.toDouble()));
 		auto& bagsRealTimeDisplayInfo = _configModule.bagsRealTimeDisplayInfo;
 		bagsRealTimeDisplayInfo.shezhidaizichangdu = value.toDouble();
+		_nextBagLengthPendingCamera1 = false;
+		_nextBagLengthPendingCamera2 = false;
 
-		unsigned int lineHeight1 = static_cast<unsigned int>(
-			value.toDouble() / _configModule.setConfig.xiangsudangliang1
-			);
-		unsigned int lineHeight2 = static_cast<unsigned int>(
-			value.toDouble() / _configModule.setConfig.xiangsudangliang2
-			);
+		applyBagLengthToCamera(1, value.toDouble());
+		applyBagLengthToCamera(2, value.toDouble());
+	}
+}
 
-		_cameraModule.setCamera1LineHeight(lineHeight1);
-		_cameraModule.setCamera2LineHeight(lineHeight2);
+void BagsRealTimeDisplay::pbtn_nextBagLengthAdd50_clicked()
+{
+	constexpr double lengthIncrement = 50.0;
+	const double nextBagLength =
+		_configModule.bagsRealTimeDisplayInfo.shezhidaizichangdu + lengthIncrement;
+
+	applyBagLengthToCamera(1, nextBagLength);
+	applyBagLengthToCamera(2, nextBagLength);
+	_nextBagLengthPendingCamera1 = true;
+	_nextBagLengthPendingCamera2 = true;
+}
+
+void BagsRealTimeDisplay::applyBagLengthToCamera(size_t cameraIndex, double bagLength)
+{
+	const auto& setConfig = _configModule.setConfig;
+	if (cameraIndex == 1 && setConfig.xiangsudangliang1 > 0.0)
+	{
+		const auto lineHeight = static_cast<unsigned int>(
+			bagLength / setConfig.xiangsudangliang1);
+		_cameraModule.setCamera1LineHeight(lineHeight);
+	}
+	else if (cameraIndex == 2 && setConfig.xiangsudangliang2 > 0.0)
+	{
+		const auto lineHeight = static_cast<unsigned int>(
+			bagLength / setConfig.xiangsudangliang2);
+		_cameraModule.setCamera2LineHeight(lineHeight);
+	}
+}
+
+void BagsRealTimeDisplay::restoreBagLengthAfterCapture(size_t cameraIndex)
+{
+	const double normalBagLength =
+		_configModule.bagsRealTimeDisplayInfo.shezhidaizichangdu;
+
+	if (cameraIndex == 1 && _nextBagLengthPendingCamera1)
+	{
+		applyBagLengthToCamera(1, normalBagLength);
+		_nextBagLengthPendingCamera1 = false;
+	}
+	else if (cameraIndex == 2 && _nextBagLengthPendingCamera2)
+	{
+		applyBagLengthToCamera(2, normalBagLength);
+		_nextBagLengthPendingCamera2 = false;
 	}
 }
 
