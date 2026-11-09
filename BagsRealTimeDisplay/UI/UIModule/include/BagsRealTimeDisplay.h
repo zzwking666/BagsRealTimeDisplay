@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QImage>
+#include <QVector>
 #include "ui_BagsRealTimeDisplay.h"
 #include <QTimer>
 #include "rqw_LabelClickable.h"
@@ -33,6 +35,9 @@ public:
 	void build_DlgProductSet();
 	void build_DlgCropPreview();
 	void build_PanZoomLabel();
+#ifndef NDEBUG
+	void build_DebugImageLoadButton();
+#endif
 protected:
 	bool eventFilter(QObject* watched, QEvent* event) override;
 private:
@@ -60,6 +65,7 @@ private slots:
 	void cbb_qiehuanxianshi_currentIndexChanged(int index);
 
 	void lb_title_clicked();
+	void pbtn_jiaozaituxiang_clicked();
 public:
 	DlgProductSet* _dlgProductSet = nullptr;
 private:
@@ -86,6 +92,13 @@ private:
 	bool _freezeImageUpdate{ false };
 	int _freezeAfterManualMs{ 3000 };
 	QTimer* _manualFreezeTimer{ nullptr };
+
+#ifndef NDEBUG
+	QPushButton* _pbtnJiaozaituxiang{ nullptr };
+	QVector<QImage> _debugLocalImages{};
+	int _debugLocalImageIndex{ 0 };
+	bool _debugLocalImageMode{ false };
+#endif
 private:
     Ui::BagsRealTimeDisplayClass* ui;
     ConfigModule& _configModule;

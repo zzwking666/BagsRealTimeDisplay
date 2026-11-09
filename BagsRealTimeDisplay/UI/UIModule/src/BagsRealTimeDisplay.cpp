@@ -1,12 +1,15 @@
 #include "BagsRealTimeDisplay.h"
 #include "DlgProductSet.h"
 
+#include <QDir>
 #include <QFile>
 #include <QGuiApplication>
+#include <QImageReader>
 #include <QMessageBox>
 #include <QPainter>
 #include <QScreen>
 #include <algorithm>
+#include <utility>
 #include <rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h>
 
 #include "Modules.hpp"
@@ -42,6 +45,9 @@ void BagsRealTimeDisplay::build_ui()
 	build_DlgProductSet();
 	build_DlgCropPreview();
 	build_PanZoomLabel();
+#ifndef NDEBUG
+	build_DebugImageLoadButton();
+#endif
 }
 
 void BagsRealTimeDisplay::build_connect()
@@ -71,6 +77,11 @@ void BagsRealTimeDisplay::build_connect()
 
 	QObject::connect(_panZoomLabel, &PanZoomLabel::cropSelected,
 		this, &BagsRealTimeDisplay::onCropSelected);
+
+#ifndef NDEBUG
+	QObject::connect(_pbtnJiaozaituxiang, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::pbtn_jiaozaituxiang_clicked);
+#endif
 }
 
 void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
@@ -167,6 +178,18 @@ void BagsRealTimeDisplay::build_PanZoomLabel()
 			});
 	}
 }
+
+#ifndef NDEBUG
+void BagsRealTimeDisplay::build_DebugImageLoadButton()
+{
+	_pbtnJiaozaituxiang = new QPushButton(QStringLiteral("加载图像"), ui->gBox_set);
+	_pbtnJiaozaituxiang->setSizePolicy(ui->pbtn_set->sizePolicy());
+	_pbtnJiaozaituxiang->setStyleSheet(ui->pbtn_set->styleSheet());
+	_pbtnJiaozaituxiang->setToolTip(QStringLiteral(
+		"从 D:\\ImgStorage\\BagsRealTimeDisplay 加载所有图片；再次点击切换下一张"));
+	ui->horizontalLayout_3->insertWidget(0, _pbtnJiaozaituxiang);
+}
+#endif
 
 bool BagsRealTimeDisplay::eventFilter(QObject* watched, QEvent* event)
 {
@@ -268,6 +291,9 @@ void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 {
+#ifndef NDEBUG
+	if (_debugLocalImageMode) return;
+#endif
 	if (_freezeImageUpdate || (_panZoomLabel && _panZoomLabel->cropSelectionActive())) return;
 	if (!_panZoomLabel || image.isNull()) return;
 	auto& _statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
@@ -409,6 +435,61 @@ void BagsRealTimeDisplay::lb_title_clicked()
 		this->showMinimized();
 		minimizeCount = 3; // 重置最小化计数器
 	}
+}
+
+void BagsRealTimeDisplay::pbtn_jiaozaituxiang_clicked()
+{
+#ifndef NDEBUG
+	if (_debugLocalImages.isEmpty())
+	{
+		const QDir imageDir(QStringLiteral("D:/ImgStorage/BagsRealTimeDisplay"));
+		if (!imageDir.exists())
+		{
+			QMessageBox::warning(this, QStringLiteral("加载图像"),
+				QStringLiteral("图像目录不存在：\n%1").arg(imageDir.absolutePath()));
+			return;
+		}
+
+		QStringList nameFilters;
+		const QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
+		nameFilters.reserve(supportedFormats.size());
+		for (const QByteArray& format : supportedFormats)
+			nameFilters.append(QStringLiteral("*.") + QString::fromLatin1(format));
+
+		const QFileInfoList files = imageDir.entryInfoList(nameFilters,
+			QDir::Files | QDir::Readable, QDir::Name | QDir::IgnoreCase);
+		QVector<QImage> loadedImages;
+		loadedImages.reserve(files.size());
+		for (const QFileInfo& file : files)
+		{
+			QImageReader reader(file.absoluteFilePath());
+			reader.setAutoTransform(true);
+			QImage image = reader.read();
+			if (!image.isNull())
+				loadedImages.push_back(std::move(image));
+		}
+
+		if (loadedImages.isEmpty())
+		{
+			QMessageBox::warning(this, QStringLiteral("加载图像"),
+				QStringLiteral("目录中没有可读取的图片：\n%1").arg(imageDir.absolutePath()));
+			return;
+		}
+
+		_debugLocalImages = std::move(loadedImages);
+		_debugLocalImageIndex = 0;
+		_debugLocalImageMode = true;
+	}
+	else
+	{
+		_debugLocalImageIndex = (_debugLocalImageIndex + 1) % _debugLocalImages.size();
+	}
+
+	_panZoomLabel->setPixmap(QPixmap::fromImage(_debugLocalImages.at(_debugLocalImageIndex)));
+	_pbtnJiaozaituxiang->setText(QStringLiteral("图像 %1/%2")
+		.arg(_debugLocalImageIndex + 1)
+		.arg(_debugLocalImages.size()));
+#endif
 }
 
 void BagsRealTimeDisplay::pbtn_exit_clicked()
