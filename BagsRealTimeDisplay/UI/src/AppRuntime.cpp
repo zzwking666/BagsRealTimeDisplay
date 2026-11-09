@@ -31,6 +31,20 @@ void AppRuntime::show()
 
 void AppRuntime::shutdown()
 {
+	// 先切断异步数据源到界面的连接，避免退出过程中继续刷新正在销毁的控件。
+	if (_bagsRealTimeDisplay)
+	{
+		QObject::disconnect(&_modules.imageStitchModule, nullptr,
+			_bagsRealTimeDisplay.get(), nullptr);
+		QObject::disconnect(&_modules.cameraModule, nullptr,
+			_bagsRealTimeDisplay.get(), nullptr);
+	}
+	if (_modules.asynchronousThreadModule.refreshUIThread)
+	{
+		QObject::disconnect(_modules.asynchronousThreadModule.refreshUIThread.get(),
+			nullptr, nullptr, nullptr);
+	}
+
 	_modules.stop();
     _modules.destroy();
 }

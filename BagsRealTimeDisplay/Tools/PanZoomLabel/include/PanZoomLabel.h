@@ -49,7 +49,7 @@ public:
 
 signals:
 	void roiRectsConfirmedChanged(const QVector<QRectF>& roiImageRects);
-	void cropSelected(const QPixmap& pixmap);
+	void cropSelected(const QPixmap& pixmap, const QRectF& normalizedRect);
 
 protected:
 	void paintEvent(QPaintEvent* e) override;

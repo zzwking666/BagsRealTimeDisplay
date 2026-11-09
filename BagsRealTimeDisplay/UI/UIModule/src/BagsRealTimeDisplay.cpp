@@ -163,7 +163,11 @@ void BagsRealTimeDisplay::build_PanZoomLabel()
 
 	_panZoomLabel->show();
 	oldLabel->hide();
-	oldLabel->deleteLater();
+
+	// 当前处于界面构建阶段，旧 Label 没有正在处理的事件，可以直接销毁。
+	// 同步更新 Designer 指针，避免其继续指向已删除的旧 Label。
+	delete oldLabel;
+	ui->label_imgDisplay_1 = _panZoomLabel;
 
 	_panZoomLabel->installEventFilter(this);
 
@@ -338,6 +342,7 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 			if (camera == 2 && _backViewState.valid)  _panZoomLabel->applyViewState(_backViewState);
 
 			_currentViewCamera = camera;
+			updateCropPreview(pix);
 		};
 
 	if (mode == 0)
@@ -384,9 +389,26 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 	}
 }
 
-void BagsRealTimeDisplay::onCropSelected(const QPixmap& pixmap)
+void BagsRealTimeDisplay::updateCropPreview(const QPixmap& source)
 {
-	if (!_dlgCropPreview || pixmap.isNull()) return;
+	if (!_dlgCropPreview || !_dlgCropPreview->isVisible() ||
+		!_cropPreviewRect.isValid() || source.isNull()) return;
+
+	const QRectF imageRect(
+		_cropPreviewRect.x() * source.width(),
+		_cropPreviewRect.y() * source.height(),
+		_cropPreviewRect.width() * source.width(),
+		_cropPreviewRect.height() * source.height());
+	const QRect cropRect = imageRect.toAlignedRect().intersected(source.rect());
+	if (!cropRect.isEmpty())
+		_dlgCropPreview->setSnapshot(source.copy(cropRect));
+}
+
+void BagsRealTimeDisplay::onCropSelected(const QPixmap& pixmap, const QRectF& normalizedRect)
+{
+	if (!_dlgCropPreview || pixmap.isNull() || !normalizedRect.isValid()) return;
+
+	_cropPreviewRect = normalizedRect;
 
 	QScreen* targetScreen = this->screen();
 	if (!targetScreen)
@@ -485,7 +507,9 @@ void BagsRealTimeDisplay::pbtn_jiaozaituxiang_clicked()
 		_debugLocalImageIndex = (_debugLocalImageIndex + 1) % _debugLocalImages.size();
 	}
 
-	_panZoomLabel->setPixmap(QPixmap::fromImage(_debugLocalImages.at(_debugLocalImageIndex)));
+	const QPixmap pixmap = QPixmap::fromImage(_debugLocalImages.at(_debugLocalImageIndex));
+	_panZoomLabel->setPixmap(pixmap);
+	updateCropPreview(pixmap);
 	_pbtnJiaozaituxiang->setText(QStringLiteral("图像 %1/%2")
 		.arg(_debugLocalImageIndex + 1)
 		.arg(_debugLocalImages.size()));

@@ -42,6 +42,7 @@ protected:
 	bool eventFilter(QObject* watched, QEvent* event) override;
 private:
 	void touchManualViewOperation();
+	void updateCropPreview(const QPixmap& source);
 public slots:
 	void updateCameraLabelState(int cameraIndex, bool state);
 
@@ -49,7 +50,7 @@ public slots:
 
     void onCameraDisplay(size_t index, const QImage& image);
 
-	void onCropSelected(const QPixmap& pixmap);
+	void onCropSelected(const QPixmap& pixmap, const QRectF& normalizedRect);
 
 	void setConfigWindowClosed();
 private slots:
@@ -73,6 +74,7 @@ private:
 	int minimizeCount{ 3 };
 	DlgCloseForm* _dlgCloseForm = nullptr;
 	DlgCropPreview* _dlgCropPreview{ nullptr };
+	QRectF _cropPreviewRect{};
 
 	// 正面背面切换锚点
 	int lastCameraCaptureCount{ 0 };

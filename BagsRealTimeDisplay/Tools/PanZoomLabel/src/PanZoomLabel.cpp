@@ -557,7 +557,14 @@ void PanZoomLabel::mouseReleaseEvent(QMouseEvent* e)
 				.intersected(QRectF(_src.rect()));
 			const QRect cropRect = imageRect.toAlignedRect().intersected(_src.rect());
 			if (cropRect.width() >= 2 && cropRect.height() >= 2)
-				emit cropSelected(_src.copy(cropRect));
+			{
+				const QRectF normalizedRect(
+					static_cast<double>(cropRect.x()) / _src.width(),
+					static_cast<double>(cropRect.y()) / _src.height(),
+					static_cast<double>(cropRect.width()) / _src.width(),
+					static_cast<double>(cropRect.height()) / _src.height());
+				emit cropSelected(_src.copy(cropRect), normalizedRect);
+			}
 		}
 
 		e->accept();
