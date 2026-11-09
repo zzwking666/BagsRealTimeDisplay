@@ -2,8 +2,11 @@
 #include "DlgProductSet.h"
 
 #include <QFile>
+#include <QGuiApplication>
 #include <QMessageBox>
 #include <QPainter>
+#include <QScreen>
+#include <algorithm>
 #include <rwul/rqwu/Keyboard/rqwu_NumberKeyboard.h>
 
 #include "Modules.hpp"
@@ -37,6 +40,7 @@ void BagsRealTimeDisplay::build_ui()
 	build_BagsRealTimeDisplayData();
 	build_DlgCloseForm();
 	build_DlgProductSet();
+	build_DlgCropPreview();
 	build_PanZoomLabel();
 }
 
@@ -64,6 +68,9 @@ void BagsRealTimeDisplay::build_connect()
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
 		this, &BagsRealTimeDisplay::lb_title_clicked);
+
+	QObject::connect(_panZoomLabel, &PanZoomLabel::cropSelected,
+		this, &BagsRealTimeDisplay::onCropSelected);
 }
 
 void BagsRealTimeDisplay::build_BagsRealTimeDisplayData()
@@ -90,6 +97,11 @@ void BagsRealTimeDisplay::build_DlgCloseForm()
 void BagsRealTimeDisplay::build_DlgProductSet()
 {
 	_dlgProductSet = new DlgProductSet(_configModule, _cameraModule, this);
+}
+
+void BagsRealTimeDisplay::build_DlgCropPreview()
+{
+	_dlgCropPreview = new DlgCropPreview(this);
 }
 
 void BagsRealTimeDisplay::build_PanZoomLabel()
@@ -169,14 +181,33 @@ bool BagsRealTimeDisplay::eventFilter(QObject* watched, QEvent* event)
 		case QEvent::MouseButtonPress:
 		{
 			auto* me = static_cast<QMouseEvent*>(event);
-			if (me->button() == Qt::LeftButton) touchManualViewOperation();
+			if (me->button() == Qt::LeftButton ||
+				(me->button() == Qt::RightButton && !_panZoomLabel->roiMode()))
+			{
+				touchManualViewOperation();
+			}
 			break;
 		}
 
 		case QEvent::MouseMove:
 		{
 			auto* me = static_cast<QMouseEvent*>(event);
-			if (me->buttons() & Qt::LeftButton) touchManualViewOperation();
+			if ((me->buttons() & Qt::LeftButton) ||
+				((me->buttons() & Qt::RightButton) && !_panZoomLabel->roiMode()))
+			{
+				touchManualViewOperation();
+			}
+			break;
+		}
+
+		case QEvent::MouseButtonRelease:
+		{
+			auto* me = static_cast<QMouseEvent*>(event);
+			if (me->button() == Qt::RightButton && !_panZoomLabel->roiMode() &&
+				_panZoomLabel->cropSelectionActive())
+			{
+				touchManualViewOperation();
+			}
 			break;
 		}
 
@@ -237,7 +268,7 @@ void BagsRealTimeDisplay::onUpdateStatisticalInfoUI()
 
 void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 {
-	if (_freezeImageUpdate) return;
+	if (_freezeImageUpdate || (_panZoomLabel && _panZoomLabel->cropSelectionActive())) return;
 	if (!_panZoomLabel || image.isNull()) return;
 	auto& _statisticalInfo = Modules::getInstance().asynchronousThreadModule.statisticalInfo;
 
@@ -325,6 +356,38 @@ void BagsRealTimeDisplay::onCameraDisplay(size_t index, const QImage& image)
 			}
 		}
 	}
+}
+
+void BagsRealTimeDisplay::onCropSelected(const QPixmap& pixmap)
+{
+	if (!_dlgCropPreview || pixmap.isNull()) return;
+
+	QScreen* targetScreen = this->screen();
+	if (!targetScreen)
+		targetScreen = QGuiApplication::primaryScreen();
+
+	if (targetScreen)
+	{
+		constexpr int margin = 10;
+		const QRect available = targetScreen->availableGeometry();
+		const QSize maxSize(
+			std::max(1, available.width() - margin * 2),
+			std::max(1, available.height() - margin * 2));
+		const QSize previewSize = _dlgCropPreview->size().boundedTo(maxSize);
+		_dlgCropPreview->resize(previewSize);
+
+		const int minX = available.left();
+		const int maxX = std::max(minX, available.right() - previewSize.width() + 1);
+		const int minY = available.top();
+		const int maxY = std::max(minY, available.bottom() - previewSize.height() + 1);
+		const int x = std::clamp(available.right() - previewSize.width() + 1 - margin, minX, maxX);
+		const int y = std::clamp(available.top() + margin, minY, maxY);
+		_dlgCropPreview->move(x, y);
+	}
+
+	_dlgCropPreview->setSnapshot(pixmap);
+	_dlgCropPreview->show();
+	_dlgCropPreview->raise();
 }
 
 void BagsRealTimeDisplay::setConfigWindowClosed()

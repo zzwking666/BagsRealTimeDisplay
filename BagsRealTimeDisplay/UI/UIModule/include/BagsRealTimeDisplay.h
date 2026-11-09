@@ -8,6 +8,7 @@
 #include "ConfigModule.hpp"
 #include "CameraModule.hpp"
 #include "DlgProductSet.h"
+#include "DlgCropPreview.h"
 #include "PanZoomLabel.h"
 
 
@@ -30,6 +31,7 @@ public:
 	void build_BagsRealTimeDisplayData();
     void build_DlgCloseForm();
 	void build_DlgProductSet();
+	void build_DlgCropPreview();
 	void build_PanZoomLabel();
 protected:
 	bool eventFilter(QObject* watched, QEvent* event) override;
@@ -41,6 +43,8 @@ public slots:
 	void onUpdateStatisticalInfoUI();
 
     void onCameraDisplay(size_t index, const QImage& image);
+
+	void onCropSelected(const QPixmap& pixmap);
 
 	void setConfigWindowClosed();
 private slots:
@@ -62,6 +66,7 @@ private:
 	rw::rqw::ClickableLabel* clickableTitle = nullptr;
 	int minimizeCount{ 3 };
 	DlgCloseForm* _dlgCloseForm = nullptr;
+	DlgCropPreview* _dlgCropPreview{ nullptr };
 
 	// 正面背面切换锚点
 	int lastCameraCaptureCount{ 0 };

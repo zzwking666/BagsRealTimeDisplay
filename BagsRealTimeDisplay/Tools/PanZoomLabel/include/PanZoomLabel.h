@@ -32,6 +32,9 @@ public:
 	void setRoiMode(bool enabled);
 	bool roiMode() const { return _roiMode; }
 
+	bool cropSelectionActive() const { return _cropSelecting; }
+	void cancelCropSelection();
+
 	// 原有：全部 ROI（如你不再需要可逐步淘汰）
 	const QVector<QRectF>& roiImageRects() const { return _roiImageRects; }
 	void clearAllRois();
@@ -46,6 +49,7 @@ public:
 
 signals:
 	void roiRectsConfirmedChanged(const QVector<QRectF>& roiImageRects);
+	void cropSelected(const QPixmap& pixmap);
 
 protected:
 	void paintEvent(QPaintEvent* e) override;
@@ -53,6 +57,7 @@ protected:
 	void mousePressEvent(QMouseEvent* e) override;
 	void mouseMoveEvent(QMouseEvent* e) override;
 	void mouseReleaseEvent(QMouseEvent* e) override;
+	void keyPressEvent(QKeyEvent* e) override;
 	void resizeEvent(QResizeEvent* e) override;
 
 private:
@@ -82,6 +87,11 @@ private:
 
 	bool _dragging{ false };
 	QPoint _lastMousePos{};
+
+	// 右键框选局部图像
+	bool _cropSelecting{ false };
+	QPointF _cropStartWidget{};
+	QPointF _cropCurrentWidget{};
 
 	// ROI 状态
 	bool _roiMode{ false };

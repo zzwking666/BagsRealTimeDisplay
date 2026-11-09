@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QWheelEvent>
 #include <QMouseEvent>
+#include <QKeyEvent>
 #include <QResizeEvent>
 #include <algorithm>
 
@@ -15,6 +16,7 @@ PanZoomLabel::PanZoomLabel(QWidget* parent)
 	: QLabel(parent)
 {
 	setMouseTracking(true);
+	setFocusPolicy(Qt::ClickFocus);
 	setAlignment(Qt::AlignLeft | Qt::AlignTop);
 	setScaledContents(false);
 	setMinimumSize(1, 1);
@@ -41,6 +43,9 @@ void PanZoomLabel::clearOverlayPaths()
 
 void PanZoomLabel::setRoiMode(bool enabled)
 {
+	if (enabled)
+		cancelCropSelection();
+
 	_roiMode = enabled;
 
 	_dragging = false;
@@ -73,14 +78,28 @@ void PanZoomLabel::cancelActiveRoi()
 	update();
 }
 
+void PanZoomLabel::cancelCropSelection()
+{
+	if (!_cropSelecting)
+		return;
+
+	_cropSelecting = false;
+	_cropStartWidget = QPointF();
+	_cropCurrentWidget = QPointF();
+	unsetCursor();
+	update();
+}
+
 void PanZoomLabel::setPixmap(const QPixmap& pixmap)
 {
+	cancelCropSelection();
 	_src = pixmap;
 	fitToView();
 }
 
 void PanZoomLabel::setPixmap(const QPixmap& pixmap, bool resetView)
 {
+	cancelCropSelection();
 	_src = pixmap;
 	if (resetView || _scale <= 0.0)
 	{
@@ -259,10 +278,24 @@ void PanZoomLabel::paintEvent(QPaintEvent* e)
 			p.drawRect(rW);
 		}
 	}
+	// 右键局部框选预览（控件坐标）
+	if (_cropSelecting)
+	{
+		QPen penCrop(QColor(0, 255, 0), 2, Qt::DashLine);
+		penCrop.setCosmetic(true);
+		p.setPen(penCrop);
+		p.setBrush(QBrush(QColor(0, 255, 0, 30)));
+		p.drawRect(QRectF(_cropStartWidget, _cropCurrentWidget).normalized());
+	}
 }
 
 void PanZoomLabel::wheelEvent(QWheelEvent* e)
 {
+	if (_cropSelecting)
+	{
+		e->accept();
+		return;
+	}
 	if (_src.isNull())
 	{
 		e->ignore();
@@ -326,6 +359,25 @@ void PanZoomLabel::mousePressEvent(QMouseEvent* e)
 			setRoiMode(false);
 		}
 
+		e->accept();
+		return;
+	}
+
+	// 非 ROI 模式：右键拖动框选局部图像
+	if (!_roiMode && e->button() == Qt::RightButton)
+	{
+		_cropSelecting = true;
+		_cropStartWidget = e->position();
+		_cropCurrentWidget = e->position();
+		setFocus(Qt::MouseFocusReason);
+		setCursor(Qt::CrossCursor);
+		update();
+		e->accept();
+		return;
+	}
+
+	if (_cropSelecting)
+	{
 		e->accept();
 		return;
 	}
@@ -394,6 +446,14 @@ void PanZoomLabel::mouseMoveEvent(QMouseEvent* e)
 	if (_src.isNull())
 	{
 		QLabel::mouseMoveEvent(e);
+		return;
+	}
+
+	if (_cropSelecting)
+	{
+		_cropCurrentWidget = e->position();
+		update();
+		e->accept();
 		return;
 	}
 
@@ -483,6 +543,27 @@ void PanZoomLabel::mouseMoveEvent(QMouseEvent* e)
 
 void PanZoomLabel::mouseReleaseEvent(QMouseEvent* e)
 {
+	if (!_roiMode && e->button() == Qt::RightButton && _cropSelecting)
+	{
+		_cropCurrentWidget = e->position();
+		const QRectF widgetRect = QRectF(_cropStartWidget, _cropCurrentWidget).normalized();
+		const QPointF startImage = widgetToImage(_cropStartWidget);
+		const QPointF currentImage = widgetToImage(_cropCurrentWidget);
+		cancelCropSelection();
+
+		if (widgetRect.width() >= 3.0 && widgetRect.height() >= 3.0)
+		{
+			const QRectF imageRect = QRectF(startImage, currentImage).normalized()
+				.intersected(QRectF(_src.rect()));
+			const QRect cropRect = imageRect.toAlignedRect().intersected(_src.rect());
+			if (cropRect.width() >= 2 && cropRect.height() >= 2)
+				emit cropSelected(_src.copy(cropRect));
+		}
+
+		e->accept();
+		return;
+	}
+
 	if (!_roiMode && e->button() == Qt::LeftButton && _dragging)
 	{
 		_dragging = false;
@@ -501,8 +582,21 @@ void PanZoomLabel::mouseReleaseEvent(QMouseEvent* e)
 	QLabel::mouseReleaseEvent(e);
 }
 
+void PanZoomLabel::keyPressEvent(QKeyEvent* e)
+{
+	if (_cropSelecting && e->key() == Qt::Key_Escape)
+	{
+		cancelCropSelection();
+		e->accept();
+		return;
+	}
+
+	QLabel::keyPressEvent(e);
+}
+
 void PanZoomLabel::resizeEvent(QResizeEvent* e)
 {
+	cancelCropSelection();
 	QLabel::resizeEvent(e);
 
 	if (!_src.isNull())
