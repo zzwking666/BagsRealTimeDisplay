@@ -72,6 +72,8 @@ void BagsRealTimeDisplay::build_connect()
 		this, &BagsRealTimeDisplay::pbtn_setBagLength_clicked);
 	QObject::connect(ui->pbtn_nextBagLengthAdd50, &QPushButton::clicked,
 		this, &BagsRealTimeDisplay::pbtn_nextBagLengthAdd50_clicked);
+	QObject::connect(ui->pbtn_nextBagLengthReduce50, &QPushButton::clicked,
+		this, &BagsRealTimeDisplay::pbtn_nextBagLengthReduce50_clicked);
 
 	// 连接显示标题
 	QObject::connect(clickableTitle, &rw::rqw::ClickableLabel::clicked,
@@ -611,6 +613,18 @@ void BagsRealTimeDisplay::pbtn_nextBagLengthAdd50_clicked()
 	constexpr double lengthIncrement = 50.0;
 	const double nextBagLength =
 		_configModule.bagsRealTimeDisplayInfo.shezhidaizichangdu + lengthIncrement;
+
+	applyBagLengthToCamera(1, nextBagLength);
+	applyBagLengthToCamera(2, nextBagLength);
+	_nextBagLengthPendingCamera1 = true;
+	_nextBagLengthPendingCamera2 = true;
+}
+
+void BagsRealTimeDisplay::pbtn_nextBagLengthReduce50_clicked()
+{
+	constexpr double lengthDecrement = 50.0;
+	const double nextBagLength = std::max(0.0,
+		_configModule.bagsRealTimeDisplayInfo.shezhidaizichangdu - lengthDecrement);
 
 	applyBagLengthToCamera(1, nextBagLength);
 	applyBagLengthToCamera(2, nextBagLength);
