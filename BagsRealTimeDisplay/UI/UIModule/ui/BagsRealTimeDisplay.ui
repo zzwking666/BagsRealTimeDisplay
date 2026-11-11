@@ -51,7 +51,7 @@
          <widget class="QGroupBox" name="gBox_infor">
           <property name="styleSheet">
            <string notr="true">QGroupBox {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     background-color: rgb(255, 255, 255);
     border: 1px solid #e0e0e0;
@@ -71,7 +71,7 @@ QGroupBox::title {
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
+            <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,1">
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_7">
                <item>
@@ -82,10 +82,10 @@ QGroupBox::title {
                     <widget class="QLabel" name="label_wasteProducts">
                      <property name="styleSheet">
                       <string notr="true">QLabel {
-       font-size: 20px;        
+       font-size: 16px;
        font-weight: bold;        
        color:  rgb(141, 141, 141);       
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                      </property>
@@ -101,16 +101,16 @@ QGroupBox::title {
                     <widget class="QLabel" name="lb_FrontTotal">
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
-                       <height>50</height>
+                       <width>80</width>
+                       <height>36</height>
                       </size>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QLabel {
-       font-size: 20px;        
+       font-size: 16px;
        font-weight: bold;        
        color:   rgb(0, 0, 0);      
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                      </property>
@@ -127,10 +127,10 @@ QGroupBox::title {
                     <widget class="QLabel" name="label_wasteProducts_2">
                      <property name="styleSheet">
                       <string notr="true">QLabel {
-       font-size: 20px;        
+       font-size: 16px;
        font-weight: bold;        
        color:  rgb(141, 141, 141);       
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                      </property>
@@ -146,16 +146,16 @@ QGroupBox::title {
                     <widget class="QLabel" name="lb_BackTotal">
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
-                       <height>50</height>
+                       <width>80</width>
+                       <height>36</height>
                       </size>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QLabel {
-       font-size: 20px;        
+       font-size: 16px;
        font-weight: bold;        
        color:   rgb(0, 0, 0);      
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                      </property>
@@ -172,10 +172,10 @@ QGroupBox::title {
                     <widget class="QLabel" name="label_info">
                      <property name="styleSheet">
                       <string notr="true">QLabel {
-       font-size: 20px;        
+       font-size: 16px;
        font-weight: bold;        
        color:  rgb(141, 141, 141);       
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                      </property>
@@ -197,18 +197,18 @@ QGroupBox::title {
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
+                       <width>80</width>
                        <height>0</height>
                       </size>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px; 
+    font-size: 16px;
 }
 
 QPushButton:hover {
@@ -244,12 +244,12 @@ QPushButton:pressed {
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 24px; 
+    font-size: 20px;
 }
 
 QPushButton:hover {
@@ -277,18 +277,18 @@ QPushButton:pressed {
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
-                       <height>50</height>
+                       <width>80</width>
+                       <height>36</height>
                       </size>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px; 
+    font-size: 16px;
 }
 
 QPushButton:hover {
@@ -316,12 +316,12 @@ QPushButton:pressed {
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 24px; 
+    font-size: 20px;
 }
 
 QPushButton:hover {
@@ -353,12 +353,12 @@ QPushButton:pressed {
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 24px; 
+    font-size: 20px;
 }
 
 QPushButton:hover {
@@ -386,18 +386,18 @@ QPushButton:pressed {
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>100</width>
-                       <height>50</height>
+                       <width>80</width>
+                       <height>36</height>
                       </size>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px; 
+    font-size: 16px;
 }
 
 QPushButton:hover {
@@ -425,12 +425,12 @@ QPushButton:pressed {
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 24px; 
+    font-size: 20px;
 }
 
 QPushButton:hover {
@@ -456,10 +456,10 @@ QPushButton:pressed {
                     <widget class="QLabel" name="label_wasteProducts_3">
                      <property name="styleSheet">
                       <string notr="true">QLabel {
-       font-size: 20px;        
+       font-size: 16px;
        font-weight: bold;        
        color:  rgb(141, 141, 141);       
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                      </property>
@@ -481,12 +481,12 @@ QPushButton:pressed {
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QComboBox {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 QComboBox:hover {
@@ -519,7 +519,7 @@ QComboBox QAbstractItemView {
     color: #444;
     selection-background-color: #F5F5F5;
     selection-color: #222;
-    font-size: 18px;
+    font-size: 16px;
 }</string>
                      </property>
                     </widget>
@@ -536,7 +536,7 @@ QComboBox QAbstractItemView {
                 <widget class="QLabel" name="label_info_2">
                  <property name="minimumSize">
                   <size>
-                   <width>125</width>
+                   <width>110</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -545,10 +545,10 @@ QComboBox QAbstractItemView {
                  </property>
                  <property name="styleSheet">
                   <string notr="true">QLabel {
-       font-size: 20px;        
+       font-size: 16px;
        font-weight: bold;        
        color:  rgb(141, 141, 141);       
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                  </property>
@@ -572,18 +572,18 @@ QComboBox QAbstractItemView {
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>150</width>
+                     <width>110</width>
                      <height>0</height>
                     </size>
                    </property>
                    <property name="styleSheet">
                     <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 QPushButton:hover {
@@ -611,7 +611,7 @@ QPushButton:pressed {
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>80</width>
+                     <width>60</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -620,12 +620,12 @@ QPushButton:pressed {
                    </property>
                    <property name="styleSheet">
                     <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 QPushButton:hover {
@@ -653,7 +653,7 @@ QPushButton:pressed {
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>80</width>
+                     <width>60</width>
                      <height>0</height>
                     </size>
                    </property>
@@ -662,12 +662,12 @@ QPushButton:pressed {
                    </property>
                    <property name="styleSheet">
                     <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 QPushButton:hover {
@@ -700,7 +700,7 @@ QPushButton:pressed {
            <widget class="QGroupBox" name="gBox_set">
             <property name="styleSheet">
              <string notr="true">QGroupBox {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     background-color: rgb(255, 255, 255);
     border: 1px solid #e0e0e0;
@@ -729,12 +729,12 @@ QGroupBox::title {
                </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton {
-    padding: 6px 14px;
+    padding: 4px 8px;
     border: 2px solid #CCC;
     border-radius: 4px;
     background-color: white;
     color: #444;
-    font-size: 20px; 
+    font-size: 16px;
 }
 
 QPushButton:hover {
@@ -756,7 +756,7 @@ QPushButton:pressed {
               <widget class="QGroupBox" name="groupBox_head">
                <property name="styleSheet">
                 <string notr="true">QGroupBox {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     background-color: rgb(255, 255, 255);
     border: 1px solid #e0e0e0;
@@ -794,7 +794,7 @@ QGroupBox::title {
     border-radius: 5px;
     font-size: 14px;
     qproperty-icon: url(:/BagsRealTimeDisplay/icons/close.png);  
-    qproperty-iconSize: 50px 50px;
+    qproperty-iconSize: 36px 36px;
 }
 
 QPushButton:hover {
@@ -835,10 +835,10 @@ QPushButton:pressed {
                        <widget class="QLabel" name="label_cameraStateTitle">
                         <property name="styleSheet">
                          <string notr="true">QLabel {
-       font-size: 24px;        
+       font-size: 20px;
        font-weight: bold;        
        color:  rgb(141, 141, 141);       
-       padding: 5px 5px;     
+       padding: 3px 3px;
        border-bottom: 2px solid #cccccc; 
     }</string>
                         </property>
@@ -862,9 +862,9 @@ QPushButton:pressed {
                           </property>
                           <property name="styleSheet">
                            <string notr="true">QLabel {
-       font-size: 18px;        
+       font-size: 16px;
        font-weight: bold;        
-		padding: 5px 5px;  
+		padding: 3px 3px;
     }</string>
                           </property>
                           <property name="text">
@@ -882,9 +882,9 @@ QPushButton:pressed {
                           </property>
                           <property name="styleSheet">
                            <string notr="true">QLabel {
-       font-size: 18px;        
+       font-size: 16px;
        font-weight: bold;        
-		padding: 5px 5px;  
+		padding: 3px 3px;
     }</string>
                           </property>
                           <property name="text">
@@ -903,9 +903,9 @@ QPushButton:pressed {
                          <widget class="QLabel" name="label_camera2State">
                           <property name="styleSheet">
                            <string notr="true">QLabel {
-       font-size: 18px;        
+       font-size: 16px;
        font-weight: bold;        
-		padding: 5px 5px;  
+		padding: 3px 3px;
     }</string>
                           </property>
                           <property name="text">
@@ -923,9 +923,9 @@ QPushButton:pressed {
                           </property>
                           <property name="styleSheet">
                            <string notr="true">QLabel {
-       font-size: 18px;        
+       font-size: 16px;
        font-weight: bold;        
-		padding: 5px 5px;  
+		padding: 3px 3px;
     }</string>
                           </property>
                           <property name="text">
@@ -957,7 +957,7 @@ QPushButton:pressed {
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
- <layoutdefault spacing="6" margin="11"/>
+ <layoutdefault spacing="4" margin="6"/>
  <resources>
   <include location="../qrc/BagsRealTimeDisplay.qrc"/>
  </resources>
